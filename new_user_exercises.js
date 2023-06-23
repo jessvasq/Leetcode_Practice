@@ -31,7 +31,7 @@ console.log('Question 13. Roman to Integer')
 
 const romanToNum = (s) => {
 
-    //object containing the roman num
+    //object containing the roman numerals and its values
     const romanNum = {
        "I": 1, 
         "V": 5, 
@@ -44,16 +44,20 @@ const romanToNum = (s) => {
 
  let answer = 0;
 
+ //iterate over string 's' and retrieves its value from the 'romanNum' object
  for (let i=0; i<s.length; i++) {
 
     const currentSymbol = romanNum[s[i]];
+    //retrieve the next value in the string 
     const nextSymbol = romanNum[s[i+1]];
   
-
+    //check if the current roman symbol is less than the next symbol's value. If true it represents a subtractive notation
     if (currentSymbol < nextSymbol ){
+        //adds the difference between the next symbol and current symbol and increments the variable by 1 
         answer += nextSymbol - currentSymbol;
         i++;
     }
+    //if the current symbol is not less than the next symbol's value, there's no subtractive notation so the symbol is just added to the answer
     else{
         answer += currentSymbol;
     }
@@ -63,4 +67,4 @@ const romanToNum = (s) => {
 }
 
 
-console.log(romanToNum("D"))
+console.log(romanToNum("XI"))
