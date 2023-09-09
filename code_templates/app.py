@@ -139,3 +139,119 @@ def fn(head):
         
     return prev  #returns prev, which now points to the new head of the reversed linked list. This is because prev was the last node processed in the original list, and after reversing, it becomes the first node in the reversed list.
 
+'''Find number of subarrays that fit an exact criteria'''
+'''function called fn that takes two arguments: arr, which is a list of integers, and k, which is also an integer. The function appears to be counting the number of subarrays in arr whose sum is equal to k. It uses a defaultdict from the collections module to efficiently keep track of cumulative counts of partial sums. This code uses a defaultdict to efficiently count the number of subarrays in arr with a sum of k. It maintains a cumulative sum (curr) and updates the count of partial sums encountered so far in the counts dictionary. The ans variable accumulates the count of subarrays with a sum of k.'''
+
+from collections import defaultdict #This class is used to create a dictionary that automatically initializes values to a default type (in this case, integers) if they don't exist in the dictionary.
+
+def fn(arr, k):
+    counts = defaultdict(int) #Create a counts dictionary using defaultdict(int). This dictionary will be used to store the cumulative counts of partial sums encountered in the arr.
+    counts[0] = 1  #The initial count for the sum of 0 is set to 1 because there's one way to obtain a sum of 0 (i.e., by having an empty subarray).
+    ans = curr = 0 #ans is initialized to 0. This variable will store the final count of subarrays with a sum of k. curr is initialized to 0. This variable keeps track of the cumulative sum as we iterate through arr.
+
+    for num in arr: #for loop that iterates through each num in the arr list,  used to process each element of the input array one by one.
+        
+        # do logic to change curr
+        
+        ans += counts[curr - k] #ans variable is updated by adding counts[curr - k]. This step counts the number of subarrays that sum to k by checking how many subarrays ending at the current position (curr) have a sum of k. It does this by looking at the cumulative count of partial sums encountered before this position (i.e., counts[curr - k]).
+        
+        counts[curr] += 1 #ncrement the count of the current cumulative sum (curr) in the counts dictionary by 1. This is done using counts[curr] += 1, indicating that we've encountered one more subarray with the current sum.
+        
+        #The loop continues to iterate through all the elements in arr, updating curr, ans, and the counts dictionary.
+    
+    return ans  # the function returns the value of ans, which represents the count of subarrays in arr whose sum is equal to k
+
+
+'''Monotonic increasing stack'''
+'''function called fn that takes a list of integers, arr, as input. This function appears to be using a stack data structure to process the elements of the input list while maintaining a "monotonic increasing" sequence, meaning that the elements in the stack are in non-decreasing order. This code processes an input list arr using a stack to maintain a monotonic increasing sequence, and it appears to perform some operation when elements are removed from the stack. The specific purpose and functionality of this code depend on the problem being solved and the missing logic that should be executed when elements are popped from the stack. '''
+def fn(arr):
+    stack = [] #stack is initialized as an empty list. This list will serve as a stack data structure, where elements can be pushed onto and popped off the top of the stack.
+    ans = 0 # ans is initialized to 0. This variable is likely intended to store some result, although the code does not appear to update it within the loop.
+
+    for num in arr: #for loop that iterates through each num in the arr list. 
+        
+        # for monotonic decreasing, just flip the > to <
+        
+        while stack and stack[-1] > num: #This inner loop is used to ensure that the stack remains in a monotonic increasing order. Specifically, it pops elements from the stack if the top element of the stack (stack[-1]) is greater than the current num. This ensures that the stack contains elements in non-decreasing order.
+            
+            # do logic
+            
+            stack.pop() #After the while loop has finished, it means that the top of the stack contains an element less than or equal to the current num. This element is popped to maintain the monotonic increasing property.
+            
+            
+        stack.append(num) #After the inner while loop, the current num is appended to the stack. This maintains the stack's property of containing elements in non-decreasing order.
+    
+    return ans #function returns the value of ans, which is initialized to 0 but does not appear to be updated within the loop. If ans is meant to accumulate some result, you would need to add the appropriate logic to update it within the loop.
+
+'''Binary tree: DFS (recursive)'''
+'''function called dfs that appears to be implementing a Depth-First Search (DFS) algorithm to traverse a binary tree. The function takes a single argument, root, which is assumed to be the root node of the binary tree. The goal of this code is not explicitly mentioned in the snippet, but it seems to involve processing each node of the tree and potentially accumulating some result in the variable ans. This code defines a depth-first traversal function (dfs) for a binary tree. It recursively processes the nodes of the tree, potentially accumulating a result in the ans variable. The specific logic for processing the nodes and updating ans is not provided in the code snippet, so you would need to customize the function according to your problem's requirements by replacing the placeholder comment "# do logic" with the actual logic you want to execute on each node.'''
+
+def dfs(root):
+    ans = 0 
+    
+    if not root: #Check if the root node is None (i.e., the tree is empty or the current node is a leaf). If the root is None, the function returns immediately without performing any further actions. This is the base case for the recursive function
+        return
+    
+    ans = 0 #Initialize a variable named ans to 0. This variable is likely intended to store some result that will be computed during the traversal of the tree. It starts at 0 and may be updated within the function
+
+    # do logic
+    
+    dfs(root.left) #Recursively call the dfs function on the left child of the current node, root.left. This step initiates a DFS traversal of the left subtree of the current node
+    
+    dfs(root.right) #Recursively call the dfs function on the right child of the current node, root.right. This step initiates a DFS traversal of the right subtree of the current node.
+    
+    return ans #After processing both the left and right subtrees, the function returns the value of ans. However, as written in the code snippet, ans is initialized to 0 and does not appear to be updated within the function. Therefore, it will always return 0 unless modified elsewhere in the code.
+
+'''Binary tree: DFS (iterative)'''
+'''Python function called dfs that implements a Depth-First Search (DFS) traversal on a binary tree. The traversal starts from the root node and explores each node's children, depth-first, using an iterative approach with a stack data structure. The function appears to perform some logic on each visited node and accumulate a result in the variable ans. This code implements a depth-first traversal of a binary tree using an iterative approach with a stack. It allows you to process nodes in a specific order, and you can customize the traversal logic by replacing the placeholder comment "# do logic" with the actual code that operates on the nodes and updates the ans variable as needed for your problem'''
+
+def dfs(root):
+    stack = [root] #Initialize a stack data structure stack with the root node root. This is done by creating a list containing the root node, which serves as the starting point for the traversal.
+    ans = 0 #Initialize a variable ans to 0. This variable is likely intended to store some result that will be computed during the traversal. It starts at 0 and may be updated within the loop.
+
+    while stack: # This loop continues as long as there are nodes in the stack to be processed, indicating that there are nodes in the tree that have not yet been visited
+        node = stack.pop() #Inside the loop, pop a node from the stack using stack.pop(). This node represents the current node being processed.
+        
+        # do logic, update the ans variable as needed.
+        
+        if node.left: #Check if the current node has a left child (node.left). If it does, push the left child onto the stack using stack.append(node.left). This ensures that the left child will be processed after the current node's logic is executed.
+            stack.append(node.left)
+        if node.right: # if the current node has a right child (node.right). If it does, push the right child onto the stack using stack.append(node.right). This ensures that the right child will be processed after the left child (if it exists) and the current node's logic are executed.
+            stack.append(node.right)
+
+    #loop continues to process nodes in a depth-first manner, popping nodes from the stack, performing logic, and pushing child nodes onto the stack until all nodes have been visited.
+    return ans #After processing all nodes, the function returns the value of ans. This value represents the result that has been accumulated or computed during the traversal.
+
+
+'''Binary tree: BFS'''
+
+''' function called fn that performs a level-order traversal of a binary tree (also known as a breadth-first search, or BFS). This traversal visits all the nodes in the tree level by level, starting from the root node. The function uses a queue data structure (imported from the collections module) to achieve this traversal. this code implements a level-order (breadth-first) traversal of a binary tree using a queue. It allows you to explore the nodes level by level, and you can customize the traversal logic by replacing the placeholder comments with the actual code that operates on the nodes and updates the ans variable as needed for your problem. '''
+
+
+from collections import deque #A deque (short for "double-ended queue") is a versatile data structure that supports efficient append and pop operations at both ends, making it suitable for implementing a queue.
+
+def fn(root):
+    queue = deque([root]) #Initialize a queue called queue with the root node root. The root node is placed in a deque (double-ended queue) data structure, which is used as a queue for the level-order traversal.
+    ans = 0 #Initialize a variable ans to 0. This variable is likely intended to store some result that will be computed during the traversal. It starts at 0 and may be updated within the loop.
+
+    while queue: #Enter a while loop with the condition while queue. This loop continues as long as there are nodes in the queue to be processed, indicating that there are nodes at the current level to explore.
+        
+        current_length = len(queue) #Before processing the nodes at the current level, obtain the current length of the queue using current_length = len(queue). This step is crucial for keeping track of the number of nodes at the current level. It allows you to process one level at a time.
+        
+        
+        # do logic for current level, replace this comment with the code that processes the nodes at the current level.
+
+        for _ in range(current_length): #for loop that iterates current_length times. This loop is responsible for processing the nodes at the current level
+            node = queue.popleft() #Inside the loop, node is dequeued (removed from the left side of the queue) using node = queue.popleft(). This node represents the current node being processed.
+            
+            # do logic,  replace this comment with the code that processes the current node's value or performs some operation based on the node's data.
+            
+            if node.left: #Check if the current node has a left child (node.left). If it does, enqueue the left child into the queue using queue.append(node.left). This ensures that the left child nodes will be processed in the next level.
+                queue.append(node.left)
+                
+            if node.right: #check if the current node has a right child (node.right). If it does, enqueue the right child into the queue using queue.append(node.right).
+                queue.append(node.right)
+                
+        #The inner loop processes all nodes at the current level, and then the outer while loop advances to the next level of nodes (if they exist).
+
+    return ans # function returns the value of ans, which represents the result that has been accumulated or computed during the traversal.
