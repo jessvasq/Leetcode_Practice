@@ -255,3 +255,81 @@ def fn(root):
         #The inner loop processes all nodes at the current level, and then the outer while loop advances to the next level of nodes (if they exist).
 
     return ans # function returns the value of ans, which represents the result that has been accumulated or computed during the traversal.
+
+
+'''Graph: DFS (recursive)'''
+
+'''function called fn that performs a depth-first search (DFS) traversal on a graph represented as an adjacency list. The goal of this code is to explore and possibly compute something on each node in the graph starting from a specific "START_NODE." This code defines a function fn that performs a depth-first search (DFS) traversal on a graph represented as an adjacency list. It starts from a specified starting node (START_NODE) and explores all connected nodes while accumulating a result (ans). The specific logic for processing nodes and computing the result should be implemented within the dfs function, where the comment "# do some logic" is indicated. '''
+
+def fn(graph):
+    def dfs(node): #Define an inner function dfs(node) within the fn function. This inner function is a recursive DFS traversal function that takes a node as its argument and returns a result (ans).
+        
+        ans = 0 #Initialize a variable ans to 0. This variable is likely intended to store some result that will be computed during the traversal.
+        
+        # do some logic
+        
+        for neighbor in graph[node]: #for loop that iterates over the neighbors of the current node. The graph is represented as an adjacency list, so graph[node] is a list of neighbors for the given node.
+            if neighbor not in seen: #For each neighbor in graph[node], check if the neighbor has not been seen before (i.e., not in the seen set). If it hasn't been seen, mark it as seen by adding it to the seen set.
+                
+                seen.add(neighbor)
+                ans += dfs(neighbor) # Then, recursively call the dfs function on the neighbor and accumulate the result in the ans variable.
+        
+        return ans #Return the final value of ans after processing all the neighbors of the current node.
+
+    seen = {START_NODE} #Initialize a set called seen and add the START_NODE to it. This sets up the initial state for the DFS traversal, indicating that the START_NODE is the starting point for exploration.
+    
+    return dfs(START_NODE) #Finally, call the dfs function with the START_NODE as an argument, initiating the DFS traversal from the starting node. The result of the traversal will be returned as the result of the fn function.
+
+
+'''Graph: DFS (iterative)'''
+'''Python function called fn that performs a depth-first search (DFS) traversal on a graph represented as an adjacency list. The goal of this code is to explore all nodes in the graph starting from a specified "START_NODE." This code defines a function fn that performs a depth-first search (DFS) traversal on a graph represented as an adjacency list. It explores nodes in a specific order using a stack, and you can customize the traversal logic by replacing the placeholder comment "# do some logic" with the actual code that operates on the nodes and updates the ans variable as needed for your problem.'''
+
+def fn(graph):
+    stack = [START_NODE] #Initialize a stack called stack with the START_NODE. This is the starting point for the DFS traversal. The START_NODE is added to the stack as the initial node to be explored
+    seen = {START_NODE} #Initialize a set called seen and add the START_NODE to it. This set keeps track of nodes that have been visited during the traversal. The START_NODE is marked as seen because it's the starting node.
+    
+    ans = 0 #Initialize a variable ans to 0. This variable is likely intended to store some result that will be computed during the traversal. 
+
+    while stack: #Enter a while loop with the condition while stack. This loop continues as long as there are nodes in the stack to be processed, indicating that there are unexplored nodes in the graph.
+        
+        node = stack.pop() #Inside the loop, pop a node from the top of the stack using node = stack.pop(). This node represents the current node being processed.
+        
+        # do some logic
+        
+        for neighbor in graph[node]: #Iterate through the neighbors of the current node by looping over graph[node]. The graph is represented as an adjacency list, and graph[node] provides a list of neighbors for the current node.
+            if neighbor not in seen: #For each neighbor in graph[node], check if the neighbor has not been seen before (i.e., not in the seen set). If it hasn't been seen, mark it as seen by adding it to the seen set.
+                seen.add(neighbor)
+                stack.append(neighbor) #Push the neighbor onto the stack to indicate that it should be explored next. This allows the traversal to continue from the newly added node.
+                
+    #The loop continues to process nodes in a depth-first manner, popping nodes from the stack, performing logic, and pushing unvisited neighbors onto the stack until all nodes have been visited.
+    
+    return ans #rocessing all nodes in the graph or until the stack becomes empty, the function returns the value of ans. This value represents the result that has been accumulated or computed during the traversal.
+
+
+'''Graph: BFS'''
+''' function called fn that performs a breadth-first search (BFS) traversal on a graph represented as an adjacency list. The goal of this code is to explore all nodes in the graph starting from a specified "START_NODE."  this code defines a function fn that performs a breadth-first search (BFS) traversal on a graph represented as an adjacency list. It explores nodes level by level using a queue, and you can customize the traversal logic by replacing the placeholder comment "# do some logic" with the actual code that operates on the nodes and updates the ans variable as needed for your problem'''
+
+from collections import deque #deque (short for "double-ended queue") is used to implement a queue data structure, which is ideal for BFS traversal.
+
+def fn(graph):
+    queue = deque([START_NODE]) #Initialize a queue called queue with the START_NODE. The START_NODE is the initial node from which the BFS traversal begins. The deque is initialized with a single element, the START_NODE.
+    seen = {START_NODE} #Initialize a set called seen and add the START_NODE to it. This set keeps track of nodes that have been visited during the traversal. The START_NODE is marked as seen because it's the starting node.
+    
+    ans = 0 #Initialize a variable ans to 0. This variable is likely intended to store some result that will be computed during the traversal. 
+
+    while queue: #Enter a while loop with the condition while queue. This loop continues as long as there are nodes in the queue to be processed, indicating that there are unexplored nodes in the graph
+        
+        node = queue.popleft() #Inside the loop, dequeue (remove from the front of) a node from the queue using node = queue.popleft(). This node represents the current node being processed.
+        
+        # do some logic
+        
+        for neighbor in graph[node]: #Iterate through the neighbors of the current node by looping over graph[node]. The graph is represented as an adjacency list, and graph[node] provides a list of neighbors for the current node
+            if neighbor not in seen: #For each neighbor in graph[node], check if the neighbor has not been seen before (i.e., not in the seen set). If it hasn't been seen, mark it as seen by adding it to the seen set.
+                seen.add(neighbor)
+                
+                queue.append(neighbor) #Enqueue (add to the back of) the neighbor into the queue to indicate that it should be explored in the next BFS level. This allows the traversal to continue to the newly added nodes
+                
+    #The loop continues to process nodes in a breadth-first manner, dequeuing nodes from the front of the queue, performing logic, and enqueuing unvisited neighbors to the back of the queue until all nodes have been visited.
+    
+    return ans #After processing all nodes in the graph or until the queue becomes empty, the function returns the value of ans. This value represents the result that has been accumulated or computed during the traversa
+
