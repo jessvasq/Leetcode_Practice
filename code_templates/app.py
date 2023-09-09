@@ -333,3 +333,84 @@ def fn(graph):
     
     return ans #After processing all nodes in the graph or until the queue becomes empty, the function returns the value of ans. This value represents the result that has been accumulated or computed during the traversa
 
+
+'''Find top k elements with heap'''
+'''function called fn that uses a min-heap (priority queue) to find the k smallest elements from a given list arr. This code efficiently finds the k smallest elements from a list arr based on some criteria by using a min-heap. The criteria value for each element determines its priority in the heap, and the code ensures that the heap size remains limited to k, making it an efficient way to find the k smallest elements'''
+
+import heapq #heapq module, which provides functions for heap operations. In this code, heapq.heappush and heapq.heappop are used to manipulate the heap.
+
+def fn(arr, k):
+    heap = [] #Initialize an empty heap called heap. This heap will store tuples where the first element represents a certain criteria (to be defined later) and the second element is a number from the input list arr.
+    
+    for num in arr: #Enter a loop that iterates through each num in the arr list. This loop is used to process each element of the input list one by one.
+        
+        # do some logic to push onto heap according to problem's criteria
+        
+        heapq.heappush(heap, (CRITERIA, num)) #Use heapq.heappush to push a tuple (CRITERIA, num) onto the heap. This effectively adds the element num to the heap, and it will be prioritized based on the computed criteria. The smallest elements will be at the top of the heap due to the min-heap property.
+        
+        if len(heap) > k: #Check if the length of the heap has exceeded k by using len(heap) > k. If it has, it means that there are more than k elements in the heap, and we need to remove the element with the highest criteria (the largest criteria value) to maintain the size of the heap as k. To do this, use heapq.heappop(heap), which removes and returns the smallest element from the heap.
+            
+            heapq.heappop(heap)#Repeat steps 4-6 for each element in arr. As a result, the heap will always contain the k smallest elements based on the computed criteria.
+    
+    return [num for num in heap] #After processing all elements in arr, the function returns a list comprehension that extracts the second element (the numbers) from the tuples in the heap. This list contains the k smallest elements in ascending order
+
+
+'''Binary search'''
+''' function called fn that performs binary search on a sorted list arr to find the insertion point of a target element. The insertion point is the index where the target element would be inserted into the sorted list to maintain its sorted order. This code performs binary search on a sorted list arr to find the insertion point of a target element. If the target element is found, it performs some action (specified as "# do something") and returns. If the target element is not found, it returns the index where the target should be inserted into the list to maintain its sorted orde '''
+
+def fn(arr, target):
+    #left and right. left is set to 0, which represents the leftmost index of the list, and right is set to len(arr) - 1, which represents the rightmost index of the list. These pointers are used to define the search range within the list.
+    left = 0
+    right = len(arr) - 1
+    
+    while left <= right: #Enter a while loop with the condition while left <= right. This loop continues as long as the search range is valid, meaning that there are still elements to search within the list.
+        
+        mid = (left + right) // 2 #Calculate the middle index, mid, as (left + right) // 2. This index represents the middle of the current search range
+        
+        if arr[mid] == target: #Check if the element at the mid index, arr[mid], is equal to the target element, target. If it is, you can choose to perform some specific action
+            
+            # do something
+            
+            return
+        
+        if arr[mid] > target: #If arr[mid] is greater than the target (arr[mid] > target), it means that the target element, if present, must be in the left half of the current search range. Therefore, update right to mid - 1 to narrow the search range to the left half.
+            right = mid - 1 
+            
+        else: #If arr[mid] is less than the target (arr[mid] < target), it means that the target element, if present, must be in the right half of the current search range. Therefore, update left to mid + 1 to narrow the search range to the right half.
+            left = mid + 1
+            
+    #The loop continues to search for the target element by repeatedly updating the search range based on whether the target is greater or less than the middle element.
+    #If the loop exits without finding the target element, it means that the target element should be inserted into the list to maintain its sorted order. The left pointer at this point represents the insertion point, as it points to the first element greater than the target in the list.
+    
+    # left is the insertion point
+    return left #Return the value of left as the insertion point. This value indicates the index where the target element should be inserted into the list
+
+
+'''Binary search: duplicate elements, left-most insertion point'''
+'''function called fn that performs binary search on a sorted list arr to find the lower bound of a target element. The lower bound is the index of the first occurrence of the target element in the sorted list, or if the target is not found, it returns the index where the target element should be inserted to maintain the sorted order. This code performs binary search on a sorted list arr to find the lower bound of a target element. It efficiently identifies the index of the first occurrence of the target or the index where the target should be inserted to maintain the sorted order. '''
+
+
+def fn(arr, target):
+    left = 0 #Initialize two pointers, left and right. left is set to 0, which represents the leftmost index of the list, and right is set to len(arr), which represents one past the rightmost index of the list. These pointers define the search range within the list
+    right = len(arr)
+    
+    while left < right: #while loop with the condition while left < right. This loop continues as long as the search range is valid, meaning that there are still elements to search within the list.
+        
+        mid = (left + right) // 2 #Calculate the middle index, mid, as (left + right) // 2. This index represents the middle of the current search range.
+        #Check if the element at the mid index, arr[mid], is greater than or equal to the target element, target. This condition is used to find the lower bound of the target element.
+        
+        #If arr[mid] is greater than or equal to target, it means that the target element, if present, must be in the left half of the current search range. Therefore, update right to mid to narrow the search range to the left half.
+
+        #If arr[mid] is less than target, it means that the target element, if present, must be in the right half of the current search range. Therefore, update left to mid + 1 to narrow the search range to the right half.
+        if arr[mid] >= target: 
+            right = mid
+        else:
+            left = mid + 1
+            
+        #The loop continues to search for the target element by repeatedly updating the search range based on whether the target is greater or equal to the middle element.
+
+#If the loop exits without finding the target element, it means that the target element should be inserted into the list to maintain its sorted order. The left pointer at this point represents the insertion point, as it points to the first element greater than or equal to the target in the list.
+
+#Return the value of left as the lower bound. This value indicates the index of the first occurrence of the target element in the list, or if the target is not found, the index where the target element should be inserted.
+
+    return left
