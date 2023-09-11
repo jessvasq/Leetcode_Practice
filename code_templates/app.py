@@ -414,3 +414,126 @@ def fn(arr, target):
 #Return the value of left as the lower bound. This value indicates the index of the first occurrence of the target element in the list, or if the target is not found, the index where the target element should be inserted.
 
     return left
+
+'''Binary search: duplicate elements, right-most insertion point'''
+def fn(arr, target):
+    left = 0
+    right = len(arr)
+    while left < right:
+        mid = (left + right) // 2
+        if arr[mid] > target:
+            right = mid
+        else:
+            left = mid + 1
+
+    return left
+
+'''Binary search: for greedy problems'''
+'''If looking for a minimum:'''
+def fn(arr):
+    def check(x):
+        # this function is implemented depending on the problem
+        return BOOLEAN
+
+    left = MINIMUM_POSSIBLE_ANSWER
+    right = MAXIMUM_POSSIBLE_ANSWER
+    while left <= right:
+        mid = (left + right) // 2
+        if check(mid):
+            right = mid - 1
+        else:
+            left = mid + 1
+    
+    return left
+
+
+'''If looking for a maximum:'''
+def fn(arr):
+    def check(x):
+        # this function is implemented depending on the problem
+        return BOOLEAN
+
+    left = MINIMUM_POSSIBLE_ANSWER
+    right = MAXIMUM_POSSIBLE_ANSWER
+    while left <= right:
+        mid = (left + right) // 2
+        if check(mid):
+            left = mid + 1
+        else:
+            right = mid - 1
+    
+    return right
+
+
+'''Backtracking'''
+def backtrack(curr, OTHER_ARGUMENTS...):
+    if (BASE_CASE):
+        # modify the answer
+        return
+    
+    ans = 0
+    for (ITERATE_OVER_INPUT):
+        # modify the current state
+        ans += backtrack(curr, OTHER_ARGUMENTS...)
+        # undo the modification of the current state
+    
+    return ans
+
+
+'''Dynamic programming: top-down memoization'''
+def fn(arr):
+    def dp(STATE):
+        if BASE_CASE:
+            return 0
+        
+        if STATE in memo:
+            return memo[STATE]
+        
+        ans = RECURRENCE_RELATION(STATE)
+        memo[STATE] = ans
+        return ans
+
+    memo = {}
+    return dp(STATE_FOR_WHOLE_INPUT)
+
+'''Build a trie'''
+# note: using a class is only necessary if you want to store data at each node.
+# otherwise, you can implement a trie using only hash maps.
+class TrieNode:
+    def __init__(self):
+        # you can store data at nodes if you wish
+        self.data = None
+        self.children = {}
+
+def fn(words):
+    root = TrieNode()
+    for word in words:
+        curr = root
+        for c in word:
+            if c not in curr.children:
+                curr.children[c] = TrieNode()
+            curr = curr.children[c]
+        # at this point, you have a full word at curr
+        # you can perform more logic here to give curr an attribute if you want
+    
+    return root
+
+
+'''Dijkstra's algorithm'''
+from math import inf
+from heapq import *
+
+distances = [inf] * n
+distances[source] = 0
+heap = [(0, source)]
+
+while heap:
+    curr_dist, node = heappop(heap)
+    if curr_dist > distances[node]:
+        continue
+    
+    for nei, weight in graph[node]:
+        dist = curr_dist + weight
+        if dist < distances[nei]:
+            distances[nei] = dist
+            heappush(heap, (dist, nei))
