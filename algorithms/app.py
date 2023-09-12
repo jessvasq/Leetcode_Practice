@@ -151,3 +151,41 @@ else:
     print('element is not present in array')  
         
         
+'''SORTING'''
+'''OPTIMIZED BUBLE SORT'''
+''' Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The optimization in this code is that it keeps track of the number of iterations performed. Bubble sort is not the most efficient sorting algorithm, especially for large datasets, as it has a worst-case time complexity of O(n^2). However, it is straightforward to implement and can be useful for small datasets or educational purposes '''#this algo is not that efficient but important to understand. This algo can be used to quickly find if the array is sorted 
+#An optimized algo for the bubble sort is to find the largest nth element and put it at the end of the array
+
+def bubble_optimized(arr): #takes the list of elements to be sorted
+    iterations = 0 #will be used to count the number of iterations(comparisons and swaps) made during the sorting process, useful to understand the efficiency of the sorting algo 
+    for i in range(len(arr)): #This loop controls the number of passes through the array. In each pass, the largest unsorted element will "bubble up" to its correct position.
+
+        for j in range(len(arr)-i-1): #nested loop. This loop goes through the unsorted portion of the array. Since after each pass, the largest element is placed at the end of the unsorted portion, we reduce the inner loop's range by i elements to avoid unnecessary comparisons.
+            iterations += 1 #With each iteration of the inner loop, the variable iterations is incremented by 1
+            if arr[j] > arr[j+1]: #if the current element is greater than the next element, it means they're not in order, so a sawap is performed using a tuple assignment. This swap puts the larger element in its correct position relative to the smaller one 
+                arr[j], arr[j+1] = arr[j+1], arr[j] #tuple assignment 
+    return arr, iterations
+
+arr = [2, 5, 1, 9, 4, 3, 1]
+print(bubble_optimized(arr))
+
+
+'''INSERTION SORT'''
+'''simple sorting algorithm that builds the final sorted array one item at a time.'''
+def insert_sort(arr1):
+    for element in range(1, len(arr1)): #loop that iterates over the elements of the list starting from the second element (index 1) and going up to the last element. The reason for starting at index 1 is that the first element is considered to be sorted by itself initially.
+        key = arr1[element] #The reason for starting at index 1 is that the first element is considered to be sorted by itself initially.
+        i = element -1 #i is initialized to element - 1, which is the index of the element immediately before the current element.
+        while i >= 0 and arr1[i] > key: #compare the key with elements in the sorted subarray (elements before the current element). The loop continues as long as i is greater than or equal to 0 (ensuring we don't go out of bounds) and the element at arr1[i] is greater than key.
+            arr1[i+1] = arr1[i] # if condition is true, it means that the element at arr1[i] should be moved to the right to make space for key. This is done by assigning arr1[i] to arr1[i+1]. Essentially, we shift elements in the sorted subarray to the right until we find the correct position for key.
+            i -= 1
+        arr1[i + 1] = key #After exiting the while loop, we have found the correct position for key, and we insert it by assigning key to arr1[i + 1].
+        
+        #The process continues for each element in the list, gradually building the sorted subarray. At the end of the loop, the entire list is sorted in ascending order.The sorted arr1 is modified in-place, so there is no need to return it explicitly from the function.
+
+arr1 = [20, 4, 10, 2, 3, 1]
+insert_sort(arr1)
+print(arr1)
+        
+
+
