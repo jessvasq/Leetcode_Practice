@@ -120,5 +120,123 @@ if result == output:
 #ALGO'S COMPLEXITY 
 #Time complexity of linear search is O(N) and its space complexity is O(1)
 
+'''BINARY SEARCH'''
+#Note: We're using the same cards problem
+#The best idea would be to pick a random card and use the fact that the list is sorted, to determine whether the target card lies to the left or right. If we pick the middle card, we can reduce the number of additional cards to be tested to half the size of the list. Then we can simply repeat the process with each half. 
+
+#PSEUDECODE
+#1. Find the middle element of the list
+#2. It it matches the query number, return the middle position as the answe
+#3. If it is less than the query number, then search the first half of the list 
+#4. If it is greater than the queried number, then search the second half of the list 
+#5. If we reach the end of the list, return -1 
+
+#SOLUTION 
+
+def find_card(cards, query):
+    lowest, highest = 0, len(cards) - 1 #lowest will have the value 0, meaning it will start at index 0 
+                                        #highest will be the last item in the list. We access this element by lenght of cards - 1
+    
+    #check if there are items in the list 
+    while lowest <= highest:
+        #remember we're working with indexes, not the actual values meaning that we'll use index starting at 0 plus the last index in the list, we add them and divide them by two to find the middle number
+        middle = (lowest + highest) // 2 # we use '//' to get a whole number not decimals or floating numbers
+        mid_number = cards[middle]
+        
+        #test whethe the values are working as expected
+        print('lowest:', lowest, ', highest:', highest, ', middle:', middle, ', middle_number:', mid_number)
+        
+        
+        if mid_number == query:
+            return middle
+        elif mid_number < query:
+            highest = middle - 1
+        elif mid_number > query:
+            lowest = middle + 1
+    return -1 
+
+
+#TEST SOLUTION 
+
+result = find_card(test['input'] ['cards'], test['input']['query'])
+print(result) 
+
+# or #
+
+results = find_card(cards, 7)
+print(results)  
+
+if result == output:
+    print('cards is located at position:', results)
+
+#SECOND SOLUTION 
+
+#the test function tells us whether we need to look on the left or right side of the list 
+def test_location(cards, query, mid):
+    mid_number = cards[mid]
+    print('mid:', mid, ',mid_number:', mid_number)
+    
+    if mid_number == query:
+        #check if the index is valid by using (mid-1) >= 0 and if the element before the mid number is less than the query, we need to go left
+        if mid-1 >= 0 and cards[mid-1] == query:
+            return 'left'
+        else:
+            return 'found'
+    #check if the middle number is less than the query, print left
+    elif mid_number < query:
+        return 'left'
+    #check if the middle number is greater than the query, print right
+    else: 
+        return 'right'
+    
+def find_cards(cards, query):
+    lowest, highest = 0, len(cards)-1
+    
+    while lowest <= highest:
+        print('lowest:', lowest, ', highest:', highest,)
+        middle = (lowest + highest) // 2 
+        result = test_location(cards, query, middle)
+        
+        if result == 'found':
+            return middle
+        if result == 'left':
+            highest = middle -1 
+        elif result == 'right':
+            lowest = middle + 1
+    return -1 
+
+#TEST SECOND SOLUTION 
+
+result = find_cards(test['input'] ['cards'], test['input']['query'])
+print(result) 
+
+# or #
+
+results = find_cards(cards, 7)
+print(results)  
+
+if result == output:
+    print('cards is located at position:', results)
+
+
+#COMPLEXITY 
+#count number of iterations in the algo. If we start out with an array of N elements, then each time the size of the array reduces to half (N/2) for the next iteration , until we are left with just one element 
+
+#initial length - N 
+#iteration 1 - N/2 
+#iteration 1 - N/4
+#iteration 1 - N/8 
+# #iteration 1 - N/16 
+#...
+#iteration - N/2^k 
+
+#since the final length of the array is 1, we can find the N/2^k = 1 
+#Rearranging the terms, we get
+#N = 2^k
+#Taking the logarithm 
+#k = logN 
+
+#where log refers to the log to the base of 2. Therefore, our algo has the time complexity O(log N)
+#The space complexity of binary search is 0(1)
 
 
