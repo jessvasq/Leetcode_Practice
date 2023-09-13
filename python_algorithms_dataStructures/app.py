@@ -239,4 +239,118 @@ if result == output:
 #where log refers to the log to the base of 2. Therefore, our algo has the time complexity O(log N)
 #The space complexity of binary search is 0(1)
 
+'''GENERIC BINARY SEARCH '''
+
+def binary_search(low, high, condition): #it takes a low, high, and condition
+    while low <= high:  
+        middle = (low + high) // 2 
+        result = condition(middle)
+        if result == 'found': 
+            return middle
+        elif result == 'left':
+            high = middle - 1
+        else: 
+            low = middle + 1
+    return -1 
+
+
+#using the algo 
+
+def get_card(cards, query):
+    
+    def condition(mid): 
+        if cards[mid] == query: 
+            #we check if the mid is within the list 
+            if mid>0 and cards[mid-1] == query:
+                return "left"
+            else: 
+                return 'found'
+        elif cards[mid] < query:
+            return 'left'
+        else: 
+            return 'right'
+                        #low  #high    #condition function
+    return binary_search(0, len(cards)-1, condition)
+
+#TEST
+
+results = get_card(cards, 7)
+print(results)
+
+if result == output:
+    print('cards is located at position:', results)
+    
+
+for test in tests: 
+    print(get_card(**test['input']) == test['output'])
+
+
+'''BINARY SEARCH vs. LINEAR SEARCH'''
+
+#TEST large lists 
+# large_test = {
+#     'input': {
+#         "cards": list(range(100000000, 0, -1)), #we're creating a decreasing list by using range() starting at 10000000 and ending at 1 
+#         "query": 2
+#         }, 
+#     'output': 999998
+# }
+
+#The binary search is over 55,000 times faster than the linear search version 
+#As the size of the input grows larger, the difference only gets bigger. 
+
+
+'''SECOND QUESTION. #34 LEETCODE'''
+'''Given an array of integers nums sorted in ascending order, find the starting and ending position of a given number. If target is not found in the array, return [-1, -1].
+You must write an algorithm with O(log n) runtime complexity.'''
+
+#You must write an algorithm with O(log n), meaning a binary search 
+#1. numbers are sorted in increasing order 
+#2. Assuming the given number is duplicated, we will need to find both: the start index and end index
+
+nums = [5,7,7,8,8,10]
+target = 8
+output = [3,4]
+
+#using the binary search algo 
+
+#find the start index 
+def first_position(nums, target):
+    def condition(mid):
+        if nums[mid] == target: 
+            if mid > 0 and nums[mid-1] == target:
+                 return 'left'
+            return 'found'
+        
+        elif nums[mid] < target: 
+            return 'right'
+        else: 
+            return 'left'
+    return binary_search(0, len(nums)-1, condition)
+
+def last_position(nums, target):
+    def condition(mid):
+        if nums[mid] == target: 
+            #we're checking the right of the list
+            if mid < len(nums)-1 and nums[mid+1] == target:
+                 return 'right'
+            return 'found'
+        
+        elif nums[mid] < target: 
+            return 'right'
+        else: 
+            return 'left'
+    return binary_search(0, len(nums)-1, condition)
+
+def get_first_last_position(nums, target):
+    return first_position(nums, target), last_position(nums, target)
+        
+        
+#TEST
+
+results = get_first_last_position(nums, 8)
+print(results)
+
+if results == output:
+    print('cards is located at position:', results)       
 
