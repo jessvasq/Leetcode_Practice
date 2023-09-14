@@ -390,7 +390,10 @@ def count_rotations(nums):
         #nums[position] < nums[position-1]: checks if the current element at position is less than the element just before it (position-1). If this condition is met, it indicates a point where the list is not sorted as expected.
         if position > 0 and nums[position] < nums[position-1]:
             #return position: If the conditions in the if statement are met, the function returns the position where the unexpected ordering was detected. This position represents the number of rotations needed to restore the original sorted order. Remember we're looking at the index here 
+            print('position', position, 'value:', nums[position])
+           
             return position 
+      
         
         position += 1 #If neither of the conditions in the if statement is met, the code increments the position variable by 1, effectively moving to the next element in the list for further inspection.
     
@@ -463,7 +466,39 @@ for test in tests:
 
 #Analyze the algorithm's complexity: O(N)
 
+'''BINARY SEARCH SOLUTION'''
 
-   
+#Same concept, only difference is that we'd need to find the middle element. Given the middle element decide if the answer is in the right or left 
+#If the middle answer is smaller than the last element of the range, then the answer is to the left. Otherwiser, the answer is to the right.
    
 
+def count_rotations_binary(nums):
+    lo=0
+    hi=len(nums)-1
+    
+    while lo < hi:
+        mid = (lo+hi) // 2 
+        mid_number = nums[mid]
+        
+        # if mid > 0 and mid < len(nums)-1:
+        #     return mid 
+        
+        #check if the answer is in the right side by checking if the middle ellement is at the right index. if it is, this indicates that the rotation point is to the right of mid, so set left to mid + 1.
+        if mid_number > nums[hi]:
+            print('mid_num:', mid_number, 'value:', nums[hi])
+            lo = mid + 1
+            print('lo:', lo)
+        #Otherwise, if the middle element is less than or equal to the element at the right index, this indicates that the rotation point is to the left of mid or at mid itself, so set right to mid.
+        else:
+            hi = mid
+    
+    return lo
+
+#TEST
+tests = [test0, test1, test2, test3, test4]
+
+for test in tests:
+   print(count_rotations(**test['input']) == test['output'])
+    
+    
+#Analyze the algo's complexity: O(logN)
