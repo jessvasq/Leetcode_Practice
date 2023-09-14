@@ -354,3 +354,116 @@ print(results)
 if results == output:
     print('cards is located at position:', results)       
 
+#######################################################
+'''You are given a list of numbers, obtained by rotating a sorted list an unknown number of times. Write a function to determine the minimum number of times the original sorted list was rotated to obtain the givenlist. Your function should have the worst-case complexity of O(logN), where N is the length of the list. You can assume that all the numbers in the list are unique. 
+Ex: the list [5,6,9,0,2,3,4] was obtained by rotating the sorted list and assing it before the first element. Eg. rotating the list [3,2,4,1] produces [1,3,2,4]'''
+
+#Understanding the problem 
+#trying to find how many the minimum times a list was rotated. 
+#all numbers are unique. 
+#A rotated list is where the elements are shifted to the left or right by a certain number of positions. These can be rotated to the left and right by a specified number of positions
+#rotations is the number of times the sorted list was rotated
+
+#nums represent a sorted rotated list 
+nums = [5,6,9,0,2,3,4]
+
+#PSEUDOCODE 
+
+#If a list is rotated 'k' times, then the smallest number in the list ends up at position 'k'
+#It is the onlyu number in the list which is smaller than the number before it 
+#we need to check whether the value is less than the number before it 
+#then our answer is ismply the position of this number. If we can't find this value then the list wasn't rotated at all 
+
+'''linear search solution'''
+#PSEUDOCODE 
+# Create a variable position with the value 0
+# Compare the number is smaller than its predecessor, then return position 
+# Otherwise, increment position and repeat till we reach the end of the list
+
+def count_rotations(nums):
+    #This variable will be used to keep track of the current position while iterating through the list nums
+    position = 0
+    
+    #iterates through each element of the list.
+    while position < len(nums):
+        #position > 0: This condition checks if the current position is greater than 0. This is because, in a sorted list with no rotations, each element should be greater than or equal to the previous element. If this condition is not met, it means we've found a point where the list is not sorted as expected.
+        #nums[position] < nums[position-1]: checks if the current element at position is less than the element just before it (position-1). If this condition is met, it indicates a point where the list is not sorted as expected.
+        if position > 0 and nums[position] < nums[position-1]:
+            #return position: If the conditions in the if statement are met, the function returns the position where the unexpected ordering was detected. This position represents the number of rotations needed to restore the original sorted order. Remember we're looking at the index here 
+            return position 
+        
+        position += 1 #If neither of the conditions in the if statement is met, the code increments the position variable by 1, effectively moving to the next element in the list for further inspection.
+    
+    return 0 #This means that the list is either sorted or empty, and no rotations are needed to restore the original order.
+
+
+
+# TEST CASES # 
+#Each dictionary will contain 2 keys. Input: a nested dictionary containing one key for each argument to the function and output (the expected result from the function)
+
+test = {
+    'input': {
+        'nums': [19, 25, 29, 3, 5, 6, 7, 9, 11, 15 ], 
+        
+    }, 
+    'output': 3 
+}
+
+
+nums0 = test['input']['nums']
+output0 = test['output']
+result0 = count_rotations(nums0)
+result0, result0 == output0
+ 
+test0 = test
+
+#A list of size 8 rotated 5 times
+test1 = {
+    'input': {
+        'nums': [4, 5, 6, 7, 8, 1, 2, 3 ], 
+        
+    }, 
+    'output': 5 
+}
+
+#A list that wasn't rotated at all 
+test2 = {
+    'input': {
+        'nums': [1, 2, 3, 4, 5, 6], 
+        
+    }, 
+    'output': 0 
+}
+
+#A list that was rotated just once 
+test3 = {
+    'input': {
+        'nums': [7, 3, 5 ], 
+        
+    }, 
+    'output': 1 
+}
+
+
+
+#A list where n is the size of the list
+test4 = {
+    'input': {
+        'nums': [3, 5, 7, 8, 9, 10 ], 
+        
+    }, 
+    'output': 0
+}
+
+tests = [test0, test1, test2, test3, test4]
+
+for test in tests:
+   print(count_rotations(**test['input']) == test['output'])
+   
+
+#Analyze the algorithm's complexity: O(N)
+
+
+   
+   
+
