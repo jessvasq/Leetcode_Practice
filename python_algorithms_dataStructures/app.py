@@ -639,3 +639,107 @@ print(database.list_all())
 '''Analyze complexity '''
 # Operations insert, find, update involves iterating over list of use, which can take N iterations 
 #Insert O(N), Find O(N), Update O(N), getting the List O(1)
+
+
+'''BINARY TREE'''
+#We can limit he number of iterations by using a binary tree 
+#A binary tree is like an inverted tree trunk with branches called nodes, top node is called the 'root' where most operations begin 
+#Binary tree indicates that each ''node'' in the tree can have 2 children max (left or right)
+#Nodes that do not have any children are called 'leaves' 
+
+'''Implement a binary tree using Python and show its usage with some examples'''
+
+#here is a simple class representing a node within a binary tree
+class TreeNode: 
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None 
+        
+#create objects representing each node of the above tree
+node0 = TreeNode(3)
+node1 = TreeNode(5)
+node2 = TreeNode(7)
+
+print(node0) #verifies if is an object of the type 'Treenode' 
+print(node0.key) #and has the property key set to 3 
+
+#we can connect the nodes by setting the .left and .right properties to the root node 
+node0.left = node1
+node0.right = node2
+
+tree = node0
+print(tree.key)
+print(tree.left.key)
+print(tree.right.key)
+
+'''Create a binary tree using the 'TreeNode class defined above'''
+
+#we can use a tuple 
+tree_tuple = ((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8)))
+
+def parse_tuple(data): 
+    #If data is a tuple with three elements (indicating a non-empty tree node), it creates a TreeNode object with the middle element as the value of the node (data[1]).
+    if isinstance(data, tuple) and len(data) == 3:
+        node = TreeNode(data[1])
+        
+        #It recursively parses the left subtree by calling parse_tuple(data[0]) and assigns it to the left attribute of the node.
+        node.left = parse_tuple(data=[0])
+        
+        #It recursively parses the right subtree by calling parse_tuple(data[2]) and assigns it to the right attribute of the node.
+        node.right = parse_tuple(data=[2])
+        
+    #If data is None, it returns None to indicate an empty subtree.
+    elif data is None: 
+        node=None
+        
+    #If data is neither a tuple nor None, it assumes that it's a leaf node value and creates a TreeNode with that value.    
+    else: 
+        node = TreeNode(data)
+    return node
+
+
+tree2 = parse_tuple(((1,3, None), 2, ((None, 3, 4), 5, (6, 7, 8) )))
+print(tree2)
+print(tree2.key)
+print(tree2.left.key, tree2.right.key)
+
+
+''''Function to display a binary tree'''
+def print_tree(root): 
+    #check if there is a tree 
+    if root is None: 
+        return
+    
+    #initialized with the root node
+    queue = [root] 
+    
+    #continue as long as the 'queue' is not empty 
+    while queue: 
+        #find the number of nodes by finding the length of the queue
+        level_nodes = len(queue)
+        
+        #for loop iterates over the nodes in the current level
+        for i in range(level_nodes):
+            #remove the node at index 0 
+            node = queue.pop(0)
+            
+            #if there's a value,  the code enqueues (appends) the left and right children of the current node to the queue
+            if node: 
+                print(node.key, end=' ')
+                queue.append(node.left)
+                queue.append(node.right)
+            #if the node is empty(missing child), we print none 
+            else: 
+                print('None', end= ' ')
+    print()
+    
+root = TreeNode(2)
+root.left = TreeNode(1)
+root.right = TreeNode(5)
+root.left.right = TreeNode(3)
+root.right.right = TreeNode(6)
+root.right.right.left = TreeNode(7)
+root.right.right.right = TreeNode(8)
+    
+print_tree(root)
