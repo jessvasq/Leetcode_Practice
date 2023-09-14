@@ -743,3 +743,73 @@ root.right.right.left = TreeNode(7)
 root.right.right.right = TreeNode(8)
     
 print_tree(root)
+
+
+'''TRAVERSAL'''
+#implementation of inorder taversal of a binary tree
+def traverse_in_order(node): #node represents the root of the subtree 
+    if node is None: #if the node is empty
+        return [] #it returns an empty list
+    #recursively traverses the left subtree of the current node. This returns a list of keys/values from the left subtree in in-order.
+    #[node.key] represents the key (or value) of the current node itself. This is a single-element list containing the key/value of the current node.
+    #traverse_in_order(node.right) recursively traverses the right subtree of the current node. This returns a list of keys/values from the right subtree in in-order.
+    # the + operator creates a single list that represents the in-order traversal of the entire subtree rooted at the current node
+    return(traverse_in_order(node.left)) + [node.key] + traverse_in_order(node.right)
+
+'''Height and size of a Binary Tree'''
+'''Write a function to calculate the heigh/depth of a binary tree'''
+
+def tree_height(node): #takes the root node 
+    if node is None: #If the node is not None, the function recursively calculates the height
+        return 0 
+    return 1 + max(tree_height(node.left), tree_height(node.right)) #tree_height(node.left) calculates the height of the left subtree of the current node by making a recursive call.
+                                                                    #tree_height(node.right) calculates the height of the right subtree of the current node by making a recursive call.
+                                                                    #max: computes the max height between the left and right subtree because the height of the entire tree is determied by the longer of the two subtrees 
+                                                                    #adds 1 to the maximum height of the subtrees to account for the current level (the level of the current node). (since we're looking at the index)
+                                                                    
+                                                                    
+# class TreeNodes(): 
+#     def __init__(self, key): 
+#         self.key = key
+#         self.left = None
+#         self.right = None
+    
+#     def height(self): 
+#         if self is None: 
+#             return 0 
+#         return 1 + max(TreeNode.height(self.left), TreeNode.height(self.right))
+    
+#     def size(self):
+#         if self is None: 
+#             return 0 
+#         return 1 + TreeNode.size(self.left) + TreeNode.size(self.right)
+    
+#     def traverse_in_order(self): 
+#         if self is None: 
+#             return []
+#         return (TreeNode.traverse_in_order(self.left)+ [self.key] + TreeNode.traverse_in_order(self.right))
+    
+#     def display_keys(self, space='\t', level=0):
+#         #if the node is empty
+#         if self is None: 
+#             print(space*level + 'o')
+#             return
+        
+#         #if the node is a leaf 
+#         if self.left is None and self.right is None: 
+#             print(space*level + str(self.key))
+#             return
+        
+#         #if the node has children
+#         display_keys(self.right, space, level+1)
+#         print(space*level + str(self.key))
+#         display_keys(self.left, space, level+1)
+    
+#     def to_tuple(self):
+#         if self is None: 
+#             return None
+#         if self.left is None and self.right is None: 
+#             return self.key 
+#         return TreeNode.to_tuple(self.left), self.key, TreeNode.to_tuple()
+    
+    
