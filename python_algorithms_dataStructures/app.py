@@ -852,4 +852,105 @@ def is_binary_search_tree(node):
     return is_bst_node, min_key, max_key
 
 
-      
+'''PROBLEM# 4: OPTIMAL SOLUTION'''
+#keys would be the username and user objects as values:
+class BSTNode():
+    def __init__(self, key, value=None):
+        self.key = key 
+        self.value = value 
+        self.left = None 
+        self.right = None
+        self. parent = None
+        
+#level 0 
+bstree = BSTNode(josseline.username, josseline)
+print(bstree.key, bstree.value)
+
+#level 1
+bstree.left = BSTNode(miriam.username, miriam)
+bstree.left.parent = bstree 
+bstree.right = BSTNode(jennifer.username, jennifer)
+bstree.right.parent = bstree
+print(bstree.left.key, bstree.left.value, bstree.right.key, bstree.right.value)
+
+#display tree
+print_tree(bstree)
+
+###### PARAMETERS #######
+#  key is the key(username) of the node to be inserted 
+#  'value' is the value (entire user's object which includes name, email & username) associated with the new node
+############
+
+
+'''Write a function to INSERT a new node into a BST'''
+'''we need to recursively traverse the tree to find the appropriate location for the new node and updates the tree structure accordingly'''
+def insert(node, key, value): #node is the root of the current subtree, key is the key(username) of the node to be inserted, and 'value' is the value (entire user's object which includes name, email & username) associated with the new node
+#    check if the current node is None, indicating that the function has reached an empty (null) node. If this is the case, it creates a new BSTNode with the specified key and value, effectively creating the new node and assigning it to node
+    if node is None: 
+        node = BSTNode(key, value)
+        
+# checks whether the key to be inserted (key) is less than the key of the current node (node.key). If it is, the insertion process continues in the left subtree.
+    elif key < node.key:
+#         recursively calls the insert function on the left subtree. It assigns the result (the updated left subtree) to node.left, effectively linking the new node to the left subtree.
+# node.left.parent = node sets the parent of the newly inserted node (node.left) to be the current node (node).
+        node.left = insert(node.left, key, value)
+        node.left.parent = node
+    elif key > node.key:
+        node.right = insert(node.right, key, value)
+        node.right.parent = node
+    return node
+                      #key                #value
+bstree = insert(None, josseline.username, josseline)
+print(bstree.key, bstree.value)
+insert(bstree, miriam.username, miriam)
+insert(bstree, jennifer.username, jennifer)
+#display tree
+print_tree(bstree)
+
+
+'''FINDING A NODE IN BST(Binary Search Tree)'''
+'''Find the value associated with a given key in a BST'''
+
+#we'll use a recursive strategy, we're calling the same function over and over again
+def find(node, key): #node is the root of the current subtree, key is the key (username) of the node we're looking for
+    if node is None: 
+        return node 
+    if node.key == key: 
+        return node
+    if key < node.key: 
+        return find(node.left, key)
+    if key > node.key: 
+        return find(node.right, key)
+    
+    
+node = find(bstree, 'joss')
+print('key:', node.key, 'value:', node.value)
+
+
+'''UPDATING A VALUE IN A BST'''
+'''Write a function to update the value associated with a given key'''
+
+def update(self, key, value):
+    #we first find the node
+    target = find(node, key)
+
+    if target is not None:
+    #we update the target with the new value  
+        target.value = value
+        
+update(bstree, 'jenn', User('jenn', 'Jennifer', 'jenny@gmail.com'))
+node = find(bstree, 'jenn')
+print('Updated node value: ', node.value)  
+
+
+'''RETRIEVE LIST'''
+'''Write a funtion to retrieve all the key-value pairs stored in a BST in the sorted order of keys'''
+#nodes can be listed in a sorted order by performing an inorder traversal(meaning that we visit the leftmost node first, then the root, and lastly the right node) of the BST
+
+def list_all(node):
+    if node is None: 
+        return []
+    else:                           #insert the key and value from the current node 
+        return list_all(node.left) + [(node.key, node.value)] + list_all(node.right)
+    
+print(list_all(bstree))
