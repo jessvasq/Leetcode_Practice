@@ -653,6 +653,7 @@ print(database.list_all())
 class TreeNode: 
     def __init__(self, key):
         self.key = key
+
         self.left = None
         self.right = None 
         
@@ -813,3 +814,42 @@ def tree_height(node): #takes the root node
 #         return TreeNode.to_tuple(self.left), self.key, TreeNode.to_tuple()
     
     
+'''BINARY SEARCH TREE (BST)'''
+#A binary search tree that satisfies these conditions: 
+#1. Left subtree of any node only contains nodes with keys less than the node's key 
+#2. RIght subtree of any node only contains nodes with keys greater than the node's key 
+ 
+'''Write a function to check if a binary tree is a binary search tree (BST). 
+ Write a function to find the maximum key in a binary tree
+ Write a function to find the minimum key in a binary tree'''
+ 
+ #The function below addresses all questions 
+#  check whether a given binary tree is a binary search tree (BST). It does so by recursively traversing the tree while maintaining the minimum and maximum values allowed for the nodes at each level of the tree
+ 
+def remove_none(nums): 
+    #returns a new list containing only the non-None values. It uses a list comprehension to filter out None values from the input list.
+     return [x for x in nums if x is not None]
+ 
+def is_binary_search_tree(node):
+    # check if the binary tree rooted at node is a BST. If node is None (i.e., an empty tree or leaf node), it returns True because an empty tree is considered a BST. It also returns None for both the minimum and maximum values for this subtree.
+    if node is None: 
+        return True, None, None
+    
+    #  It obtains the results from these recursive calls, including whether each subtree is a BST (is_binary_search_tree_l and is_binary_search_tree_r), and the minimum and maximum values for each subtree (min_l, max_l, min_r, max_r).
+    is_binary_search_tree_l, min_l, max_l = is_binary_search_tree(node.left)
+    is_binary_search_tree_r, min_r, max_r = is_binary_search_tree(node.right)
+    
+    #checks whether the current node itself is part of a BST. It does this by ensuring that both the left and right subtrees are BSTs (is_binary_search_tree_l and is_binary_search_tree_r are True), and that the node.key (assuming node has a key attribute) is greater than the maximum value allowed in the left subtree (max_l) and less than the minimum value allowed in the right subtree (min_r)
+    is_bst_node = (is_binary_search_tree_l and is_binary_search_tree_r and 
+                   (max_l is None or node.key > max_l) and
+                   (min_r is None or node.key < min_r))
+    
+    #calculates the minimum and maximum values for the current subtree. It uses the remove_none function to filter out None values from the list of minimum and maximum values calculated for the left subtree, node.key, and the values calculated for the right subtree. This ensures that the min_key and max_key do not include None values.
+    min_key = min(remove_none([min_l, node.key, min_r]))
+    max_key = max(remove_none([max_l, node.key, max_r]))
+    
+    # returns whether the current node is part of a BST (is_bst_node), as well as the minimum and maximum values for the subtree rooted at node.
+    return is_bst_node, min_key, max_key
+
+
+      
