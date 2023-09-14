@@ -502,3 +502,140 @@ for test in tests:
     
     
 #Analyze the algo's complexity: O(logN)
+
+'''BINARY TREES, TRAVERSALS AND BALANCING'''
+'''You are tasked with developing a fast in-memory data structure to manage profile information(username, name, email) for 100 million users. It should allow the following operations:
+1. Insert the profile info for a new user 
+2. FIND the profile info of a user, given their username 
+3. UPDATE the profilw information of a user, given their username
+4. LIST all the users of the platform, sorted by username. 
+You can assume that username are unique'''
+
+
+#State the problem 
+#We need to create a database  to store 100 million records and perform insertion, search, update and list operations efficiently
+#inputs: user's info (username, name, email)
+
+'''SIMPLE SOLUTION '''
+
+class User: 
+    def __init__(self, name, username, email):
+        self.username = username 
+        self.name = name 
+        self.email = email 
+        
+    #we can also create methods inside a class 
+    def introduction(self, friend_name):
+        return f"Hi, {friend_name}! I'm {self.name}, you can reach me at {self.email}"
+
+        
+    #returns a printable representation of a given object 
+    def __repr__(self):
+        return "User(name={}, username={}, email={})".format(self.name, self.username, self.email)
+    
+    #returns the string representation of a given object
+    def __str__(self):
+        return self.__repr__() 
+    
+# #instantiate an object of the user class by calling the class like a function 
+# user1 = User('Marcela', 'Chela', 'marcela@gmail.com')
+# user1.introduction('Jess')
+
+
+'''OUTPUT''' 
+class UserDatabase: 
+    def __init__(self):
+        self.users = [] #empty list
+        
+    #we'll create a function for each operation 
+    def insert(self, user):
+        i = 0
+        
+        while i < len(self.users):
+            #find the first username greater than the user's username 
+            if self.users[i].username > user.username: 
+                break
+            i += 1 
+        self.users.insert(i, user) #we insert the new user at the empty index 
+    
+    def find(self, username):
+        for user in self.users: 
+            if user.username == username: 
+                return user 
+            
+        
+    def update(self, user):
+        target = self.find(user.username)
+        if target:
+            target.name, target.email = user.name, user.email
+    
+    def list_all(self):
+        return self.users
+
+
+
+'''pseudocode''' 
+''' Store use objects in a list sorted by usernamees
+Functions to be implemented: 
+1. Insert: Loop through the list and add the new user at a position that keeps the list sorted 
+2. Find: Loop through the list and find the user object with the username matching the query 
+3. Update: Loop through the list, find the user object matching the query and update the details
+4. List return the list of all user objects
+'''
+
+
+# #Create new database 
+# database = UserDatabase()
+# print(database)
+# #insert new users 
+# database.insert(josseline)
+# database.insert(miriam)
+# print(database)
+
+# #Retrieve data for a user given the username
+# user = database.find('Miriam')
+# print(user)
+
+# #change the info for a user 
+# database.update(User(username='joss', name='Josseline', email='jossy@gmail.com'))
+# user = database.find('Josseline')
+# print(user)
+
+# #retrieve a list of user in alphabetical order 
+# database.list_all()
+
+# database.insert(jennifer)
+# database.list_all()
+
+'''TESTCASES'''
+#Instantiate new objects
+josseline = User('Josseline', 'joss', 'joss@gmail.com')
+jennifer = User('Jenny', 'jenn', 'jenn@gmail.com')
+miriam = User('Miriam', 'mir', 'miriam@gmail.com')
+
+users = [josseline, jennifer, miriam]
+print('List of existing users:', users)
+
+josseline.username, josseline.name
+print('String representation:', josseline)
+
+database = UserDatabase()
+print(database)
+
+database.insert(josseline)
+database.insert(miriam)
+print(database.list_all())
+
+user = database.find('mir')
+print(user)
+
+database.update(User('Josseline', 'joss', 'jossy@gmail.com'))
+user = database.find('joss')
+print(user)
+
+database.insert(jennifer)
+print(database.list_all())
+
+'''Analyze complexity '''
+# Operations insert, find, update involves iterating over list of use, which can take N iterations 
+#Insert O(N), Find O(N), Update O(N), getting the List O(1)
