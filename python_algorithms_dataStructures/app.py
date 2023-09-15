@@ -420,7 +420,7 @@ result0, result0 == output0
  
 test0 = test
 
-#A list of size 8 rotated 5 times
+#A li_bubblest of s_bubbleize 8 r_bubbleotated _bubble5 times
 test1 = {
     'input': {
         'nums': [4, 5, 6, 7, 8, 1, 2, 3 ], 
@@ -954,3 +954,163 @@ def list_all(node):
         return list_all(node.left) + [(node.key, node.value)] + list_all(node.right)
     
 print(list_all(bstree))
+
+######################
+'''BALANCED TREE'''
+'''Write a function to determine if a binary tree is balanced'''
+
+#Recursive strategy 
+# 1. Ensure that the left subtree is balanced
+# 2. Ensure that the right subtree is balanced
+# 3. Ensure that the difference between heights of the left subtree and right subtree is not more than 1
+
+def is_balanced(node):
+    if node is None: 
+        return True, 0
+    balanced_l, height_l = is_balanced(node.left)
+    balanced_r, height_r = is_balanced(node.right)
+    balanced = balanced_l and balanced_r and abs(height_l - height_r ) <= 1 
+    height = 1 + max(height_l, height_r)
+    return balanced, height
+
+print(is_balanced(bstree))
+
+'''BALANCED BINARY SEARCH TREES'''
+'''Write a function to create a balance BST from a sorted list/array of key-value pairs'''
+# Use recursion
+# Similar to binary search, we find the middle element and use that as our root node 
+# then take the left half of the list and use that to create a balanced binary search tree and make it the left child element of the root node 
+# Same process for the right side, we take the right elements, create a balanced binary search tree and link it to be the right child element of the root node (middle element)\
+#use the recursive algo below if the data is sorted to create a balanced binary search tree. If the data is not sorted, it could lead to unbalanced recursion.
+
+def make_balanced_bst(data, lo=0, hi=None, parent=None): #data which a list of key value pair  #set lo to 0, initial index in the list  
+    hi= len(data) -1 #the last item in the list 
+    
+    if lo>hi:
+        return None
+    
+    #find the middle element 
+    mid= (lo+hi) // 2 
+    #we get the user's username and the user's object 
+    key, value = data[mid]
+    
+    #we create the root node
+    root = BSTNode(key, value)
+    root.parent = parent 
+    #recursive function. Here we're passing the list of key-value pairs, the range would start at lo= 0 and end at the middle element - 1, and our root 
+    root.left = make_balanced_bst(data, lo, mid-1, root)
+    #we're passing the list of key-value pairs, the range would start at mid_element + 1 and end at the given hi value which is the end of the list , and our root
+    root.right = make_balanced_bst(data, mid+1, hi, root)
+    
+    return root
+
+data = [(user.username, user) for user in users]
+print('Balanced binary search tree: ', data)
+   
+# 
+# balanced_tree = make_balanced_bst(data)
+# print(balanced_tree)
+
+
+'''BALANCING AN UNBALANCED BST'''
+
+'''Write a function to balance unbalanced binary search tree'''
+#perform an inorder traversal, then create a balanced BST using the function defined earlier 
+
+def balance_bst(node): 
+                          #we're doing an inorder traversal to call the sorted array and passing that into the 'make_balanced_bst' function' 
+    return make_balanced_bst(list_all(node))
+
+unbalancedt1 = None 
+#insert the values one by one
+for user in users: 
+    unbalancedt1 = insert(unbalancedt1, user.username, user)
+    
+# print(unbalancedt1)
+
+
+# unbalancedt2 = balance_bst(unbalancedt1)
+
+
+'''OPTIMIZED SOLUTION'''
+# Define a class for user profiles
+class UserProfile:
+    def __init__(self, username, name, email):
+        self.username = username
+        self.name = name
+        self.email = email
+
+# Define a class for the user database
+class UserDatabase:
+    def __init__(self):
+        self.profile_dict = {}  # Hash table for profiles (username -> UserProfile)
+        self.sorted_usernames = []  # Balanced Binary Search Tree for sorted usernames
+
+    def insert(self, username, name, email):
+        # Create a new user profile
+        new_profile = UserProfile(username, name, email)
+
+        # Insert into the hash table
+        self.profile_dict[username] = new_profile
+
+        # Insert into the BST for sorting
+        self.insert_into_bst(username)
+
+    def find(self, username):
+        if username in self.profile_dict:
+            return self.profile_dict[username]
+        else:
+            return None
+
+    def update(self, username, name, email):
+        if username in self.profile_dict:
+            # Update the profile information
+            self.profile_dict[username].name = name
+            self.profile_dict[username].email = email
+
+    def list_all(self):
+        # Perform an in-order traversal of the BST to list all users sorted by username
+        sorted_users = [self.profile_dict[username] for username in self.sorted_usernames]
+        return sorted_users
+
+    def insert_into_bst(self, username):
+        # Helper function to insert a username into the BST
+        self.sorted_usernames = self._insert_into_bst(self.sorted_usernames, username)
+
+    def _insert_into_bst(self, usernames, username):
+        # Recursive helper function to insert a username into the BST
+        if not usernames:
+            return [username]
+
+        root_index = len(usernames) // 2
+        root_username = usernames[root_index]
+
+        if username < root_username:
+            # Insert into the left subtree
+            return self._insert_into_bst(usernames[:root_index], username) + [root_username] + usernames[root_index:]
+        else:
+            # Insert into the right subtree
+            return usernames[:root_index + 1] + [username] + self._insert_into_bst(usernames[root_index + 1:], username)
+
+# Example usage:
+if __name__ == "__main__":
+    db = UserDatabase()
+
+    # Insert user profiles
+    db.insert('user3', 'Alice', 'alice@example.com')
+    db.insert('user1', 'Bob', 'bob@example.com')
+    db.insert('user2', 'Charlie', 'charlie@example.com')
+
+    # Find and update user profiles
+    user = db.find('user1')
+    if user:
+        print(f"Found user: {user.name}, {user.email}")
+        db.update('user1', 'Bobby', 'bobby@example.com')
+
+    # List all users sorted by username
+    users = db.list_all()
+    print("All users:")
+    for user in users:
+        print(f"{user.username}: {user.name}, {user.email}")
+
+
