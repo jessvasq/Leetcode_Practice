@@ -141,3 +141,44 @@ bst.insert(5)
 k = 1
 kth_smallest = bst.find_kth(k)
 print(f"The {k}th smallest element is {kth_smallest}")
+
+
+'''Write a function to find the longest common prefix of an array of strings.'''
+
+#loop through the array 
+#compare each character and compare to the other characters in other strings 
+
+
+def longest_common_prefix(strs):
+    # Handle the case of an empty input array
+    if not strs:
+        return ""
+
+    # Find the minimum length string in the array
+    min_length = min(len(s) for s in strs)
+
+    print('min length: ', min_length)
+    
+    # Initialize the longest common prefix
+    common_prefix = ""
+
+    # Iterate through characters at the same position in all strings
+    for i in range(min_length):
+        char = strs[0][i]  # Get the character from the first string
+        print('char: ', char)
+        
+        for s in strs:
+            if s[i] != char:
+                print('common prefix: ', common_prefix)
+                return common_prefix
+               
+        common_prefix += char
+        print('loop: ', common_prefix)
+
+    return common_prefix
+
+
+# Example usage:
+strings = ["unhappy", "unsatisfied", "unified"]
+result = longest_common_prefix(strings)
+print("Longest Common Prefix:", result)
