@@ -182,3 +182,32 @@ def longest_common_prefix(strs):
 strings = ["unhappy", "unsatisfied", "unified"]
 result = longest_common_prefix(strings)
 print("Longest Common Prefix:", result)
+
+
+
+'''Write a function to generate the first n numbers of the Fibonacci sequence.'''
+#Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones
+#the first and 2nd elements of the fibonacci series are 0 and 1 
+#iterate from 1 to n-1 and print f2 then store f2 in a variable and update f2 with f2+f1 and f1 as f2
+
+def print_fibonacci(n):
+    # Initialize the first two Fibonacci numbers
+    f1=0
+    f2=1
+    
+    if (n<1):
+        return
+    print(f1, end='')
+    
+    for _ in range(1,n):
+        print(f2, end='')
+        # Calculate the next Fibonacci number by adding the last two
+        next_num = f1+f2 
+        #we assign f1 to f2
+        f1 = f2
+        f2 = next_num
+
+#Time Complexity: O(n) 
+#Auxiliary Space: O(1)
+n=5
+print_fibonacci(n)
