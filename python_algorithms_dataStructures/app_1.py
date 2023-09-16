@@ -211,3 +211,61 @@ def print_fibonacci(n):
 #Auxiliary Space: O(1)
 n=5
 print_fibonacci(n)
+
+
+
+'''Given an array of integers, write a function to find the largest sum of any contiguous subarray.'''
+#Kadane's algorithm is used to find the maximum sum of any contiguous subarray within a one-dimensional array of numbers, whether the numbers are positive, negative, or zero.
+
+def max_subarray_sum(nums):
+    if not nums:
+        return 0
+
+    #We initialize max_sum and current_sum to the first element of the array nums[0]
+    max_sum = current_sum = nums[0]
+
+    for num in nums[1:]: #iterate starting at the second element
+        
+        #update current_sum by taking the maximum of the current element or the sum of the current element and the previous
+        current_sum = max(num, current_sum + num) 
+        
+        #store the maximum subarray sum encountered so far.
+        max_sum = max(max_sum, current_sum)
+
+    return max_sum
+
+# Example usage:
+nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+result = max_subarray_sum(nums)
+print("Largest sum of contiguous subarray:", result)
+
+
+
+'''You have to complete a function getNumber which receives a single argument H, where H is the head of a linked list. Each node of the linked list contains an integer which is either 1 or 0. Placing all the integers present in the linked list in a order from left to right, forms a binary number. Return the decimal representation of the binary number to the base 10'''
+
+class ListNode: #represents a node in the linked list 
+    def __init__(self, value=0, next=None):
+        self.value = value
+        self.next = next #reference to the next node
+
+def getNumber(head):
+    binary_representation = 0
+    
+    # Traverse the linked list
+    current = head #keeps track of the current node
+    while current is not None:
+        # Left-shift the binary representation and add the current node's value
+        binary_representation = (binary_representation * 2) | current.value  
+        current = current.next
+    
+    return binary_representation
+
+# Example usage:
+# Create a linked list: 1 -> 0 -> 1 -> 0
+node4 = ListNode(0)
+node3 = ListNode(1, node4)
+node2 = ListNode(0, node3)
+node1 = ListNode(1, node2)
+
+decimal_representation = getNumber(node1)
+print("Decimal Representation:", decimal_representation)
