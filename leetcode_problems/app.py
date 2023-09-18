@@ -31,4 +31,37 @@ x=81
 print(find_square_root(x))
         
    
-   
+'''Given two integer arrays nums1 and nums2, sorted in non-decreasing order, return the minimum integer common to both arrays. If there is no common integer amongst nums1 and nums2, return -1. Note that an integer is said to be common to nums1 and nums2 if both arrays have at least one occurrence of that integer.
+ '''  
+
+ 
+def find_common_min(arr1, arr2):
+
+    #find hi and lo elements for both arrays
+    lo = 0 
+    hi = len(arr1)-1
+    arr2_lo = 0
+    arr2_hi = len(arr2)-1
+    
+    while lo <= hi and arr2_lo <= arr2_hi:
+        #compare the first two lo elements, if they're equal return lo
+        if arr1[lo] == arr2[arr2_lo]:
+            return arr1[lo]
+        
+        #if the lo element in arr1 is less than lo element in list 2, increment arr1 lo by 1 
+        elif arr1[lo] < arr2[arr2_lo]:
+            lo += 1
+            
+        #else increment arr2 low by 1     
+        else: 
+            arr2_lo += 1
+  
+    #return -1 if there's no common integer
+    return -1 
+                  
+    
+nums1 = [1,2,3]
+nums2 = [2, 4]
+
+print(find_common_min(nums1, nums2))
+     
