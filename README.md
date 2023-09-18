@@ -1,2 +1,2 @@
 # Leetcode_Practice
-Solutions for Leetcode questions
+Repo for algorithms practice and Leetcode problems' solutions
