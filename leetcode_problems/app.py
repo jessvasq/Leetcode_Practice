@@ -68,34 +68,64 @@ For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.'''
 
 '''268. Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.''' 
 
-#simple solution
-def find_missing_num(arr):
-    n = len(arr)
+# #simple solution
+# def find_missing_num(arr):
+#     n = len(arr)
     
-    for num in range(n+1):
-        if num not in arr:
-            return num
+#     for num in range(n+1):
+#         if num not in arr:
+#             return num
 
-#TEST CASES
-nums=[9,6,4,2,3,5,7,0,1]
-nums1 = [3,0,1]
-nums2 = [0,1]
+# #TEST CASES
+# nums=[9,6,4,2,3,5,7,0,1]
+# nums1 = [3,0,1]
+# nums2 = [0,1]
 
-print(find_missing_num(nums))
-print(find_missing_num(nums1))
-print(find_missing_num(nums2))
+# print(find_missing_num(nums))
+# print(find_missing_num(nums1))
+# print(find_missing_num(nums2))
     
-#Optimized solution 
-def missing_number(nums):
-    n = len(nums)
-    print('N', n)
-    # use the formula for the sum of aithmetic progression. Sum of all numbers from 0 to n
-    total_sum = n * (n + 1) // 2  
-    array_sum = sum(nums)  # Sum of elements in the array
-    print(array_sum) 
-    return total_sum - array_sum #This subtraction will result in the missing number because all the other numbers from 0 to n should have canceled each other out, leaving only the missing number. e.g [0, 1, 3], sum of all numbers from 0 to 3 = (0 + 1 + 2 + 3 = 6) and the sum of the elements in the nums array (3 + 0 + 1 = 4), resulting in the output 2
+# #Optimized solution 
+# def missing_number(nums):
+#     n = len(nums)
+#     print('N', n)
+#     # use the formula for the sum of aithmetic progression. Sum of all numbers from 0 to n
+#     total_sum = n * (n + 1) // 2  
+#     array_sum = sum(nums)  # Sum of elements in the array
+#     print(array_sum) 
+#     return total_sum - array_sum #This subtraction will result in the missing number because all the other numbers from 0 to n should have canceled each other out, leaving only the missing number. e.g [0, 1, 3], sum of all numbers from 0 to 3 = (0 + 1 + 2 + 3 = 6) and the sum of the elements in the nums array (3 + 0 + 1 = 4), resulting in the output 2
 
-# Example usage:
-nums = [9,6,4,2,3,5,7,0,1]
-result = missing_number(nums)
-print(result)  
+## Example usage:
+# nums = [9,6,4,2,3,5,7,0,1]
+# result = missing_number(nums)
+# print(result)  
+
+'''287. Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.There is only one repeated number in nums, return this repeated number.You must solve the problem without modifying the array nums and uses only constant extra space.'''
+
+def find_duplicate_num(nums):
+    # Define the search range
+    lo, hi = 1, len(nums) - 1
+    print(hi)
+    
+    while lo < hi:
+        mid = (lo + hi )// 2
+        count = 0
+        
+        # Count the number of elements in the array that are less than or equal to mid
+        for num in nums:
+            if num <= mid:
+                count += 1
+        
+        # Adjust the search range based on the count
+        if count <= mid:
+            lo = mid + 1
+        else:
+            hi = mid
+    
+    # At this point, lo and hi will converge to the repeated number
+    return lo
+
+nums = [1,3,4,2,2]
+nums1 = [3,1,3,4,2]
+print(find_duplicate_num(nums))
+print(find_duplicate_num(nums1))
