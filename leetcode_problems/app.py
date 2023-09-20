@@ -102,30 +102,68 @@ For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.'''
 
 '''287. Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.There is only one repeated number in nums, return this repeated number.You must solve the problem without modifying the array nums and uses only constant extra space.'''
 
-def find_duplicate_num(nums):
-    # Define the search range
-    lo, hi = 1, len(nums) - 1
-    print(hi)
+# def find_duplicate_num(nums):
+#     # Define the search range
+#     lo, hi = 1, len(nums) - 1
+#     print(hi)
     
-    while lo < hi:
-        mid = (lo + hi )// 2
-        count = 0
+#     while lo < hi:
+#         mid = (lo + hi )// 2
+#         count = 0
         
-        # Count the number of elements in the array that are less than or equal to mid
-        for num in nums:
-            if num <= mid:
-                count += 1
+#         # Count the number of elements in the array that are less than or equal to mid
+#         for num in nums:
+#             if num <= mid:
+#                 count += 1
         
-        # Adjust the search range based on the count
-        if count <= mid:
-            lo = mid + 1
-        else:
-            hi = mid
+#         # Adjust the search range based on the count
+#         if count <= mid:
+#             lo = mid + 1
+#         else:
+#             hi = mid
     
-    # At this point, lo and hi will converge to the repeated number
-    return lo
+#     # At this point, lo and hi will converge to the repeated number
+#     return lo
 
-nums = [1,3,4,2,2]
-nums1 = [3,1,3,4,2]
-print(find_duplicate_num(nums))
-print(find_duplicate_num(nums1))
+# nums = [1,3,4,2,2]
+# nums1 = [3,1,3,4,2]
+# print(find_duplicate_num(nums))
+# print(find_duplicate_num(nums1))
+
+'''33. Search in Rotated Sorted Array'''
+'''There is an integer array nums sorted in ascending order (with distinct values).
+Prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 and become [4,5,6,7,0,1,2].
+Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
+You must write an algorithm with O(log n) runtime complexity.'''
+
+def search_target(nums, target):
+    lo, hi = 0, len(nums)-1  
+      
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        mid_num = nums[mid]
+        
+        if mid_num == target: 
+            return mid
+            
+        elif mid_num >= nums[lo]:
+            if target >= nums[lo] and target < mid_num:
+                hi = mid - 1
+            else:
+                lo = mid + 1
+        
+        else:
+            if target > mid_num and target <= nums[hi]:
+                lo = mid + 1
+            else: 
+                hi = mid - 1 
+    return -1 
+
+
+nums_search = [4,5,6,7,0,1,2]
+target = 3
+
+print(search_target(nums_search, target))
+
+            
+        
