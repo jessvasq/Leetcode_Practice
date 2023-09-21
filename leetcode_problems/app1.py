@@ -212,6 +212,38 @@ def minMaxSum(arr):
     
 arr = [2, 5, 3, 4, 1]
 print(minMaxSum(arr))
-    
-    
-    
+
+'''Given a time in 12-hour AM/PM format, convert it to military (24-hour) time.
+Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
+- 12:00:00PM on a 12-hour clock is 12:00:00 on a 24-hour clock.'''
+
+#only thing that changes would be the first two integers, we need to add 12 
+#check if it's 12 and 'AM', if True change it to '00' and add the remaining 
+#check if the last two int -2 == 'PM'. If true 
+def timeConversions(s):
+    if s[-2:] == 'AM' and s[:2] == '12':
+        return '00' + s[2:-2]
+    elif s[-2:] == 'AM':
+        return s[:-2]
+    elif s[-2:] == 'PM' and s[:2] == '12':
+        return s[:-2]
+    else:
+        return str(int(s[:2]) + 12 ) + s[2:-2]
+
+s='02:20:20AM'
+print(timeConversions(s))
+
+'''MOCK TEST'''
+'''Find the median num of a given arr'''
+
+test1 = [5, 4, 2, 8, 7]
+
+def find_median(arr):
+    #sort list 
+    arr.sort()
+    #using binary search, find the middle element/median
+    lo, hi = 0, len(arr)-1
+    mid = (lo+hi) // 2
+    return arr[mid]
+
+print(find_median(test1))
