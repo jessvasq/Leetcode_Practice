@@ -15,14 +15,14 @@ The second line contains  space-separated integers that make up .
 
 '''
 
-def reverse_arr(arr):
-    reversed_arr = arr[::-1]
-    print(reversed_arr)
-    return reversed_arr
+# def reverse_arr(arr):
+#     reversed_arr = arr[::-1]
+#     print(reversed_arr)
+#     return reversed_arr
 
 
-test0 = [1, 4, 3, 2]
-print(reverse_arr(test0))
+# test0 = [1, 4, 3, 2]
+# print(reverse_arr(test0))
 
 '''2D ARRAY'''
 '''Declare a 2-dimensional array, , of  empty arrays. All arrays are zero indexed.
@@ -105,37 +105,55 @@ Returns
 
 '''   
 
-#SIMPLE SOLUTION 
+# #SIMPLE SOLUTION 
 
-def rotate_left(arr, d):
-    last = len(arr)-1
+# def rotate_left(arr, d):
+#     last = len(arr)-1
     
-    #iterates d times 
-    for i in range(0, d): 
-        print(i)
-        #assign the value of the first element to 'first'
-        first = arr[0]
+#     #iterates d times 
+#     for i in range(0, d): 
+#         print(i)
+#         #assign the value of the first element to 'first'
+#         first = arr[0]
         
         
-        for e in range(0, last):
-            #Inside the loop, each element at index e is replaced with the element at index e+1
-            arr[e] = arr[e+1]
-            print(arr[e])
+#         for e in range(0, last):
+#             #Inside the loop, each element at index e is replaced with the element at index e+1
+#             arr[e] = arr[e+1]
+#             print(arr[e])
     
-    #After the second loop, the first element is assigned to the last position of the array
-        arr[last] = first
-    return arr 
+#     #After the second loop, the first element is assigned to the last position of the array
+#         arr[last] = first
+#     return arr 
 
 
-#OPTIMIZED SOLUTION
-def rotate_l(arr, d):
-    #slice notation 
-    rotated_arr = arr[d:] + arr[:d]
-    return rotated_arr
+# #OPTIMIZED SOLUTION
+# def rotate_l(arr, d):
+#     #slice notation 
+#     rotated_arr = arr[d:] + arr[:d]
+#     return rotated_arr
     
     
-arr = [1,2,3,4,5]
-arr1 = [1,2,3,4,5]
-d=2
-print(rotate_left(arr, d))
-print(rotate_l(arr1, d))
+# arr = [1,2,3,4,5]
+# arr1 = [1,2,3,4,5]
+# d=2
+# print(rotate_left(arr, d))
+# print(rotate_l(arr1, d))
+
+
+'''There is a collection of input strings and a collection of query strings. For each query string, determine how many times it occurs in the list of input strings. Return an array of the results.'''
+
+def matchingStrings(stringList, queries):
+    #count() --> return the number of times a specific value appears in a certain list 
+    #use list comprehension
+    match = [stringList.count(query) for query in queries]
+
+    return match
+      
+    
+
+stringList = ['ab', 'ab', 'abc']
+queries = ['ab', 'abc', 'bc']
+
+
+print(matchingStrings(stringList, queries))
