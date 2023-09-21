@@ -199,19 +199,19 @@ Input Format
 *A single line of five space-separated integers.
 '''
 
-def minMaxSum(arr):
-    #sort array
-    arr.sort()
-    print(arr)
-    #using slice notation, find the sum of the first 4 int -> min_sum 
-    min_sum = sum(arr[:4])
-    #find the sum of the last 4 int -> max_sum 
-    max_sum = sum(arr[1:])
+# def minMaxSum(arr):
+#     #sort array
+#     arr.sort()
+#     print(arr)
+#     #using slice notation, find the sum of the first 4 int -> min_sum 
+#     min_sum = sum(arr[:4])
+#     #find the sum of the last 4 int -> max_sum 
+#     max_sum = sum(arr[1:])
 
-    print(min_sum, max_sum)
+#     print(min_sum, max_sum)
     
-arr = [2, 5, 3, 4, 1]
-print(minMaxSum(arr))
+# arr = [2, 5, 3, 4, 1]
+# print(minMaxSum(arr))
 
 '''Given a time in 12-hour AM/PM format, convert it to military (24-hour) time.
 Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
@@ -220,30 +220,45 @@ Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
 #only thing that changes would be the first two integers, we need to add 12 
 #check if it's 12 and 'AM', if True change it to '00' and add the remaining 
 #check if the last two int -2 == 'PM'. If true 
-def timeConversions(s):
-    if s[-2:] == 'AM' and s[:2] == '12':
-        return '00' + s[2:-2]
-    elif s[-2:] == 'AM':
-        return s[:-2]
-    elif s[-2:] == 'PM' and s[:2] == '12':
-        return s[:-2]
-    else:
-        return str(int(s[:2]) + 12 ) + s[2:-2]
+# def timeConversions(s):
+#     if s[-2:] == 'AM' and s[:2] == '12':
+#         return '00' + s[2:-2]
+#     elif s[-2:] == 'AM':
+#         return s[:-2]
+#     elif s[-2:] == 'PM' and s[:2] == '12':
+#         return s[:-2]
+#     else:
+#         return str(int(s[:2]) + 12 ) + s[2:-2]
 
-s='02:20:20AM'
-print(timeConversions(s))
+# s='02:20:20AM'
+# print(timeConversions(s))
 
-'''MOCK TEST'''
-'''Find the median num of a given arr'''
+# '''MOCK TEST'''
+# '''Find the median num in a given list'''
 
-test1 = [5, 4, 2, 8, 7]
+# test1 = [5, 4, 2, 8, 7]
 
-def find_median(arr):
-    #sort list 
-    arr.sort()
-    #using binary search, find the middle element/median
-    lo, hi = 0, len(arr)-1
-    mid = (lo+hi) // 2
-    return arr[mid]
+# def find_median(arr):
+#     #sort list 
+#     arr.sort()
+#     #using binary search, find the middle element/median
+#     lo, hi = 0, len(arr)-1
+#     mid = (lo+hi) // 2
+#     return arr[mid]
 
-print(find_median(test1))
+# print(find_median(test1))
+
+
+'''LONELY INTEGER'''
+'''Given an array of integers, where all elements but one occur twice, find the unique element.'''
+
+def lonelyinteger(a):
+    #using count() method, count each element and return the element that occurs once or it's equal 1 
+    for i in a: 
+        if a.count(i) == 1:
+            return i
+        
+
+a = [1,2,3,2,8,2,1]
+print(lonelyinteger(a))
+        
