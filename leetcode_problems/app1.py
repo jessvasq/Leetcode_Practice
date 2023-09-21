@@ -168,22 +168,50 @@ Note: This challenge introduces precision problems. The test cases are scaled to
 #count 0 
 #divide positive by n to find the ratio
 #divide negative #s by n to find the ratio
-
-def ratios(arr):
-    n = len(arr)
+ 
+# def ratios(arr):
+#     n = len(arr)
      
-    positive = [arr.count(i) for i in arr if i > 0]
-    positive_ratio = '{:6f}'.format(len(positive) / n)
-    print(positive_ratio)
+#     positive = [arr.count(i) for i in arr if i > 0]
+#     positive_ratio = '{:6f}'.format(len(positive) / n)
+#     print(positive_ratio)
     
-    negative = [arr.count(i) for i in arr if i < 0]
-    negative_ratio = '{:6f}'.format(len(negative) / n)
-    print(negative_ratio)
+#     negative = [arr.count(i) for i in arr if i < 0]
+#     negative_ratio = '{:6f}'.format(len(negative) / n)
+#     print(negative_ratio)
     
-    zero_nums = [arr.count(i) for i in arr if i == 0]
-    zero_ratio = '{:6f}'.format(len(zero_nums) / n)
-    print(zero_ratio)
+#     zero_nums = [arr.count(i) for i in arr if i == 0]
+#     zero_ratio = '{:6f}'.format(len(zero_nums) / n)
+#     print(zero_ratio)
     
     
-arr = [1, 1, 0, -1, -1]
-print(ratios(arr))
+# arr = [1, 1, 0, -1, -1]
+# print(ratios(arr))
+
+
+'''Given five positive integers, find the minimum and maximum values that can be calculated by summing exactly four of the five integers. Then print the respective minimum and maximum values as a single line of two space-separated long integers.
+Function Description
+*Complete the miniMaxSum function in the editor below. miniMaxSum has the following parameter(s):
+*arr: an array of 5 integers
+Print
+*Print two space-separated integers on one line: the minimum sum and the maximum sum of  of  elements.
+Input Format
+*A single line of five space-separated integers.
+'''
+
+def minMaxSum(arr):
+    #sort array
+    arr.sort()
+    print(arr)
+    #using slice notation, find the sum of the first 4 int -> min_sum 
+    min_sum = sum(arr[:4])
+    #find the sum of the last 4 int -> max_sum 
+    max_sum = sum(arr[1:])
+
+    print(min_sum, max_sum)
+    
+arr = [2, 5, 3, 4, 1]
+print(minMaxSum(arr))
+    
+    
+    
