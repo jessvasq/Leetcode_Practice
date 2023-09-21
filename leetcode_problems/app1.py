@@ -143,17 +143,47 @@ Returns
 
 '''There is a collection of input strings and a collection of query strings. For each query string, determine how many times it occurs in the list of input strings. Return an array of the results.'''
 
-def matchingStrings(stringList, queries):
-    #count() --> return the number of times a specific value appears in a certain list 
-    #use list comprehension
-    match = [stringList.count(query) for query in queries]
+# def matchingStrings(stringList, queries):
+#     #count() --> return the number of times a specific value appears in a certain list 
+#     #use list comprehension
+#     match = [stringList.count(query) for query in queries]
 
-    return match
+#     return match
       
     
 
-stringList = ['ab', 'ab', 'abc']
-queries = ['ab', 'abc', 'bc']
+# stringList = ['ab', 'ab', 'abc']
+# queries = ['ab', 'abc', 'bc']
 
 
-print(matchingStrings(stringList, queries))
+# print(matchingStrings(stringList, queries))
+
+'''PLUS MINUS'''
+'''Given an array of integers, calculate the ratios of its elements that are positive, negative, and zero. Print the decimal value of each fraction on a new line with  places after the decimal.
+
+Note: This challenge introduces precision problems. The test cases are scaled to six decimal places, though answers with absolute error of up to  are acceptable.'''
+
+#find positive nums 
+#count negative nums 
+#count 0 
+#divide positive by n to find the ratio
+#divide negative #s by n to find the ratio
+
+def ratios(arr):
+    n = len(arr)
+     
+    positive = [arr.count(i) for i in arr if i > 0]
+    positive_ratio = '{:6f}'.format(len(positive) / n)
+    print(positive_ratio)
+    
+    negative = [arr.count(i) for i in arr if i < 0]
+    negative_ratio = '{:6f}'.format(len(negative) / n)
+    print(negative_ratio)
+    
+    zero_nums = [arr.count(i) for i in arr if i == 0]
+    zero_ratio = '{:6f}'.format(len(zero_nums) / n)
+    print(zero_ratio)
+    
+    
+arr = [1, 1, 0, -1, -1]
+print(ratios(arr))
