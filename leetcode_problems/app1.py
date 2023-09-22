@@ -252,13 +252,68 @@ Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
 '''LONELY INTEGER'''
 '''Given an array of integers, where all elements but one occur twice, find the unique element.'''
 
-def lonelyinteger(a):
-    #using count() method, count each element and return the element that occurs once or it's equal 1 
-    for i in a: 
-        if a.count(i) == 1:
-            return i
+# def lonelyinteger(a):
+#     #using count() method, count each element and return the element that occurs once or it's equal 1 
+#     for i in a: 
+#         if a.count(i) == 1:
+#             return i
         
 
-a = [1,2,3,2,8,2,1]
-print(lonelyinteger(a))
-        
+# a = [1,2,3,2,8,2,1]
+# print(lonelyinteger(a))
+
+'''DIAGONAL DIFFERENCE'''
+'''Given a square matrix, calculate the absolute difference between the sums of its diagonals.'''
+
+def diagonal_difference(arr):
+    n = len(arr)
+    diagonal_sum1 = 0
+    diagonal_sum2 = 0
+    
+    for i in range(n):
+        diagonal_sum1 += arr[i][i]
+        diagonal_sum2 += arr[i][n-i-1]
+
+    return abs(diagonal_sum1 - diagonal_sum2)
+
+arr = [
+      [11, 2, 4,],
+      [4, 5, 6,],
+      [10, 8, -12],
+] 
+print(diagonal_difference(arr))
+
+
+'''Counting Sort'''
+'''Comparison Sorting
+Quicksort usually has a running time of nxlog(n), but is there an algorithm that can sort even faster? In general, this is not possible. Most sorting algorithms are comparison sorts, i.e. they sort a list just by comparing the elements to one another. A comparison sort algorithm cannot beat nxlog(n)(worst-case) running time, since n x log(n) represents the minimum number of comparisons needed to know where to place each element.
+
+Alternative Sorting
+Another sorting method, the counting sort, does not require comparison. Instead, you create an integer array whose index range covers the entire range of values in your array to sort. Each time a value occurs in the original array, you increment the counter at that index. At the end, run through your counting array, printing the value of each non-zero valued index that number of times.
+Challenge
+Given a list of integers, count and return the number of times each value appears as an array of integers.'''
+
+
+arr1 = [63, 25, 73, 1, 98, 73, 56, 84, 86, 57, 16, 83, 8, 25, 81, 56, 9, 53, 98, 67, 99, 12, 83, 89, 80, 91, 39, 86, 76, 85, 74, 39, 25, 90, 59, 10, 94, 32, 44, 3, 89, 30, 27, 79, 46, 96, 27, 32, 18, 21, 92, 69, 81, 40, 40, 34, 68, 78, 24, 87, 42, 69, 23, 41, 78, 22, 6, 90, 99, 89, 50, 30, 20, 1, 43, 3, 70, 95, 33, 46, 44, 9, 69, 48, 33, 60, 65, 16, 82, 67, 61, 32, 21, 79, 75, 75, 13, 87, 70, 33,]
+arr1.sort()
+print(arr1)
+
+def count_frequencies(input_list):
+    
+    # Initialize a frequency array with 100 elements, all set to 0
+    frequency_array = [0] * 100
+    
+    # # Iterate through the input list
+    for num in input_list:
+    #   Increment the corresponding element in the frequency array
+        print('frequency', frequency_array[num])
+        frequency_array[num] += 1
+    
+    # return frequency_array
+    return frequency_array
+
+# Example usage:
+input_list = [63, 25, 73, 1, 98, 73, 56, 84, 86, 57, 16, 83, 8, 25, 81, 56, 9, 53, 98, 67, 99, 12, 83, 89, 80, 91, 39, 86, 76, 85, 74, 39, 25, 90, 59, 10, 94, 32, 44, 3, 89, 30, 27, 79, 46, 96, 27, 32, 18, 21, 92, 69, 81, 40, 40, 34, 68, 78, 24, 87, 42, 69, 23, 41, 78, 22, 6, 90, 99, 89, 50, 30, 20, 1, 43, 3, 70, 95, 33, 46, 44, 9, 69, 48, 33, 60, 65, 16, 82, 67, 61, 32, 21, 79, 75, 75, 13, 87, 70, 33,]
+counts_array = count_frequencies(input_list)
+print(counts_array)  # Output: [2, 2, 1, 3, 1]
+
