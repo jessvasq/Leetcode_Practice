@@ -265,23 +265,23 @@ Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
 '''DIAGONAL DIFFERENCE'''
 '''Given a square matrix, calculate the absolute difference between the sums of its diagonals.'''
 
-def diagonal_difference(arr):
-    n = len(arr)
-    diagonal_sum1 = 0
-    diagonal_sum2 = 0
+# def diagonal_difference(arr):
+#     n = len(arr)
+#     diagonal_sum1 = 0
+#     diagonal_sum2 = 0
     
-    for i in range(n):
-        diagonal_sum1 += arr[i][i]
-        diagonal_sum2 += arr[i][n-i-1]
+#     for i in range(n):
+#         diagonal_sum1 += arr[i][i]
+#         diagonal_sum2 += arr[i][n-i-1]
 
-    return abs(diagonal_sum1 - diagonal_sum2)
+#     return abs(diagonal_sum1 - diagonal_sum2)
 
-arr = [
-      [11, 2, 4,],
-      [4, 5, 6,],
-      [10, 8, -12],
-] 
-print(diagonal_difference(arr))
+# arr = [
+#       [11, 2, 4,],
+#       [4, 5, 6,],
+#       [10, 8, -12],
+# ] 
+# print(diagonal_difference(arr))
 
 
 '''Counting Sort'''
@@ -294,26 +294,114 @@ Challenge
 Given a list of integers, count and return the number of times each value appears as an array of integers.'''
 
 
-arr1 = [63, 25, 73, 1, 98, 73, 56, 84, 86, 57, 16, 83, 8, 25, 81, 56, 9, 53, 98, 67, 99, 12, 83, 89, 80, 91, 39, 86, 76, 85, 74, 39, 25, 90, 59, 10, 94, 32, 44, 3, 89, 30, 27, 79, 46, 96, 27, 32, 18, 21, 92, 69, 81, 40, 40, 34, 68, 78, 24, 87, 42, 69, 23, 41, 78, 22, 6, 90, 99, 89, 50, 30, 20, 1, 43, 3, 70, 95, 33, 46, 44, 9, 69, 48, 33, 60, 65, 16, 82, 67, 61, 32, 21, 79, 75, 75, 13, 87, 70, 33,]
-arr1.sort()
-print(arr1)
+# arr1 = [63, 25, 73, 1, 98, 73, 56, 84, 86, 57, 16, 83, 8, 25, 81, 56, 9, 53, 98, 67, 99, 12, 83, 89, 80, 91, 39, 86, 76, 85, 74, 39, 25, 90, 59, 10, 94, 32, 44, 3, 89, 30, 27, 79, 46, 96, 27, 32, 18, 21, 92, 69, 81, 40, 40, 34, 68, 78, 24, 87, 42, 69, 23, 41, 78, 22, 6, 90, 99, 89, 50, 30, 20, 1, 43, 3, 70, 95, 33, 46, 44, 9, 69, 48, 33, 60, 65, 16, 82, 67, 61, 32, 21, 79, 75, 75, 13, 87, 70, 33,]
+# arr1.sort()
+# print(arr1)
 
-def count_frequencies(input_list):
+# def count_frequencies(input_list):
     
-    # Initialize a frequency array with 100 elements, all set to 0
-    frequency_array = [0] * 100
+#     # Initialize a frequency array with 100 elements, all set to 0
+#     frequency_array = [0] * 100
     
-    # # Iterate through the input list
-    for num in input_list:
-    #   Increment the corresponding element in the frequency array
-        print('frequency', frequency_array[num])
-        frequency_array[num] += 1
+#     # # Iterate through the input list
+#     for num in input_list:
+#     #   Increment the corresponding element in the frequency array
+#         print('frequency', frequency_array[num])
+#         frequency_array[num] += 1
     
-    # return frequency_array
-    return frequency_array
+#     # return frequency_array
+#     return frequency_array
+
+# # Example usage:
+# input_list = [63, 25, 73, 1, 98, 73, 56, 84, 86, 57, 16, 83, 8, 25, 81, 56, 9, 53, 98, 67, 99, 12, 83, 89, 80, 91, 39, 86, 76, 85, 74, 39, 25, 90, 59, 10, 94, 32, 44, 3, 89, 30, 27, 79, 46, 96, 27, 32, 18, 21, 92, 69, 81, 40, 40, 34, 68, 78, 24, 87, 42, 69, 23, 41, 78, 22, 6, 90, 99, 89, 50, 30, 20, 1, 43, 3, 70, 95, 33, 46, 44, 9, 69, 48, 33, 60, 65, 16, 82, 67, 61, 32, 21, 79, 75, 75, 13, 87, 70, 33,]
+# counts_array = count_frequencies(input_list)
+# print(counts_array)  # Output: [2, 2, 1, 3, 1]
+
+'''ZIG ZAG SEQUENCE'''
+
+
+# def findZigZagSequence(a, n):
+#     a.sort()
+#     print('a', a)
+#     mid = int((n + 1)/2)
+#     # mid_num = a[mid]
+#     # a[mid], a[n-1] = a[n-1], a[mid]
+
+#     st = 0
+#     ed = len(a)- 1
+#     while(st <= ed):
+#         mid_num = a[mid]
+#         a[st], a[ed] = a[ed], a[st]
+#         st = st + 1
+#         ed = ed + 1
+
+#     for i in range (n):
+#         if i == n-1:
+#             print(a[i])
+#         else:
+#             print(a[i], end = ' ')
+#     return
+
+# a = [1,2,3,4,5,6,7]  #outout: 1, 2, 3, 7, 6, 5, 4
+# print(findZigZagSequence(a, 7))
+
+'''Flipping the matrix'''
+
+def maximize_upper_left_sum(matrix):
+    #size of the upper-left quadrant
+    n = len(matrix) // 2  
+    #num of rows
+    rows = len(matrix)
+    #num of columns
+    cols = len(matrix[0])
+
+    # Sort rows in descending order based on their largest sums
+    #key=lambda row: sum(row) is a lambda function that computes the sum of elements in each row. It is used as the sorting key.
+    #reverse=True indicates that the sorting should be in descending order, so the rows with the largest sums will come first after sorting.
+    matrix.sort(key=lambda row: sum(row), reverse=True)
+
+    # Sort columns in descending order based on their sums
+    #To sort columns in descending order based on their sums, we first transpose the matrix. Transposing swaps rows and columns.
+    #the rows become columns and the columns become rows 
+    transposed_matrix = [[matrix[j][i] for j in range(rows)] for i in range(cols)]
+    
+    # Sort columns in descending order based on their largest sums
+    #key=lambda row: sum(row) is a lambda function that computes the sum of elements in each row. It is used as the sorting key.
+    #reverse=True indicates that the sorting should be in descending order, so the columns with the largest sums will come first after sorting.
+    #After this line of code, transposed_matrix will be sorted with columns having the largest sums in the upper part.
+    transposed_matrix.sort(key=lambda col: sum(col), reverse=True)
+
+    #  calculates the sum of elements in the upper-left quadrant of the original matrix (matrix). It uses nested list comprehensions to iterate over rows and columns within the upper-left quadrant and sums their elements.
+    upper_left_sum = sum(sum(row[:n]) for row in matrix[:n])
+    
+    #calculates the sum of elements in the upper-left quadrant of the transposed matrix (transposed_matrix). Similarly, it uses nested list comprehensions to iterate over columns and rows in the transposed upper-left quadrant.
+    transposed_upper_left_sum = sum(sum(col[:n]) for col in transposed_matrix[:n])
+
+
+    #compare both (original & sorted) and return the largest sum
+    if transposed_upper_left_sum > upper_left_sum:
+        # If transposed_upper_left_sum is greater than upper_left_sum, it means that transposing the matrix resulted in a better upper-left sum, and you should use the transposed matrix for further processing.
+        matrix = transposed_matrix
+
+    #It returns the portion of the matrix that corresponds to the maximized upper-left quadrant
+    #matrix[:n] is a list slicing operation. It extracts the first n rows of the matrix list, effectively selecting the upper-left quadrant of the matrix.
+    return matrix[:n]
+  
 
 # Example usage:
-input_list = [63, 25, 73, 1, 98, 73, 56, 84, 86, 57, 16, 83, 8, 25, 81, 56, 9, 53, 98, 67, 99, 12, 83, 89, 80, 91, 39, 86, 76, 85, 74, 39, 25, 90, 59, 10, 94, 32, 44, 3, 89, 30, 27, 79, 46, 96, 27, 32, 18, 21, 92, 69, 81, 40, 40, 34, 68, 78, 24, 87, 42, 69, 23, 41, 78, 22, 6, 90, 99, 89, 50, 30, 20, 1, 43, 3, 70, 95, 33, 46, 44, 9, 69, 48, 33, 60, 65, 16, 82, 67, 61, 32, 21, 79, 75, 75, 13, 87, 70, 33,]
-counts_array = count_frequencies(input_list)
-print(counts_array)  # Output: [2, 2, 1, 3, 1]
+g_matrices = [
+    [
+        [4, 3, 2, 1],
+        [8, 7, 6, 5],
+        [12, 11, 10, 9],
+        [16, 15, 14, 13]
+    ],
+    # Add more matrices here
+]
 
+for matrix in g_matrices:
+    result = maximize_upper_left_sum(matrix)
+    print("Maximized Upper-Left Quadrant:")
+    for row in result:
+        print(row)
+    print()
