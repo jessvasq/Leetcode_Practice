@@ -347,61 +347,46 @@ Given a list of integers, count and return the number of times each value appear
 
 '''Flipping the matrix'''
 
-def maximize_upper_left_sum(matrix):
-    #size of the upper-left quadrant
-    n = len(matrix) // 2  
-    #num of rows
-    rows = len(matrix)
-    #num of columns
-    cols = len(matrix[0])
+def flippingMatrix(matrix):
+    n = len(matrix) // 2
+    count = 0
 
-    # Sort rows in descending order based on their largest sums
-    #key=lambda row: sum(row) is a lambda function that computes the sum of elements in each row. It is used as the sorting key.
-    #reverse=True indicates that the sorting should be in descending order, so the rows with the largest sums will come first after sorting.
-    matrix.sort(key=lambda row: sum(row), reverse=True)
+    #nested loop 
+    #iterates through rows from 0 to n-1 
+    for i in range(n):
+        #iterates through columns from 0 to n-1 
+        for j in range(n):
+            #increments count variable 
+                        #matrix[i][j]: value at the current row 'i' and column 'j
+                        #matrix[i][~j]: value at the current row i and the corresponding column
+                        #matrix[~i][j]: value at the corresponding row in the lower-left quadrant and the current column j
+                        #matrix[~i][~j]: value at the corresponding row in the lower-right quadrant and the corresponding column.
+                        
+            count += max(matrix[i][j], matrix[i][~j], matrix[~i][j], matrix[~i][~j])
 
-    # Sort columns in descending order based on their sums
-    #To sort columns in descending order based on their sums, we first transpose the matrix. Transposing swaps rows and columns.
-    #the rows become columns and the columns become rows 
-    transposed_matrix = [[matrix[j][i] for j in range(rows)] for i in range(cols)]
-    
-    # Sort columns in descending order based on their largest sums
-    #key=lambda row: sum(row) is a lambda function that computes the sum of elements in each row. It is used as the sorting key.
-    #reverse=True indicates that the sorting should be in descending order, so the columns with the largest sums will come first after sorting.
-    #After this line of code, transposed_matrix will be sorted with columns having the largest sums in the upper part.
-    transposed_matrix.sort(key=lambda col: sum(col), reverse=True)
-
-    #  calculates the sum of elements in the upper-left quadrant of the original matrix (matrix). It uses nested list comprehensions to iterate over rows and columns within the upper-left quadrant and sums their elements.
-    upper_left_sum = sum(sum(row[:n]) for row in matrix[:n])
-    
-    #calculates the sum of elements in the upper-left quadrant of the transposed matrix (transposed_matrix). Similarly, it uses nested list comprehensions to iterate over columns and rows in the transposed upper-left quadrant.
-    transposed_upper_left_sum = sum(sum(col[:n]) for col in transposed_matrix[:n])
+    return count #is the sum of the maximum values from each quadrant of the input matrix
 
 
-    #compare both (original & sorted) and return the largest sum
-    if transposed_upper_left_sum > upper_left_sum:
-        # If transposed_upper_left_sum is greater than upper_left_sum, it means that transposing the matrix resulted in a better upper-left sum, and you should use the transposed matrix for further processing.
-        matrix = transposed_matrix
+'''ZIG ZAG'''
+'''Given an array of  distinct integers, transform the array into a zig zag sequence by permuting the array elements. A sequence will be called a zig zag sequence if the first  elements in the sequence are in increasing order and the last  elements are in decreasing order, where . You need to find the lexicographically smallest zig zag sequence of the given array.'''
 
-    #It returns the portion of the matrix that corresponds to the maximized upper-left quadrant
-    #matrix[:n] is a list slicing operation. It extracts the first n rows of the matrix list, effectively selecting the upper-left quadrant of the matrix.
-    return matrix[:n]
-  
+def findZigZagSequence(a, n):
+    a.sort()
+    mid = int((n + 1)/2) - 1
+    a[mid], a[n-1] = a[n-1], a[mid]
 
-# Example usage:
-g_matrices = [
-    [
-        [4, 3, 2, 1],
-        [8, 7, 6, 5],
-        [12, 11, 10, 9],
-        [16, 15, 14, 13]
-    ],
-    # Add more matrices here
-]
+    st = mid + 1
+    ed = n - 2
+    while(st <= ed):
+        a[st], a[ed] = a[ed], a[st]
+        st = st + 1
+        ed = ed - 1
 
-for matrix in g_matrices:
-    result = maximize_upper_left_sum(matrix)
-    print("Maximized Upper-Left Quadrant:")
-    for row in result:
-        print(row)
-    print()
+    for i in range (n):
+        if i == n-1:
+            print(a[i])
+        else:
+            print(a[i], end = ' ')
+    return
+
+
