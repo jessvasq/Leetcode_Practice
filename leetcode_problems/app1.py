@@ -405,3 +405,48 @@ def towerBreakers(n, m):
     else:
         return 2 
     
+
+'''Julius Caesar protected his confidential information by encrypting it using a cipher. Caesar's cipher shifts each letter by a number of letters. If the shift takes you past the end of the alphabet, just rotate back to the front of the alphabet. In the case of a rotation by 3, w, x, y and z would map to z, a, b and c'''    
+
+def ceaser_cipher(s, k):
+    #initialized a variable to store the encrypted pw 
+    encrypted_pw = ''
+    
+    #iterate through the string 
+    for letter in s:
+        #check if the letter is in the alphabet 
+        if letter.isalpha():
+            #returns True if all characters are in upper case, otherwise False 
+            is_upper = letter.isupper()
+            
+            #convert all characters to lowercase 
+            letter = letter.lower()
+            
+            #ord() returns the unicode code point(int) 
+            #ord('a'): computes the Unicode code point of the lowercase letter 'a'.  used as a reference point to make calculations based on the alphabet's position.
+            
+            #(ord(letter) - ord('a')): calculates the position of the character letter within the lowercase alphabet. By subtracting the code point of 'a' from the code point of the character, you get a number that represents the character's position in the alphabet
+            #k - num of positions to shift the character 
+            # %26 ensures that the shifted position remains within the alphabet, which has 26 letters. If it goes beyond 'z' and starts again at 'a'
+            shifted = (ord(letter) - ord('a') + k) % 26
+            
+            #convert the unicode into a character 
+            shifted_letter = chr(shifted + ord('a'))
+            
+            
+            if is_upper:
+                #convert back to upper if the original pw was uppercase
+                shifted_letter = shifted_letter.upper()
+            
+            encrypted_pw += shifted_letter
+            
+        else:
+            encrypted_pw += letter #letter is the character that has undergone the shift
+    
+    return encrypted_pw
+
+
+s = "There's-a-starman-waiting-in-the-sky"
+k = 3
+    
+print(ceaser_cipher(s, k))
