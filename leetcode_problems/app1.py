@@ -450,3 +450,40 @@ s = "There's-a-starman-waiting-in-the-sky"
 k = 3
     
 print(ceaser_cipher(s, k))
+
+
+'''GRID CHALLENGE'''
+'''Given a square grid of characters in the range ascii[a-z], rearrange elements of each row alphabetically, ascending. Determine if the columns are also in ascending alphabetical order, top to bottom. Return YES if they are or NO if they are not.'''
+
+grid = ['abc', 'ade', 'efg']
+grid1 = ['mpxz', 'abcd', 'wlmf']
+
+def grid_challenge(grid):
+    #each row of the grid is sorted alphabetically by converting the row string into a list of characters, sorting the list, and then joining the sorted characters back into a string
+    for row in range(len(grid)):
+        sorted_row = sorted((grid[row]))
+        sorted_row=''.join(sorted_row)
+        grid[row] = sorted_row
+    
+    
+    num_cols = len(grid[0])
+    print(num_cols)
+    for col in range(num_cols):
+        #check whether the columns of the sorted grid are in ascending alphabetical order from top to bottom
+ 
+        # check whether the columns are sorted
+        #iterates through each row except the last row (len(grid)-1). It compares the character at the current column and row with the character at the same column in the next row. If it finds that the character in the current row is greater (lexicographically) than the character in the next row, it means the columns are not in ascending alphabetical order
+        for row in range(len(grid)-1):
+            
+            if grid[row][col] > grid[row + 1][col]:
+                return "NO"  # Columns are not sorted
+
+    # Step 3: If all columns are sorted, return "YES"
+    return "YES"
+        
+print(grid_challenge(grid1))
+
+            
+        
+        
+        
