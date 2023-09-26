@@ -347,47 +347,47 @@ Given a list of integers, count and return the number of times each value appear
 
 '''Flipping the matrix'''
 
-def flippingMatrix(matrix):
-    n = len(matrix) // 2
-    count = 0
+# def flippingMatrix(matrix):
+#     n = len(matrix) // 2
+#     count = 0
 
-    #nested loop 
-    #iterates through rows from 0 to n-1 
-    for i in range(n):
-        #iterates through columns from 0 to n-1 
-        for j in range(n):
-            #increments count variable 
-                        #matrix[i][j]: value at the current row 'i' and column 'j
-                        #matrix[i][~j]: value at the current row i and the corresponding column
-                        #matrix[~i][j]: value at the corresponding row in the lower-left quadrant and the current column j
-                        #matrix[~i][~j]: value at the corresponding row in the lower-right quadrant and the corresponding column.
+#     #nested loop 
+#     #iterates through rows from 0 to n-1 
+#     for i in range(n):
+#         #iterates through columns from 0 to n-1 
+#         for j in range(n):
+#             #increments count variable 
+#                         #matrix[i][j]: value at the current row 'i' and column 'j
+#                         #matrix[i][~j]: value at the current row i and the corresponding column
+#                         #matrix[~i][j]: value at the corresponding row in the lower-left quadrant and the current column j
+#                         #matrix[~i][~j]: value at the corresponding row in the lower-right quadrant and the corresponding column.
                         
-            count += max(matrix[i][j], matrix[i][~j], matrix[~i][j], matrix[~i][~j])
+#             count += max(matrix[i][j], matrix[i][~j], matrix[~i][j], matrix[~i][~j])
 
-    return count #is the sum of the maximum values from each quadrant of the input matrix
+#     return count #is the sum of the maximum values from each quadrant of the input matrix
 
 
 '''ZIG ZAG'''
 '''Given an array of  distinct integers, transform the array into a zig zag sequence by permuting the array elements. A sequence will be called a zig zag sequence if the first  elements in the sequence are in increasing order and the last  elements are in decreasing order, where . You need to find the lexicographically smallest zig zag sequence of the given array.'''
 
-def findZigZagSequence(a, n):
-    a.sort()
-    mid = int((n + 1)/2) - 1
-    a[mid], a[n-1] = a[n-1], a[mid]
+# def findZigZagSequence(a, n):
+#     a.sort()
+#     mid = int((n + 1)/2) - 1
+#     a[mid], a[n-1] = a[n-1], a[mid]
 
-    st = mid + 1
-    ed = n - 2
-    while(st <= ed):
-        a[st], a[ed] = a[ed], a[st]
-        st = st + 1
-        ed = ed - 1
+#     st = mid + 1
+#     ed = n - 2
+#     while(st <= ed):
+#         a[st], a[ed] = a[ed], a[st]
+#         st = st + 1
+#         ed = ed - 1
 
-    for i in range (n):
-        if i == n-1:
-            print(a[i])
-        else:
-            print(a[i], end = ' ')
-    return
+#     for i in range (n):
+#         if i == n-1:
+#             print(a[i])
+#         else:
+#             print(a[i], end = ' ')
+#     return
 
 
 '''TOWER BREAKERS'''
@@ -399,89 +399,89 @@ In each turn, a player can choose a tower of height  and reduce its height to y 
 If the current player is unable to make a move, they lose the game.
 Given the values of  n and m, determine which player will win. If the first player wins, return 1. Otherwise, return 2.'''
 
-def towerBreakers(n, m):
-    if n == 1 or m == 1 or n% 2 == 0:
-        return 1
-    else:
-        return 2 
+# def towerBreakers(n, m):
+#     if n == 1 or m == 1 or n% 2 == 0:
+#         return 1
+#     else:
+#         return 2 
     
 
 '''Julius Caesar protected his confidential information by encrypting it using a cipher. Caesar's cipher shifts each letter by a number of letters. If the shift takes you past the end of the alphabet, just rotate back to the front of the alphabet. In the case of a rotation by 3, w, x, y and z would map to z, a, b and c'''    
 
-def ceaser_cipher(s, k):
-    #initialized a variable to store the encrypted pw 
-    encrypted_pw = ''
+# def ceaser_cipher(s, k):
+#     #initialized a variable to store the encrypted pw 
+#     encrypted_pw = ''
     
-    #iterate through the string 
-    for letter in s:
-        #check if the letter is in the alphabet 
-        if letter.isalpha():
-            #returns True if all characters are in upper case, otherwise False 
-            is_upper = letter.isupper()
+#     #iterate through the string 
+#     for letter in s:
+#         #check if the letter is in the alphabet 
+#         if letter.isalpha():
+#             #returns True if all characters are in upper case, otherwise False 
+#             is_upper = letter.isupper()
             
-            #convert all characters to lowercase 
-            letter = letter.lower()
+#             #convert all characters to lowercase 
+#             letter = letter.lower()
             
-            #ord() returns the unicode code point(int) 
-            #ord('a'): computes the Unicode code point of the lowercase letter 'a'.  used as a reference point to make calculations based on the alphabet's position.
+#             #ord() returns the unicode code point(int) 
+#             #ord('a'): computes the Unicode code point of the lowercase letter 'a'.  used as a reference point to make calculations based on the alphabet's position.
             
-            #(ord(letter) - ord('a')): calculates the position of the character letter within the lowercase alphabet. By subtracting the code point of 'a' from the code point of the character, you get a number that represents the character's position in the alphabet
-            #k - num of positions to shift the character 
-            # %26 ensures that the shifted position remains within the alphabet, which has 26 letters. If it goes beyond 'z' and starts again at 'a'
-            shifted = (ord(letter) - ord('a') + k) % 26
+#             #(ord(letter) - ord('a')): calculates the position of the character letter within the lowercase alphabet. By subtracting the code point of 'a' from the code point of the character, you get a number that represents the character's position in the alphabet
+#             #k - num of positions to shift the character 
+#             # %26 ensures that the shifted position remains within the alphabet, which has 26 letters. If it goes beyond 'z' and starts again at 'a'
+#             shifted = (ord(letter) - ord('a') + k) % 26
             
-            #convert the unicode into a character 
-            shifted_letter = chr(shifted + ord('a'))
+#             #convert the unicode into a character 
+#             shifted_letter = chr(shifted + ord('a'))
             
             
-            if is_upper:
-                #convert back to upper if the original pw was uppercase
-                shifted_letter = shifted_letter.upper()
+#             if is_upper:
+#                 #convert back to upper if the original pw was uppercase
+#                 shifted_letter = shifted_letter.upper()
             
-            encrypted_pw += shifted_letter
+#             encrypted_pw += shifted_letter
             
-        else:
-            encrypted_pw += letter #letter is the character that has undergone the shift
+#         else:
+#             encrypted_pw += letter #letter is the character that has undergone the shift
     
-    return encrypted_pw
+#     return encrypted_pw
 
 
-s = "There's-a-starman-waiting-in-the-sky"
-k = 3
+# s = "There's-a-starman-waiting-in-the-sky"
+# k = 3
     
-print(ceaser_cipher(s, k))
+# print(ceaser_cipher(s, k))
 
 
 '''GRID CHALLENGE'''
 '''Given a square grid of characters in the range ascii[a-z], rearrange elements of each row alphabetically, ascending. Determine if the columns are also in ascending alphabetical order, top to bottom. Return YES if they are or NO if they are not.'''
 
-grid = ['abc', 'ade', 'efg']
-grid1 = ['mpxz', 'abcd', 'wlmf']
+# grid = ['abc', 'ade', 'efg']
+# grid1 = ['mpxz', 'abcd', 'wlmf']
 
-def grid_challenge(grid):
-    #each row of the grid is sorted alphabetically by converting the row string into a list of characters, sorting the list, and then joining the sorted characters back into a string
-    for row in range(len(grid)):
-        sorted_row = sorted((grid[row]))
-        sorted_row=''.join(sorted_row)
-        grid[row] = sorted_row
+# def grid_challenge(grid):
+#     #each row of the grid is sorted alphabetically by converting the row string into a list of characters, sorting the list, and then joining the sorted characters back into a string
+#     for row in range(len(grid)):
+#         sorted_row = sorted((grid[row]))
+#         sorted_row=''.join(sorted_row)
+#         grid[row] = sorted_row
     
     
-    num_cols = len(grid[0])
-    print(num_cols)
-    for col in range(num_cols):
-        #check whether the columns of the sorted grid are in ascending alphabetical order from top to bottom
+#     num_cols = len(grid[0])
+#     print(num_cols)
+#     for col in range(num_cols):
+#         #check whether the columns of the sorted grid are in ascending alphabetical order from top to bottom
  
-        # check whether the columns are sorted
-        #iterates through each row except the last row (len(grid)-1). It compares the character at the current column and row with the character at the same column in the next row. If it finds that the character in the current row is greater (lexicographically) than the character in the next row, it means the columns are not in ascending alphabetical order
-        for row in range(len(grid)-1):
+#         # check whether the columns are sorted
+#         #iterates through each row except the last row (len(grid)-1). It compares the character at the current column and row with the character at the same column in the next row. If it finds that the character in the current row is greater (lexicographically) than the character in the next row, it means the columns are not in ascending alphabetical order
+#         for row in range(len(grid)-1):
             
-            if grid[row][col] > grid[row + 1][col]:
-                return "NO"  # Columns are not sorted
+#             if grid[row][col] > grid[row + 1][col]:
+#                 return "NO"  # Columns are not sorted
 
-    # Step 3: If all columns are sorted, return "YES"
-    return "YES"
+#     # Step 3: If all columns are sorted, return "YES"
+#     return "YES"
         
-print(grid_challenge(grid1))
+# print(grid_challenge(grid1))
 
 
 '''RECURSIVE DIGIT SUM'''
@@ -498,28 +498,56 @@ int: the super digit of n repeated k times
 '''        
 
 
-def superDigit(n, k):
-    def recursive_sum(n):
-        count = 0
-        for num in n:
-            count += int(num)
-        count = str(count)
+# def superDigit(n, k):
+#     def recursive_sum(n):
+#         count = 0
+#         for num in n:
+#             count += int(num)
+#         count = str(count)
         
-        if len(count) == 1:
-            return count
-        else: 
-            return recursive_sum(count)
+#         if len(count) == 1:
+#             return count
+#         else: 
+#             return recursive_sum(count)
 
-    #use recursive function
-    p = str(recursive_sum(n)*k)
-    return recursive_sum(p)
+#     #use recursive function
+#     p = str(recursive_sum(n)*k)
+#     return recursive_sum(p)
 
-#TEST CASE
-n='9875'
-k=4
-print(superDigit(n,k))
+# #TEST CASE
+# n='9875'
+# k=4
+# print(superDigit(n,k))
 
+
+'''NEW YEAR CHAOS'''
+'''It is New Year's Day and people are in line for the Wonderland rollercoaster ride. Each person wears a sticker indicating their initial position in the queue from 1 to n. Any person can bribe the person directly in front of them to swap positions, but they still wear their original sticker. One person can bribe at most two others.
+Determine the minimum number of bribes that took place to get to a given queue order. Print the number of bribes, or, if anyone has bribed more than two people, print Too chaotic.
+'''
+
+
+q1 = [1, 2, 3, 5, 4, 6, 7, 8]
+q = [2,1,5,3,4]
+
+
+def min_bribes(q):
+    total = 0
+    n=len(q)
     
+    for num in range(n):
+        
+        if q[num] - (num + 1) > 2:
+            print('Too chaotic')
+            return
+        
+            
+        #q[num] - 2 calculates the lowest possible position in the queue from which a person could have bribed the person at position i. This is because a person can only bribe at most two others, so they cannot move more than two positions ahead. Therefore, q[i] - 2 is the lower bound on the position we want to start checking for potential bribers.
+        # ensures that we don't go below the first position in the queue (position 0).
+        #num represents the current position of the person for whom we are counting bribes.
+        for el in range(max(0, q[num]-2), num):
+            if q[el] > q[num]:
+                total += 1
+    return total 
 
-
+print(min_bribes(q))       
 
