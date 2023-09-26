@@ -483,7 +483,43 @@ def grid_challenge(grid):
         
 print(grid_challenge(grid1))
 
-            
+
+'''RECURSIVE DIGIT SUM'''
+'''We define super digit of an integer  using the following rules:
+
+Given an integer, we need to find the super digit of the integer.
+If  has only  digit, then its super digit is .
+Otherwise, the super digit of  is equal to the super digit of the sum of the digits of . Complete the function superDigit in the editor below. It must return the calculated super digit as an integer.
+superDigit has the following parameter(s):
+string n: a string representation of an integer
+int k: the times to concatenate n to make p
+Returns
+int: the super digit of n repeated k times
+'''        
+
+
+def superDigit(n, k):
+    def recursive_sum(n):
+        count = 0
+        for num in n:
+            count += int(num)
+        count = str(count)
         
-        
-        
+        if len(count) == 1:
+            return count
+        else: 
+            return recursive_sum(count)
+
+    #use recursive function
+    p = str(recursive_sum(n)*k)
+    return recursive_sum(p)
+
+#TEST CASE
+n='9875'
+k=4
+print(superDigit(n,k))
+
+    
+
+
+
