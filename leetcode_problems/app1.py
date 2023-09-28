@@ -663,3 +663,23 @@ def reversePrint(llist):
     #prints in reverse order (backtrack) because the recursive function is called before the 'print' statement
     print(llist.data)
           
+'''Reverse a linked list'''
+'''Given the pointer to the head node of a linked list, change the next pointers of the nodes so that their order is reversed. The head pointer given may be null meaning that the initial list is empty.'''
+
+def reverse(llist):
+    if llist is None:
+        return 
+    current = llist #points to the head
+    previous = None #previous points to the previous element 
+    following = current.next #points at the second element 
+
+    while current: #loop till the we reach the tail 
+        current.next = previous #reverse the link
+        previous = current  #move 'previous' one step aheaad
+        current = following #move 'current' one step ahead
+        if following: #if this was not the last element
+            following = following.next #move 'following' one step ahead 
+    llist = previous
+    return llist
+
+
