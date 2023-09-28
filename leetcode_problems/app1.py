@@ -551,9 +551,10 @@ def min_bribes(q):
 
 print(min_bribes(q))       
 
+'''--------------------------------------------------------------------------------LINKED LISTS---------------------------------------------------------------------------------------------------'''
+
 '''MERGE TWO SORTED LINKED LIST'''
 '''Given pointers to the heads of two sorted linked lists, merge them into a single, sorted linked list. Either head pointer may be null meaning that the corresponding list is empty.'''
-
 
 
 # For your reference:
@@ -572,9 +573,10 @@ def mergeLists(head1, head2):
     if not head2:
         return head1
     
-    merged_head = None
-    current = None 
+    merged_head = None #keep track of the head of the merged list 
+    current = None #keep track of the current node 
     
+    #iterate through both lists (head1 and head2) simultaneously, comparing the data values of nodes and linking them in ascending order to create the merged list.
     while head1 and head2: 
         if head1.data <= head2.data:
             if merged_head is None: 
@@ -592,12 +594,30 @@ def mergeLists(head1, head2):
                 current.next = head2
                 current = current.next
             head2 = head2.next
-    #append remaining nodes 
+    #append remaining nodes, if one list is shorter than the other one 
     if head1:
         current.next = head1
     if head2:
         current.next = head2
     
     return merged_head
+
+'''PRINT THE ELEMENTS OF A LINKED LIST'''
+'''Given a pointer to the head node of a linked list, print each node's DATA element, one per line. If the head pointer is null (indicating the list is empty), there is nothing to print.
+Function Description
+-Complete the printLinkedList function in the editor below.
+-printLinkedList has the following parameter(s):
+-SinglyLinkedListNode head: a reference to the head of the list
+Print
+-For each node, print its DATA value on a new line (console.log in Javascript)'''
                 
-        
+
+def printLinkedList(head):
+    if head is None:
+        print(None)
+    
+    current = head
+    
+    while current is not None:
+        print(current.data)
+        current = current.next
