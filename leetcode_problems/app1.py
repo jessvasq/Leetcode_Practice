@@ -683,3 +683,25 @@ def reverse(llist):
     return llist
 
 
+'''Delete a Node'''
+'''Delete the node at a given position in a linked list and return a reference to the head node. The head is at position 0. The list may be empty after you delete the node. In that case, return a null value.'''
+
+def delete_at_position(llist, position):
+    current = llist 
+    count = 0 
+    
+    # checks if the position to delete is the head of the linked list (position 0). If so, it immediately returns current.next, effectively removing the current head and returning the new head.
+    if position == 0:
+        return current.next
+        
+    while current and count < position -1:
+        current = current.next 
+        count += 1
+        
+    if current is None or current.next is None: 
+        return None
+    
+    current.next = current.next.next  
+    
+    return llist
+        
