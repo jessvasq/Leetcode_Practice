@@ -621,3 +621,17 @@ def printLinkedList(head):
     while current is not None:
         print(current.data)
         current = current.next
+        
+'''Insert a node at the head of a linked list'''
+'''Given a pointer to the head of a linked list, insert a new node before the head. The NEXT value in the new node should point to HEAD and the DATA value should be replaced with a given value. Return a reference to the new head of the list. The head pointer given may be null meaning that the initial list is empty.'''
+
+def insertNodeAtHead(list1, data):
+    new_node = SinglyLinkedListNode(data) #SinglyLinkedListNode Class is given
+    new_node.next = list1
+    list1 = new_node
+    
+    return list1 
+        
+    
+        
+        
