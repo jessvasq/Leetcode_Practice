@@ -631,7 +631,26 @@ def insertNodeAtHead(list1, data):
     list1 = new_node
     
     return list1 
+
+'''Insert a Node at the Tail of a Linked List'''
+'''You are given the pointer to the head node of a linked list and an integer to add to the list. Create a new node with the given integer. Insert this node at the tail of the linked list and return the head node of the linked list formed after inserting this new node. The given head pointer may be null, meaning that the initial list is empty.'''
         
+ 
+def insertNodeAtTail(head, data):
+    new_node = SinglyLinkedListNode(data)
+    new_node.next = None
+    current = head
+  
+    if current is None:
+        head = new_node
+        return head
     
+    while current.next is not None: 
+        current = current.next
+    current.next = new_node
+        
+    return head
+        
+           
         
         
