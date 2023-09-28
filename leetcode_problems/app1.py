@@ -652,5 +652,14 @@ def insertNodeAtTail(head, data):
     return head
         
            
-        
-        
+'''Print in Reverse'''       
+'''Given a pointer to the head of a singly-linked list, print each DATA value from the reversed list. If the given list is empty, do not print anything.'''
+
+def reversePrint(llist):
+    if llist is None:
+        return
+    #use a recursive function and pass the next element in the list until head is none which means we've reached the end of the list, so the recursion starts to backtrack
+    reversePrint(llist.next)
+    #prints in reverse order (backtrack) because the recursive function is called before the 'print' statement
+    print(llist.data)
+          
