@@ -551,3 +551,53 @@ def min_bribes(q):
 
 print(min_bribes(q))       
 
+'''MERGE TWO SORTED LINKED LIST'''
+'''Given pointers to the heads of two sorted linked lists, merge them into a single, sorted linked list. Either head pointer may be null meaning that the corresponding list is empty.'''
+
+
+
+# For your reference:
+#
+# SinglyLinkedListNode:
+#     int data
+#     SinglyLinkedListNode next
+#
+#
+
+
+def mergeLists(head1, head2):
+    #if one list is empty, return the other list
+    if not head1:
+        return head2
+    if not head2:
+        return head1
+    
+    merged_head = None
+    current = None 
+    
+    while head1 and head2: 
+        if head1.data <= head2.data:
+            if merged_head is None: 
+                merged_head = head1
+                current = merged_head
+            else: 
+                current.next = head1
+                current = current.next
+            head1 = head1.next
+        else:
+            if merged_head is None: 
+                merged_head = head2
+                current = merged_head
+            else: 
+                current.next = head2
+                current = current.next
+            head2 = head2.next
+    #append remaining nodes 
+    if head1:
+        current.next = head1
+    if head2:
+        current.next = head2
+    
+    return merged_head
+                
+        
