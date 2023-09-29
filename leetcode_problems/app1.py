@@ -704,4 +704,62 @@ def delete_at_position(llist, position):
     current.next = current.next.next  
     
     return llist
+
+
+'''CYCLE DETECTION'''
+'''A linked list is said to contain a cycle if any node is visited more than once while traversing the list. Given a pointer to the head of a linked list, determine if it contains a cycle. If it does, return 1. Otherwise, return 0.'''
+
+
+def has_cycle(head):
+    slow = head
+    fast = head
+    
+    if head is None:
+        return None
+    
+    while slow != None and fast != None:
+        slow = slow.next
+        fast = fast.next.next
         
+        if slow == fast:
+            return 1
+      
+    return 0 
+        
+
+'''Inserting a Node Into a Sorted Doubly Linked List'''   
+'''Given a reference to the head of a doubly-linked list and an integer, DATA, create a new DoublyLinkedListNode object having data value DATA and insert it at the proper location to maintain the sort.'''
+
+#we need to traversee the list to find the correct position where the node should be inserted
+
+
+def sortedInsert(llist, data):
+    #create new node 
+    new_node = DoublyLinkedListNode(data)
+    
+    #if the list is empty or the new node's data is smaller than the head's data
+    if llist is None or data < llist.data:
+        new_node.next = llist
+        if llist:
+            llist.prev = new_node
+        return new_node
+    
+    current = llist
+    
+    #traverse the list 
+    while current.next and current.next.data < data:
+        current = current.next
+        
+    #insert 
+    new_node.next = current.next
+    if current.next:
+        current.next.prev = new_node
+    current.next = new_node
+    new_node.prev = current
+    
+    return llist
+        
+        
+
+    
+    
