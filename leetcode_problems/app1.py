@@ -526,30 +526,30 @@ Determine the minimum number of bribes that took place to get to a given queue o
 '''
 
 
-q1 = [1, 2, 3, 5, 4, 6, 7, 8]
-q = [2,1,5,3,4]
+# q1 = [1, 2, 3, 5, 4, 6, 7, 8]
+# q = [2,1,5,3,4]
 
 
-def min_bribes(q):
-    total = 0
-    n=len(q)
+# def min_bribes(q):
+#     total = 0
+#     n=len(q)
     
-    for num in range(n):
+#     for num in range(n):
         
-        if q[num] - (num + 1) > 2:
-            print('Too chaotic')
-            return
+#         if q[num] - (num + 1) > 2:
+#             print('Too chaotic')
+#             return
         
             
-        #q[num] - 2 calculates the lowest possible position in the queue from which a person could have bribed the person at position i. This is because a person can only bribe at most two others, so they cannot move more than two positions ahead. Therefore, q[i] - 2 is the lower bound on the position we want to start checking for potential bribers.
-        # ensures that we don't go below the first position in the queue (position 0).
-        #num represents the current position of the person for whom we are counting bribes.
-        for el in range(max(0, q[num]-2), num):
-            if q[el] > q[num]:
-                total += 1
-    return total 
+#         #q[num] - 2 calculates the lowest possible position in the queue from which a person could have bribed the person at position i. This is because a person can only bribe at most two others, so they cannot move more than two positions ahead. Therefore, q[i] - 2 is the lower bound on the position we want to start checking for potential bribers.
+#         # ensures that we don't go below the first position in the queue (position 0).
+#         #num represents the current position of the person for whom we are counting bribes.
+#         for el in range(max(0, q[num]-2), num):
+#             if q[el] > q[num]:
+#                 total += 1
+#     return total 
 
-print(min_bribes(q))       
+# print(min_bribes(q))       
 
 '''--------------------------------------------------------------------------------LINKED LISTS---------------------------------------------------------------------------------------------------'''
 
@@ -566,41 +566,41 @@ print(min_bribes(q))
 #
 
 
-def mergeLists(head1, head2):
-    #if one list is empty, return the other list
-    if not head1:
-        return head2
-    if not head2:
-        return head1
+# def mergeLists(head1, head2):
+#     #if one list is empty, return the other list
+#     if not head1:
+#         return head2
+#     if not head2:
+#         return head1
     
-    merged_head = None #keep track of the head of the merged list 
-    current = None #keep track of the current node 
+#     merged_head = None #keep track of the head of the merged list 
+#     current = None #keep track of the current node 
     
-    #iterate through both lists (head1 and head2) simultaneously, comparing the data values of nodes and linking them in ascending order to create the merged list.
-    while head1 and head2: 
-        if head1.data <= head2.data:
-            if merged_head is None: 
-                merged_head = head1
-                current = merged_head
-            else: 
-                current.next = head1
-                current = current.next
-            head1 = head1.next
-        else:
-            if merged_head is None: 
-                merged_head = head2
-                current = merged_head
-            else: 
-                current.next = head2
-                current = current.next
-            head2 = head2.next
-    #append remaining nodes, if one list is shorter than the other one 
-    if head1:
-        current.next = head1
-    if head2:
-        current.next = head2
+#     #iterate through both lists (head1 and head2) simultaneously, comparing the data values of nodes and linking them in ascending order to create the merged list.
+#     while head1 and head2: 
+#         if head1.data <= head2.data:
+#             if merged_head is None: 
+#                 merged_head = head1
+#                 current = merged_head
+#             else: 
+#                 current.next = head1
+#                 current = current.next
+#             head1 = head1.next
+#         else:
+#             if merged_head is None: 
+#                 merged_head = head2
+#                 current = merged_head
+#             else: 
+#                 current.next = head2
+#                 current = current.next
+#             head2 = head2.next
+#     #append remaining nodes, if one list is shorter than the other one 
+#     if head1:
+#         current.next = head1
+#     if head2:
+#         current.next = head2
     
-    return merged_head
+#     return merged_head
 
 '''PRINT THE ELEMENTS OF A LINKED LIST'''
 '''Given a pointer to the head node of a linked list, print each node's DATA element, one per line. If the head pointer is null (indicating the list is empty), there is nothing to print.
@@ -612,119 +612,119 @@ Print
 -For each node, print its DATA value on a new line (console.log in Javascript)'''
                 
 
-def printLinkedList(head):
-    if head is None:
-        print(None)
+# def printLinkedList(head):
+#     if head is None:
+#         print(None)
     
-    current = head
+#     current = head
     
-    while current is not None:
-        print(current.data)
-        current = current.next
+#     while current is not None:
+#         print(current.data)
+#         current = current.next
         
 '''Insert a node at the head of a linked list'''
 '''Given a pointer to the head of a linked list, insert a new node before the head. The NEXT value in the new node should point to HEAD and the DATA value should be replaced with a given value. Return a reference to the new head of the list. The head pointer given may be null meaning that the initial list is empty.'''
 
-def insertNodeAtHead(list1, data):
-    new_node = SinglyLinkedListNode(data) #SinglyLinkedListNode Class is given
-    new_node.next = list1
-    list1 = new_node
+# def insertNodeAtHead(list1, data):
+#     new_node = SinglyLinkedListNode(data) #SinglyLinkedListNode Class is given
+#     new_node.next = list1
+#     list1 = new_node
     
-    return list1 
+#     return list1 
 
 '''Insert a Node at the Tail of a Linked List'''
 '''You are given the pointer to the head node of a linked list and an integer to add to the list. Create a new node with the given integer. Insert this node at the tail of the linked list and return the head node of the linked list formed after inserting this new node. The given head pointer may be null, meaning that the initial list is empty.'''
         
  
-def insertNodeAtTail(head, data):
-    new_node = SinglyLinkedListNode(data)
-    new_node.next = None
-    current = head
+# def insertNodeAtTail(head, data):
+#     new_node = SinglyLinkedListNode(data)
+#     new_node.next = None
+#     current = head
   
-    if current is None:
-        head = new_node
-        return head
+#     if current is None:
+#         head = new_node
+#         return head
     
-    while current.next is not None: 
-        current = current.next
-    current.next = new_node
+#     while current.next is not None: 
+#         current = current.next
+#     current.next = new_node
         
-    return head
+#     return head
         
            
 '''Print in Reverse'''       
 '''Given a pointer to the head of a singly-linked list, print each DATA value from the reversed list. If the given list is empty, do not print anything.'''
 
-def reversePrint(llist):
-    if llist is None:
-        return
-    #use a recursive function and pass the next element in the list until head is none which means we've reached the end of the list, so the recursion starts to backtrack
-    reversePrint(llist.next)
-    #prints in reverse order (backtrack) because the recursive function is called before the 'print' statement
-    print(llist.data)
+# def reversePrint(llist):
+#     if llist is None:
+#         return
+#     #use a recursive function and pass the next element in the list until head is none which means we've reached the end of the list, so the recursion starts to backtrack
+#     reversePrint(llist.next)
+#     #prints in reverse order (backtrack) because the recursive function is called before the 'print' statement
+#     print(llist.data)
           
 '''Reverse a linked list'''
 '''Given the pointer to the head node of a linked list, change the next pointers of the nodes so that their order is reversed. The head pointer given may be null meaning that the initial list is empty.'''
 
-def reverse(llist):
-    if llist is None:
-        return 
-    current = llist #points to the head
-    previous = None #previous points to the previous element 
-    following = current.next #points at the second element 
+# def reverse(llist):
+#     if llist is None:
+#         return 
+#     current = llist #points to the head
+#     previous = None #previous points to the previous element 
+#     following = current.next #points at the second element 
 
-    while current: #loop till the we reach the tail 
-        current.next = previous #reverse the link
-        previous = current  #move 'previous' one step aheaad
-        current = following #move 'current' one step ahead
-        if following: #if this was not the last element
-            following = following.next #move 'following' one step ahead 
-    llist = previous
-    return llist
+#     while current: #loop till the we reach the tail 
+#         current.next = previous #reverse the link
+#         previous = current  #move 'previous' one step aheaad
+#         current = following #move 'current' one step ahead
+#         if following: #if this was not the last element
+#             following = following.next #move 'following' one step ahead 
+#     llist = previous
+#     return llist
 
 
 '''Delete a Node'''
 '''Delete the node at a given position in a linked list and return a reference to the head node. The head is at position 0. The list may be empty after you delete the node. In that case, return a null value.'''
 
-def delete_at_position(llist, position):
-    current = llist 
-    count = 0 
+# def delete_at_position(llist, position):
+#     current = llist 
+#     count = 0 
     
-    # checks if the position to delete is the head of the linked list (position 0). If so, it immediately returns current.next, effectively removing the current head and returning the new head.
-    if position == 0:
-        return current.next
+#     # checks if the position to delete is the head of the linked list (position 0). If so, it immediately returns current.next, effectively removing the current head and returning the new head.
+#     if position == 0:
+#         return current.next
         
-    while current and count < position -1:
-        current = current.next 
-        count += 1
+#     while current and count < position -1:
+#         current = current.next 
+#         count += 1
         
-    if current is None or current.next is None: 
-        return None
+#     if current is None or current.next is None: 
+#         return None
     
-    current.next = current.next.next  
+#     current.next = current.next.next  
     
-    return llist
+#     return llist
 
 
 '''CYCLE DETECTION'''
 '''A linked list is said to contain a cycle if any node is visited more than once while traversing the list. Given a pointer to the head of a linked list, determine if it contains a cycle. If it does, return 1. Otherwise, return 0.'''
 
 
-def has_cycle(head):
-    slow = head
-    fast = head
+# def has_cycle(head):
+#     slow = head
+#     fast = head
     
-    if head is None:
-        return None
+#     if head is None:
+#         return None
     
-    while slow != None and fast != None:
-        slow = slow.next
-        fast = fast.next.next
+#     while slow != None and fast != None:
+#         slow = slow.next
+#         fast = fast.next.next
         
-        if slow == fast:
-            return 1
+#         if slow == fast:
+#             return 1
       
-    return 0 
+#     return 0 
         
 
 '''Inserting a Node Into a Sorted Doubly Linked List'''   
@@ -733,33 +733,90 @@ def has_cycle(head):
 #we need to traversee the list to find the correct position where the node should be inserted
 
 
-def sortedInsert(llist, data):
-    #create new node 
-    new_node = DoublyLinkedListNode(data)
+# def sortedInsert(llist, data):
+#     #create new node 
+#     new_node = DoublyLinkedListNode(data)
     
-    #if the list is empty or the new node's data is smaller than the head's data
-    if llist is None or data < llist.data:
-        new_node.next = llist
-        if llist:
-            llist.prev = new_node
-        return new_node
+#     #if the list is empty or the new node's data is smaller than the head's data
+#     if llist is None or data < llist.data:
+#         new_node.next = llist
+#         if llist:
+#             llist.prev = new_node
+#         return new_node
     
-    current = llist
+#     current = llist
     
-    #traverse the list 
-    while current.next and current.next.data < data:
-        current = current.next
+#     #traverse the list 
+#     while current.next and current.next.data < data:
+#         current = current.next
         
-    #insert 
-    new_node.next = current.next
-    if current.next:
-        current.next.prev = new_node
-    current.next = new_node
-    new_node.prev = current
+#     #insert 
+#     new_node.next = current.next
+#     if current.next:
+#         current.next.prev = new_node
+#     current.next = new_node
+#     new_node.prev = current
     
-    return llist
+#     return llist
         
         
+'''----------------------------------------------------------------------------------TWO POINTERS-------------------------------------------------------------------------------------------------'''
+'''1877. Minimize Maximum Pair Sum in Array'''
+'''The pair sum of a pair (a,b) is equal to a + b. The maximum pair sum is the largest pair sum in a list of pairs.
+-For example, if we have pairs (1,5), (2,3), and (4,4), the maximum pair sum would be max(1+5, 2+3, 4+4) = max(6, 5, 8) = 8.
+Given an array nums of even length n, pair up the elements of nums into n / 2 pairs such that:
+-Each element of nums is in exactly one pair, and
+-The maximum pair sum is minimized.
+Return the minimized maximum pair sum after optimally pairing up the elements.
+'''
 
+
+# def minPairSum(nums):
+#     nums = sorted(nums)
+#     lo = 0 
+#     hi = len(nums)-1
     
+#     n = len(nums)
+#     if n % 2 != 0:
+#         return 
     
+#     num_sum = 0 # store the maximum pair sum found during the iteration
+    
+#     #loop stops when these two pointers meet or cross each other 
+#     while lo < hi:
+#         #In each iteration, calculate the sum of lo and hi in the sorted list. It then updates num_sum to store the maximum of its current value and the newly calculated sum. It ensures that num_sum always contains the maximum pair sum found so far
+#         num_sum = max(num_sum, nums[lo] + nums[hi])
+#         lo += 1 #after calculating the sum, move lo one step to the right
+#         hi -= 1 #after calculating the sum, move hi one step to the left
+    
+#     return num_sum
+
+# nums = [3,5,2, 3]
+# print(minPairSum(nums))      
+
+'''26. Remove Duplicates from Sorted Array'''
+'''Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+
+Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:
+
+Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
+Return k.
+'''        
+
+def removeDuplicates(nums):
+    unique_el = 1 #start at 1 as we assume that the first element is unique
+    
+    for i in range(1, len(nums)):
+        if nums[i] != nums[i-1]: #check if the current element is not the same as the previous element (nums[i-1])
+            nums[unique_el] = nums[i]  # the unique element is found, it is assigned to the position indicated by the nums[unique_el] pointer
+            unique_el += 1 #increment by 1, which will be the position for the next element
+
+    #unique_el represents the lenght of the unique elements, nums returs the modified list with duplicates removed or placed at the end of the list
+    #return unique_el, nums
+    return unique_el #problem states: return k or in this case unique_el
+    
+
+
+nums1 = [0,0,1,1,1,2,2,3,3,4]
+print(removeDuplicates(nums1))
+            
