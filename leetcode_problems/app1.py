@@ -820,3 +820,57 @@ def removeDuplicates(nums):
 nums1 = [0,0,1,1,1,2,2,3,3,4]
 print(removeDuplicates(nums1))
             
+'''148. Sort List'''
+'''Given the head of a linked list, return the list after sorting it in ascending order.'''
+
+def sortList(head):
+    
+    
+    if head is None or head.next is None:
+        return head
+        
+    #split the linked list 
+    left = head
+    right = self.findMid(head)
+    current = right.next
+    right.next = None
+    right = current
+        
+    #sort both sides 
+    left_sort = self.sortList(left)
+    right_sort = self.sortList(right)
+    return self.merge(left_sort, right_sort)
+
+
+def find_mid(self, head):
+    slow=head
+    fast=head 
+        
+    while fast.next and fast.next:
+        slow = slow.next #increment slow by one
+        fast = fast.next.next #increment by two 
+    return slow #slow will be at the middle value
+    
+def merge(self, list1, list2):
+    dummy = ListNode()
+    tail = dummy
+        
+    while list1 and list2:
+        if list1.data < list2.data:
+            tail.next = list1
+            list1 = list1.next
+        else:
+            tail.next = list2
+            list2 = list2.next 
+        tail = tail.next
+    if list1:
+        tail.next = list1
+            
+    if list2: 
+        tail.next = list2 
+            
+    return dummy.next 
+    
+
+    
+    
