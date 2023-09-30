@@ -803,74 +803,102 @@ Change the array nums such that the first k elements of nums contain the unique 
 Return k.
 '''        
 
-def removeDuplicates(nums):
-    unique_el = 1 #start at 1 as we assume that the first element is unique
+# def removeDuplicates(nums):
+#     unique_el = 1 #start at 1 as we assume that the first element is unique
     
-    for i in range(1, len(nums)):
-        if nums[i] != nums[i-1]: #check if the current element is not the same as the previous element (nums[i-1])
-            nums[unique_el] = nums[i]  # the unique element is found, it is assigned to the position indicated by the nums[unique_el] pointer
-            unique_el += 1 #increment by 1, which will be the position for the next element
+#     for i in range(1, len(nums)):
+#         if nums[i] != nums[i-1]: #check if the current element is not the same as the previous element (nums[i-1])
+#             nums[unique_el] = nums[i]  # the unique element is found, it is assigned to the position indicated by the nums[unique_el] pointer
+#             unique_el += 1 #increment by 1, which will be the position for the next element
 
-    #unique_el represents the lenght of the unique elements, nums returs the modified list with duplicates removed or placed at the end of the list
-    #return unique_el, nums
-    return unique_el #problem states: return k or in this case unique_el
+#     #unique_el represents the lenght of the unique elements, nums returs the modified list with duplicates removed or placed at the end of the list
+#     #return unique_el, nums
+#     return unique_el #problem states: return k or in this case unique_el
     
 
 
-nums1 = [0,0,1,1,1,2,2,3,3,4]
-print(removeDuplicates(nums1))
+# nums1 = [0,0,1,1,1,2,2,3,3,4]
+# print(removeDuplicates(nums1))
             
 '''148. Sort List'''
 '''Given the head of a linked list, return the list after sorting it in ascending order.'''
 
-def sortList(head):
+# def sortList(head):
     
     
-    if head is None or head.next is None:
-        return head
+#     if head is None or head.next is None:
+#         return head
         
-    #split the linked list 
-    left = head
-    right = self.findMid(head)
-    current = right.next
-    right.next = None
-    right = current
+#     #split the linked list 
+#     left = head
+#     right = self.findMid(head)
+#     current = right.next
+#     right.next = None
+#     right = current
         
-    #sort both sides 
-    left_sort = self.sortList(left)
-    right_sort = self.sortList(right)
-    return self.merge(left_sort, right_sort)
+#     #sort both sides 
+#     left_sort = self.sortList(left)
+#     right_sort = self.sortList(right)
+#     return self.merge(left_sort, right_sort)
 
 
-def find_mid(self, head):
-    slow=head
-    fast=head 
+# def find_mid(self, head):
+#     slow=head
+#     fast=head 
         
-    while fast.next and fast.next:
-        slow = slow.next #increment slow by one
-        fast = fast.next.next #increment by two 
-    return slow #slow will be at the middle value
+#     while fast.next and fast.next:
+#         slow = slow.next #increment slow by one
+#         fast = fast.next.next #increment by two 
+#     return slow #slow will be at the middle value
     
-def merge(self, list1, list2):
-    dummy = ListNode()
-    tail = dummy
+# def merge(self, list1, list2):
+#     dummy = ListNode()
+#     tail = dummy
         
-    while list1 and list2:
-        if list1.data < list2.data:
-            tail.next = list1
-            list1 = list1.next
+#     while list1 and list2:
+#         if list1.data < list2.data:
+#             tail.next = list1
+#             list1 = list1.next
+#         else:
+#             tail.next = list2
+#             list2 = list2.next 
+#         tail = tail.next
+#     if list1:
+#         tail.next = list1
+            
+#     if list2: 
+#         tail.next = list2 
+            
+#     return dummy.next 
+    
+'''MERGE SORTED ARRAY'''
+'''You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+
+Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+
+The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.'''    
+
+def merge(nums1, nums2, n, m):
+    p1 = m-1
+    p2 = n-1
+    merged_pointer = m + n-1
+    
+    while p1 >= 0 and p2 >= 0:
+        if nums1[p1] > nums2[p2]:
+            nums1[merged_pointer] = nums1[p1]
+            p1 -= 1
         else:
-            tail.next = list2
-            list2 = list2.next 
-        tail = tail.next
-    if list1:
-        tail.next = list1
-            
-    if list2: 
-        tail.next = list2 
-            
-    return dummy.next 
+            nums1[merged_pointer] = nums2[p2]
+            p2 -= 1
+        merged_pointer -= 1
     
+    while p2 >= 0:
+        nums1[merged_pointer] = nums2[p2]
+        p2 -= 1
+        merged_pointer -= 1
 
-    
-    
+nums1  = [1,2,3,0,0,0]
+nums2 = [2,5,6]
+m=3
+n=3
+print(merge(nums1, nums2, m, n))
