@@ -871,34 +871,85 @@ Return k.
             
 #     return dummy.next 
     
-'''MERGE SORTED ARRAY'''
+'''88. MERGE SORTED ARRAY'''
 '''You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
 
 Merge nums1 and nums2 into a single array sorted in non-decreasing order.
 
 The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.'''    
 
-def merge(nums1, nums2, n, m):
-    p1 = m-1
-    p2 = n-1
-    merged_pointer = m + n-1
+# def merge(nums1, nums2, n, m):
+#     p1 = m-1
+#     p2 = n-1
+#     merged_pointer = m + n-1
     
-    while p1 >= 0 and p2 >= 0:
-        if nums1[p1] > nums2[p2]:
-            nums1[merged_pointer] = nums1[p1]
-            p1 -= 1
-        else:
-            nums1[merged_pointer] = nums2[p2]
-            p2 -= 1
-        merged_pointer -= 1
+#     while p1 >= 0 and p2 >= 0:
+#         if nums1[p1] > nums2[p2]:
+#             nums1[merged_pointer] = nums1[p1]
+#             p1 -= 1
+#         else:
+#             nums1[merged_pointer] = nums2[p2]
+#             p2 -= 1
+#         merged_pointer -= 1
     
-    while p2 >= 0:
-        nums1[merged_pointer] = nums2[p2]
-        p2 -= 1
-        merged_pointer -= 1
+#     while p2 >= 0:
+#         nums1[merged_pointer] = nums2[p2]
+#         p2 -= 1
+#         merged_pointer -= 1
 
-nums1  = [1,2,3,0,0,0]
-nums2 = [2,5,6]
-m=3
-n=3
-print(merge(nums1, nums2, m, n))
+# nums1  = [1,2,3,0,0,0]
+# nums2 = [2,5,6]
+# m=3
+# n=3
+# print(merge(nums1, nums2, m, n))
+
+'''20. VALID PARENTHESES'''
+'''Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+An input string is valid if:
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.
+'''
+s = "(){}}{"
+
+def isValid(s):
+    stack = []
+    brackets = {')': '(', '}': '{', ']': '['}
+
+    for char in s:
+        if char in brackets.values():
+            stack.append(char)
+        #Check the dictionary key to see if there's a closing bracket
+        elif char in brackets.keys():
+            # check if the 'stack' is empty. If it is it means there's no matching bracket
+            # checks whether the most recent open bracket matches the current closing bracket
+            print(brackets.keys())
+            if not stack or stack.pop() != brackets[char]: #pop() removes an element at a specified position
+                return False
+        else:
+            return False
+
+    return not stack
+
+print(isValid(s))
+
+'''125. Valid Palindrome'''
+'''A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+Given a string s, return true if it is a palindrome, or false otherwise.'''
+
+s = ""
+
+def isPalindrome(s):
+    #Using list-comprehension, convert to lowercase and remove all non-alphanumeric characters     
+    lower_s = ''.join(char.lower() for char in s if char.isalnum())
+    print(lower_s)
+    
+    #reverse string 
+    reversed_s=lower_s[::-1]
+    if lower_s == reversed_s:
+        return True 
+    else:
+        return False
+
+        
+print(isPalindrome(s))
