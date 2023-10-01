@@ -953,3 +953,31 @@ def isPalindrome(s):
 
         
 print(isPalindrome(s))
+
+'''----------------------------------------------------------------------------------WINDOW SLIDING TECHNIQUE--------------------------------------------------------------------------------------------'''
+'''Given an array of integers of size ‘n’, Calculate the maximum sum of ‘k’ consecutive elements in the array.'''
+
+def maxSum(arr, k):
+    n=len(arr)
+    
+    if n < k:
+        return
+    
+    #calculate sum of the first window
+    window_sum = sum(arr[:k])
+    max_sum = window_sum
+    
+    #calculate sum of the remaining windows
+    for i in range(n-k):
+        print('arr[i]', arr[i])
+        print('arr[i+k]', arr[i+k])
+        window_sum = window_sum - arr[i] + arr[i+k]
+        max_sum = max(max_sum, window_sum)
+        
+    return max_sum
+
+
+arr = [1, 4, 2, 10, 2, 3, 1, 0, 20]
+k=4
+
+print(maxSum(arr, k))
