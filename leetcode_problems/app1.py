@@ -910,74 +910,100 @@ Open brackets must be closed by the same type of brackets.
 Open brackets must be closed in the correct order.
 Every close bracket has a corresponding open bracket of the same type.
 '''
-s = "(){}}{"
+# s = "(){}}{"
 
-def isValid(s):
-    stack = []
-    brackets = {')': '(', '}': '{', ']': '['}
+# def isValid(s):
+#     stack = []
+#     brackets = {')': '(', '}': '{', ']': '['}
 
-    for char in s:
-        if char in brackets.values():
-            stack.append(char)
-        #Check the dictionary key to see if there's a closing bracket
-        elif char in brackets.keys():
-            # check if the 'stack' is empty. If it is it means there's no matching bracket
-            # checks whether the most recent open bracket matches the current closing bracket
-            print(brackets.keys())
-            if not stack or stack.pop() != brackets[char]: #pop() removes an element at a specified position
-                return False
-        else:
-            return False
+#     for char in s:
+#         if char in brackets.values():
+#             stack.append(char)
+#         #Check the dictionary key to see if there's a closing bracket
+#         elif char in brackets.keys():
+#             # check if the 'stack' is empty. If it is it means there's no matching bracket
+#             # checks whether the most recent open bracket matches the current closing bracket
+#             print(brackets.keys())
+#             if not stack or stack.pop() != brackets[char]: #pop() removes an element at a specified position
+#                 return False
+#         else:
+#             return False
 
-    return not stack
+#     return not stack
 
-print(isValid(s))
+# print(isValid(s))
 
 '''125. Valid Palindrome'''
 '''A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
 Given a string s, return true if it is a palindrome, or false otherwise.'''
 
-s = ""
+# s = ""
 
-def isPalindrome(s):
-    #Using list-comprehension, convert to lowercase and remove all non-alphanumeric characters     
-    lower_s = ''.join(char.lower() for char in s if char.isalnum())
-    print(lower_s)
+# def isPalindrome(s):
+#     #Using list-comprehension, convert to lowercase and remove all non-alphanumeric characters     
+#     lower_s = ''.join(char.lower() for char in s if char.isalnum())
+#     print(lower_s)
     
-    #reverse string 
-    reversed_s=lower_s[::-1]
-    if lower_s == reversed_s:
-        return True 
-    else:
-        return False
+#     #reverse string 
+#     reversed_s=lower_s[::-1]
+#     if lower_s == reversed_s:
+#         return True 
+#     else:
+#         return False
 
         
-print(isPalindrome(s))
+# print(isPalindrome(s))
 
 '''----------------------------------------------------------------------------------WINDOW SLIDING TECHNIQUE--------------------------------------------------------------------------------------------'''
 '''Given an array of integers of size ‘n’, Calculate the maximum sum of ‘k’ consecutive elements in the array.'''
 
-def maxSum(arr, k):
-    n=len(arr)
+# def maxSum(arr, k):
+#     n=len(arr)
     
-    if n < k:
-        return
+#     if n < k:
+#         return
     
-    #calculate sum of the first window
-    window_sum = sum(arr[:k])
-    max_sum = window_sum
+#     #calculate sum of the first window
+#     window_sum = sum(arr[:k])
+#     max_sum = window_sum
     
-    #calculate sum of the remaining windows
-    for i in range(n-k):
-        print('arr[i]', arr[i])
-        print('arr[i+k]', arr[i+k])
-        window_sum = window_sum - arr[i] + arr[i+k]
-        max_sum = max(max_sum, window_sum)
+#     #calculate sum of the remaining windows
+#     for i in range(n-k):
+#         print('arr[i]', arr[i])
+#         print('arr[i+k]', arr[i+k])
+#         window_sum = window_sum - arr[i] + arr[i+k]
+#         max_sum = max(max_sum, window_sum)
         
-    return max_sum
+#     return max_sum
 
 
-arr = [1, 4, 2, 10, 2, 3, 1, 0, 20]
+# arr = [1, 4, 2, 10, 2, 3, 1, 0, 20]
+# k=4
+
+# print(maxSum(arr, k))
+
+
+'''643. Maximum Average Subarray I'''
+'''You are given an integer array nums consisting of n elements, and an integer k.
+Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will be accepted.
+'''
+
+def findMaxAverage(nums, k):
+    n = len(nums)
+    if n == 0 or n < k:
+        return 
+    
+    max_sum = sum(nums[:k])
+    current_sum = max_sum 
+        
+    for i in range(k, n):
+        # Add the next element and subtract the first element in the window
+        current_sum += nums[i] - nums[i-k]
+        max_sum = max(max_sum, current_sum) 
+   
+    avg_sum = max_sum / k
+    return avg_sum
+    
+nums = [1,12,-5,-6,50,3]
 k=4
-
-print(maxSum(arr, k))
+print(findMaxAverage(nums, k))
