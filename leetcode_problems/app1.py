@@ -1068,3 +1068,45 @@ def merge_intervals(intervals):
 
 print( merge_intervals(intervals) )
 
+'''19. BINARY TREE RIGHT SIDE VIEW'''
+'''Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom'''
+
+from collections import deque
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        
+def rightSideView(root):
+    if not root:
+        return 
+
+    result = []  # Initialize an empty list to store the values of the rightmost nodes.
+    q = deque()  # Create a deque (a double-ended queue) to perform level-order traversal.
+    q.append(root)  # Add the root node to the queue.
+
+    while q:
+        rightSide = None  # Initialize a variable to keep track of the rightmost node at each level.
+        n = len(q)  # Get the number of nodes at the current level.
+
+        for i in range(n):
+            node = q.popleft()  # Dequeue (remove and return) the leftmost node from the queue.
+            if node:
+                rightSide = node  # Update the rightmost node with the current node.
+                q.append(node.left)  # Enqueue the left child of the current node.
+                q.append(node.right)  # Enqueue/add/push the right child of the current node so we can then take the rightmost value and append it to the result
+
+        if rightSide:
+            result.append(rightSide.val)  # Add the value of the rightmost node to the result list.
+
+    return result
+
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+root.right.right = TreeNode(6)
+
+print(rightSideView(root))
