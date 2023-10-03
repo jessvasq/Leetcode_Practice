@@ -1012,64 +1012,106 @@ Find a contiguous subarray whose length is equal to k that has the maximum avera
 '''56. MERGE INTERVALS'''
 '''Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.'''
 
-intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
+# intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
 
 
-#First solution 
+# #First solution 
 
-def merge_intervals(intervals):
-    #sort the array 
-    intervals.sort(key=lambda index : index[0])
-    #stores the merged intervals as we iterate through the intervals
-    non_overlapping_arr = [intervals[0]] #Output= [[1,3]] first interval located at index 0 
-    print(intervals)
-    print(non_overlapping_arr)
-    # end=non_overlapping_arr[-1][1]
-    # print('end' ,end)
+# def merge_intervals(intervals):
+#     #sort the array 
+#     intervals.sort(key=lambda index : index[0])
+#     #stores the merged intervals as we iterate through the intervals
+#     non_overlapping_arr = [intervals[0]] #Output= [[1,3]] first interval located at index 0 
+#     print(intervals)
+#     print(non_overlapping_arr)
+#     # end=non_overlapping_arr[-1][1]
+#     # print('end' ,end)
 
-    for s, e in intervals[1:]:
-        #non_overlapping_arr[-1] -- accesses the last interval in the 'merged_intervals', which is the most recently merged interval. [1] accesses the end element inside the most recently merged interval 
-        end=non_overlapping_arr[-1][1]
-        print('end' ,end)
+#     for s, e in intervals[1:]:
+#         #non_overlapping_arr[-1] -- accesses the last interval in the 'merged_intervals', which is the most recently merged interval. [1] accesses the end element inside the most recently merged interval 
+#         end=non_overlapping_arr[-1][1]
+#         print('end' ,end)
         
-        #compare the start of the current interval with the end time of the previous interval to check if there' san overlap 
-        if s <= end:                    #end stores the end value of the previous merged interval. While 'e' is the original value of the current interval 
-            #To merge them, we update the end time of the previous_interval to the maximum of the current interval
-            non_overlapping_arr[-1][1] = max(end, e)
+#         #compare the start of the current interval with the end time of the previous interval to check if there' san overlap 
+#         if s <= end:                    #end stores the end value of the previous merged interval. While 'e' is the original value of the current interval 
+#             #To merge them, we update the end time of the previous_interval to the maximum of the current interval
+#             non_overlapping_arr[-1][1] = max(end, e)
             
-        else: 
-            non_overlapping_arr.append([s, e])
-    return non_overlapping_arr
+#         else: 
+#             non_overlapping_arr.append([s, e])
+#     return non_overlapping_arr
         
         
 #Second solution
 
-def merge_intervals(intervals):
-    if not intervals:
-        return []
+# def merge_intervals(intervals):
+#     if not intervals:
+#         return []
 
-    # Sort the intervals by their start times
-    intervals.sort(key=lambda x: x[0])
+#     # Sort the intervals by their start times
+#     intervals.sort(key=lambda x: x[0])
 
-    merged_intervals = [intervals[0]]
+#     merged_intervals = [intervals[0]]
     
-    for i in range(1, len(intervals)):
-        current_interval = intervals[i]
-        previous_interval = merged_intervals[-1]
+#     for i in range(1, len(intervals)):
+#         current_interval = intervals[i]
+#         previous_interval = merged_intervals[-1]
 
-        # If the current interval overlaps with the previous one, merge them
-        if current_interval[0] <= previous_interval[1]:
-            previous_interval[1] = max(previous_interval[1], current_interval[1])
-        else:
-            # If there is no overlap, add the current interval to the merged_intervals
-            merged_intervals.append(current_interval)
+#         # If the current interval overlaps with the previous one, merge them
+#         if current_interval[0] <= previous_interval[1]:
+#             previous_interval[1] = max(previous_interval[1], current_interval[1])
+#         else:
+#             # If there is no overlap, add the current interval to the merged_intervals
+#             merged_intervals.append(current_interval)
     
-    return merged_intervals
+#     return merged_intervals
 
-print( merge_intervals(intervals) )
+# print( merge_intervals(intervals) )
 
 '''19. BINARY TREE RIGHT SIDE VIEW'''
 '''Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom'''
+
+# from collections import deque
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+        
+# def rightSideView(root):
+#     if not root:
+#         return 
+
+#     result = []  # Initialize an empty list to store the values of the rightmost nodes.
+#     q = deque()  # Create a deque (a double-ended queue) to perform level-order traversal.
+#     q.append(root)  # Add the root node to the queue.
+
+#     while q:
+#         rightSide = None  # Initialize a variable to keep track of the rightmost node at each level.
+#         n = len(q)  # Get the number of nodes at the current level.
+
+#         for i in range(n):
+#             node = q.popleft()  # Dequeue (remove and return) the leftmost node from the queue.
+#             if node:
+#                 rightSide = node  # Update the rightmost node with the current node.
+#                 q.append(node.left)  # Enqueue the left child of the current node.
+#                 q.append(node.right)  # Enqueue/add/push the right child of the current node so we can then take the rightmost value and append it to the result
+
+#         if rightSide:
+#             result.append(rightSide.val)  # Add the value of the rightmost node to the result list.
+
+#     return result
+
+# root = TreeNode(1)
+# root.left = TreeNode(2)
+# root.right = TreeNode(3)
+# root.left.right = TreeNode(5)
+# root.right.right = TreeNode(4)
+
+# print(rightSideView(root))
+
+'''BINARY TREE LEFT SIDE VIEW'''
+'''Given the root of a binary tree, imagine yourself standing on the left side of it, return the values of the nodes you can see ordered from top to bottom'''
 
 from collections import deque
 class TreeNode:
@@ -1078,35 +1120,34 @@ class TreeNode:
         self.left = left
         self.right = right
         
-def rightSideView(root):
+def leftSideView(root):
     if not root:
         return 
 
-    result = []  # Initialize an empty list to store the values of the rightmost nodes.
+    result = []  # Initialize an empty list to store the values of the leftmost nodes.
     q = deque()  # Create a deque (a double-ended queue) to perform level-order traversal.
     q.append(root)  # Add the root node to the queue.
 
     while q:
-        rightSide = None  # Initialize a variable to keep track of the rightmost node at each level.
+        leftSide = None  # Initialize a variable to keep track of the leftmost node at each level.
         n = len(q)  # Get the number of nodes at the current level.
 
         for i in range(n):
             node = q.popleft()  # Dequeue (remove and return) the leftmost node from the queue.
             if node:
-                rightSide = node  # Update the rightmost node with the current node.
-                q.append(node.left)  # Enqueue the left child of the current node.
-                q.append(node.right)  # Enqueue/add/push the right child of the current node so we can then take the rightmost value and append it to the result
+                leftSide = node  # Update the leftmost node with the current node.
+                q.append(node.right)  # Enqueue the left child of the current node.
+                q.append(node.left)  # Enqueue/add/push the right child of the current node so we can then take the leftmost value and append it to the result
 
-        if rightSide:
-            result.append(rightSide.val)  # Add the value of the rightmost node to the result list.
+        if leftSide:
+            result.append(leftSide.val)  # Add the value of the leftmost node to the result list.
 
     return result
 
 root = TreeNode(1)
 root.left = TreeNode(2)
 root.right = TreeNode(3)
-root.left.left = TreeNode(4)
 root.left.right = TreeNode(5)
-root.right.right = TreeNode(6)
+root.right.right = TreeNode(4)
 
-print(rightSideView(root))
+print(leftSideView(root))
