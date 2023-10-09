@@ -6,62 +6,62 @@
 The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.'''
 
 
-s="hello"
+# s="hello"
 
 
-def reverse_vowel(s):
-    vowels = 'aeiouAEIOU'
-    s=list(s) #convert to a list to make it mutable 
-    left, right = 0, len(s)-1
+# def reverse_vowel(s):
+#     vowels = 'aeiouAEIOU'
+#     s=list(s) #convert to a list to make it mutable 
+#     left, right = 0, len(s)-1
     
-    while left < right:
-        #check if there's a vowel on the left side
-        while left < right and s[left] not in vowels:
-            left += 1
+#     while left < right:
+#         #check if there's a vowel on the left side
+#         while left < right and s[left] not in vowels:
+#             left += 1
             
-        #check if there's a vowel on the right side
-        while left < right and s[right] not in vowels:
-            right -= 1
+#         #check if there's a vowel on the right side
+#         while left < right and s[right] not in vowels:
+#             right -= 1
             
-        #if we find a vowel 
-        if left < right:
-            #swap vowels 
-            s[left], s[right] = s[right], s[left]
-            left += 1
-            right -= 1   
+#         #if we find a vowel 
+#         if left < right:
+#             #swap vowels 
+#             s[left], s[right] = s[right], s[left]
+#             left += 1
+#             right -= 1   
             
-    return ''.join(s)
+#     return ''.join(s)
 
-print(reverse_vowel(s))
+# print(reverse_vowel(s))
 
 
 '''1768. Merge Strings Alternately'''
 '''You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the end of the merged string.Return the merged string.'''
 
-def merge_alternately(word1, word2):
-    lo = 0
-    lo2 = 0
-    hi = len(word1)
-    hi2 = len(word2)
-    merged_word = ''
+# def merge_alternately(word1, word2):
+#     lo = 0
+#     lo2 = 0
+#     hi = len(word1)
+#     hi2 = len(word2)
+#     merged_word = ''
     
-    while lo < hi and lo2<hi2:
-        merged_word += word1[lo] + word2[lo2]
-        lo += 1
-        lo2 += 1
+#     while lo < hi and lo2<hi2:
+#         merged_word += word1[lo] + word2[lo2]
+#         lo += 1
+#         lo2 += 1
         
-    if lo < hi:
-        merged_word += word1[lo:]
+#     if lo < hi:
+#         merged_word += word1[lo:]
         
-    if lo2 < hi2:
-        merged_word += word2[lo2:]
+#     if lo2 < hi2:
+#         merged_word += word2[lo2:]
     
-    return merged_word
+#     return merged_word
     
-word1 = 'abc'
-word2 = 'pqrdf'
-print(len(word1)-1)
-print(merge_alternately(word1, word2))
+# word1 = 'abc'
+# word2 = 'pqrdf'
+# print(len(word1)-1)
+# print(merge_alternately(word1, word2))
 
 
 
@@ -70,22 +70,43 @@ print(merge_alternately(word1, word2))
 Return a boolean array result of length n, where result[i] is true if, after giving the ith kid all the extraCandies, they will have the greatest number of candies among all the kids, or false otherwise.
 Note that multiple kids can have the greatest number of candies.'''
 
-def kids_with_candies(candies, extra_candies):
-    #Find the max_num in the array
-    max_num_candies = max(candies)
-    #iterate through the list 
-    for num in range(len(candies)):
-        #check if current kid with candies + extra candies is greater or equal to max_num candies
-        if candies[num] + extra_candies >= max_num_candies:
-            #if yes, return True
-            candies[num] = True
-            #else False
-        else: 
-            candies[num] = False
-    #return list of candies(will return Boolean values)
-    return candies
+# def kids_with_candies(candies, extra_candies):
+#     #Find the max_num in the array
+#     max_num_candies = max(candies)
+#     #iterate through the list 
+#     for num in range(len(candies)):
+#         #check if current kid with candies + extra candies is greater or equal to max_num candies
+#         if candies[num] + extra_candies >= max_num_candies:
+#             #if yes, return True
+#             candies[num] = True
+#             #else False
+#         else: 
+#             candies[num] = False
+#     #return list of candies(will return Boolean values)
+#     return candies
 
-candies = [2,3,5,1,3]
-extra_candies = 3
+# candies = [2,3,5,1,3]
+# extra_candies = 3
 
-print(kids_with_candies(candies, extra_candies))
+# print(kids_with_candies(candies, extra_candies))
+
+'''151.Reverse Words in a String
+Given an input string s, reverse the order of the words.
+A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.
+Return a string of the words in reverse order concatenated by a single space.
+Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.
+'''
+
+s = "the sky is blue"
+
+def reverseWords(s):
+    s = s.strip()
+    s = s.split()
+    lo=0
+    hi=len(s)-1
+    
+    while lo <= hi:
+        s[lo], s[hi] = s[hi], s[lo]
+        lo += 1
+        hi -= 1
+    return(' '.join(s))
