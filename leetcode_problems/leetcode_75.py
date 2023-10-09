@@ -114,25 +114,70 @@ Note that s may contain leading or trailing spaces or multiple spaces between tw
 '''334. Increasing Triplet Subsequence
 Given an integer array nums, return true if there exists a triple of indices (i, j, k) such that i < j < k and nums[i] < nums[j] < nums[k]. If no such indices exists, return false.'''
 
-nums = [2,1,5,0,4,6]
+# nums = [2,1,5,0,4,6]
 
-def increasing_triplet(nums):
-    #check if the list has at least three values
-    if len(nums) < 3:
-        return False
-    #initialize two variables to keep track of the smallest elements 
-    first_num = float('inf')
-    second_num = float('inf')
+# def increasing_triplet(nums):
+#     #check if the list has at least three values
+#     if len(nums) < 3:
+#         return False
+#     #initialize two variables to keep track of the smallest elements 
+#     first_num = float('inf')
+#     second_num = float('inf')
     
-    #loop through the list 
-    for num in nums: 
-        if num <= first_num:
-            first_num = num
-        elif num <= second_num:
-            second_num = num 
-        else: 
-            return True 
+#     #loop through the list 
+#     for num in nums: 
+#         if num <= first_num:
+#             first_num = num
+#         elif num <= second_num:
+#             second_num = num 
+#         else: 
+#             return True 
     
-    return False
+#     return False
 
-print(increasing_triplet(nums))
+# print(increasing_triplet(nums))
+
+'''135. Candy
+There are n children standing in a line. Each child is assigned a rating value given in the integer array ratings.
+You are giving candies to these children subjected to the following requirements:
+Each child must have at least one candy.
+Children with a higher rating get more candies than their neighbors.
+Return the minimum number of candies you need to have to distribute the candies to the children.
+'''
+
+ratings = [1, 2, 2]
+# n = len(ratings)
+# for rating in range(n-2, -1, -1):
+#     print('current', ratings[rating])
+#     print('next', ratings[rating+1])
+
+# for rating in range(1, n):
+#     print('current', ratings[rating])
+#     print('next', ratings[rating-1])
+    
+def candy(ratings):
+    n = len(ratings)
+    #initialize an array to start at 1, since all children have at least 1 candy 
+    candies = [1] * n 
+    print(candies)
+    
+    #check left to right 
+    for rating in range(1, n):
+        if ratings[rating] > ratings[rating-1]: #check if the current rating is greater than the rating to its left
+            candies[rating] = candies[rating-1] + 1 #ensure that the current child has more than its left neighbor
+        
+    #check right to left, backwards loop
+    for rating in range(n-2, -1, -1): #start at second to last, stop at the last index(0)
+        if ratings[rating] > ratings[rating + 1]:
+            candies[rating] = max(candies[rating], candies[rating+1] + 1)
+            
+    #find total candies 
+    total_candies = sum(candies)
+    return total_candies 
+
+
+print(candy(ratings))
+
+
+
+        
