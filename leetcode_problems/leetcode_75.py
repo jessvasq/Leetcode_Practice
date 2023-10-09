@@ -155,29 +155,50 @@ ratings = [1, 2, 2]
 #     print('current', ratings[rating])
 #     print('next', ratings[rating-1])
     
-def candy(ratings):
-    n = len(ratings)
-    #initialize an array to start at 1, since all children have at least 1 candy 
-    candies = [1] * n 
-    print(candies)
+# def candy(ratings):
+#     n = len(ratings)
+#     #initialize an array to start at 1, since all children have at least 1 candy 
+#     candies = [1] * n 
+#     print(candies)
     
-    #check left to right 
-    for rating in range(1, n):
-        if ratings[rating] > ratings[rating-1]: #check if the current rating is greater than the rating to its left
-            candies[rating] = candies[rating-1] + 1 #ensure that the current child has more than its left neighbor
+#     #check left to right 
+#     for rating in range(1, n):
+#         if ratings[rating] > ratings[rating-1]: #check if the current rating is greater than the rating to its left
+#             candies[rating] = candies[rating-1] + 1 #ensure that the current child has more than its left neighbor
         
-    #check right to left, backwards loop
-    for rating in range(n-2, -1, -1): #start at second to last, stop at the last index(0)
-        if ratings[rating] > ratings[rating + 1]:
-            candies[rating] = max(candies[rating], candies[rating+1] + 1)
+#     #check right to left, backwards loop
+#     for rating in range(n-2, -1, -1): #start at second to last, stop at the last index(0)
+#         if ratings[rating] > ratings[rating + 1]:
+#             candies[rating] = max(candies[rating], candies[rating+1] + 1)
             
-    #find total candies 
-    total_candies = sum(candies)
-    return total_candies 
+#     #find total candies 
+#     total_candies = sum(candies)
+#     return total_candies 
 
 
-print(candy(ratings))
+# print(candy(ratings))
 
 
+'''-----------------------------------------------HASH MAP / SET --------------------------------------------------------------------------------------------'''
+'''1207. Unique Number of Occurrences
+Given an array of integers arr, return true if the number of occurrences of each value in the array is unique or false otherwise.'''
 
+arr = [1,2,2,1,1,3]
+
+def uniqueOccurrence(arr):
+    occurrence_dict = {}
+    unique_count = {}
+    
+    #count the occurence of each unique value 
+    for num in arr:
+        occurrence_dict[num] = occurrence_dict.get(num, 0) + 1 #use .get() to retrieve the value associated with the key 'num'. If 'num' is not already a key in the dictionary, it return '0', then increments by 1 
         
+    #check if all counts are unique 
+    for count in occurrence_dict.values():
+        if count in unique_count:
+            return False
+        unique_count[count] = True
+    return True 
+
+
+print(uniqueOccurrence(arr))
