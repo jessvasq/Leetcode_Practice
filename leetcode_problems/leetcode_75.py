@@ -97,16 +97,42 @@ Return a string of the words in reverse order concatenated by a single space.
 Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.
 '''
 
-s = "the sky is blue"
+# s = "the sky is blue"
 
-def reverseWords(s):
-    s = s.strip()
-    s = s.split()
-    lo=0
-    hi=len(s)-1
+# def reverseWords(s):
+#     s = s.strip()
+#     s = s.split()
+#     lo=0
+#     hi=len(s)-1
     
-    while lo <= hi:
-        s[lo], s[hi] = s[hi], s[lo]
-        lo += 1
-        hi -= 1
-    return(' '.join(s))
+#     while lo <= hi:
+#         s[lo], s[hi] = s[hi], s[lo]
+#         lo += 1
+#         hi -= 1
+#     return(' '.join(s))
+
+'''334. Increasing Triplet Subsequence
+Given an integer array nums, return true if there exists a triple of indices (i, j, k) such that i < j < k and nums[i] < nums[j] < nums[k]. If no such indices exists, return false.'''
+
+nums = [2,1,5,0,4,6]
+
+def increasing_triplet(nums):
+    #check if the list has at least three values
+    if len(nums) < 3:
+        return False
+    #initialize two variables to keep track of the smallest elements 
+    first_num = float('inf')
+    second_num = float('inf')
+    
+    #loop through the list 
+    for num in nums: 
+        if num <= first_num:
+            first_num = num
+        elif num <= second_num:
+            second_num = num 
+        else: 
+            return True 
+    
+    return False
+
+print(increasing_triplet(nums))
