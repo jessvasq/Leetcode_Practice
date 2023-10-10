@@ -443,3 +443,55 @@ root.left.left = TreeNode(7)
 
 val=2
 print(searchBST(root, val))    
+
+
+'''450. Delete Node in a BST - M 
+Given a root node reference of a BST and a key, delete the node with the given key in the BST. Return the root node reference (possibly updated) of the BST.
+Basically, the deletion can be divided into two stages:
+Search for a node to remove.
+If the node is found, delete the node.'''
+
+#we need to handle three cases for the node to be deleted
+# a. If the node to be deleted has no children (a leaf node), you can simply remove it.
+# b. If the node to be deleted has one child, you can replace the node with its child.
+# c. If the node to be deleted has two children, you need to find the node's in-order 
+
+def deleteNode(root, key):
+    #base case
+    if root is None:
+        return 
+    
+    #search for the node to delete 
+    if key < root.val:
+        #recursively call the left subtree to search for and delete the key 
+        root.left = deleteNode(root.left, key)
+    elif key > root.val:
+        #recursively call the right subtree to search for and delete the key 
+        root.right = deleteNode(root.right, key)
+    #DELETES THE NODE 
+    # if the node is equal to the value
+    else: 
+        if root.left is None and root.right is None:
+            return None
+        #IF THE NODE HAS NO LEFT CHILD 
+        if not root.left:
+            #return the right child to be the replacement for the deleted node
+            return root.right 
+        #B. IF THE NODE HAS NO RIGHT CHILD
+        elif not root.right:
+            #return the left child as the replacement 
+            return root.left
+        
+        #C. IF THE NODE HAS TWO CHILDREN: LEFT & RIGHT
+        #find the minimum node value in the right subtree
+        current = root.right
+        #traverse left in the right subtree until it reaches the min value
+        while current.left:
+            current = current.left 
+        #replace the current node with the min value 'in-order sucessor'
+        root.val = current.val
+        #call deleteNode recursively on the right subtree to delete the node with the min value
+        root.right = deleteNode(root.right, root.val)
+    #return the modified 'root', important step to make sure the tree remains connected 
+    return root 
+        
