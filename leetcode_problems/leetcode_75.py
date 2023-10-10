@@ -180,68 +180,104 @@ ratings = [1, 2, 2]
 
 
 '''-----------------------------------------------HASH MAP / SET --------------------------------------------------------------------------------------------'''
-'''1207. Unique Number of Occurrences
+'''1207. Unique Number of Occurrences - E
 Given an array of integers arr, return true if the number of occurrences of each value in the array is unique or false otherwise.'''
 
-arr = [1,2,2,1,1,3]
+# arr = [1,2,2,1,1,3]
 
-def uniqueOccurrence(arr):
-    occurrence_dict = {}
-    unique_count = {}
+# def uniqueOccurrence(arr):
+#     occurrence_dict = {}
+#     unique_count = {}
     
-    #count the occurence of each unique value 
-    for num in arr:
-        occurrence_dict[num] = occurrence_dict.get(num, 0) + 1 #use .get() to retrieve the value associated with the key 'num'. If 'num' is not already a key in the dictionary, it return '0', then increments by 1 
+#     #count the occurence of each unique value 
+#     for num in arr:
+#         occurrence_dict[num] = occurrence_dict.get(num, 0) + 1 #use .get() to retrieve the value associated with the key 'num'. If 'num' is not already a key in the dictionary, it return '0', then increments by 1 
         
-    #check if all counts are unique 
-    for count in occurrence_dict.values():
-        if count in unique_count:
-            return False
-        unique_count[count] = True
-    return True 
+#     #check if all counts are unique 
+#     for count in occurrence_dict.values():
+#         if count in unique_count:
+#             return False
+#         unique_count[count] = True
+#     return True 
 
 
-print(uniqueOccurrence(arr))
+# print(uniqueOccurrence(arr))
 
 '''2352. Equal Row and Column Pairs - M
 Given a 0-indexed n x n integer matrix grid, return the number of pairs (ri, cj) such that row ri and column cj are equal.
 A row and column pair is considered equal if they contain the same elements in the same order (i.e., an equal array).'''
 
 # def equal_pairs(grid):
-grid = [[3,1,2,2],[1,4,4,5],[2,4,2,2],[2,4,2,2]]
+# grid = [[3,1,2,2],[1,4,4,5],[2,4,2,2],[2,4,2,2]]
 
-def countEqualRowColumnPairs(grid):
-    count = 0
+# def countEqualRowColumnPairs(grid):
+#     count = 0
 
-    for row in range(len(grid)):
-        for column in range(len(grid)):
-            if grid[row] == [grid[k][column] for k in range(len(grid))]:
-                count += 1
-    return count
+#     for row in range(len(grid)):
+#         for column in range(len(grid)):
+#             if grid[row] == [grid[k][column] for k in range(len(grid))]:
+#                 count += 1
+#     return count
 
-print(countEqualRowColumnPairs(grid)) 
+# print(countEqualRowColumnPairs(grid)) 
 
 
-'''49. Group Anagrams
+'''49. Group Anagrams - M
 Given an array of strings strs, group the anagrams together. You can return the answer in any order.
 An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.'''
 
-strs = ["eat","tea","tan","ate","nat","bat"]
-def group_anagrams(strs):
-    anagrams = {}
+# strs = ["eat","tea","tan","ate","nat","bat"]
+# def group_anagrams(strs):
+#     anagrams = {}
 
-    for word in strs:
-        #sort the word to create a key to be added to the dict
-        sorted_word = ''.join(sorted(word))
-           #create a new list if the key is not in the dict
-        if sorted_word not in anagrams:
-            anagrams[sorted_word] = [word]
-        else:
-            #append the word to the list of anagrams 
-            anagrams[sorted_word].append(word)
-            print('dict', anagrams)
+#     for word in strs:
+#         #sort the word to create a key to be added to the dict
+#         sorted_word = ''.join(sorted(word))
+#            #create a new list if the key is not in the dict
+#         if sorted_word not in anagrams:
+#             anagrams[sorted_word] = [word]
+#         else:
+#             #append the word to the list of anagrams 
+#             anagrams[sorted_word].append(word)
+#             print('dict', anagrams)
             
-    #convert the values into a list   
-    return list(anagrams.values())
+#     #convert the values into a list   
+#     return list(anagrams.values())
 
-print(group_anagrams(strs))
+# print(group_anagrams(strs))
+
+
+'''----------------------------------------------- QUEUES/STACKS--------------------------------------------------------------------------------------------'''
+
+'''933. Number of Recent Calls - E
+
+You have a RecentCounter class which counts the number of recent requests within a certain time frame.
+Implement the RecentCounter class:
+RecentCounter() Initializes the counter with zero recent requests.
+int ping(int t) Adds a new request at time t, where t represents some time in milliseconds, and returns the number of requests that has happened in the past 3000 milliseconds (including the new request). Specifically, return the number of requests that have happened in the inclusive range [t - 3000, t].
+It is guaranteed that every call to ping uses a strictly larger value of t than the previous call.'''
+
+from collections import deque
+
+class RecentCounter:
+    def __init__(self):
+        #initialize an empty double ended queue, allow quicker pop and append operations 
+        self.requests = deque()
+
+    def ping(self, t):
+        # Remove requests that are older than 3000 milliseconds
+        while self.requests and self.requests[0] < t - 3000:
+            #pop elements from the left side[0] until we find the request within 3000 
+            self.requests.popleft()
+
+        # Add the current request at time 't'
+        self.requests.append(t)
+
+        # Return the lenght of the deque, which return the number of requests within the past 3000 milliseconds
+        return len(self.requests)
+
+counter = RecentCounter()
+print(counter.ping(1))  # Output: 1
+print(counter.ping(100))  # Output: 2
+print(counter.ping(3001))  # Output: 3
+print(counter.ping(3002))  # Output: 3
