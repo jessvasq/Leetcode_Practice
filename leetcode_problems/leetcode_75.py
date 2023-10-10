@@ -220,3 +220,28 @@ def countEqualRowColumnPairs(grid):
     return count
 
 print(countEqualRowColumnPairs(grid)) 
+
+
+'''49. Group Anagrams
+Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.'''
+
+strs = ["eat","tea","tan","ate","nat","bat"]
+def group_anagrams(strs):
+    anagrams = {}
+
+    for word in strs:
+        #sort the word to create a key to be added to the dict
+        sorted_word = ''.join(sorted(word))
+           #create a new list if the key is not in the dict
+        if sorted_word not in anagrams:
+            anagrams[sorted_word] = [word]
+        else:
+            #append the word to the list of anagrams 
+            anagrams[sorted_word].append(word)
+            print('dict', anagrams)
+            
+    #convert the values into a list   
+    return list(anagrams.values())
+
+print(group_anagrams(strs))
