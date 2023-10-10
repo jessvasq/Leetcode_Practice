@@ -289,36 +289,127 @@ The encoding rule is: k[encoded_string], where the encoded_string inside the squ
 You may assume that the input string is always valid; there are no extra white spaces, square brackets are well-formed, etc. Furthermore, you may assume that the original data does not contain any digits and that digits are only for those repeat numbers, k. For example, there will not be input like 3a or 2[4].
 The test cases are generated so that the length of the output will never exceed 105.'''
 
-s = "3[a]2[bc]"
+# s = "3[a]2[bc]"
 
-def decoded_string(s):
-    stack = []
-    current_num = 0
-    current_str = ""
+# def decoded_string(s):
+#     stack = []
+#     current_num = 0
+#     current_str = ""
 
-    #iterate through each character in the string
-    for char in s:
-        #check if char is a digit 
-        if char.isdigit():
-            current_num = current_num * 10 + int(char) #if it is update to current_num 
-        elif char == "[":
-            #push/append current_str and num to the stack 
-            stack.append(current_str)
-            stack.append(current_num)
-            #reset to its original value
-            current_str = ""
-            current_num = 0
-        elif char == "]":
-            num = stack.pop()
-            prev_str = stack.pop()
-            #update the string by multiplying previous string 'num' times
-            current_str = prev_str + num * current_str
-        else:
-            #append all other chars
-            current_str += char
+#     #iterate through each character in the string
+#     for char in s:
+#         #check if char is a digit 
+#         if char.isdigit():
+#             current_num = current_num * 10 + int(char) #if it is update to current_num 
+#         elif char == "[":
+#             #push/append current_str and num to the stack 
+#             stack.append(current_str)
+#             stack.append(current_num)
+#             #reset to its original value
+#             current_str = ""
+#             current_num = 0
+#         elif char == "]":
+#             num = stack.pop()
+#             prev_str = stack.pop()
+#             #update the string by multiplying previous string 'num' times
+#             current_str = prev_str + num * current_str
+#         else:
+#             #append all other chars
+#             current_str += char
 
-    return current_str
+#     return current_str
+
+# print(decoded_string(s))  # Output: "accaccacc"
+
+'''----------------------------------------------- BINARY TREE-DFS/BFS--------------------------------------------------------------------------------------------'''
+'''1161. Maximum Level Sum of a Binary Tree
+Given the root of a binary tree, the level of its root is 1, the level of its children is 2, and so on.
+Return the smallest level x such that the sum of all the values of nodes at level x is maximal.
+'''
+
+from collections import deque
+
+class TreeNode():
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val 
+        self.left = left
+        self.right = right 
+
+
+def maxLevelSum(root):
+    #check if the tree is empty 
+        if not root:
+            return 0
+        
+        #track the level with the max sum of node values and the max sum so far 
+        max_level = 1
+        max_sum = float('-inf')
+        level=1 #start at level 1 which is the current level being processed 
+        q=[root] #list containing the root 
+        
+        while q: 
+            level_sum = 0 #store the sum at each level 
+            next_level = [] #store the nodes at next level
+            
+            for node in q: 
+                level_sum += node.val
+                #check if there are any children and append them to the list 
+                if node.left:
+                    next_level.append(node.left)
+                if node.right:
+                    next_level.append(node.right)
+                
+            if level_sum > max_sum: #if this condition is true, update max_sum and max_level accordingly
+                max_sum = level_sum
+                max_level = level
+                
+            #update q & level to next level for the next iteration
+            q = next_level 
+            level += 1
+  
+        return max_level
+    
+root = TreeNode(1)
+root.left = TreeNode(7)
+root.right = TreeNode(0)
+root.left.right = TreeNode(-8)
+root.left.left = TreeNode(7)
+
+print(maxLevelSum(root))
+            
+
+    
+    
+'''102. Binary Tree Level Order Traversal
+Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+'''
+
+#traverse through every level from left to right- BFS 
+# from collections import deque 
+
+
+def level_order(root):
+    res = []
+    q = deque()
+    q.append(root)
+    
+    if root is None:
+        return 
+    
+    while q: #run loop while q is not empty, as long as there are levels to process
+        level = []
+        for i in range(len(q)):
+            node = q.popleft()
+            if node != None: 
+                level.append(node.val)                
+                q.append(node.left)
+                q.append(node.right)
+                
+        if level:
+            res.append(level)
+            
+    return res
 
 
 
-print(decoded_string(s))  # Output: "accaccacc"
+print(level_order(root))
