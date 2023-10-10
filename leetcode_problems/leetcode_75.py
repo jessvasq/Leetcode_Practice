@@ -257,27 +257,68 @@ RecentCounter() Initializes the counter with zero recent requests.
 int ping(int t) Adds a new request at time t, where t represents some time in milliseconds, and returns the number of requests that has happened in the past 3000 milliseconds (including the new request). Specifically, return the number of requests that have happened in the inclusive range [t - 3000, t].
 It is guaranteed that every call to ping uses a strictly larger value of t than the previous call.'''
 
-from collections import deque
+# from collections import deque
 
-class RecentCounter:
-    def __init__(self):
-        #initialize an empty double ended queue, allow quicker pop and append operations 
-        self.requests = deque()
+# class RecentCounter:
+#     def __init__(self):
+#         #initialize an empty double ended queue, allow quicker pop and append operations 
+#         self.requests = deque()
 
-    def ping(self, t):
-        # Remove requests that are older than 3000 milliseconds
-        while self.requests and self.requests[0] < t - 3000:
-            #pop elements from the left side[0] until we find the request within 3000 
-            self.requests.popleft()
+#     def ping(self, t):
+#         # Remove requests that are older than 3000 milliseconds
+#         while self.requests and self.requests[0] < t - 3000:
+#             #pop elements from the left side[0] until we find the request within 3000 
+#             self.requests.popleft()
 
-        # Add the current request at time 't'
-        self.requests.append(t)
+#         # Add the current request at time 't'
+#         self.requests.append(t)
 
-        # Return the lenght of the deque, which return the number of requests within the past 3000 milliseconds
-        return len(self.requests)
+#         # Return the lenght of the deque, which return the number of requests within the past 3000 milliseconds
+#         return len(self.requests)
 
-counter = RecentCounter()
-print(counter.ping(1))  # Output: 1
-print(counter.ping(100))  # Output: 2
-print(counter.ping(3001))  # Output: 3
-print(counter.ping(3002))  # Output: 3
+# counter = RecentCounter()
+# print(counter.ping(1))  # Output: 1
+# print(counter.ping(100))  # Output: 2
+# print(counter.ping(3001))  # Output: 3
+# print(counter.ping(3002))  # Output: 3
+
+
+'''394. Decode String - M 
+Given an encoded string, return its decoded string.
+The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is being repeated exactly k times. Note that k is guaranteed to be a positive integer.
+You may assume that the input string is always valid; there are no extra white spaces, square brackets are well-formed, etc. Furthermore, you may assume that the original data does not contain any digits and that digits are only for those repeat numbers, k. For example, there will not be input like 3a or 2[4].
+The test cases are generated so that the length of the output will never exceed 105.'''
+
+s = "3[a]2[bc]"
+
+def decoded_string(s):
+    stack = []
+    current_num = 0
+    current_str = ""
+
+    #iterate through each character in the string
+    for char in s:
+        #check if char is a digit 
+        if char.isdigit():
+            current_num = current_num * 10 + int(char) #if it is update to current_num 
+        elif char == "[":
+            #push/append current_str and num to the stack 
+            stack.append(current_str)
+            stack.append(current_num)
+            #reset to its original value
+            current_str = ""
+            current_num = 0
+        elif char == "]":
+            num = stack.pop()
+            prev_str = stack.pop()
+            #update the string by multiplying previous string 'num' times
+            current_str = prev_str + num * current_str
+        else:
+            #append all other chars
+            current_str += char
+
+    return current_str
+
+
+
+print(decoded_string(s))  # Output: "accaccacc"
