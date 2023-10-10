@@ -202,3 +202,21 @@ def uniqueOccurrence(arr):
 
 
 print(uniqueOccurrence(arr))
+
+'''2352. Equal Row and Column Pairs - M
+Given a 0-indexed n x n integer matrix grid, return the number of pairs (ri, cj) such that row ri and column cj are equal.
+A row and column pair is considered equal if they contain the same elements in the same order (i.e., an equal array).'''
+
+# def equal_pairs(grid):
+grid = [[3,1,2,2],[1,4,4,5],[2,4,2,2],[2,4,2,2]]
+
+def countEqualRowColumnPairs(grid):
+    count = 0
+
+    for row in range(len(grid)):
+        for column in range(len(grid)):
+            if grid[row] == [grid[k][column] for k in range(len(grid))]:
+                count += 1
+    return count
+
+print(countEqualRowColumnPairs(grid)) 
