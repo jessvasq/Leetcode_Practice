@@ -495,3 +495,35 @@ def deleteNode(root, key):
     #return the modified 'root', important step to make sure the tree remains connected 
     return root 
         
+
+'''DFS'''
+'''104. Maximum Depth of Binary Tree - E
+Given the root of a binary tree, return its maximum depth.
+A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.'''
+
+#first solution
+def maxDepth(root):
+    stack = [[root, 1]]
+    level = 0
+    
+    while stack:
+        node = stack.pop()
+        depth = stack.pop()
+        
+        if node is not None:
+            level = max(level, depth)
+            stack.append([node.left, depth + 1])
+            stack.append([node.right, depth + 1])
+    return level
+
+#second solution using recurssion 
+
+def max_depth(root):
+    if root is None:
+        return 0 
+    
+    #recursively find the depth of left and right 
+    left_depth = max_depth(root.left)
+    right_depth = max_depth(root.right)
+    
+    return max(left_depth, right_depth) + 1 #find the max number between the right and left subtree, plus 1 (from the root)
