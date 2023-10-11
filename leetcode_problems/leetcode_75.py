@@ -327,55 +327,55 @@ Given the root of a binary tree, the level of its root is 1, the level of its ch
 Return the smallest level x such that the sum of all the values of nodes at level x is maximal.
 '''
 
-from collections import deque
+# from collections import deque
 
-class TreeNode():
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val 
-        self.left = left
-        self.right = right 
+# class TreeNode():
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val 
+#         self.left = left
+#         self.right = right 
 
 
-def maxLevelSum(root):
-    #check if the tree is empty 
-        if not root:
-            return 0
+# def maxLevelSum(root):
+#     #check if the tree is empty 
+#         if not root:
+#             return 0
         
-        #track the level with the max sum of node values and the max sum so far 
-        max_level = 1
-        max_sum = float('-inf')
-        level=1 #start at level 1 which is the current level being processed 
-        q=[root] #list containing the root 
+#         #track the level with the max sum of node values and the max sum so far 
+#         max_level = 1
+#         max_sum = float('-inf')
+#         level=1 #start at level 1 which is the current level being processed 
+#         q=[root] #list containing the root 
         
-        while q: 
-            level_sum = 0 #store the sum at each level 
-            next_level = [] #store the nodes at next level
+#         while q: 
+#             level_sum = 0 #store the sum at each level 
+#             next_level = [] #store the nodes at next level
             
-            for node in q: 
-                level_sum += node.val
-                #check if there are any children and append them to the list 
-                if node.left:
-                    next_level.append(node.left)
-                if node.right:
-                    next_level.append(node.right)
+#             for node in q: 
+#                 level_sum += node.val
+#                 #check if there are any children and append them to the list 
+#                 if node.left:
+#                     next_level.append(node.left)
+#                 if node.right:
+#                     next_level.append(node.right)
                 
-            if level_sum > max_sum: #if this condition is true, update max_sum and max_level accordingly
-                max_sum = level_sum
-                max_level = level
+#             if level_sum > max_sum: #if this condition is true, update max_sum and max_level accordingly
+#                 max_sum = level_sum
+#                 max_level = level
                 
-            #update q & level to next level for the next iteration
-            q = next_level 
-            level += 1
+#             #update q & level to next level for the next iteration
+#             q = next_level 
+#             level += 1
   
-        return max_level
+#         return max_level
     
-root = TreeNode(1)
-root.left = TreeNode(7)
-root.right = TreeNode(0)
-root.left.right = TreeNode(-8)
-root.left.left = TreeNode(7)
+# root = TreeNode(1)
+# root.left = TreeNode(7)
+# root.right = TreeNode(0)
+# root.left.right = TreeNode(-8)
+# root.left.left = TreeNode(7)
 
-print(maxLevelSum(root))
+# print(maxLevelSum(root))
             
 
     
@@ -388,61 +388,61 @@ Given the root of a binary tree, return the level order traversal of its nodes' 
 # from collections import deque 
 
 
-def level_order(root):
-    res = []
-    q = deque()
-    q.append(root)
+# def level_order(root):
+#     res = []
+#     q = deque()
+#     q.append(root)
     
-    if root is None:
-        return 
+#     if root is None:
+#         return 
     
-    while q: #run loop while q is not empty, as long as there are levels to process
-        level = []
-        for i in range(len(q)):
-            node = q.popleft()
-            if node != None: 
-                level.append(node.val)                
-                q.append(node.left)
-                q.append(node.right)
+#     while q: #run loop while q is not empty, as long as there are levels to process
+#         level = []
+#         for i in range(len(q)):
+#             node = q.popleft()
+#             if node != None: 
+#                 level.append(node.val)                
+#                 q.append(node.left)
+#                 q.append(node.right)
                 
-        if level:
-            res.append(level)
+#         if level:
+#             res.append(level)
             
-    return res
+#     return res
 
-print(level_order(root))
+# print(level_order(root))
 
 '''700. Search in a Binary Search Tree
 You are given the root of a binary search tree (BST) and an integer val.
 Find the node in the BST that the node's value equals val and return the subtree rooted with that node. If such a node does not exist, return null.
 '''
-class TreeNode():
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val 
-        self.left = left
-        self.right = right 
+# class TreeNode():
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val 
+#         self.left = left
+#         self.right = right 
         
-def searchBST(root, val):
-    if root is None: 
-        return 
+# def searchBST(root, val):
+#     if root is None: 
+#         return 
     
-    while root:
-        if root.val == val:
-            return root
-        if val < root.val:
-            return searchBST(root.left, val)
-        else:
-            return searchBST(root.right, val)
+#     while root:
+#         if root.val == val:
+#             return root
+#         if val < root.val:
+#             return searchBST(root.left, val)
+#         else:
+#             return searchBST(root.right, val)
 
 
-root = TreeNode(1)
-root.left = TreeNode(7)
-root.right = TreeNode(2)
-root.left.right = TreeNode(-8)
-root.left.left = TreeNode(7)
+# root = TreeNode(1)
+# root.left = TreeNode(7)
+# root.right = TreeNode(2)
+# root.left.right = TreeNode(-8)
+# root.left.left = TreeNode(7)
 
-val=2
-print(searchBST(root, val))    
+# val=2
+# print(searchBST(root, val))    
 
 
 '''450. Delete Node in a BST - M 
@@ -456,44 +456,44 @@ If the node is found, delete the node.'''
 # b. If the node to be deleted has one child, you can replace the node with its child.
 # c. If the node to be deleted has two children, you need to find the node's in-order 
 
-def deleteNode(root, key):
-    #base case
-    if root is None:
-        return 
+# def deleteNode(root, key):
+#     #base case
+#     if root is None:
+#         return 
     
-    #search for the node to delete 
-    if key < root.val:
-        #recursively call the left subtree to search for and delete the key 
-        root.left = deleteNode(root.left, key)
-    elif key > root.val:
-        #recursively call the right subtree to search for and delete the key 
-        root.right = deleteNode(root.right, key)
-    #DELETES THE NODE 
-    # if the node is equal to the value
-    else: 
-        if root.left is None and root.right is None:
-            return None
-        #IF THE NODE HAS NO LEFT CHILD 
-        if not root.left:
-            #return the right child to be the replacement for the deleted node
-            return root.right 
-        #B. IF THE NODE HAS NO RIGHT CHILD
-        elif not root.right:
-            #return the left child as the replacement 
-            return root.left
+#     #search for the node to delete 
+#     if key < root.val:
+#         #recursively call the left subtree to search for and delete the key 
+#         root.left = deleteNode(root.left, key)
+#     elif key > root.val:
+#         #recursively call the right subtree to search for and delete the key 
+#         root.right = deleteNode(root.right, key)
+#     #DELETES THE NODE 
+#     # if the node is equal to the value
+#     else: 
+#         if root.left is None and root.right is None:
+#             return None
+#         #IF THE NODE HAS NO LEFT CHILD 
+#         if not root.left:
+#             #return the right child to be the replacement for the deleted node
+#             return root.right 
+#         #B. IF THE NODE HAS NO RIGHT CHILD
+#         elif not root.right:
+#             #return the left child as the replacement 
+#             return root.left
         
-        #C. IF THE NODE HAS TWO CHILDREN: LEFT & RIGHT
-        #find the minimum node value in the right subtree
-        current = root.right
-        #traverse left in the right subtree until it reaches the min value
-        while current.left:
-            current = current.left 
-        #replace the current node with the min value 'in-order sucessor'
-        root.val = current.val
-        #call deleteNode recursively on the right subtree to delete the node with the min value
-        root.right = deleteNode(root.right, root.val)
-    #return the modified 'root', important step to make sure the tree remains connected 
-    return root 
+#         #C. IF THE NODE HAS TWO CHILDREN: LEFT & RIGHT
+#         #find the minimum node value in the right subtree
+#         current = root.right
+#         #traverse left in the right subtree until it reaches the min value
+#         while current.left:
+#             current = current.left 
+#         #replace the current node with the min value 'in-order sucessor'
+#         root.val = current.val
+#         #call deleteNode recursively on the right subtree to delete the node with the min value
+#         root.right = deleteNode(root.right, root.val)
+#     #return the modified 'root', important step to make sure the tree remains connected 
+#     return root 
         
 
 '''DFS'''
@@ -502,31 +502,31 @@ Given the root of a binary tree, return its maximum depth.
 A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.'''
 
 #first solution
-def maxDepth(root):
-    stack = [[root, 1]]
-    level = 0
+# def maxDepth(root):
+#     stack = [[root, 1]]
+#     level = 0
     
-    while stack:
-        node = stack.pop()
-        depth = stack.pop()
+#     while stack:
+#         node = stack.pop()
+#         depth = stack.pop()
         
-        if node is not None:
-            level = max(level, depth)
-            stack.append([node.left, depth + 1])
-            stack.append([node.right, depth + 1])
-    return level
+#         if node is not None:
+#             level = max(level, depth)
+#             stack.append([node.left, depth + 1])
+#             stack.append([node.right, depth + 1])
+#     return level
 
-#second solution using recurssion 
+# #second solution using recurssion 
 
-def max_depth(root):
-    if root is None:
-        return 0 
+# def max_depth(root):
+#     if root is None:
+#         return 0 
     
-    #recursively find the depth of left and right 
-    left_depth = max_depth(root.left)
-    right_depth = max_depth(root.right)
+#     #recursively find the depth of left and right 
+#     left_depth = max_depth(root.left)
+#     right_depth = max_depth(root.right)
     
-    return max(left_depth, right_depth) + 1 #find the max number between the right and left subtree, plus 1 (from the root)
+#     return max(left_depth, right_depth) + 1 #find the max number between the right and left subtree, plus 1 (from the root)
 
 
 
@@ -534,44 +534,76 @@ def max_depth(root):
 Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values along the path equals targetSum.
 The path does not need to start or end at the root or a leaf, but it must go downwards (i.e., traveling only from parent nodes to child nodes).'''
 
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 
 
-#countPaths function, which calls the dfs function and initializes a dictionary with a count of 0 for a prefix sum of 0 (used for the root node).
-def countPaths(root, targetSum):
-    #dfs function recursively calculates the currentSum by adding the value of the current node and checks if (currentSum - targetSum) exists in the dictionary. If yes, we increment by (currentSum - targetSum)
+# #countPaths function, which calls the dfs function and initializes a dictionary with a count of 0 for a prefix sum of 0 (used for the root node).
+# def countPaths(root, targetSum):
+#     #dfs function recursively calculates the currentSum by adding the value of the current node and checks if (currentSum - targetSum) exists in the dictionary. If yes, we increment by (currentSum - targetSum)
     
-    def dfs(node, current_sum, prefix_sum, targetSum):
-        if not node:
-            return 0
+#     def dfs(node, current_sum, prefix_sum, targetSum):
+#         if not node:
+#             return 0
 
-        current_sum += node.val
-        count = prefix_sum.get(current_sum - targetSum, 0)
+#         current_sum += node.val
+#         count = prefix_sum.get(current_sum - targetSum, 0)
 
-        prefix_sum[current_sum] = prefix_sum.get(current_sum, 0) + 1
+#         prefix_sum[current_sum] = prefix_sum.get(current_sum, 0) + 1
 
-        count += dfs(node.left, current_sum, prefix_sum, targetSum)
-        count += dfs(node.right, current_sum, prefix_sum, targetSum)
+#         count += dfs(node.left, current_sum, prefix_sum, targetSum)
+#         count += dfs(node.right, current_sum, prefix_sum, targetSum)
 
-        prefix_sum[current_sum] -= 1
-        if prefix_sum[current_sum] == 0:
-            del prefix_sum[current_sum]
+#         prefix_sum[current_sum] -= 1
+#         if prefix_sum[current_sum] == 0:
+#             del prefix_sum[current_sum]
 
-        return count
-    #initializes a dictionary with a count of 0 for a prefix sum of 0 (used for the root node).
-    prefix_sum = {0: 1}  
-    return dfs(root, 0, prefix_sum, targetSum)
+#         return count
+#     #initializes a dictionary with a count of 0 for a prefix sum of 0 (used for the root node).
+#     prefix_sum = {0: 1}  
+#     return dfs(root, 0, prefix_sum, targetSum)
 
-root = TreeNode(10)
-root.left = TreeNode(5)
-root.right = TreeNode(-3)
-root.left.left = TreeNode(3)
-root.left.right = TreeNode(2)
-root.right.right = TreeNode(11)
+# root = TreeNode(10)
+# root.left = TreeNode(5)
+# root.right = TreeNode(-3)
+# root.left.left = TreeNode(3)
+# root.left.right = TreeNode(2)
+# root.right.right = TreeNode(11)
 
-targetSum = 8
-print(countPaths(root, targetSum))
+# targetSum = 8
+# print(countPaths(root, targetSum))
+
+'''162. Find Peak Element'''
+'''A peak element is an element that is strictly greater than its neighbors.
+
+Given a 0-indexed integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
+
+You may imagine that nums[-1] = nums[n] = -∞. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.
+
+You must write an algorithm that runs in O(log n) time.''' 
+
+#O(log n) meaning use binary search 
+
+nums = [1,2,3,1]
+
+def findPeakElement(nums):
+    lo = 0
+    hi = len(nums)-1
+
+    while lo < hi: 
+        mid = (lo+hi) // 2
+        mid_num = nums[mid]
+        
+        #if the mid num is less than the num on its right, then the peak must be on the right side
+        if mid_num < nums[mid+1]:
+            lo = mid+1
+        #else the peak will be on the left side 
+        else: 
+            hi = mid
+    return lo
+
+print(findPeakElement(nums))
+        
