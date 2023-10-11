@@ -587,23 +587,81 @@ You must write an algorithm that runs in O(log n) time.'''
 
 #O(log n) meaning use binary search 
 
-nums = [1,2,3,1]
+# nums = [1,2,3,1]
 
-def findPeakElement(nums):
-    lo = 0
-    hi = len(nums)-1
+# def findPeakElement(nums):
+#     lo = 0
+#     hi = len(nums)-1
 
-    while lo < hi: 
-        mid = (lo+hi) // 2
-        mid_num = nums[mid]
+#     while lo < hi: 
+#         mid = (lo+hi) // 2
+#         mid_num = nums[mid]
         
-        #if the mid num is less than the num on its right, then the peak must be on the right side
-        if mid_num < nums[mid+1]:
-            lo = mid+1
-        #else the peak will be on the left side 
-        else: 
-            hi = mid
-    return lo
+#         #if the mid num is less than the num on its right, then the peak must be on the right side
+#         if mid_num < nums[mid+1]:
+#             lo = mid+1
+#         #else the peak will be on the left side 
+#         else: 
+#             hi = mid
+#     return lo
 
-print(findPeakElement(nums))
+# print(findPeakElement(nums))
         
+
+'''1926. Nearest Exit from Entrance in Maze
+You are given an m x n matrix maze (0-indexed) with empty cells (represented as '.') and walls (represented as '+'). You are also given the entrance of the maze, where entrance = [entrancerow, entrancecol] denotes the row and column of the cell you are initially standing at.
+In one step, you can move one cell up, down, left, or right. You cannot step into a cell with a wall, and you cannot step outside the maze. Your goal is to find the nearest exit from the entrance. An exit is defined as an empty cell that is at the border of the maze. The entrance does not count as an exit.
+Return the number of steps in the shortest path from the entrance to the nearest exit, or -1 if no such path exists.'''
+
+
+from collections import deque #use this to create a queue for the breadth-first search (BFS).
+
+def nearestExit(maze, entrance):
+    #Get the number of rows and columns in the maze
+    rows, cols = len(maze), len(maze[0])
+    #create a tuple for each movement: up, down, left, right
+    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+
+    #boundary checks 
+    def is_valid(row, column):
+        #return True if the the current row and current col are within the bounds of the maze
+        return 0 <= row < rows and 0 <= column < cols
+    #Initialize a queue with a starting point at the entrance. The queue contains tuples in the format (row, column, steps). Steps is the number of steps = 0 for the entrance cell
+    
+    queue = deque([(entrance[0], entrance[1], 0)])
+    # Mark the entrance as visited by changing its value from '.' to '+'
+    maze[entrance[0]][entrance[1]] = '+'  
+
+    #loop continues as long as the queue is not empty
+    while queue:
+        #use popleft() to remove the front element from the queue
+        row, column, steps = queue.popleft()
+
+        #Check if the current row and column is not the entrance and if the're located at one of the borders of the maze
+        if (row != entrance[0] or column != entrance[1]) and (row == 0 or row == rows - 1 or column == 0 or column == cols - 1):
+            #return # steps as it's an exit
+            return steps
+
+        #calculate the new coordinates by adding the rows and columns direction's to the current row, column
+        for current_row, current_column in directions:
+            new_row = row + current_row
+            new_column = column + current_column
+
+            #check if the new (row, column): is within the boundaries and is an empty cell
+            if is_valid(new_row, new_column) and maze[new_row][new_column] == '.':
+                #If True, append a tuple (row, column, steps + 1) to the queue, which moves to the new (row, column) with an increased number of steps
+                queue.append((new_row, new_column, steps + 1))
+                # Mark the row and columns as visited by changing its value to "+"
+                maze[new_row][new_column] = '+'  
+
+    return -1
+
+# Example usage:
+maze = [
+    ['+', '+', '.', '+', '+', '+'],
+    ['+', '.', '.', '.', '.', '.'],
+    ['+', '.', '+', '.', '+', '.']
+]
+entrance = [1, 2]
+result = nearestExit(maze, entrance)
+print(result)  # Output: 1
