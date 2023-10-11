@@ -527,3 +527,51 @@ def max_depth(root):
     right_depth = max_depth(root.right)
     
     return max(left_depth, right_depth) + 1 #find the max number between the right and left subtree, plus 1 (from the root)
+
+
+
+'''437. Path Sum III
+Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values along the path equals targetSum.
+The path does not need to start or end at the root or a leaf, but it must go downwards (i.e., traveling only from parent nodes to child nodes).'''
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+#countPaths function, which calls the dfs function and initializes a dictionary with a count of 0 for a prefix sum of 0 (used for the root node).
+def countPaths(root, targetSum):
+    #dfs function recursively calculates the currentSum by adding the value of the current node and checks if (currentSum - targetSum) exists in the dictionary. If yes, we increment by (currentSum - targetSum)
+    
+    def dfs(node, current_sum, prefix_sum, targetSum):
+        if not node:
+            return 0
+
+        current_sum += node.val
+        count = prefix_sum.get(current_sum - targetSum, 0)
+
+        prefix_sum[current_sum] = prefix_sum.get(current_sum, 0) + 1
+
+        count += dfs(node.left, current_sum, prefix_sum, targetSum)
+        count += dfs(node.right, current_sum, prefix_sum, targetSum)
+
+        prefix_sum[current_sum] -= 1
+        if prefix_sum[current_sum] == 0:
+            del prefix_sum[current_sum]
+
+        return count
+    #initializes a dictionary with a count of 0 for a prefix sum of 0 (used for the root node).
+    prefix_sum = {0: 1}  
+    return dfs(root, 0, prefix_sum, targetSum)
+
+root = TreeNode(10)
+root.left = TreeNode(5)
+root.right = TreeNode(-3)
+root.left.left = TreeNode(3)
+root.left.right = TreeNode(2)
+root.right.right = TreeNode(11)
+
+targetSum = 8
+print(countPaths(root, targetSum))
