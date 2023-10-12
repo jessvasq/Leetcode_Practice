@@ -703,6 +703,8 @@ def findCircleSum(isConnected):
     
     return count 
 
+
+isConnected = [[1,1,0],[1,1,0],[0,0,1]]
 print(findCircleSum(isConnected))
 
 
@@ -723,3 +725,42 @@ for edge in edges:
         graph_dict[node1].append(node2)
 
 print(graph_dict)
+
+
+
+'''841. Keys and Rooms - M
+
+There are n rooms labeled from 0 to n - 1 and all the rooms are locked except for room 0. Your goal is to visit all the rooms. However, you cannot enter a locked room without having its key.
+
+When you visit a room, you may find a set of distinct keys in it. Each key has a number on it, denoting which room it unlocks, and you can take all of them with you to unlock the other rooms.
+
+Given an array rooms where rooms[i] is the set of keys that you can obtain if you visited room i, return true if you can visit all the rooms, or false otherwise.
+
+'''
+
+#rooms are the nodes, keys would be the edges
+#If we enter a room, we'll grab the set of keys and use the given key in the nested function to open the next room
+#use a boolean to keep track of the rooms we've visited
+
+def canVisitAllRoomss(rooms):
+    n=len(rooms)
+    visited = [False] * n
+
+
+    def dfs(current_room):
+            #mark current current_city as visited = True
+            visited[current_room]=True
+            
+            #iterate through all connected rooms and marked them as visited 
+            for key in rooms[current_room]:
+                if not visited[key]:
+                    #call the dfs function 
+                    dfs(key)
+                    
+    #start at room 0, which is unlocked
+    dfs(0)       
+    #return true if all rooms have been visited
+    return all(visited) 
+
+rooms = [[1,3],[3,0,1],[2],[0]]
+print(canVisitAllRoomss(rooms))
