@@ -794,27 +794,77 @@ Return the leftmost pivot index. If no such index exists, return -1.'''
 There is a biker going on a road trip. The road trip consists of n + 1 points at different altitudes. The biker starts his trip on point 0 with altitude equal 0.
 You are given an integer array gain of length n where gain[i] is the net gain in altitude between points i​​​​​​ and i + 1 for all (0 <= i < n). Return the highest altitude of a point.'''
 
-gain = [-5,1,5,0,-7]  #output=1
+# gain = [-5,1,5,0,-7]  #output=1
 
-def largestAltitude(gain):
-    altitude, current_alt = [0], 0
+# def largestAltitude(gain):
+#     altitude, current_alt = [0], 0
     
-    for num in range(len(gain)):
-        current_alt += gain[num]
-        altitude.append(current_alt)
-    return max(altitude)
+#     for num in range(len(gain)):
+#         current_alt += gain[num]
+#         altitude.append(current_alt)
+#     return max(altitude)
 
-print(largestAltitude(gain))
+# print(largestAltitude(gain))
 
-#second solution
-def largestAltitude(gain):
-    current_alt = 0
-    highest_alt = current_alt
+# #second solution
+# def largestAltitude(gain):
+#     current_alt = 0
+#     highest_alt = current_alt
     
-    for num in range(len(gain)):
-        current_alt += gain[num]
-        highest_alt = max(current_alt, highest_alt)
+#     for num in range(len(gain)):
+#         current_alt += gain[num]
+#         highest_alt = max(current_alt, highest_alt)
         
-    return highest_alt
+#     return highest_alt
 
-print(largestAltitude(gain))
+# print(largestAltitude(gain))
+
+
+'''HEAPS'''
+
+import heapq
+
+list = [21, 2, 45, 78, 3, 5]
+#use heapq and heapify to rearrange the elements
+heapq.heapify(list)
+print(list)
+
+#insert into a heap 
+heapq.heappush(list, 1)
+print(list)
+
+#remove from a heap. Heappop function will always remove the element at the index position 1.
+heapq.heappop(list)
+print(list)
+
+#Replacing in a Heap.  Heapreplace always removes the smallest element of the heap and inserts the new incoming element at some place not fixed by any order.
+heapq.heapreplace(list, 50)
+print(list)
+
+
+
+'''215. Kth Largest Element in an Array - Medium
+Given an integer array nums and an integer k, return the kth largest element in the array.
+Note that it is the kth largest element in the sorted order, not the kth distinct element.
+Can you solve it without sorting?
+'''
+
+nums = [3,2,1,5,6,4]
+k = 3
+
+def find_kth(nums, k):
+    #create a max-heap by converting all values in the list to negative 
+    max_heap = [-num for num in nums]
+    
+    #heapify list
+    heapq.heapify(max_heap)
+    
+    #pop k-1 largest elements from the max-heap using a loop
+    for i in range(k-1):
+        heapq.heappop(max_heap)
+    
+    #convert the value back to positive and return its result 
+    return -max_heap[0]
+    
+print(find_kth(nums, k))
+
