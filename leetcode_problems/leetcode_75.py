@@ -764,3 +764,27 @@ def canVisitAllRoomss(rooms):
 
 rooms = [[1,3],[3,0,1],[2],[0]]
 print(canVisitAllRoomss(rooms))
+
+'''724. Find Pivot Index - E
+Given an array of integers nums, calculate the pivot index of this array.
+
+The pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right.
+
+If the index is on the left edge of the array, then the left sum is 0 because there are no elements to the left. This also applies to the right edge of the array.
+
+Return the leftmost pivot index. If no such index exists, return -1.'''
+nums = [2,1,-1]
+
+def find_pivot(nums):
+    #calculate the sum of all nums
+    total_sum, left_sum = sum(nums), 0
+    
+    for idx in range(len(nums)):        
+    #check if the sum to the left of the index == to the right sum 
+        if left_sum == total_sum - left_sum - nums[idx]:
+            return idx
+        left_sum += nums[idx]
+    return -1
+        
+        
+print(find_pivot(nums))
