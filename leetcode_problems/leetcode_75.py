@@ -614,57 +614,57 @@ In one step, you can move one cell up, down, left, or right. You cannot step int
 Return the number of steps in the shortest path from the entrance to the nearest exit, or -1 if no such path exists.'''
 
 
-from collections import deque #use this to create a queue for the breadth-first search (BFS).
+# from collections import deque #use this to create a queue for the breadth-first search (BFS).
 
-def nearestExit(maze, entrance):
-    #Get the number of rows and columns in the maze
-    rows, cols = len(maze), len(maze[0])
-    #create a tuple for each movement: up, down, left, right
-    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+# def nearestExit(maze, entrance):
+#     #Get the number of rows and columns in the maze
+#     rows, cols = len(maze), len(maze[0])
+#     #create a tuple for each movement: up, down, left, right
+#     directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
-    #boundary checks 
-    def is_valid(row, column):
-        #return True if the the current row and current col are within the bounds of the maze
-        return 0 <= row < rows and 0 <= column < cols
-    #Initialize a queue with a starting point at the entrance. The queue contains tuples in the format (row, column, steps). Steps is the number of steps = 0 for the entrance cell
+#     #boundary checks 
+#     def is_valid(row, column):
+#         #return True if the the current row and current col are within the bounds of the maze
+#         return 0 <= row < rows and 0 <= column < cols
+#     #Initialize a queue with a starting point at the entrance. The queue contains tuples in the format (row, column, steps). Steps is the number of steps = 0 for the entrance cell
     
-    queue = deque([(entrance[0], entrance[1], 0)])
-    # Mark the entrance as visited by changing its value from '.' to '+'
-    maze[entrance[0]][entrance[1]] = '+'  
+#     queue = deque([(entrance[0], entrance[1], 0)])
+#     # Mark the entrance as visited by changing its value from '.' to '+'
+#     maze[entrance[0]][entrance[1]] = '+'  
 
-    #loop continues as long as the queue is not empty
-    while queue:
-        #use popleft() to remove the front element from the queue
-        row, column, steps = queue.popleft()
+#     #loop continues as long as the queue is not empty
+#     while queue:
+#         #use popleft() to remove the front element from the queue
+#         row, column, steps = queue.popleft()
 
-        #Check if the current row and column is not the entrance and if the're located at one of the borders of the maze
-        if (row != entrance[0] or column != entrance[1]) and (row == 0 or row == rows - 1 or column == 0 or column == cols - 1):
-            #return # steps as it's an exit
-            return steps
+#         #Check if the current row and column is not the entrance and if the're located at one of the borders of the maze
+#         if (row != entrance[0] or column != entrance[1]) and (row == 0 or row == rows - 1 or column == 0 or column == cols - 1):
+#             #return # steps as it's an exit
+#             return steps
 
-        #calculate the new coordinates by adding the rows and columns direction's to the current row, column
-        for current_row, current_column in directions:
-            new_row = row + current_row
-            new_column = column + current_column
+#         #calculate the new coordinates by adding the rows and columns direction's to the current row, column
+#         for current_row, current_column in directions:
+#             new_row = row + current_row
+#             new_column = column + current_column
 
-            #check if the new (row, column): is within the boundaries and is an empty cell
-            if is_valid(new_row, new_column) and maze[new_row][new_column] == '.':
-                #If True, append a tuple (row, column, steps + 1) to the queue, which moves to the new (row, column) with an increased number of steps
-                queue.append((new_row, new_column, steps + 1))
-                # Mark the row and columns as visited by changing its value to "+"
-                maze[new_row][new_column] = '+'  
+#             #check if the new (row, column): is within the boundaries and is an empty cell
+#             if is_valid(new_row, new_column) and maze[new_row][new_column] == '.':
+#                 #If True, append a tuple (row, column, steps + 1) to the queue, which moves to the new (row, column) with an increased number of steps
+#                 queue.append((new_row, new_column, steps + 1))
+#                 # Mark the row and columns as visited by changing its value to "+"
+#                 maze[new_row][new_column] = '+'  
 
-    return -1
+#     return -1
 
-# Example usage:
-maze = [
-    ['+', '+', '.', '+', '+', '+'],
-    ['+', '.', '.', '.', '.', '.'],
-    ['+', '.', '+', '.', '+', '.']
-]
-entrance = [1, 2]
-result = nearestExit(maze, entrance)
-print(result)  # Output: 1
+# # Example usage:
+# maze = [
+#     ['+', '+', '.', '+', '+', '+'],
+#     ['+', '.', '.', '.', '.', '.'],
+#     ['+', '.', '+', '.', '+', '.']
+# ]
+# entrance = [1, 2]
+# result = nearestExit(maze, entrance)
+# print(result)  # Output: 1
 
 
 '''547. Number of Provinces
@@ -675,37 +675,37 @@ Return the total number of provinces.'''
 
 
 
-def findCircleSum(isConnected):
-    #get the number of cities 
-    n = len(isConnected)
-    #all cities are marked as unvisited or False
-    visited = [False] * n
-    #initialize a variable to keep track of provinces
-    count = 0
+# def findCircleSum(isConnected):
+#     #get the number of cities 
+#     n = len(isConnected)
+#     #all cities are marked as unvisited or False
+#     visited = [False] * n
+#     #initialize a variable to keep track of provinces
+#     count = 0
     
-    #nested function that performs a depth-first search starting from a given city
-    def dfs(current_city):
-        #mark current current_city as visited = True
-        visited[current_city]=True
+#     #nested function that performs a depth-first search starting from a given city
+#     def dfs(current_city):
+#         #mark current current_city as visited = True
+#         visited[current_city]=True
         
-        #iterate through all cities from 0 to n. For each neighbor,check if there is a direct connection (value is 1) between the current current_city and the neighbor
-        for neighbor in range(n):
-            # If the neighbor is connected and has not been visited yet, call the dfs function on that neighbor
-            if isConnected[current_city][neighbor] == 1 and not visited[neighbor]:
-                dfs(neighbor)
-    #loop through all cities       
-    for current_city in range(n):
-        #If the current current_city has not been visited yet, we increment count by 1 
-        if not visited[current_city]:
-            count += 1
-            #start a new province by calling the dfs(current_city) function
-            dfs(current_city)
+#         #iterate through all cities from 0 to n. For each neighbor,check if there is a direct connection (value is 1) between the current current_city and the neighbor
+#         for neighbor in range(n):
+#             # If the neighbor is connected and has not been visited yet, call the dfs function on that neighbor
+#             if isConnected[current_city][neighbor] == 1 and not visited[neighbor]:
+#                 dfs(neighbor)
+#     #loop through all cities       
+#     for current_city in range(n):
+#         #If the current current_city has not been visited yet, we increment count by 1 
+#         if not visited[current_city]:
+#             count += 1
+#             #start a new province by calling the dfs(current_city) function
+#             dfs(current_city)
     
-    return count 
+#     return count 
 
 
-isConnected = [[1,1,0],[1,1,0],[0,0,1]]
-print(findCircleSum(isConnected))
+# isConnected = [[1,1,0],[1,1,0],[0,0,1]]
+# print(findCircleSum(isConnected))
 
 
 
@@ -742,28 +742,28 @@ Given an array rooms where rooms[i] is the set of keys that you can obtain if yo
 #If we enter a room, we'll grab the set of keys and use the given key in the nested function to open the next room
 #use a boolean to keep track of the rooms we've visited
 
-def canVisitAllRoomss(rooms):
-    n=len(rooms)
-    visited = [False] * n
+# def canVisitAllRoomss(rooms):
+#     n=len(rooms)
+#     visited = [False] * n
 
 
-    def dfs(current_room):
-            #mark current current_city as visited = True
-            visited[current_room]=True
+#     def dfs(current_room):
+#             #mark current current_city as visited = True
+#             visited[current_room]=True
             
-            #iterate through all connected rooms and marked them as visited 
-            for key in rooms[current_room]:
-                if not visited[key]:
-                    #call the dfs function 
-                    dfs(key)
+#             #iterate through all connected rooms and marked them as visited 
+#             for key in rooms[current_room]:
+#                 if not visited[key]:
+#                     #call the dfs function 
+#                     dfs(key)
                     
-    #start at room 0, which is unlocked
-    dfs(0)       
-    #return true if all rooms have been visited
-    return all(visited) 
+#     #start at room 0, which is unlocked
+#     dfs(0)       
+#     #return true if all rooms have been visited
+#     return all(visited) 
 
-rooms = [[1,3],[3,0,1],[2],[0]]
-print(canVisitAllRoomss(rooms))
+# rooms = [[1,3],[3,0,1],[2],[0]]
+# print(canVisitAllRoomss(rooms))
 
 '''724. Find Pivot Index - E
 Given an array of integers nums, calculate the pivot index of this array.
@@ -773,18 +773,48 @@ The pivot index is the index where the sum of all the numbers strictly to the le
 If the index is on the left edge of the array, then the left sum is 0 because there are no elements to the left. This also applies to the right edge of the array.
 
 Return the leftmost pivot index. If no such index exists, return -1.'''
-nums = [2,1,-1]
+# nums = [2,1,-1]
 
-def find_pivot(nums):
-    #calculate the sum of all nums
-    total_sum, left_sum = sum(nums), 0
+# def find_pivot(nums):
+#     #calculate the sum of all nums
+#     total_sum, left_sum = sum(nums), 0
     
-    for idx in range(len(nums)):        
-    #check if the sum to the left of the index == to the right sum 
-        if left_sum == total_sum - left_sum - nums[idx]:
-            return idx
-        left_sum += nums[idx]
-    return -1
+#     for idx in range(len(nums)):        
+#     #check if the sum to the left of the index == to the right sum 
+#         if left_sum == total_sum - left_sum - nums[idx]:
+#             return idx
+#         left_sum += nums[idx]
+#     return -1
         
         
-print(find_pivot(nums))
+# print(find_pivot(nums))
+
+
+'''1732. Find the Highest Altitude - E
+There is a biker going on a road trip. The road trip consists of n + 1 points at different altitudes. The biker starts his trip on point 0 with altitude equal 0.
+You are given an integer array gain of length n where gain[i] is the net gain in altitude between points i​​​​​​ and i + 1 for all (0 <= i < n). Return the highest altitude of a point.'''
+
+gain = [-5,1,5,0,-7]  #output=1
+
+def largestAltitude(gain):
+    altitude, current_alt = [0], 0
+    
+    for num in range(len(gain)):
+        current_alt += gain[num]
+        altitude.append(current_alt)
+    return max(altitude)
+
+print(largestAltitude(gain))
+
+#second solution
+def largestAltitude(gain):
+    current_alt = 0
+    highest_alt = current_alt
+    
+    for num in range(len(gain)):
+        current_alt += gain[num]
+        highest_alt = max(current_alt, highest_alt)
+        
+    return highest_alt
+
+print(largestAltitude(gain))
