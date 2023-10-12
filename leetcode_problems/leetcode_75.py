@@ -665,3 +665,61 @@ maze = [
 entrance = [1, 2]
 result = nearestExit(maze, entrance)
 print(result)  # Output: 1
+
+
+'''547. Number of Provinces
+There are n cities. Some of them are connected, while some are not. If city a is connected directly with city b, and city b is connected directly with city c, then city a is connected indirectly with city c.
+A province is a group of directly or indirectly connected cities and no other cities outside of the group.
+You are given an n x n matrix isConnected where isConnected[i][j] = 1 if the ith city and the jth city are directly connected, and isConnected[i][j] = 0 otherwise. 
+Return the total number of provinces.'''
+
+
+
+def findCircleSum(isConnected):
+    #get the number of cities 
+    n = len(isConnected)
+    #all cities are marked as unvisited or False
+    visited = [False] * n
+    #initialize a variable to keep track of provinces
+    count = 0
+    
+    #nested function that performs a depth-first search starting from a given city
+    def dfs(current_city):
+        #mark current current_city as visited = True
+        visited[current_city]=True
+        
+        #iterate through all cities from 0 to n. For each neighbor,check if there is a direct connection (value is 1) between the current current_city and the neighbor
+        for neighbor in range(n):
+            # If the neighbor is connected and has not been visited yet, call the dfs function on that neighbor
+            if isConnected[current_city][neighbor] == 1 and not visited[neighbor]:
+                dfs(neighbor)
+    #loop through all cities       
+    for current_city in range(n):
+        #If the current current_city has not been visited yet, we increment count by 1 
+        if not visited[current_city]:
+            count += 1
+            #start a new province by calling the dfs(current_city) function
+            dfs(current_city)
+    
+    return count 
+
+print(findCircleSum(isConnected))
+
+
+
+
+'''convert a list of lists into a dictionary'''
+edges = [['i', 'j'], ['k', 'i'], ['m', 'k'], ['k', 'l'], ['o', 'n']]
+
+# Initialize an empty dictionary
+graph_dict = {}
+
+# Populate the dictionary based on the edges
+for edge in edges:
+    node1, node2 = edge
+    if node1 not in graph_dict:
+        graph_dict[node1] = [node2]
+    else:
+        graph_dict[node1].append(node2)
+
+print(graph_dict)
