@@ -868,3 +868,94 @@ def find_kth(nums, k):
     
 print(find_kth(nums, k))
 
+'''2462. Total Cost to Hire K Workers-Medium
+
+You are given a 0-indexed integer array costs where costs[i] is the cost of hiring the ith worker.
+
+You are also given two integers k and candidates. We want to hire exactly k workers according to the following rules:
+
+You will run k sessions and hire exactly one worker in each session.
+In each hiring session, choose the worker with the lowest cost from either the first candidates workers or the last candidates workers. Break the tie by the smallest index.
+For example, if costs = [3,2,7,7,1,2] and candidates = 2, then in the first hiring session, we will choose the 4th worker because they have the lowest cost [3,2,7,7,1,2].
+In the second hiring session, we will choose 1st worker because they have the same lowest cost as 4th worker but they have the smallest index [3,2,7,7,2]. Please note that the indexing may be changed in the process.
+If there are fewer than candidates workers remaining, choose the worker with the lowest cost among them. Break the tie by the smallest index.
+A worker can only be chosen once.
+Return the total cost to hire exactly k workers.
+
+'''
+
+costs = [17,12,10,2,7,2,11,20,8]
+candidates = 4
+k=3
+
+        
+import heapq
+
+def minCostToHireWorkers(costs, k, candidates):
+    # Create a list of pairs (cost, index)
+    workers = [(cost, i) for i, cost in enumerate(costs)]
+    # Sort the workers by cost and index
+    workers.sort(key=lambda x: (x[0], x[1]))
+
+    total_cost = float('inf')  # Initialize total cost to infinity
+    min_heap = []  # Priority queue to track candidates
+
+    for worker_cost, worker_index in workers:
+        heapq.heappush(min_heap, -worker_cost)  # Add negative cost to min-heap
+
+        # If the size of the heap exceeds candidates, remove the worker with the highest cost
+        if len(min_heap) > candidates:
+            heapq.heappop(min_heap)
+
+        # If the size of the heap is equal to candidates, calculate the total cost
+        if len(min_heap) == candidates:
+            total_cost = min(total_cost, -sum(min_heap))
+
+    return total_cost
+
+print(minCostToHireWorkers(costs, k, candidates)) 
+
+
+#use two priority queues (min-heaps) to keep track of two sets of candidates
+
+def totalCost(costs, k, candidates):
+    # left_workers stores the first candidates
+    left_workers = costs[:candidates]
+    # Calculate the number of workers to be placed in right_workers
+    right_workers = costs[max(candidates, len(costs) - candidates):]
+    #min-heap to ensure that the workers with the lowest costs are at the top of each heap.
+    heapq.heapify(left_workers)
+ 
+    heapq.heapify(right_workers)
+
+        
+    total_cost = 0
+    #used to keep track of the workers outside the two queues
+    next_left= candidates
+    next_right = len(costs) - 1 - candidates 
+
+    #iterate k times, representing the hiring sessions for hiring k workers
+    for _ in range(k): 
+        #check if the right_workers heap is empty or if the cost of the worker at the top of left_workers is less than or equal to the cost of the worker at the top of right_workers. If True, the next worker to be hired comes from left_workers
+        if not right_workers or left_workers and left_workers[0] <= right_workers[0]: 
+            #Add the cost of the worker and remove that worker from the left_workers heap using heappop
+            total_cost += heapq.heappop(left_workers)
+
+            #check if there are more workers outside the two queues (beyond next_left). If so, push the next worker from the costs list into left_workers. Increment next_left to consider the next worker in the next loop 
+            if next_left <= next_right: 
+                heapq.heappush(left_workers, costs[next_left])
+                next_left += 1
+        #if previous condition is not met, next worker will come from the right 
+        else: 
+            #Add the cost of the worker and remove that worker from the right_workers heap using heappop
+            total_cost += heapq.heappop(right_workers)
+
+            #check if there are more workers outside the two queues (beyond next_right). If so, push the next worker from the costs list into right_workers. Decrement right_left to consider the next worker in the next loop 
+            if next_left <= next_right:  
+                heapq.heappush(right_workers, costs[next_right])
+                next_right -= 1
+                    
+    return total_cost
+    
+    
+print(totalCost(costs, k,  candidates))
