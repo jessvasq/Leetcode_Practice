@@ -972,20 +972,44 @@ You call a pre-defined API int guess(int num), which returns three possible resu
 Return the number that I picked.'''
 
 
-def guess_num(n):
-    lo=0
-    hi=n
+# def guess_num(n):
+#     lo=0
+#     hi=n
         
-    while lo <= hi:
-        mid = (lo+hi) //2
-        ans = guess(mid)
+#     while lo <= hi:
+#         mid = (lo+hi) //2
+#         ans = guess(mid)
             
-        if ans == -1:
-            hi = mid - 1
-        elif ans == 1:
-            lo = mid + 1
-        else:
-            return mid
+#         if ans == -1:
+#             hi = mid - 1
+#         elif ans == 1:
+#             lo = mid + 1
+#         else:
+#             return mid
 
 
+'''1071. Greatest Common Divisor of Strings - E
+For two strings s and t, we say "t divides s" if and only if s = t + ... + t (i.e., t is concatenated with itself one or more times).
 
+Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.'''
+
+str1 = "ABCABC"
+str2 = "ABC"
+
+import math
+def gcdOfStrings(str1, str2):
+    # Find the greatest common divisor of the lengths of str1 and str2. Gives us the length of the potential common divisor.
+    gcd_len = math.gcd(len(str1), len(str2))
+
+    # take the first potential greatest divisor, gcd_len characters from str1.
+    common_divisor = str1[:gcd_len]
+    print(common_divisor)
+
+    # Check if the common divisor repeats to form str1 and str2
+    if str1 == common_divisor * (len(str1) // gcd_len) and str2 == common_divisor * (len(str2) // gcd_len):
+        return common_divisor
+    else:
+        return ""
+
+print(gcdOfStrings(str1, str2))
+#space complexity = O(1) -- uses constant time regardless of the input size, time complexity=O(N) -- where n is the length of the longer of the two input strings
