@@ -960,3 +960,32 @@ Return the total cost to hire exactly k workers.
     
 # print(totalCost(costs, k,  candidates))
 
+
+'''374. Guess Number Higher or Lower - Easy
+We are playing the Guess Game. The game is as follows:
+I pick a number from 1 to n. You have to guess which number I picked.
+Every time you guess wrong, I will tell you whether the number I picked is higher or lower than your guess.
+You call a pre-defined API int guess(int num), which returns three possible results:
+-1: Your guess is higher than the number I picked (i.e. num > pick).
+1: Your guess is lower than the number I picked (i.e. num < pick).
+0: your guess is equal to the number I picked (i.e. num == pick).
+Return the number that I picked.'''
+
+
+def guess_num(n):
+    lo=0
+    hi=n
+        
+    while lo <= hi:
+        mid = (lo+hi) //2
+        ans = guess(mid)
+            
+        if ans == -1:
+            hi = mid - 1
+        elif ans == 1:
+            lo = mid + 1
+        else:
+            return mid
+
+
+
