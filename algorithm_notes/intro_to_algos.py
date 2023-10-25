@@ -125,6 +125,20 @@ class LinkedList:
         #return count which will give us the number of nodes
         return count
 
+    #this method searches for a node that contains the data passed in as an argument. Takes O(n) time or linear time
+    def search(self, key):
+        #current will be used to keep track of the current node being looked at
+        current = self.head
+        while current:
+            if current.data == key:
+                return current
+            #if the current node is not the node we're looking for, we'll set current to the next node in the list
+            else:
+                current = current.next_node
+        #if we don't find the node, we'll return None
+        return None
+        
+                
 
     '''There are three ways to add data to a linked list: Insert at the head, insert at the tail, and insert in the middle. We'll start with inserting at the head'''
 
@@ -138,6 +152,79 @@ class LinkedList:
         self.head = new_node
 
 
+    '''insert a new node at a given position. Insertion takes o(1) time, but finding the node at the given position takes O(n) linear time. Therefore it takes an overall O(n) time or linear time'''
+    def insert_at_position(self, data, position):
+        #if position is 0, we'll insert the node at the head using the previous 'insert_at_head' method
+        if position == 0:
+            self.insert_at_head(data)
+            return
+        
+        #if position is greater than 0, we'll create a new node and traverse the list until we get to the position where we want to insert the node
+        if position > 0:
+            new_node =  Node(data)
+            #if the list is empty, we'll insert the node at the head
+            current = self.head
+            #iterate through the list until we get to the position where we want to insert the node
+            while position > 1:
+                #set current to the next node in the list
+                current = current.next_node
+                #decrement position by 1
+                position -= 1
+            
+    
+            prev_node = current
+            next_node = current.next_node
+            #set the previous node to point to the new node        
+            prev_node.next_node = new_node
+            #set the new node to point to the next node
+            new_node.next_node = next_node
+            
+                
+    '''insert a new node at the tail of the list. Takes O(n) time or linear time'''
+    def insert_at_tail(self, data):
+        #create a new node
+        new_node = Node(data)
+        #set current to the head of the list
+        current = self.head
+        #iterate through the list until we get to the end, we're looking for the node whose next node is None. Once found, we'll set the next node of that node to the new node
+        while current.next_node is not None:
+            #set current to the next node in the list
+            current = current.next_node
+        #set the next node of the current node to the new node
+        current.next_node = new_node
+        
+        
+    '''remove a node from the list. Takes O(n) time or linear time'''
+    def remove(self, key):
+        #set current to the head of the list
+        current = self.head
+        #set previous to None
+        previous = None
+        #set found to False
+        found = False
+        #iterate through the list until we find the node we're looking for
+        while current and found is False:
+            #if the current node is the node we're looking for, we'll set found to True
+            if current.data == key and current is self.head:
+                found = True
+                #set the head to the next node in the list
+                self.head = current.next_node
+                #set the next node of the current node to None
+                current.next_node = None
+                return current.data
+            #if the current node is not the node we're looking for, we'll set previous to the current node and current to the next node in the list
+            elif current.data == key:
+                found = True
+                previous.next_node = current.next_node
+                #set the next node of the current node to None and return the data of the current node 
+                current.next_node = None
+                return current.data
+
+            else:
+                previous = current
+                current = current.next_node
+        #if we don't find the node, we'll return None
+        return None
 
 
 ll = LinkedList()
@@ -156,5 +243,7 @@ print('linked list size:', ll.size())
 ll.insert_at_head(3)
 ll.insert_at_head(5)
 print(ll) #Output: [Head: 5]-> [3]-> [2]-> [Tail: 4]
+node_found = ll.search(3)
+print(node_found)
 
 
