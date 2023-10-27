@@ -247,3 +247,43 @@ node_found = ll.search(3)
 print(node_found)
 
 
+'''MERGE SORT'''
+def merge_sort(list):
+    #base case: if the list is a single element, return the list
+    if len(list) <= 1:
+        return list
+    #find the mid point of the list
+    mid = len(list)//2
+    #recursively call merge_sort on the left half of the list
+    left= merge_sort(list[:mid])
+    #recursively call merge_sort on the right half of the list
+    right = merge_sort(list[mid:])
+    
+    #create a list to hold the sorted values
+    sorted_values = []
+    
+    #These indices will keep track of the position of the elements in the left and right halves
+    left_index = 0
+    right_index = 0
+    
+    #keep looping until we've gone through all the elements in both halves
+    while left_index < len(left) and right_index < len(right):
+        #if the element at the left index is less than the element at the right index, we'll append the element at the left index to the sorted_values list and increment left_index by 1
+        if left[left_index] < right[right_index]:
+            sorted_values.append(left[left_index])
+            left_index += 1
+        #if the element at the right index is less than the element at the left index, we'll append the element at the right index to the sorted_values list and increment right_index by 1
+        else:
+            sorted_values.append(right[right_index])
+            right_index += 1
+    #if there's any element left in the left half, we'll append it to the sorted_values list
+    sorted_values += left[left_index:]
+    #if there's any element left in the right half, we'll append it to the sorted_values list
+    sorted_values += right[right_index:]
+    #retrun the sorted_values list
+    return sorted_values
+
+
+sort_list=[8,10,3,1,5,2,7,4]
+print(merge_sort(sort_list))
+
