@@ -399,3 +399,27 @@ def merge_sort(list):
 sort_list=[8,10,3,1,5,2,7,4]
 print(merge_sort(sort_list))
 
+
+
+'''QUICK SORT
+Time complexity: O(n log n) average case, O(n^2) worst case. Space complexity: O(log n)
+'''
+
+def quick_sort(list):
+    #base case: if the list has only one element or is empty, return the list
+    if len(list) <= 1:
+        return list
+    #set the pivot to the last element in the list
+    pivot = list.pop()
+    #create two empty lists to hold the elements less than the pivot and the elements greater than the pivot
+    left = []
+    right = []
+    #loop through the list and append elements less than the pivot to the left list and elements greater than the pivot to the right list
+    for element in list:
+        #if the element is less than the pivot(last element in the list), append it to the left list
+        if element < pivot:
+            left.append(element)
+        else:
+            right.append(element)
+    #recursively call quick_sort on the left and right lists and concatenate the results with the pivot
+    return quick_sort(left) + [pivot] + quick_sort(right)
