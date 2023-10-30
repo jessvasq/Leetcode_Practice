@@ -423,3 +423,20 @@ def quick_sort(list):
             right.append(element)
     #recursively call quick_sort on the left and right lists and concatenate the results with the pivot
     return quick_sort(left) + [pivot] + quick_sort(right)
+
+'''SELECTION SORT
+Time complexity: O(n^2). Space complexity: O(1)'''
+
+def selection_sort(list):
+    #loop through the list
+    for i in range(len(list)):
+        #set the minimum value to the current index
+        min_value = i
+        #loop through the list again starting from the next index
+        for j in range(i+1, len(list)):
+            #if the value at the next index is less than the value at the current index, set the minimum value to the next index
+            if list[j] < list[min_value]:
+                min_value = j
+        #swap the values at the current index with the minimum value
+        list[i], list[min_value] = list[min_value], list[i]
+    return list
