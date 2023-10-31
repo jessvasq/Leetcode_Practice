@@ -1013,3 +1013,45 @@ def gcdOfStrings(str1, str2):
 
 print(gcdOfStrings(str1, str2))
 #space complexity = O(1) -- uses constant time regardless of the input size, time complexity=O(N) -- where n is the length of the longer of the two input strings
+
+
+flowerbed = [1,0,0,0,1]
+n = 2
+## simple solution, will only pass a few test cases##
+# def canPlaceFLowers(flowerbed, n):
+#     for i in range(len(flowerbed)):
+#         if flowerbed[i] == 0 and flowerbed[i+1] == 0 and flowerbed[i-1] == 0:
+#             n -= 1
+#     if n == 0:
+#         return True
+#     else: 
+#         return False
+    
+'''605. Can Place Flowers - E
+You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in adjacent plots.
+
+Given an integer array flowerbed containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n, return true if n new flowers can be planted in the flowerbed without violating the no-adjacent-flowers rule and false otherwise.'''
+
+#optimized solution, takes into account the first and last pot. Space complexity = O(1), time complexity = O(N)
+
+def canPlaceFLowers(flowerbed, n):
+    #if n (number of flowers) is 0, return True
+    if n == 0:
+        return True 
+    
+    for i in range(len(flowerbed)):
+        #check if the current pot is empty and the previous and next pots are empty
+        #i==len(flowerbed)-1 ; check if the current pot is the last pot
+        #i==0 ; check if the current pot is the first pot
+        if flowerbed[i] == 0 and (i==0 or flowerbed[i-1] == 0) and (i==len(flowerbed)-1 or flowerbed[i+1] == 0):
+            #if True, plant a flower in the current pot
+            flowerbed[i] = 1
+            #reduce the number of flowers to plant by 1
+            n -= 1
+            
+            if n == 0:
+                return True
+    return False
+    
+    
+    
