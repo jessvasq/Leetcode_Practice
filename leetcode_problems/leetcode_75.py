@@ -1054,4 +1054,96 @@ def canPlaceFLowers(flowerbed, n):
     return False
     
     
+'''443. String Compression - E'
+Given an array of characters chars, compress it using the following algorithm:
+
+Begin with an empty string s. For each group of consecutive repeating characters in chars:
+
+If the group's length is 1, append the character to s.
+Otherwise, append the character followed by the group's length.
+The compressed string s should not be returned separately, but instead, be stored in the input character array chars. Note that group lengths that are 10 or longer will be split into multiple characters in chars.
+
+After you are done modifying the input array, return the new length of the array.
+
+You must write an algorithm that uses only constant extra space.'''
+
+#Iterate trough the 'chars' array and keep track of the current track and its count 
+#If the current character is different from the previous character, append the current character and its count to the 'chars' array
+
     
+chars = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
+
+# def compress(chars):
+#     #create a variable to keep track of the current character and its count
+#     current_char = chars[0]
+#     count = 0
+
+#     #loop through the array 
+#     for i in chars: 
+#         #if the current character is the same as the previous character, increment the count by 1
+#         if i == current_char:
+#             count += 1
+#         else:
+#             #append current character and its count to the 'chars' array
+#             s.append(current_char)
+#             s.append(count)
+#             #update the current character to the current character in the loop
+#             current_char = i
+#             count = 1
+#     #append the last character and its count to the 'chars' array
+#     s.append(current_char)
+#     #if the count is greater than 1, append the count to the 'chars' array
+#     s.append(count)
+#     print(s)
+#     return len(s)
+
+# print(compress(chars))
+   
+   
+def compress(chars):
+    #check if the array is empty
+    if not chars:
+        return 0
+
+    #create a variable to keep track of the current character and its count
+    current_char = chars[0]
+    count = 1
+    #write_index keeps track of the current index where the next character should be written
+    idx = 0
+
+    #loop through the array starting at index 1
+    for i in range(1, len(chars)):
+        #if the current character is the same as the previous character, increment the count by 1
+        if chars[i] == current_char:
+            count += 1
+        #if the current character is different from the previous character, append the current character and its count to the 'chars' array
+        else:
+            chars[idx] = current_char
+            idx += 1
+            #if the count is greater than 1, append the count to the 'chars' array
+            if count > 1:
+                count_str = str(count)
+                #loop through the count_str and append each digit to the 'chars' array
+                for digit in count_str:
+                    chars[idx] = digit
+                    idx += 1
+            #update the current character to the current character in the loop
+            current_char = chars[i]
+            print(current_char)
+            #reset the count to 1
+            count = 1
+
+    #append the last character and its count to the 'chars' array
+    chars[idx] = current_char
+    idx += 1
+    #if the count is greater than 1, append the count to the 'chars' array
+    if count > 1:
+        count_str = str(count)
+        for digit in count_str:
+            chars[idx] = digit
+            idx += 1
+    
+    return idx
+
+
+print(compress(chars))
