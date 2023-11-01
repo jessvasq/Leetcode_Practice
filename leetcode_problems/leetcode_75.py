@@ -1147,3 +1147,25 @@ def compress(chars):
 
 
 print(compress(chars))
+
+
+'''283. Move Zeroes - E'''
+nums = [0,1,0,3,12]
+
+def moveZeroes(nums):
+    #initialize a variable to keep track of the current position of the non-zero element
+    i = 0
+  
+    #loop through the array
+    for j in range(len(nums)):
+        #if there's a non-zero element, swap it with the element at the current position 'i'       
+        if nums[j] != 0:
+            #since the non-zero are moved to the front, the zero elements are moved to the back
+            nums[i], nums[j] = nums[j], nums[i]
+            #move 'i' to the next idx position by incrementing it by 1 
+            i +=1
+    return nums
+
+print(moveZeroes(nums))
+        
+
