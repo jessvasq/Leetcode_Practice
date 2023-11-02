@@ -1169,3 +1169,29 @@ def moveZeroes(nums):
 print(moveZeroes(nums))
         
 
+'''392. Is Subsequence - E
+Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+ '''
+ 
+s='abc'
+t="ahbgdc"
+
+
+def isSubsequence(s, t):
+    subsequence=0
+    #if the length of s is greater than the length of t, return False
+    if len(s) > len(t):
+        return False
+    #if s is an empty string, return True
+    if len(s) == 0:
+        return True
+    #iterate through the length of t
+    for i in range(len(t)):
+        #if the current character in s is equal to the current character in t, increment subsequence by 1
+        if subsequence <= len(s) - 1:
+            if s[subsequence] == t[i]:
+                subsequence += 1
+    return subsequence == len(s)
+
+print(isSubsequence(s, t))
