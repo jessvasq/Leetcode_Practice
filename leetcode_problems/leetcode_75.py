@@ -1195,3 +1195,49 @@ def isSubsequence(s, t):
     return subsequence == len(s)
 
 print(isSubsequence(s, t))
+
+
+'''2215. Find the Difference of Two Arrays - E
+Given two 0-indexed integer arrays nums1 and nums2, return a list answer of size 2 where:
+
+answer[0] is a list of all distinct integers in nums1 which are not present in nums2.
+answer[1] is a list of all distinct integers in nums2 which are not present in nums1.
+Note that the integers in the lists may be returned in any order.
+
+ '''
+
+#first solution 
+def diff_arras1(nums1, nums2):
+        #use sets to remove duplicates
+        set1 = set(nums1)
+        set2 = set(nums2)
+
+        #create two arrays to store distinct integers
+        arr1 = []
+        arr2 = []
+
+        #iterate through both sets
+        for num in set1:
+            if num not in set2:
+                arr1.append(num)
+        
+        for num in set2:
+            if num not in set1:
+                arr2.append(num)
+        #return a tuple
+        return (arr1, arr2)
+
+ 
+#second solution using difference method
+def diff_arras(nums1, nums2):
+    #we use sets to remove duplicates
+    set1 = set(nums1)
+    set2 = set(nums2)
+    
+    #we use the difference method to find the difference between the two sets
+    return [list(set1.difference(set2)), list(set2.difference(set1))]
+
+nums1 = [1,2,3,3]
+nums2 = [1,1,2,2]
+print(diff_arras(nums1, nums2))
+print(diff_arras1(nums1, nums2))
