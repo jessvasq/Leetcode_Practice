@@ -1241,3 +1241,36 @@ nums1 = [1,2,3,3]
 nums2 = [1,1,2,2]
 print(diff_arras(nums1, nums2))
 print(diff_arras1(nums1, nums2))
+
+
+'''206. Reverse Linked List - E 
+Given the head of a singly linked list, reverse the list, and return the reversed list.'''
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.rightt = None
+        
+    def reverse_ll(self, head):
+        if head is None:
+            return 
+        #initialize three pointers to keep track of the current, previous and next nodes
+        current = head
+        following = current.next
+        prev = None
+        
+        while current:
+            #reverse the current node's pointer to the previous node
+            current.next = prev
+            #move the previous node to the current node moving it to the next node
+            prev = current
+            #current node becomes the following node
+            current = following
+            if following:
+                #if the following node is not None, move it to the next node until it reaches the end of the linked list
+                following = following.next
+        #return the previous node as the head of the reversed linked list
+        head = prev
+        return head
+
+
