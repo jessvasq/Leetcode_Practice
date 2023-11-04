@@ -1274,3 +1274,20 @@ class Node:
         return head
 
 
+'''Leaf-Similar Trees - E
+
+Consider all the leaves of a binary tree, from left to right order, the values of those leaves form a leaf value sequence. Two binary trees are considered leaf-similar if their leaf value sequence is the same. Return true if and only if the two given trees with head nodes root1 and root2 are leaf-similar.'''
+
+def leafSimilar(root1, root2):
+    #dfs function to traverse the tree, starting from the root node
+    def dfs(root):
+        #if the tree is empty, return an empty list
+        if not root:
+            return []
+        #check if the node root is a leaf root, if True, return the node's value
+        if not root.left and not root.right:
+            return [root.val]
+        #use recursion to traverse the left and right subtrees
+        return dfs(root.left) + dfs(root.right)
+    #check if the leaf values of the two trees are the same
+    return dfs(root1) == dfs(root2)
