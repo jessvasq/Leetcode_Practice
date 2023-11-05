@@ -1291,3 +1291,25 @@ def leafSimilar(root1, root2):
         return dfs(root.left) + dfs(root.right)
     #check if the leaf values of the two trees are the same
     return dfs(root1) == dfs(root2)
+
+'''The Tribonacci sequence Tn is defined as follows: 
+T0 = 0, T1 = 1, T2 = 1, and Tn+3 = Tn + Tn+1 + Tn+2 for n >= 0.
+Given n, return the value of Tn.'''
+
+def tribonacci(n):
+    if n == 0:
+        return 0 
+    if n == 1 or n == 2:
+        return 1
+    #initialize a list with the first three numbers in the sequence
+    tribonacci_seq = [0, 1, 1]
+    #loop through the range of n. We start at n=3 to ensure that we have at least three values to calculate the tribonacci numbers 
+    for i in range(3, n+1):
+        print(i)
+        #append the sum of the previous three numbers to the list
+        tribonacci_seq.append(tribonacci_seq[i-1] + tribonacci_seq[i-2] + tribonacci_seq[i-3])
+        print(tribonacci_seq)
+    return tribonacci_seq[n]
+
+print(tribonacci(4))
+
