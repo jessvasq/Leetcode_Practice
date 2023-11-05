@@ -1292,7 +1292,7 @@ def leafSimilar(root1, root2):
     #check if the leaf values of the two trees are the same
     return dfs(root1) == dfs(root2)
 
-'''The Tribonacci sequence Tn is defined as follows: 
+'''1137. The Tribonacci sequence Tn is defined as follows: 
 T0 = 0, T1 = 1, T2 = 1, and Tn+3 = Tn + Tn+1 + Tn+2 for n >= 0.
 Given n, return the value of Tn.'''
 
@@ -1313,3 +1313,24 @@ def tribonacci(n):
 
 print(tribonacci(4))
 
+'''746. Min Cost Climbing Stairs - E
+You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.
+You can either start from the step with index 0, or the step with index 1.
+Return the minimum cost to reach the top of the floor.'''
+
+def minCostClimbingStairs(cost):
+    #initialize a list where dp[i] represents the minimum cost to reach the ith step
+    dp = [0] * len(cost)
+    #set the first two values in the list to the first two values in cost
+    dp[0] = cost[0]
+    dp[1] = cost[1]
+    #loop through the range of 2 to the length of cost
+    for i in range(2, len(cost)):
+        #calculate the minimum cost to reach the ith step
+        dp[i] = min(dp[i-1], dp[i-2]) + cost[i]
+    #return the minimum cost to reach the top of the floor
+    return min(dp[-1], dp[-2])
+
+
+cost = [10,15,20]
+print(minCostClimbingStairs(cost))
