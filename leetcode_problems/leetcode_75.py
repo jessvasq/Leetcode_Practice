@@ -711,20 +711,20 @@ Return the total number of provinces.'''
 
 
 '''convert a list of lists into a dictionary'''
-edges = [['i', 'j'], ['k', 'i'], ['m', 'k'], ['k', 'l'], ['o', 'n']]
+# edges = [['i', 'j'], ['k', 'i'], ['m', 'k'], ['k', 'l'], ['o', 'n']]
 
-# Initialize an empty dictionary
-graph_dict = {}
+# # Initialize an empty dictionary
+# graph_dict = {}
 
-# Populate the dictionary based on the edges
-for edge in edges:
-    node1, node2 = edge
-    if node1 not in graph_dict:
-        graph_dict[node1] = [node2]
-    else:
-        graph_dict[node1].append(node2)
+# # Populate the dictionary based on the edges
+# for edge in edges:
+#     node1, node2 = edge
+#     if node1 not in graph_dict:
+#         graph_dict[node1] = [node2]
+#     else:
+#         graph_dict[node1].append(node2)
 
-print(graph_dict)
+# print(graph_dict)
 
 
 
@@ -993,30 +993,30 @@ For two strings s and t, we say "t divides s" if and only if s = t + ... + t (i.
 
 Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.'''
 
-str1 = "ABCABC"
-str2 = "ABC"
+# str1 = "ABCABC"
+# str2 = "ABC"
 
-import math
-def gcdOfStrings(str1, str2):
-    # Find the greatest common divisor of the lengths of str1 and str2. Gives us the length of the potential common divisor.
-    gcd_len = math.gcd(len(str1), len(str2))
+# import math
+# def gcdOfStrings(str1, str2):
+#     # Find the greatest common divisor of the lengths of str1 and str2. Gives us the length of the potential common divisor.
+#     gcd_len = math.gcd(len(str1), len(str2))
 
-    # take the first potential greatest divisor, gcd_len characters from str1.
-    common_divisor = str1[:gcd_len]
-    print(common_divisor)
+#     # take the first potential greatest divisor, gcd_len characters from str1.
+#     common_divisor = str1[:gcd_len]
+#     print(common_divisor)
 
-    # Check if the common divisor repeats to form str1 and str2
-    if str1 == common_divisor * (len(str1) // gcd_len) and str2 == common_divisor * (len(str2) // gcd_len):
-        return common_divisor
-    else:
-        return ""
+#     # Check if the common divisor repeats to form str1 and str2
+#     if str1 == common_divisor * (len(str1) // gcd_len) and str2 == common_divisor * (len(str2) // gcd_len):
+#         return common_divisor
+#     else:
+#         return ""
 
-print(gcdOfStrings(str1, str2))
-#space complexity = O(1) -- uses constant time regardless of the input size, time complexity=O(N) -- where n is the length of the longer of the two input strings
+# print(gcdOfStrings(str1, str2))
+# #space complexity = O(1) -- uses constant time regardless of the input size, time complexity=O(N) -- where n is the length of the longer of the two input strings
 
 
-flowerbed = [1,0,0,0,1]
-n = 2
+# flowerbed = [1,0,0,0,1]
+# n = 2
 ## simple solution, will only pass a few test cases##
 # def canPlaceFLowers(flowerbed, n):
 #     for i in range(len(flowerbed)):
@@ -1034,24 +1034,24 @@ Given an integer array flowerbed containing 0's and 1's, where 0 means empty and
 
 #optimized solution, takes into account the first and last pot. Space complexity = O(1), time complexity = O(N)
 
-def canPlaceFLowers(flowerbed, n):
-    #if n (number of flowers) is 0, return True
-    if n == 0:
-        return True 
+# def canPlaceFLowers(flowerbed, n):
+#     #if n (number of flowers) is 0, return True
+#     if n == 0:
+#         return True 
     
-    for i in range(len(flowerbed)):
-        #check if the current pot is empty and the previous and next pots are empty
-        #i==len(flowerbed)-1 ; check if the current pot is the last pot
-        #i==0 ; check if the current pot is the first pot
-        if flowerbed[i] == 0 and (i==0 or flowerbed[i-1] == 0) and (i==len(flowerbed)-1 or flowerbed[i+1] == 0):
-            #if True, plant a flower in the current pot
-            flowerbed[i] = 1
-            #reduce the number of flowers to plant by 1
-            n -= 1
+#     for i in range(len(flowerbed)):
+#         #check if the current pot is empty and the previous and next pots are empty
+#         #i==len(flowerbed)-1 ; check if the current pot is the last pot
+#         #i==0 ; check if the current pot is the first pot
+#         if flowerbed[i] == 0 and (i==0 or flowerbed[i-1] == 0) and (i==len(flowerbed)-1 or flowerbed[i+1] == 0):
+#             #if True, plant a flower in the current pot
+#             flowerbed[i] = 1
+#             #reduce the number of flowers to plant by 1
+#             n -= 1
             
-            if n == 0:
-                return True
-    return False
+#             if n == 0:
+#                 return True
+#     return False
     
     
 '''443. String Compression - E'
@@ -1071,7 +1071,7 @@ You must write an algorithm that uses only constant extra space.'''
 #If the current character is different from the previous character, append the current character and its count to the 'chars' array
 
     
-chars = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
+#chars = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
 
 # def compress(chars):
 #     #create a variable to keep track of the current character and its count
@@ -1100,73 +1100,73 @@ chars = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
 # print(compress(chars))
    
    
-def compress(chars):
-    #check if the array is empty
-    if not chars:
-        return 0
+# def compress(chars):
+#     #check if the array is empty
+#     if not chars:
+#         return 0
 
-    #create a variable to keep track of the current character and its count
-    current_char = chars[0]
-    count = 1
-    #write_index keeps track of the current index where the next character should be written
-    idx = 0
+#     #create a variable to keep track of the current character and its count
+#     current_char = chars[0]
+#     count = 1
+#     #write_index keeps track of the current index where the next character should be written
+#     idx = 0
 
-    #loop through the array starting at index 1
-    for i in range(1, len(chars)):
-        #if the current character is the same as the previous character, increment the count by 1
-        if chars[i] == current_char:
-            count += 1
-        #if the current character is different from the previous character, append the current character and its count to the 'chars' array
-        else:
-            chars[idx] = current_char
-            idx += 1
-            #if the count is greater than 1, append the count to the 'chars' array
-            if count > 1:
-                count_str = str(count)
-                #loop through the count_str and append each digit to the 'chars' array
-                for digit in count_str:
-                    chars[idx] = digit
-                    idx += 1
-            #update the current character to the current character in the loop
-            current_char = chars[i]
-            print(current_char)
-            #reset the count to 1
-            count = 1
+#     #loop through the array starting at index 1
+#     for i in range(1, len(chars)):
+#         #if the current character is the same as the previous character, increment the count by 1
+#         if chars[i] == current_char:
+#             count += 1
+#         #if the current character is different from the previous character, append the current character and its count to the 'chars' array
+#         else:
+#             chars[idx] = current_char
+#             idx += 1
+#             #if the count is greater than 1, append the count to the 'chars' array
+#             if count > 1:
+#                 count_str = str(count)
+#                 #loop through the count_str and append each digit to the 'chars' array
+#                 for digit in count_str:
+#                     chars[idx] = digit
+#                     idx += 1
+#             #update the current character to the current character in the loop
+#             current_char = chars[i]
+#             print(current_char)
+#             #reset the count to 1
+#             count = 1
 
-    #append the last character and its count to the 'chars' array
-    chars[idx] = current_char
-    idx += 1
-    #if the count is greater than 1, append the count to the 'chars' array
-    if count > 1:
-        count_str = str(count)
-        for digit in count_str:
-            chars[idx] = digit
-            idx += 1
+#     #append the last character and its count to the 'chars' array
+#     chars[idx] = current_char
+#     idx += 1
+#     #if the count is greater than 1, append the count to the 'chars' array
+#     if count > 1:
+#         count_str = str(count)
+#         for digit in count_str:
+#             chars[idx] = digit
+#             idx += 1
     
-    return idx
+#     return idx
 
 
-print(compress(chars))
+# print(compress(chars))
 
 
 '''283. Move Zeroes - E'''
-nums = [0,1,0,3,12]
+# nums = [0,1,0,3,12]
 
-def moveZeroes(nums):
-    #initialize a variable to keep track of the current position of the non-zero element
-    i = 0
+# def moveZeroes(nums):
+#     #initialize a variable to keep track of the current position of the non-zero element
+#     i = 0
   
-    #loop through the array
-    for j in range(len(nums)):
-        #if there's a non-zero element, swap it with the element at the current position 'i'       
-        if nums[j] != 0:
-            #since the non-zero are moved to the front, the zero elements are moved to the back
-            nums[i], nums[j] = nums[j], nums[i]
-            #move 'i' to the next idx position by incrementing it by 1 
-            i +=1
-    return nums
+#     #loop through the array
+#     for j in range(len(nums)):
+#         #if there's a non-zero element, swap it with the element at the current position 'i'       
+#         if nums[j] != 0:
+#             #since the non-zero are moved to the front, the zero elements are moved to the back
+#             nums[i], nums[j] = nums[j], nums[i]
+#             #move 'i' to the next idx position by incrementing it by 1 
+#             i +=1
+#     return nums
 
-print(moveZeroes(nums))
+# print(moveZeroes(nums))
         
 
 '''392. Is Subsequence - E
@@ -1174,27 +1174,27 @@ Given two strings s and t, return true if s is a subsequence of t, or false othe
 A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
  '''
  
-s='abc'
-t="ahbgdc"
+# s='abc'
+# t="ahbgdc"
 
 
-def isSubsequence(s, t):
-    subsequence=0
-    #if the length of s is greater than the length of t, return False
-    if len(s) > len(t):
-        return False
-    #if s is an empty string, return True
-    if len(s) == 0:
-        return True
-    #iterate through the length of t
-    for i in range(len(t)):
-        #if the current character in s is equal to the current character in t, increment subsequence by 1
-        if subsequence <= len(s) - 1:
-            if s[subsequence] == t[i]:
-                subsequence += 1
-    return subsequence == len(s)
+# def isSubsequence(s, t):
+#     subsequence=0
+#     #if the length of s is greater than the length of t, return False
+#     if len(s) > len(t):
+#         return False
+#     #if s is an empty string, return True
+#     if len(s) == 0:
+#         return True
+#     #iterate through the length of t
+#     for i in range(len(t)):
+#         #if the current character in s is equal to the current character in t, increment subsequence by 1
+#         if subsequence <= len(s) - 1:
+#             if s[subsequence] == t[i]:
+#                 subsequence += 1
+#     return subsequence == len(s)
 
-print(isSubsequence(s, t))
+# print(isSubsequence(s, t))
 
 
 '''2215. Find the Difference of Two Arrays - E
@@ -1206,131 +1206,131 @@ Note that the integers in the lists may be returned in any order.
 
  '''
 
-#first solution 
-def diff_arras1(nums1, nums2):
-        #use sets to remove duplicates
-        set1 = set(nums1)
-        set2 = set(nums2)
+# #first solution 
+# def diff_arras1(nums1, nums2):
+#         #use sets to remove duplicates
+#         set1 = set(nums1)
+#         set2 = set(nums2)
 
-        #create two arrays to store distinct integers
-        arr1 = []
-        arr2 = []
+#         #create two arrays to store distinct integers
+#         arr1 = []
+#         arr2 = []
 
-        #iterate through both sets
-        for num in set1:
-            if num not in set2:
-                arr1.append(num)
+#         #iterate through both sets
+#         for num in set1:
+#             if num not in set2:
+#                 arr1.append(num)
         
-        for num in set2:
-            if num not in set1:
-                arr2.append(num)
-        #return a tuple
-        return (arr1, arr2)
+#         for num in set2:
+#             if num not in set1:
+#                 arr2.append(num)
+#         #return a tuple
+#         return (arr1, arr2)
 
  
-#second solution using difference method
-def diff_arras(nums1, nums2):
-    #we use sets to remove duplicates
-    set1 = set(nums1)
-    set2 = set(nums2)
+# #second solution using difference method
+# def diff_arras(nums1, nums2):
+#     #we use sets to remove duplicates
+#     set1 = set(nums1)
+#     set2 = set(nums2)
     
-    #we use the difference method to find the difference between the two sets
-    return [list(set1.difference(set2)), list(set2.difference(set1))]
+#     #we use the difference method to find the difference between the two sets
+#     return [list(set1.difference(set2)), list(set2.difference(set1))]
 
-nums1 = [1,2,3,3]
-nums2 = [1,1,2,2]
-print(diff_arras(nums1, nums2))
-print(diff_arras1(nums1, nums2))
+# nums1 = [1,2,3,3]
+# nums2 = [1,1,2,2]
+# print(diff_arras(nums1, nums2))
+# print(diff_arras1(nums1, nums2))
 
 
 '''206. Reverse Linked List - E 
 Given the head of a singly linked list, reverse the list, and return the reversed list.'''
 
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.rightt = None
+# class Node:
+#     def __init__(self, data):
+#         self.data = data
+#         self.rightt = None
         
-    def reverse_ll(self, head):
-        if head is None:
-            return 
-        #initialize three pointers to keep track of the current, previous and next nodes
-        current = head
-        following = current.next
-        prev = None
+#     def reverse_ll(self, head):
+#         if head is None:
+#             return 
+#         #initialize three pointers to keep track of the current, previous and next nodes
+#         current = head
+#         following = current.next
+#         prev = None
         
-        while current:
-            #reverse the current node's pointer to the previous node
-            current.next = prev
-            #move the previous node to the current node moving it to the next node
-            prev = current
-            #current node becomes the following node
-            current = following
-            if following:
-                #if the following node is not None, move it to the next node until it reaches the end of the linked list
-                following = following.next
-        #return the previous node as the head of the reversed linked list
-        head = prev
-        return head
+#         while current:
+#             #reverse the current node's pointer to the previous node
+#             current.next = prev
+#             #move the previous node to the current node moving it to the next node
+#             prev = current
+#             #current node becomes the following node
+#             current = following
+#             if following:
+#                 #if the following node is not None, move it to the next node until it reaches the end of the linked list
+#                 following = following.next
+#         #return the previous node as the head of the reversed linked list
+#         head = prev
+#         return head
 
 
 '''Leaf-Similar Trees - E
 
 Consider all the leaves of a binary tree, from left to right order, the values of those leaves form a leaf value sequence. Two binary trees are considered leaf-similar if their leaf value sequence is the same. Return true if and only if the two given trees with head nodes root1 and root2 are leaf-similar.'''
 
-def leafSimilar(root1, root2):
-    #dfs function to traverse the tree, starting from the root node
-    def dfs(root):
-        #if the tree is empty, return an empty list
-        if not root:
-            return []
-        #check if the node root is a leaf root, if True, return the node's value
-        if not root.left and not root.right:
-            return [root.val]
-        #use recursion to traverse the left and right subtrees
-        return dfs(root.left) + dfs(root.right)
-    #check if the leaf values of the two trees are the same
-    return dfs(root1) == dfs(root2)
+# def leafSimilar(root1, root2):
+#     #dfs function to traverse the tree, starting from the root node
+#     def dfs(root):
+#         #if the tree is empty, return an empty list
+#         if not root:
+#             return []
+#         #check if the node root is a leaf root, if True, return the node's value
+#         if not root.left and not root.right:
+#             return [root.val]
+#         #use recursion to traverse the left and right subtrees
+#         return dfs(root.left) + dfs(root.right)
+#     #check if the leaf values of the two trees are the same
+#     return dfs(root1) == dfs(root2)
 
 '''1137. The Tribonacci sequence Tn is defined as follows: 
 T0 = 0, T1 = 1, T2 = 1, and Tn+3 = Tn + Tn+1 + Tn+2 for n >= 0.
 Given n, return the value of Tn.'''
 
-def tribonacci(n):
-    if n == 0:
-        return 0 
-    if n == 1 or n == 2:
-        return 1
-    #initialize a list with the first three numbers in the sequence
-    tribonacci_seq = [0, 1, 1]
-    #loop through the range of n. We start at n=3 to ensure that we have at least three values to calculate the tribonacci numbers 
-    for i in range(3, n+1):
-        print(i)
-        #append the sum of the previous three numbers to the list
-        tribonacci_seq.append(tribonacci_seq[i-1] + tribonacci_seq[i-2] + tribonacci_seq[i-3])
-        print(tribonacci_seq)
-    return tribonacci_seq[n]
+# def tribonacci(n):
+#     if n == 0:
+#         return 0 
+#     if n == 1 or n == 2:
+#         return 1
+#     #initialize a list with the first three numbers in the sequence
+#     tribonacci_seq = [0, 1, 1]
+#     #loop through the range of n. We start at n=3 to ensure that we have at least three values to calculate the tribonacci numbers 
+#     for i in range(3, n+1):
+#         print(i)
+#         #append the sum of the previous three numbers to the list
+#         tribonacci_seq.append(tribonacci_seq[i-1] + tribonacci_seq[i-2] + tribonacci_seq[i-3])
+#         print(tribonacci_seq)
+#     return tribonacci_seq[n]
 
-print(tribonacci(4))
+# print(tribonacci(4))
 
 '''746. Min Cost Climbing Stairs - E
 You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.
 You can either start from the step with index 0, or the step with index 1.
 Return the minimum cost to reach the top of the floor.'''
 
-def minCostClimbingStairs(cost):
-    #initialize a list where dp[i] represents the minimum cost to reach the ith step
-    dp = [0] * len(cost)
-    #set the first two values in the list to the first two values in cost
-    dp[0] = cost[0]
-    dp[1] = cost[1]
-    #loop through the range of 2 to the length of cost
-    for i in range(2, len(cost)):
-        #calculate the minimum cost to reach the ith step
-        dp[i] = min(dp[i-1], dp[i-2]) + cost[i]
-    #return the minimum cost to reach the top of the floor
-    return min(dp[-1], dp[-2])
+# def minCostClimbingStairs(cost):
+#     #initialize a list where dp[i] represents the minimum cost to reach the ith step
+#     dp = [0] * len(cost)
+#     #set the first two values in the list to the first two values in cost
+#     dp[0] = cost[0]
+#     dp[1] = cost[1]
+#     #loop through the range of 2 to the length of cost
+#     for i in range(2, len(cost)):
+#         #calculate the minimum cost to reach the ith step
+#         dp[i] = min(dp[i-1], dp[i-2]) + cost[i]
+#     #return the minimum cost to reach the top of the floor
+#     return min(dp[-1], dp[-2])
 
 
-cost = [10,15,20]
-print(minCostClimbingStairs(cost))
+# cost = [10,15,20]
+# print(minCostClimbingStairs(cost))
