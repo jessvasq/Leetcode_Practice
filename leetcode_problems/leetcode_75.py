@@ -1296,6 +1296,8 @@ Consider all the leaves of a binary tree, from left to right order, the values o
 T0 = 0, T1 = 1, T2 = 1, and Tn+3 = Tn + Tn+1 + Tn+2 for n >= 0.
 Given n, return the value of Tn.'''
 
+
+#optimized solution 
 # def tribonacci(n):
 #     if n == 0:
 #         return 0 
@@ -1334,3 +1336,32 @@ Return the minimum cost to reach the top of the floor.'''
 
 # cost = [10,15,20]
 # print(minCostClimbingStairs(cost))
+
+'''509. Fibonacci Number - E
+The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,'''
+#using recursion
+def fib(n):
+    if n==1 or n==2:
+        return 1
+    else:
+        return fib(n-1) + fib(n-2)  
+
+print(fib(4))
+
+#using memoization
+def fib_memo(n):
+    #initialize a dictionary to store the fibonacci numbers
+    memo = {}
+    print('memo', memo)
+    #base case
+    if n == 1 or n == 2:
+        return 1
+    #check if the fibonacci number has already been calculated
+    if n in memo:
+        return memo[n]
+    else:
+        #calculate the fibonacci number and store it in the dictionary
+        memo[n] = fib(n-1) + fib(n-2)
+    return memo[n]
+
+print(fib_memo(40))
