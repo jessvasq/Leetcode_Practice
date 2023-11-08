@@ -1364,4 +1364,17 @@ def fib_memo(n):
         memo[n] = fib(n-1) + fib(n-2)
     return memo[n]
 
-print(fib_memo(40))
+# print(fib_memo(40))
+
+#optimized solution using bottom-up approach
+def fib_btt_up(n):
+    
+    #initialize a list to store the fibonacci numbers
+    fib = [0,1,1]
+    #loop through the range of 2 to n
+    for i in range(3, n+1):
+        #append the sum of the previous two numbers to the list
+        fib.append(fib[i-1] + fib[i-2])
+    return fib[n]
+
+print(fib_btt_up(40))
