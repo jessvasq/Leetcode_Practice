@@ -40,3 +40,36 @@ def fizz_buzz(n):
     return answer
 
 print(fizz_buzz(15))
+
+'''27. Remove Element - E
+Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+
+Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
+
+Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are not important as well as the size of nums.
+Return k.'''
+nums = [3,2,2,3]
+val = 3
+
+def remove_element(nums, val):
+    #use two pointers
+    lo = 0
+    hi = len(nums)-1
+    
+    #while the low pointer is less than or equal to the high pointer
+    while lo <= hi:
+        #if the value at the low pointer is equal to the value we want to remove (val)
+        if nums[lo] == val:
+            #swap the values at the low and high pointers
+            nums[lo], nums[hi] = nums[hi], nums[lo]
+            #high pointer goes down by 1
+            hi -= 1
+        #if the value at the low pointer is not equal to the value we want to remove (val)
+        else:
+            #low pointer goes up by 1
+            lo += 1
+    #return the low pointer as the length of the array, we return lo because the low pointer is the index of the first element that is not equal to val
+    return int(lo)
+
+
+print(remove_element(nums, val))
