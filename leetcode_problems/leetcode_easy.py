@@ -73,3 +73,25 @@ def remove_element(nums, val):
 
 
 print(remove_element(nums, val))
+
+n = 11111111111111111111111111111101
+
+
+'''190. Reverse Bits - E
+Reverse bits of a given 32 bits unsigned integer.'''
+
+def reverse_bits(n):
+    reverse_bits = 0
+    #loop through 32 given bits
+    for i in range(32):
+        #shift the reverse_bits to the left by 1 to make room for the next bit
+        reverse_bits <<= 1
+        print(reverse_bits)
+        #if the last bit of n is 1, then add 1 to reverse_bits
+        if n & 1:
+            reverse_bits += 1
+        #shift n to the right by 1
+        n >>= 1
+    return reverse_bits
+
+print(reverse_bits(n))
