@@ -95,3 +95,29 @@ def reverse_bits(n):
     return reverse_bits
 
 print(reverse_bits(n))
+
+'''
+14. Longest Common Prefix - E
+Write a function to find the longest common prefix string amongst an array of strings.
+If there is no common prefix, return an empty string "".
+'''
+
+strs = ["flower","flow","flight"]
+
+def longestCommonPrefix(strs):
+    #if the list is empty, return an empty string
+    if len(strs) == 0:
+        return ''
+    #set the prefix to the first element in the list
+    prefix = strs[0]
+    #loop through the list starting at the second element
+    for i in range(1, len(strs)):
+        #while the prefix is not in the beginning of the element, remove the last character of the prefix
+        while prefix not in strs[i][:len(prefix)]:
+           #remove the last character of the prefix
+            prefix = prefix[:-1]
+    #return the prefix 
+    return prefix
+
+print(longestCommonPrefix(strs))
+
