@@ -165,3 +165,37 @@ def str_str(haystack, needle):
         return haystack.index(needle)
     
 print(str_str(haystack, needle))
+
+
+        
+'''136. Single Number - E
+Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+
+You must implement a solution with a linear runtime complexity and use only constant extra space.'''
+
+nums2 = [4,1,2,1,2]
+#first solution using count method
+def single_number(nums):
+    for num in nums:
+        if nums.count(num) == 1:
+            return num
+            
+print(single_number(nums2))    
+#second solution using XOR operation 
+def singleNumber(nums):
+    ans = 0 
+    for num in nums:
+        #we use the XOR operator to find the single number. XOring a number with itself is 0. XOring a number with itself results in 0 and the duplicates cancel each other out leaving the single number. The XOR operation returns 1 if the number of inputs is odd and 0 if the number of inputs is even.
+        
+    # | A | B | A XOR B |
+    # |---|---|---------|
+    # | 0 | 0 |    0    |
+    # | 0 | 1 |    1    |
+    # | 1 | 0 |    1    |
+    # | 1 | 1 |    0    |
+
+
+        ans ^= num 
+    return ans
+
+print(singleNumber(nums2))
