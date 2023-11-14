@@ -150,3 +150,18 @@ def contains_duplicate1(nums):
             return True
 
 print(contains_duplicate1(nums))
+
+'''28. Find the Index of the First Occurrence in a String - E
+Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+'''
+haystack = 'leeto'
+needle = 'leetcode'
+
+def str_str(haystack, needle):
+    if  needle not in haystack:
+        return -1
+    else:
+        return haystack.index(needle)
+    
+print(str_str(haystack, needle))
