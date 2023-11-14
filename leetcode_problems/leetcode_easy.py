@@ -121,3 +121,32 @@ def longestCommonPrefix(strs):
 
 print(longestCommonPrefix(strs))
 
+
+
+'''217. Contains Duplicate - E
+Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.'''
+
+nums = [1,2,3,1]
+
+#using a set to remove duplicates and comparing the length of the set to the length of the given list
+
+def contains_duplicate(nums):
+    #create a set from the list of numbers. A set removes duplicates
+    nums_set = set(nums)
+    #if the length of the set is not equal to the length of the list, return True
+    if len(nums_set) != len(nums):
+        return True
+    #else return False
+    else:
+        return False
+    
+print(contains_duplicate(nums))
+
+#using count method
+def contains_duplicate1(nums):
+    for num in nums:
+        x = nums.count(num)
+        if x > 1:
+            return True
+
+print(contains_duplicate1(nums))
