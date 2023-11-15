@@ -199,3 +199,48 @@ def singleNumber(nums):
     return ans
 
 print(singleNumber(nums2))
+
+'''94. Binary Tree Inorder Traversal - W
+Given the root of a binary tree, return the inorder traversal of its nodes' values.
+'''
+
+
+class TreeNode:
+    def __init__(self, val, left, right):
+        self.val = val
+        self.left = None
+        self.right = None
+        
+    #recursive solution
+    def inorder_traversal(self, root):
+        resrtult = []
+        #check if the root is not None
+        if root:
+            #recursively call the function on the left subtree
+            result += self.inorder_traversal(root.left)
+            #print the value of the root
+            result.append(root.val)
+            #recursively call the function on the right subtree
+            result += self.inorder_traversal(root.right)
+            
+    #iterative solution
+    def inorder_traversal1(self, root):
+        #create an empty stack
+        stack = []
+        result = []
+        #while the current node is not None or the stack is not empty
+        while root or stack:
+            #while the root node is not None
+            while root:
+                #append the root node to the stack
+                stack.append(root)
+                #set the root node to the left node
+                root = root.left
+            #pop the root node from the stack
+            root = stack.pop()
+            #append the root node value to the result list
+            result.append(root.val)
+            #set the root node to the right node
+            root = root.right
+        return result
+            
