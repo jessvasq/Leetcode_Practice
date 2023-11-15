@@ -244,3 +244,35 @@ class TreeNode:
             root = root.right
         return result
             
+
+'''108. Convert Sorted Array to Binary Search Tree - E
+Given an integer array nums where the elements are sorted in ascending order, convert it to a height-balanced binary search tree.
+'''
+
+#select the middle element of the array as the root node
+#recursively create the right and left subtrees using the elements on the left and right of the mid element
+
+nums = [-10,-3,0,5,9]
+
+def arrToBst(nums):
+
+    def sortedArrtoBST(nums, start, end):
+        #base case checks if the start is less than the end. If it is continue with the recursion
+        if start <= end:
+            #find the mid 
+            mid = (start + end) // 2
+            #mid element of the array is the root node
+            mid_num = nums[mid]
+            root = TreeNode(mid_num)
+            
+            #recursively create the left and right subtree
+            #left subtree is created using the elements on the left of the mid element, mid-1 is the end of the left subtree
+            root.left = sortedArrtoBST(nums, start, mid-1)
+            #right subtree is created using the elements on the right of the mid element, mid+1 is the start of the right subtree
+            root.right = sortedArrtoBST(nums, mid+1, end)
+            #rertun the root node
+            return root
+    #call the helper function and pass in the array, start=0 and end index=len(nums)-1
+    return sortedArrtoBST(nums, 0, len(nums)-1)
+
+print(arrToBst(nums))
