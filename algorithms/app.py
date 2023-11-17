@@ -208,3 +208,43 @@ def selection_sort(arr):
 
 arr = [20, 4, 10, 2, 3, 1]
 print(selection_sort(arr))
+
+
+'''MERGE SORT
+Divides an array into two halves, sorts each half separately, and then merges them into a single sorted array. The merge() function is used for merging two halves. The merge(arr, l, m, r) is a key process that assumes that arr[l..m] and arr[m+1..r] are sorted and merges the two sorted subarrays into one. '''
+
+
+def merge_sort(arr):
+    if len(arr) > 1: #checks if the length of the array is greater than 1. If not, it means that the array is already sorted.
+        mid = len(arr) // 2 #mid is calculated by dividing the length of the array by 2. This gives us the index of the middle element.
+        left = arr[:mid] #left is assigned the first half of the array, from index 0 to mid.
+        right = arr[mid:] #right is assigned the second half of the array, from index mid to the end.
+        
+        merge_sort(left) #The merge_sort() function is recursively called for left and right.
+        merge_sort(right)
+        
+        i = j = k = 0 #i, j, and k are initialized to 0. 
+        #i is used to track the index of the left array
+        #j is used to track the index of the right array
+        #k is used to track the index of the merged array.
+        
+        while i < len(left) and j < len(right): #The while loop continues as long as i is less than the length of the left array and j is less than the length of the right array.
+            if left[i] < right[j]: #If the element at left[i] is smaller than the element at right[j], it is placed in the merged array and i is incremented by 1.
+                arr[k] = left[i]
+                i += 1
+            else: #Otherwise, the element at right[j] is placed in the merged array and j is incremented by 1.
+                arr[k] = right[j]
+                j += 1
+            k += 1 #k is incremented by 1 after each iteration of the while loop.
+            
+        while i < len(left): #If there are any remaining elements in the left array, they are placed in the merged array.
+            arr[k] = left[i]
+            i += 1
+            k += 1
+            
+        while j < len(right): #If there are any remaining elements in the right array, they are placed in the merged array.
+            arr[k] = right[j]
+            j += 1
+            k += 1 #k is incremented by 1 after each iteration of the while loop and the loop continues until both i and j are greater than or equal to their respective array lengths
+            
+    return arr
