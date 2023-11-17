@@ -188,3 +188,23 @@ insert_sort(arr1)
 print(arr1)
         
 
+'''SELECTION SORT'''
+'''Repeatedly finds the smallest or largest element in the unsorted subarray and places it at the beginning of the unsorted subarray. The sorted subarray is built up one element at a time. '''
+
+def selection_sort(arr):
+    for i in range(len(arr)):
+        #min_idx is initialized to i, which is the index of the first element in the unsorted subarray.
+        min_idx = i
+        
+        #j iterates over the remaining elements in the unsorted subarray. If an element at index j is smaller than the element at min_idx, then min_idx is updated to j.
+        for j in range(i+1, len(arr)):
+            if arr[min_idx] > arr[j]:
+                min_idx = j
+            
+        #After finding the smallest element in the unsorted subarray, it is swapped with the element at the beginning of the unsorted subarray.
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+        
+    return arr
+
+arr = [20, 4, 10, 2, 3, 1]
+print(selection_sort(arr))
