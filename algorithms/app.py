@@ -248,3 +248,17 @@ def merge_sort(arr):
             k += 1 #k is incremented by 1 after each iteration of the while loop and the loop continues until both i and j are greater than or equal to their respective array lengths
             
     return arr
+
+'''QUICK SORT
+Picks an element as a pivot and partitions the given array around the picked pivot. Partitioning is done in such a way that all elements smaller than the pivot are moved to the left of the pivot, and all greater elements are moved to the right of the pivot. The pivot element could be the first element, last element, middle element and random element.'''
+
+def quick_sort(arr):
+    if len(arr) <= 1: #checks if the length of the array is less than or equal to 1. If so, it means that the array is already sorted.
+        return arr
+    
+    pivot = arr[len(arr) // 2] #pivot is assigned the middle element of the array.
+    left = [x for x in arr if x < pivot] #left is assigned a list of all the elements in arr that are smaller than pivot.
+    middle = [x for x in arr if x == pivot] #middle is assigned a list of all the elements in arr that are equal to pivot.
+    right = [x for x in arr if x > pivot] #right is assigned a list of all the elements in arr that are greater than pivot.
+    
+    return quick_sort(left) + middle + quick_sort(right) #The quick_sort() function is recursively called for left and right and the three lists are concatenated and returned.
