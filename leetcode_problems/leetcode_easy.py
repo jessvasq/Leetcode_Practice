@@ -252,30 +252,30 @@ Given an integer array nums where the elements are sorted in ascending order, co
 #select the middle element of the array as the root node
 #recursively create the right and left subtrees using the elements on the left and right of the mid element
 
-nums = [-10,-3,0,5,9]
+# nums = [-10,-3,0,5,9]
 
-def arrToBst(nums):
+# def arrToBst(nums):
 
-    def sortedArrtoBST(nums, start, end):
-        #base case checks if the start is less than the end. If it is continue with the recursion
-        if start <= end:
-            #find the mid 
-            mid = (start + end) // 2
-            #mid element of the array is the root node
-            mid_num = nums[mid]
-            root = TreeNode(mid_num)
+#     def sortedArrtoBST(nums, start, end):
+#         #base case checks if the start is less than the end. If it is continue with the recursion
+#         if start <= end:
+#             #find the mid 
+#             mid = (start + end) // 2
+#             #mid element of the array is the root node
+#             mid_num = nums[mid]
+#             root = TreeNode(mid_num)
             
-            #recursively create the left and right subtree
-            #left subtree is created using the elements on the left of the mid element, mid-1 is the end of the left subtree
-            root.left = sortedArrtoBST(nums, start, mid-1)
-            #right subtree is created using the elements on the right of the mid element, mid+1 is the start of the right subtree
-            root.right = sortedArrtoBST(nums, mid+1, end)
-            #rertun the root node
-            return root
-    #call the helper function and pass in the array, start=0 and end index=len(nums)-1
-    return sortedArrtoBST(nums, 0, len(nums)-1)
+#             #recursively create the left and right subtree
+#             #left subtree is created using the elements on the left of the mid element, mid-1 is the end of the left subtree
+#             root.left = sortedArrtoBST(nums, start, mid-1)
+#             #right subtree is created using the elements on the right of the mid element, mid+1 is the start of the right subtree
+#             root.right = sortedArrtoBST(nums, mid+1, end)
+#             #rertun the root node
+#             return root
+#     #call the helper function and pass in the array, start=0 and end index=len(nums)-1
+#     return sortedArrtoBST(nums, 0, len(nums)-1)
 
-print(arrToBst(nums))
+# print(arrToBst(nums))
 
 '''33. Search in Rotated Sorted Array'''
 '''There is an integer array nums sorted in ascending order (with distinct values).
@@ -313,4 +313,31 @@ You must write an algorithm with O(log n) runtime complexity.'''
 # print(search_target(nums_search, target))
 
             
+
+
+'''66. Plus One - E
+You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
+Increment the large integer by one and return the resulting array of digits.'''
+
         
+nums = [1, 2, 3]
+
+#first solution 
+def plusOne(nums):
+    #loop through the array backwards
+    #-1 is the starting index, -1 is the ending index, -1 is the step
+    for i in range(len(nums)-1, -1, -1):
+        #if the number is 9, set the number to 0
+        if nums[i] == 9:
+            nums[i] = 0
+     
+        #if the number is less than 9, add 1 to the number and return the array
+        else:
+            nums[i] += 1
+            return nums
+    
+        #if all the numbers are 9, add 1 to the beginning of the array and return the array
+        return [1] + nums 
+            
+print(plusOne(nums))
+
