@@ -341,3 +341,50 @@ Increment the large integer by one and return the resulting array of digits.'''
             
 # print(plusOne(nums))
 
+
+b ='aab'
+a='aa'
+c = {}
+
+for i in b:
+    c[i] = c.get(i, 0) + 1
+print(c)
+
+for i in a:
+    if i in c:
+        c[i] -= 1
+        print('t')
+    else:
+        print('f')
+        break
+
+print(c)
+   
+  
+'''
+383. Ransom Note - E
+Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise.
+
+Each letter in magazine can only be used once in ransomNote.'''
+
+def canConstruct(ransomNote, magazine):
+    #create a dictionary from the magazine string
+    mag_dict = {}
+    for i in magazine:
+        #if the letter is in the dictionary, add 1 to the value of the letter. .get() method returns the value of the key. If the key does not exist, it returns 0 
+        mag_dict[i] = mag_dict.get(i, 0) + 1
+    #loop through the ransomNote string
+    for i in ransomNote:
+        #if the letter is in the magazine dictionary
+        if i in mag_dict:
+            #subtract 1 from the value of the letter
+            mag_dict[i] -= 1
+            #if the value of the letter is less than 0, return False
+            if mag_dict[i] < 0:
+                return False
+        #if the letter is not in the magazine dictionary, return False
+        else:
+            return False
+    return True
+
+print(canConstruct(a,b))
