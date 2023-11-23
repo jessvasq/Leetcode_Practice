@@ -388,3 +388,30 @@ def canConstruct(ransomNote, magazine):
     return True
 
 print(canConstruct(a,b))
+
+'''242. Valid Anagram - E
+Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+'''
+
+s='anagram'
+t='gramana'
+
+def isAnagram(s, t):
+    if len(s) != len(t):
+        return False
+    
+    #use dictionaries  
+    s_dict = {}
+    t_dict = {}
+    
+    for i in s:
+        s_dict[i] = s_dict.get(i,0) + 1
+        
+    for i in t:
+        t_dict[i] = t_dict.get(i, 0) + 1
+        
+    return t_dict == s_dict
+        
+
+print(isAnagram(s,t))
