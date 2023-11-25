@@ -415,3 +415,30 @@ def isAnagram(s, t):
         
 
 print(isAnagram(s,t))
+
+nums = [0,1,2,4,5,7]
+
+
+'''228. Summary Ranges - E
+You are given a sorted unique integer array nums.
+
+A range [a,b] is the set of all integers from a to b (inclusive).
+
+Return the smallest sorted list of ranges that cover all the numbers in the array exactly. That is, each element of nums is covered by exactly one of the ranges, and there is no integer x such that x is in one of the ranges but not in nums.
+Each range [a,b] in the list should be output as:'''
+
+
+def summaryRanges(nums):
+    #create an empty list to store the ranges
+    ranges = []
+    #loop through the nums array
+    for i in nums:
+        #if the ranges list is empty or the last element of the ranges list is not equal to the current element - 1, append the current element to the ranges list
+        if not ranges or ranges[-1][-1] + 1 != i:
+            ranges.append([])
+        #append the current element to the last element of the ranges list
+        ranges[-1][1:] = [i]
+    #return the ranges list
+    return ['->'.join(map(str, r)) for r in ranges]
+
+print(summaryRanges(nums))
