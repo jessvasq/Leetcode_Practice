@@ -442,3 +442,33 @@ Each range [a,b] in the list should be output as:'''
 #     return ['->'.join(map(str, r)) for r in ranges]
 
 # print(summaryRanges(nums))
+
+'''226. Invert a binary tree
+Given the root of a binary tree, invert the tree, and return its root.'''
+
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.right = None
+        self.left = None
+        
+
+def reverse_bt(root):
+    if root is None:
+        return None
+    if root:
+        root.left, root.right = root.right, root.left
+        reverse_bt(root.left)
+        reverse_bt(root.right)
+        
+    return root
+
+root = TreeNode(4)
+root.left = TreeNode(2)
+root.right = TreeNode(7)
+root.left.left = TreeNode(1)
+root.left.right = TreeNode(3)
+root.right.left = TreeNode(6)
+root.right.left = TreeNode(9)
+
+reverse_bt(root)
