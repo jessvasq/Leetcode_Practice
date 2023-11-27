@@ -367,56 +367,56 @@ Given two strings ransomNote and magazine, return true if ransomNote can be cons
 
 Each letter in magazine can only be used once in ransomNote.'''
 
-def canConstruct(ransomNote, magazine):
-    #create a dictionary from the magazine string
-    mag_dict = {}
-    for i in magazine:
-        #if the letter is in the dictionary, add 1 to the value of the letter. .get() method returns the value of the key. If the key does not exist, it returns 0 
-        mag_dict[i] = mag_dict.get(i, 0) + 1
-    #loop through the ransomNote string
-    for i in ransomNote:
-        #if the letter is in the magazine dictionary
-        if i in mag_dict:
-            #subtract 1 from the value of the letter
-            mag_dict[i] -= 1
-            #if the value of the letter is less than 0, return False
-            if mag_dict[i] < 0:
-                return False
-        #if the letter is not in the magazine dictionary, return False
-        else:
-            return False
-    return True
+# def canConstruct(ransomNote, magazine):
+#     #create a dictionary from the magazine string
+#     mag_dict = {}
+#     for i in magazine:
+#         #if the letter is in the dictionary, add 1 to the value of the letter. .get() method returns the value of the key. If the key does not exist, it returns 0 
+#         mag_dict[i] = mag_dict.get(i, 0) + 1
+#     #loop through the ransomNote string
+#     for i in ransomNote:
+#         #if the letter is in the magazine dictionary
+#         if i in mag_dict:
+#             #subtract 1 from the value of the letter
+#             mag_dict[i] -= 1
+#             #if the value of the letter is less than 0, return False
+#             if mag_dict[i] < 0:
+#                 return False
+#         #if the letter is not in the magazine dictionary, return False
+#         else:
+#             return False
+#     return True
 
-print(canConstruct(a,b))
+# print(canConstruct(a,b))
 
 '''242. Valid Anagram - E
 Given two strings s and t, return true if t is an anagram of s, and false otherwise.
 
 '''
 
-s='anagram'
-t='gramana'
+# s='anagram'
+# t='gramana'
 
-def isAnagram(s, t):
-    if len(s) != len(t):
-        return False
+# def isAnagram(s, t):
+#     if len(s) != len(t):
+#         return False
     
-    #use dictionaries  
-    s_dict = {}
-    t_dict = {}
+#     #use dictionaries  
+#     s_dict = {}
+#     t_dict = {}
     
-    for i in s:
-        s_dict[i] = s_dict.get(i,0) + 1
+#     for i in s:
+#         s_dict[i] = s_dict.get(i,0) + 1
         
-    for i in t:
-        t_dict[i] = t_dict.get(i, 0) + 1
+#     for i in t:
+#         t_dict[i] = t_dict.get(i, 0) + 1
         
-    return t_dict == s_dict
+#     return t_dict == s_dict
         
 
-print(isAnagram(s,t))
+# print(isAnagram(s,t))
 
-nums = [0,1,2,4,5,7]
+# nums = [0,1,2,4,5,7]
 
 
 '''228. Summary Ranges - E
@@ -428,17 +428,17 @@ Return the smallest sorted list of ranges that cover all the numbers in the arra
 Each range [a,b] in the list should be output as:'''
 
 
-def summaryRanges(nums):
-    #create an empty list to store the ranges
-    ranges = []
-    #loop through the nums array
-    for i in nums:
-        #if the ranges list is empty or the last element of the ranges list is not equal to the current element - 1, append the current element to the ranges list
-        if not ranges or ranges[-1][-1] + 1 != i:
-            ranges.append([])
-        #append the current element to the last element of the ranges list
-        ranges[-1][1:] = [i]
-    #return the ranges list
-    return ['->'.join(map(str, r)) for r in ranges]
+# def summaryRanges(nums):
+#     #create an empty list to store the ranges
+#     ranges = []
+#     #loop through the nums array
+#     for i in nums:
+#         #if the ranges list is empty or the last element of the ranges list is not equal to the current element - 1, append the current element to the ranges list
+#         if not ranges or ranges[-1][-1] + 1 != i:
+#             ranges.append([])
+#         #append the current element to the last element of the ranges list
+#         ranges[-1][1:] = [i]
+#     #return the ranges list
+#     return ['->'.join(map(str, r)) for r in ranges]
 
-print(summaryRanges(nums))
+# print(summaryRanges(nums))
