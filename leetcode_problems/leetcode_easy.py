@@ -472,3 +472,44 @@ root.right.left = TreeNode(6)
 root.right.left = TreeNode(9)
 
 reverse_bt(root)
+
+'''1. Two Sum - E
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+'''
+nums = [3,3]
+target = 6
+
+# we could use two pointer method to solve this problem however it would be an inefficient approach as the array is not sorted 
+def two_sum(nums, target):
+    slow=0
+    fast=1
+    for num in range(len(nums)):
+        if nums[slow] + nums[fast] == target:
+           return [slow, fast]
+    
+        else:
+            slow += 1
+            fast += 1
+
+    return []
+    
+print(two_sum(nums, target))  
+
+#efficient solution using a dictionary/hashmap
+def two_sum1(nums, target):
+    #create a dictionary to store the indices of the elements
+    nums_dict = {}
+    #loop through the nums array
+    for i in range(len(nums)):
+        x = target - nums[i]
+        #if the target - the current element is in the dictionary, return the index of the current element and the index of the target - the current element
+        if x in nums_dict:
+            return [nums_dict[x], i]
+        #if the target - the current element is not in the dictionary, add the current element to the dictionary
+        else:
+            nums_dict[nums[i]] = i
+    return []  
+
+print(two_sum1(nums, target))  
