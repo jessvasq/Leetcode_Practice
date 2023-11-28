@@ -513,3 +513,25 @@ def two_sum1(nums, target):
     return []  
 
 print(two_sum1(nums, target))  
+
+
+'''219. Contains Duplicate II - E
+Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.'''
+
+nums = [1,2,3,1]
+k = 3
+
+def contains_duplicate(nums, k):
+    #create a dictionary to store the indices of the elements
+    nums_dict = {}
+    #loop through the nums array
+    for i in range(len(nums)):
+        #if the current element is in the dictionary and the difference between the current index and the index of the current element in the dictionary is less than or equal to k, return True
+        if nums[i] in nums_dict and i - nums_dict[nums[i]] <= k:
+            return True
+        #if the current element is not in the dictionary, add the current element to the dictionary
+        else:
+            nums_dict[nums[i]] = i
+    return False
+
+print(contains_duplicate(nums, k))
