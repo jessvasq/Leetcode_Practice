@@ -556,3 +556,64 @@ def is_same_tree(p, q):
     else:
         #recursively call the function on the left and right subtrees of p and q 
         return is_same_tree(p.left, q.left) and is_same_tree(p.right, q.right)
+
+
+arr =[[2, 4, 5, 4, 2, 4 ],
+[2, 3, 5, 4, 2, 3 ],
+[2, 4, 6, 4, 2, 5 ],
+[2, 4, 8, 4, 1, 2 ]]
+
+rows = len(arr)
+columns = len(arr[0])
+
+for row in range(rows):
+    print(arr[row])
+    for col in arr[row]:
+        print(col)
+        
+
+'''36. Valid Sudoku - E
+Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+Each row must contain the digits 1-9 without repetition.
+Each column must contain the digits 1-9 without repetition.
+Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+Note:
+A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+Only the filled cells need to be validated according to the mentioned rules.'''
+
+def isValidSudoku(board):
+    def is_valid(arr):
+        #create a set to store the numbers
+        seen = set()
+        #loop through the array
+        for i in arr:
+            if i != '.':
+                if i in seen:
+                #if the number is in the set, return False
+                    return False
+                #if the number is not in the set, add the number to the set
+                seen.add(i)
+        return True
+    
+    #check if the rows are valid
+    for row in range(9):
+        #call the is_valid function on the row
+        if not is_valid(board[row]):
+            return False
+        
+    #check if the columns are valid by transposing the board
+    for col in range(9):
+        column = [board[row][col] for row in range(9)]
+        if not is_valid(column):
+            return False
+        
+    #check if the 3x3 sub-boxes are valid
+    for i in range(0, 9, 3):
+        #loop through the rows
+        for row in range(0, 9, 3):
+            #create a list of the 3x3 sub-boxes
+            #board[x][y] is the element in the 3x3 sub-boxes 
+            sub_box = [board[x][y] for x in range(i, i+3) for y in range(row, row+3)]
+            if not is_valid(sub_box):
+                return False
+    return True
