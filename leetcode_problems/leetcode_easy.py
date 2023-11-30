@@ -535,3 +535,24 @@ def contains_duplicate(nums, k):
     return False
 
 print(contains_duplicate(nums, k))
+
+
+'''100. Same Tree - E
+Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+
+ '''
+
+def is_same_tree(p, q):
+    #we check if both p and q are None, if they are return True
+    if p is None and q is None:
+        return True
+    #if one of them is None and the other is not, return False
+    elif p is None or q is None:
+        return False
+    #check if the values of the nodes are not equal, if they are not return False
+    elif p.val != q.val:
+        return False
+    else:
+        #recursively call the function on the left and right subtrees of p and q 
+        return is_same_tree(p.left, q.left) and is_same_tree(p.right, q.right)
