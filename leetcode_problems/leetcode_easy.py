@@ -213,7 +213,8 @@ Given the root of a binary tree, return the inorder traversal of its nodes' valu
         
 #     #recursive solution
 #     def inorder_traversal(self, root):
-#         resrtult = []
+#         #create an empty list to store the result
+#         result = []
 #         #check if the root is not None
 #         if root:
 #             #recursively call the function on the left subtree
@@ -342,23 +343,23 @@ Increment the large integer by one and return the resulting array of digits.'''
 # print(plusOne(nums))
 
 
-b ='aab'
-a='aa'
-c = {}
+# b ='aab'
+# a='aa'
+# c = {}
 
-for i in b:
-    c[i] = c.get(i, 0) + 1
-print(c)
+# for i in b:
+#     c[i] = c.get(i, 0) + 1
+# print(c)
 
-for i in a:
-    if i in c:
-        c[i] -= 1
-        print('t')
-    else:
-        print('f')
-        break
+# for i in a:
+#     if i in c:
+#         c[i] -= 1
+#         print('t')
+#     else:
+#         print('f')
+#         break
 
-print(c)
+# print(c)
    
   
 '''
@@ -454,8 +455,6 @@ class TreeNode:
         
 
 def reverse_bt(root):
-    if root is None:
-        return None
     if root:
         root.left, root.right = root.right, root.left
         reverse_bt(root.left)
@@ -558,20 +557,6 @@ def is_same_tree(p, q):
         return is_same_tree(p.left, q.left) and is_same_tree(p.right, q.right)
 
 
-arr =[[2, 4, 5, 4, 2, 4 ],
-[2, 3, 5, 4, 2, 3 ],
-[2, 4, 6, 4, 2, 5 ],
-[2, 4, 8, 4, 1, 2 ]]
-
-rows = len(arr)
-columns = len(arr[0])
-
-for row in range(rows):
-    print(arr[row])
-    for col in arr[row]:
-        print(col)
-        
-
 '''36. Valid Sudoku - E
 Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
 Each row must contain the digits 1-9 without repetition.
@@ -582,6 +567,7 @@ A Sudoku board (partially filled) could be valid but is not necessarily solvable
 Only the filled cells need to be validated according to the mentioned rules.'''
 
 def isValidSudoku(board):
+    #helper function to check if the rows, columns and 3x3 sub-boxes are valid meaning they do not contain duplicates
     def is_valid(arr):
         #create a set to store the numbers
         seen = set()
