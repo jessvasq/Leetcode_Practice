@@ -1171,42 +1171,42 @@ Find a contiguous subarray whose length is equal to k that has the maximum avera
 '''Given two integers x and n, write a function to compute xn. We may assume that x and n are small and overflow doesn’t happen.'''
 
 #Naive Approach. Time ciomplexity: O(n), Space complexity: O(1)
-def power(x, n):
+# def power(x, n):
  
-    # initialize result by 1
-    ans = 1
+#     # initialize result by 1
+#     ans = 1
  
-    # Multiply x for n times
-    for i in range(n):
-        ans = ans * x
+#     # Multiply x for n times
+#     for i in range(n):
+#         ans = ans * x
  
-    return ans
-x=2
-n=3
-print(power(x,n))
+#     return ans
+# x=2
+# n=3
+# print(power(x,n))
 
 #using Divide and conquer approach. Time Complexity O(n), Space Complexity O(n)
-def power_1(x, n):
+# def power_1(x, n):
  
-    # base condition
-    if n == 0:
-        return 1
+#     # base condition
+#     if n == 0:
+#         return 1
  
-    # calculate subproblem recursively, pow is the recursive function
-    pow = power(x, n // 2)
+#     # calculate subproblem recursively, pow is the recursive function
+#     pow = power(x, n // 2)
  
-    # if n is even
-    if n % 2 == 0:
-        return pow * pow
+#     # if n is even
+#     if n % 2 == 0:
+#         return pow * pow
  
-    # if n is odd
-    else:
-        return x * pow * pow
+#     # if n is odd
+#     else:
+#         return x * pow * pow
 
-print(power_1(x, n))
+# print(power_1(x, n))
 
-#using ** operator. Time Complexity O(log n), Space Complexity O(1)
-def power_2(x, n):
-    return x ** n
+# #using ** operator. Time Complexity O(log n), Space Complexity O(1)
+# def power_2(x, n):
+#     return x ** n
 
-print(power_2(x, n))
+# print(power_2(x, n))

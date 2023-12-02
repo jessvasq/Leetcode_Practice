@@ -447,93 +447,93 @@ Each range [a,b] in the list should be output as:'''
 '''226. Invert a binary tree
 Given the root of a binary tree, invert the tree, and return its root.'''
 
-class TreeNode:
-    def __init__(self, value):
-        self.value = value
-        self.right = None
-        self.left = None
+# class TreeNode:
+#     def __init__(self, value):
+#         self.value = value
+#         self.right = None
+#         self.left = None
         
 
-def reverse_bt(root):
-    if root:
-        root.left, root.right = root.right, root.left
-        reverse_bt(root.left)
-        reverse_bt(root.right)
+# def reverse_bt(root):
+#     if root:
+#         root.left, root.right = root.right, root.left
+#         reverse_bt(root.left)
+#         reverse_bt(root.right)
         
-    return root
+#     return root
 
-root = TreeNode(4)
-root.left = TreeNode(2)
-root.right = TreeNode(7)
-root.left.left = TreeNode(1)
-root.left.right = TreeNode(3)
-root.right.left = TreeNode(6)
-root.right.left = TreeNode(9)
+# root = TreeNode(4)
+# root.left = TreeNode(2)
+# root.right = TreeNode(7)
+# root.left.left = TreeNode(1)
+# root.left.right = TreeNode(3)
+# root.right.left = TreeNode(6)
+# root.right.left = TreeNode(9)
 
-reverse_bt(root)
+# reverse_bt(root)
 
 '''1. Two Sum - E
 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
 '''
-nums = [3,3]
-target = 6
+# nums = [3,3]
+# target = 6
 
-# we could use two pointer method to solve this problem however it would be an inefficient approach as the array is not sorted 
-def two_sum(nums, target):
-    slow=0
-    fast=1
-    for num in range(len(nums)):
-        if nums[slow] + nums[fast] == target:
-           return [slow, fast]
+# # we could use two pointer method to solve this problem however it would be an inefficient approach as the array is not sorted 
+# def two_sum(nums, target):
+#     slow=0
+#     fast=1
+#     for num in range(len(nums)):
+#         if nums[slow] + nums[fast] == target:
+#            return [slow, fast]
     
-        else:
-            slow += 1
-            fast += 1
+#         else:
+#             slow += 1
+#             fast += 1
 
-    return []
+#     return []
     
-print(two_sum(nums, target))  
+# print(two_sum(nums, target))  
 
-#efficient solution using a dictionary/hashmap
-def two_sum1(nums, target):
-    #create a dictionary to store the indices of the elements
-    nums_dict = {}
-    #loop through the nums array
-    for i in range(len(nums)):
-        x = target - nums[i]
-        #if the target - the current element is in the dictionary, return the index of the current element and the index of the target - the current element
-        if x in nums_dict:
-            return [nums_dict[x], i]
-        #if the target - the current element is not in the dictionary, add the current element to the dictionary
-        else:
-            nums_dict[nums[i]] = i
-    return []  
+# #efficient solution using a dictionary/hashmap
+# def two_sum1(nums, target):
+#     #create a dictionary to store the indices of the elements
+#     nums_dict = {}
+#     #loop through the nums array
+#     for i in range(len(nums)):
+#         x = target - nums[i]
+#         #if the target - the current element is in the dictionary, return the index of the current element and the index of the target - the current element
+#         if x in nums_dict:
+#             return [nums_dict[x], i]
+#         #if the target - the current element is not in the dictionary, add the current element to the dictionary
+#         else:
+#             nums_dict[nums[i]] = i
+#     return []  
 
-print(two_sum1(nums, target))  
+# print(two_sum1(nums, target))  
 
 
 '''219. Contains Duplicate II - E
 Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.'''
 
-nums = [1,2,3,1]
-k = 3
+# nums = [1,2,3,1]
+# k = 3
 
-def contains_duplicate(nums, k):
-    #create a dictionary to store the indices of the elements
-    nums_dict = {}
-    #loop through the nums array
-    for i in range(len(nums)):
-        #if the current element is in the dictionary and the difference between the current index and the index of the current element in the dictionary is less than or equal to k, return True
-        if nums[i] in nums_dict and i - nums_dict[nums[i]] <= k:
-            return True
-        #if the current element is not in the dictionary, add the current element to the dictionary
-        else:
-            nums_dict[nums[i]] = i
-    return False
+# def contains_duplicate(nums, k):
+#     #create a dictionary to store the indices of the elements
+#     nums_dict = {}
+#     #loop through the nums array
+#     for i in range(len(nums)):
+#         #if the current element is in the dictionary and the difference between the current index and the index of the current element in the dictionary is less than or equal to k, return True
+#         if nums[i] in nums_dict and i - nums_dict[nums[i]] <= k:
+#             return True
+#         #if the current element is not in the dictionary, add the current element to the dictionary
+#         else:
+#             nums_dict[nums[i]] = i
+#     return False
 
-print(contains_duplicate(nums, k))
+# print(contains_duplicate(nums, k))
 
 
 '''100. Same Tree - E
@@ -542,19 +542,19 @@ Two binary trees are considered the same if they are structurally identical, and
 
  '''
 
-def is_same_tree(p, q):
-    #we check if both p and q are None, if they are return True
-    if p is None and q is None:
-        return True
-    #if one of them is None and the other is not, return False
-    elif p is None or q is None:
-        return False
-    #check if the values of the nodes are not equal, if they are not return False
-    elif p.val != q.val:
-        return False
-    else:
-        #recursively call the function on the left and right subtrees of p and q 
-        return is_same_tree(p.left, q.left) and is_same_tree(p.right, q.right)
+# def is_same_tree(p, q):
+#     #we check if both p and q are None, if they are return True
+#     if p is None and q is None:
+#         return True
+#     #if one of them is None and the other is not, return False
+#     elif p is None or q is None:
+#         return False
+#     #check if the values of the nodes are not equal, if they are not return False
+#     elif p.val != q.val:
+#         return False
+#     else:
+#         #recursively call the function on the left and right subtrees of p and q 
+#         return is_same_tree(p.left, q.left) and is_same_tree(p.right, q.right)
 
 
 '''36. Valid Sudoku - E
@@ -566,40 +566,40 @@ Note:
 A Sudoku board (partially filled) could be valid but is not necessarily solvable.
 Only the filled cells need to be validated according to the mentioned rules.'''
 
-def isValidSudoku(board):
-    #helper function to check if the rows, columns and 3x3 sub-boxes are valid meaning they do not contain duplicates
-    def is_valid(arr):
-        #create a set to store the numbers
-        seen = set()
-        #loop through the array
-        for i in arr:
-            if i != '.':
-                if i in seen:
-                #if the number is in the set, return False
-                    return False
-                #if the number is not in the set, add the number to the set
-                seen.add(i)
-        return True
+# def isValidSudoku(board):
+#     #helper function to check if the rows, columns and 3x3 sub-boxes are valid meaning they do not contain duplicates
+#     def is_valid(arr):
+#         #create a set to store the numbers
+#         seen = set()
+#         #loop through the array
+#         for i in arr:
+#             if i != '.':
+#                 if i in seen:
+#                 #if the number is in the set, return False
+#                     return False
+#                 #if the number is not in the set, add the number to the set
+#                 seen.add(i)
+#         return True
     
-    #check if the rows are valid
-    for row in range(9):
-        #call the is_valid function on the row
-        if not is_valid(board[row]):
-            return False
+#     #check if the rows are valid
+#     for row in range(9):
+#         #call the is_valid function on the row
+#         if not is_valid(board[row]):
+#             return False
         
-    #check if the columns are valid by transposing the board
-    for col in range(9):
-        column = [board[row][col] for row in range(9)]
-        if not is_valid(column):
-            return False
+#     #check if the columns are valid by transposing the board
+#     for col in range(9):
+#         column = [board[row][col] for row in range(9)]
+#         if not is_valid(column):
+#             return False
         
-    #check if the 3x3 sub-boxes are valid
-    for i in range(0, 9, 3):
-        #loop through the rows
-        for row in range(0, 9, 3):
-            #create a list of the 3x3 sub-boxes
-            #board[x][y] is the element in the 3x3 sub-boxes 
-            sub_box = [board[x][y] for x in range(i, i+3) for y in range(row, row+3)]
-            if not is_valid(sub_box):
-                return False
-    return True
+#     #check if the 3x3 sub-boxes are valid
+#     for i in range(0, 9, 3):
+#         #loop through the rows
+#         for row in range(0, 9, 3):
+#             #create a list of the 3x3 sub-boxes
+#             #board[x][y] is the element in the 3x3 sub-boxes 
+#             sub_box = [board[x][y] for x in range(i, i+3) for y in range(row, row+3)]
+#             if not is_valid(sub_box):
+#                 return False
+#     return True
