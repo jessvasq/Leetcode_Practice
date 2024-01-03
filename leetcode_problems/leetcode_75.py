@@ -1339,42 +1339,42 @@ Return the minimum cost to reach the top of the floor.'''
 
 '''509. Fibonacci Number - E
 The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,'''
-#using recursion
-def fib(n):
-    if n==1 or n==2:
-        return 1
-    else:
-        return fib(n-1) + fib(n-2)  
+# #using recursion
+# def fib(n):
+#     if n==1 or n==2:
+#         return 1
+#     else:
+#         return fib(n-1) + fib(n-2)  
 
-print(fib(4))
+# print(fib(4))
 
-#using memoization
-def fib_memo(n):
-    #initialize a dictionary to store the fibonacci numbers
-    memo = {}
-    print('memo', memo)
-    #base case
-    if n == 1 or n == 2:
-        return 1
-    #check if the fibonacci number has already been calculated
-    if n in memo:
-        return memo[n]
-    else:
-        #calculate the fibonacci number and store it in the dictionary
-        memo[n] = fib(n-1) + fib(n-2)
-    return memo[n]
+# #using memoization
+# def fib_memo(n):
+#     #initialize a dictionary to store the fibonacci numbers
+#     memo = {}
+#     print('memo', memo)
+#     #base case
+#     if n == 1 or n == 2:
+#         return 1
+#     #check if the fibonacci number has already been calculated
+#     if n in memo:
+#         return memo[n]
+#     else:
+#         #calculate the fibonacci number and store it in the dictionary
+#         memo[n] = fib(n-1) + fib(n-2)
+#     return memo[n]
 
-# print(fib_memo(40))
+# # print(fib_memo(40))
 
-#optimized solution using bottom-up approach
-def fib_btt_up(n):
+# #optimized solution using bottom-up approach
+# def fib_btt_up(n):
     
-    #initialize a list to store the fibonacci numbers
-    fib = [0,1,1]
-    #loop through the range of 2 to n
-    for i in range(3, n+1):
-        #append the sum of the previous two numbers to the list
-        fib.append(fib[i-1] + fib[i-2])
-    return fib[n]
+#     #initialize a list to store the fibonacci numbers
+#     fib = [0,1,1]
+#     #loop through the range of 2 to n
+#     for i in range(3, n+1):
+#         #append the sum of the previous two numbers to the list
+#         fib.append(fib[i-1] + fib[i-2])
+#     return fib[n]
 
-print(fib_btt_up(40))
+# print(fib_btt_up(40))

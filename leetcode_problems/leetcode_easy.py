@@ -609,36 +609,36 @@ Only the filled cells need to be validated according to the mentioned rules.'''
 '''101. Symmetric Tree - E
 Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
 '''
-class TreeNode:
-    def __init__(self, value):
-        self.value = value
-        self.right = None
-        self.left = None
+# class TreeNode:
+#     def __init__(self, value):
+#         self.value = value
+#         self.right = None
+#         self.left = None
 
-def symmetric_tree(root):
-    #create a helper function to traverse the tree
-    def traverse_bt(right, left):
-        #check if the right and left nodes are None, if they are return True
-        if right is None and left is None:
-            return True
-        #if either side is None, return False
-        elif right is None or left is None:
-            return False
-        #if the values of the right and left nodes are not equal, return False
-        elif right.value != left.value:
-            return False
-        #else recursively call the function on the right and left subtrees of the root  
-        else:
-            return traverse_bt(right.right, left.left) and traverse_bt(right.left, left.right)
-    #call the helper function on the right and left subtrees of the root
-    return traverse_bt(root.right, root.left)
+# def symmetric_tree(root):
+#     #create a helper function to traverse the tree
+#     def traverse_bt(right, left):
+#         #check if the right and left nodes are None, if they are return True
+#         if right is None and left is None:
+#             return True
+#         #if either side is None, return False
+#         elif right is None or left is None:
+#             return False
+#         #if the values of the right and left nodes are not equal, return False
+#         elif right.value != left.value:
+#             return False
+#         #else recursively call the function on the right and left subtrees of the root  
+#         else:
+#             return traverse_bt(right.right, left.left) and traverse_bt(right.left, left.right)
+#     #call the helper function on the right and left subtrees of the root
+#     return traverse_bt(root.right, root.left)
 
-root = TreeNode(1)
-root.left = TreeNode(2)
-root.right = TreeNode(2)
-root.left.left = TreeNode(3)
-root.left.right = TreeNode(4)
-root.right.left = TreeNode(4)
-root.right.right = TreeNode(3)
+# root = TreeNode(1)
+# root.left = TreeNode(2)
+# root.right = TreeNode(2)
+# root.left.left = TreeNode(3)
+# root.left.right = TreeNode(4)
+# root.right.left = TreeNode(4)
+# root.right.right = TreeNode(3)
 
-print(symmetric_tree(root))
+# print(symmetric_tree(root))
