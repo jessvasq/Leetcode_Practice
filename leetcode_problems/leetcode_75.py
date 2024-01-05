@@ -5,13 +5,13 @@
 
 The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.'''
 
-
+#this solution uses two pointers, one at the beginning and one at the end of the string. We swap the vowels until the two pointers meet in the middle
 # s="hello"
 
 
 # def reverse_vowel(s):
 #     vowels = 'aeiouAEIOU'
-#     s=list(s) #convert to a list to make it mutable 
+#     s=list(s) #convert to a list to make it mutable. A mutable object can be changed after it is created, and an immutable object can’t.
 #     left, right = 0, len(s)-1
     
 #     while left < right:
@@ -37,6 +37,10 @@ The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower an
 
 '''1768. Merge Strings Alternately'''
 '''You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the end of the merged string.Return the merged string.'''
+# word1 = "ab"
+# word2 = "pqrs"
+
+# the solution below uses two pointers to keep track of the current index of each word. We append the letters to the merged_word until we reach the end of one of the words. Then we append the remaining letters of the other word to the merged_word 
 
 # def merge_alternately(word1, word2):
 #     lo = 0
@@ -65,11 +69,12 @@ The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower an
 
 
 
-'''1431. Kids with the greates number of candies '''
+'''1431. Kids with the greatest number of candies '''
 '''There are n kids with candies. You are given an integer array candies, where each candies[i] represents the number of candies the ith kid has, and an integer extraCandies, denoting the number of extra candies that you have.
 Return a boolean array result of length n, where result[i] is true if, after giving the ith kid all the extraCandies, they will have the greatest number of candies among all the kids, or false otherwise.
 Note that multiple kids can have the greatest number of candies.'''
 
+#this solution uses the max() function to find the max number of candies in the array. Then we iterate through the array and check if the current kid with candies + extra candies is greater or equal to max_num candies. If yes, return True, else False 
 # def kids_with_candies(candies, extra_candies):
 #     #Find the max_num in the array
 #     max_num_candies = max(candies)
@@ -98,9 +103,12 @@ Note that s may contain leading or trailing spaces or multiple spaces between tw
 '''
 
 # s = "the sky is blue"
+#this solution uses the built-in split() function to split the string into a list of words. Then we reverse the list and join the words with a space in between
 
 # def reverseWords(s):
+# strip the leading and trailing spaces
 #     s = s.strip()
+# split the string into a list of words
 #     s = s.split()
 #     lo=0
 #     hi=len(s)-1
