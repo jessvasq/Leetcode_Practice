@@ -193,6 +193,8 @@ Given an array of integers arr, return true if the number of occurrences of each
 
 # arr = [1,2,2,1,1,3]
 
+# this solution uses two dictionaries to keep track of the number of occurrences of each value and the number of unique occurrences. We iterate through the dictionary of occurrences and check if the count is already in the dictionary of unique occurrences. If yes, return False, else True
+
 # def uniqueOccurrence(arr):
 #     occurrence_dict = {}
 #     unique_count = {}
@@ -218,11 +220,14 @@ A row and column pair is considered equal if they contain the same elements in t
 # def equal_pairs(grid):
 # grid = [[3,1,2,2],[1,4,4,5],[2,4,2,2],[2,4,2,2]]
 
+#this solution iterates through each row and column and checks if they are equal. If yes, increment count by 1
+
 # def countEqualRowColumnPairs(grid):
 #     count = 0
 
 #     for row in range(len(grid)):
 #         for column in range(len(grid)):
+## Check if the row and column are equal. grid[k][column] is the value at the current row and column
 #             if grid[row] == [grid[k][column] for k in range(len(grid))]:
 #                 count += 1
 #     return count
@@ -234,25 +239,27 @@ A row and column pair is considered equal if they contain the same elements in t
 Given an array of strings strs, group the anagrams together. You can return the answer in any order.
 An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.'''
 
-# strs = ["eat","tea","tan","ate","nat","bat"]
-# def group_anagrams(strs):
-#     anagrams = {}
+strs = ["eat","tea","tan","ate","nat","bat"]
+#this solution uses a dictionary to keep track of the anagrams. We sort each word and use it as a key in the dictionary. If the key is not in the dictionary, we create a new list. If the key is already in the dictionary, we append the word to the list of anagrams
 
-#     for word in strs:
-#         #sort the word to create a key to be added to the dict
-#         sorted_word = ''.join(sorted(word))
-#            #create a new list if the key is not in the dict
-#         if sorted_word not in anagrams:
-#             anagrams[sorted_word] = [word]
-#         else:
-#             #append the word to the list of anagrams 
-#             anagrams[sorted_word].append(word)
-#             print('dict', anagrams)
+def group_anagrams(strs):
+    anagrams = {}
+
+    for word in strs:
+        #sort the word to create a key to be added to the dict
+        sorted_word = ''.join(sorted(word))
+           #create a new list if the key is not in the dict
+        if sorted_word not in anagrams:
+            anagrams[sorted_word] = [word]
+        else:
+            #append the word to the list of anagrams 
+            anagrams[sorted_word].append(word)
+            print('dict', anagrams)
             
-#     #convert the values into a list   
-#     return list(anagrams.values())
+    #convert the values into a list   
+    return list(anagrams.values())
 
-# print(group_anagrams(strs))
+print(group_anagrams(strs))
 
 
 '''----------------------------------------------- QUEUES/STACKS--------------------------------------------------------------------------------------------'''
