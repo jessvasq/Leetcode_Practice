@@ -239,27 +239,27 @@ A row and column pair is considered equal if they contain the same elements in t
 Given an array of strings strs, group the anagrams together. You can return the answer in any order.
 An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.'''
 
-strs = ["eat","tea","tan","ate","nat","bat"]
+# strs = ["eat","tea","tan","ate","nat","bat"]
 #this solution uses a dictionary to keep track of the anagrams. We sort each word and use it as a key in the dictionary. If the key is not in the dictionary, we create a new list. If the key is already in the dictionary, we append the word to the list of anagrams
 
-def group_anagrams(strs):
-    anagrams = {}
+# def group_anagrams(strs):
+#     anagrams = {}
 
-    for word in strs:
-        #sort the word to create a key to be added to the dict
-        sorted_word = ''.join(sorted(word))
-           #create a new list if the key is not in the dict
-        if sorted_word not in anagrams:
-            anagrams[sorted_word] = [word]
-        else:
-            #append the word to the list of anagrams 
-            anagrams[sorted_word].append(word)
-            print('dict', anagrams)
+#     for word in strs:
+#         #sort the word to create a key to be added to the dict
+#         sorted_word = ''.join(sorted(word))
+#            #create a new list if the key is not in the dict
+#         if sorted_word not in anagrams:
+#             anagrams[sorted_word] = [word]
+#         else:
+#             #append the word to the list of anagrams 
+#             anagrams[sorted_word].append(word)
+#             print('dict', anagrams)
             
-    #convert the values into a list   
-    return list(anagrams.values())
+#     #convert the values into a list   
+#     return list(anagrams.values())
 
-print(group_anagrams(strs))
+# print(group_anagrams(strs))
 
 
 '''----------------------------------------------- QUEUES/STACKS--------------------------------------------------------------------------------------------'''
@@ -273,6 +273,7 @@ int ping(int t) Adds a new request at time t, where t represents some time in mi
 It is guaranteed that every call to ping uses a strictly larger value of t than the previous call.'''
 
 # from collections import deque
+#this solution uses a double ended queue to keep track of the requests. We remove requests that are older than 3000 milliseconds. Then we add the current request at time 't' and return the length of the deque, which returns the number of requests within the past 3000 milliseconds
 
 # class RecentCounter:
 #     def __init__(self):
@@ -281,6 +282,8 @@ It is guaranteed that every call to ping uses a strictly larger value of t than 
 
 #     def ping(self, t):
 #         # Remove requests that are older than 3000 milliseconds
+#          #check if the queue is not empty 
+#         #self.requests[0] is the oldest request, so we check if it's older than 3000 milliseconds
 #         while self.requests and self.requests[0] < t - 3000:
 #             #pop elements from the left side[0] until we find the request within 3000 
 #             self.requests.popleft()
@@ -306,15 +309,20 @@ The test cases are generated so that the length of the output will never exceed 
 
 # s = "3[a]2[bc]"
 
+## this solution uses a stack to keep track of the number of times a string is repeated. We iterate through each character in the string and check if it's a digit, open bracket, or close bracket. If it's a digit, we update the current_num. If it's an open bracket, we append the current_num and current_str to the stack. If it's a close bracket, we pop the stack and update the current_str by multiplying the previous string 'num' times. Else, we append all other chars to the current_str
+
 # def decoded_string(s):
 #     stack = []
+#   current_num keeps track of the number of times a string is repeated
 #     current_num = 0
+#   #current_str keeps track of the current string
 #     current_str = ""
 
 #     #iterate through each character in the string
 #     for char in s:
 #         #check if char is a digit 
 #         if char.isdigit():
+                ## if it is, update current_num. Multiply by 10 to account for numbers with more than one digit + convert char to int
 #             current_num = current_num * 10 + int(char) #if it is update to current_num 
 #         elif char == "[":
 #             #push/append current_str and num to the stack 
