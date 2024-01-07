@@ -358,6 +358,7 @@ Return the smallest level x such that the sum of all the values of nodes at leve
 #         self.left = left
 #         self.right = right 
 
+## this solution uses a queue to keep track of the nodes at each level. We iterate through each level and update the max_sum and max_level accordingly. We return the max_level
 
 # def maxLevelSum(root):
 #     #check if the tree is empty 
@@ -365,15 +366,19 @@ Return the smallest level x such that the sum of all the values of nodes at leve
 #             return 0
         
 #         #track the level with the max sum of node values and the max sum so far 
+#          #initialize max_level to 1, since the root is at level 1, and max_sum to -infinity so that any sum will be greater than it, level to 1 as it is the current level being processed, q to a list containing the root 
 #         max_level = 1
 #         max_sum = float('-inf')
 #         level=1 #start at level 1 which is the current level being processed 
 #         q=[root] #list containing the root 
-        
+        ## while q is not empty, as long as there are levels to process
+        ## initialize level_sum = 0 to store the sum at each level
 #         while q: 
 #             level_sum = 0 #store the sum at each level 
 #             next_level = [] #store the nodes at next level
             
+             ##for each node in the current level, add its value to level_sum and append its children to next_level
+             
 #             for node in q: 
 #                 level_sum += node.val
 #                 #check if there are any children and append them to the list 
@@ -381,12 +386,15 @@ Return the smallest level x such that the sum of all the values of nodes at leve
 #                     next_level.append(node.left)
 #                 if node.right:
 #                     next_level.append(node.right)
-                
+            
+              ## check if level_sum is greater than max_sum, if yes, update max_sum and max_level accordingly
+              
 #             if level_sum > max_sum: #if this condition is true, update max_sum and max_level accordingly
 #                 max_sum = level_sum
 #                 max_level = level
                 
 #             #update q & level to next level for the next iteration
+
 #             q = next_level 
 #             level += 1
   
@@ -409,7 +417,8 @@ Given the root of a binary tree, return the level order traversal of its nodes' 
 
 #traverse through every level from left to right- BFS 
 # from collections import deque 
-
+ 
+#this solution uses a queue  to traverse through every level from left to right. We iterate through each level and append the node values to the list. We return the list 
 
 # def level_order(root):
 #     res = []
@@ -420,8 +429,10 @@ Given the root of a binary tree, return the level order traversal of its nodes' 
 #         return 
     
 #     while q: #run loop while q is not empty, as long as there are levels to process
+            ## level will store the node values at each level
 #         level = []
 #         for i in range(len(q)):
+#             # node will store the node at the front of the queue
 #             node = q.popleft()
 #             if node != None: 
 #                 level.append(node.val)                
@@ -434,11 +445,15 @@ Given the root of a binary tree, return the level order traversal of its nodes' 
 #     return res
 
 # print(level_order(root))
+7000
 
 '''700. Search in a Binary Search Tree
 You are given the root of a binary search tree (BST) and an integer val.
 Find the node in the BST that the node's value equals val and return the subtree rooted with that node. If such a node does not exist, return null.
 '''
+
+#this solution uses recursion to search for the node with the value 'val'. If the node is found, we return the node. If the node is not found, we return None
+
 # class TreeNode():
 #     def __init__(self, val=0, left=None, right=None):
 #         self.val = val 
