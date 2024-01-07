@@ -578,6 +578,7 @@ The path does not need to start or end at the root or a leaf, but it must go dow
 #         self.left = left
 #         self.right = right
 
+# This solution uses a dictionary to keep track of the prefix sum. We use a dfs function to recursively calculate the currentSum by adding the value of the current node and check if (currentSum - targetSum) exists in the dictionary. If yes, we increment by (currentSum - targetSum). We then call the dfs function on the left and right subtree. We return the count of paths
 
 # #countPaths function, which calls the dfs function and initializes a dictionary with a count of 0 for a prefix sum of 0 (used for the root node).
 # def countPaths(root, targetSum):
@@ -626,6 +627,7 @@ You must write an algorithm that runs in O(log n) time.'''
 #O(log n) meaning use binary search 
 
 # nums = [1,2,3,1]
+# This solution uses binary search to find the peak element. We check if the mid number is less than the number on its right. If yes, the peak must be on the right side. Else, the peak will be on the left side. We return the left pointer
 
 # def findPeakElement(nums):
 #     lo = 0
@@ -712,6 +714,7 @@ You are given an n x n matrix isConnected where isConnected[i][j] = 1 if the ith
 Return the total number of provinces.'''
 
 
+#This solution uses a depth-first search (DFS) to find the number of provinces. We iterate through each city and check if it has been visited. If not, we increment count by 1 and call the dfs function on that city. The dfs function marks the city as visited and checks if there is a direct connection between the current city and its neighbor. If yes, we call the dfs function on that neighbor. We return the count of provinces
 
 # def findCircleSum(isConnected):
 #     #get the number of cities 
@@ -750,6 +753,8 @@ Return the total number of provinces.'''
 
 '''convert a list of lists into a dictionary'''
 # edges = [['i', 'j'], ['k', 'i'], ['m', 'k'], ['k', 'l'], ['o', 'n']]
+
+# This solution uses a dictionary to keep track of the edges. We iterate through each edge and check if the node1 is not in the dictionary. If yes, we create a new list. If no, we append the node2 to the list of edges
 
 # # Initialize an empty dictionary
 # graph_dict = {}
