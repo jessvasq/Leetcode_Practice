@@ -785,6 +785,8 @@ Given an array rooms where rooms[i] is the set of keys that you can obtain if yo
 #If we enter a room, we'll grab the set of keys and use the given key in the nested function to open the next room
 #use a boolean to keep track of the rooms we've visited
 
+#This solution uses a depth-first search (DFS) to find the number of rooms. We iterate through each room and check if it has been visited. If not, we increment and call the dfs function on that room. The dfs function marks the room as visited  We return a list of rooms visited 
+
 # def canVisitAllRoomss(rooms):
 #     n=len(rooms)
 #     visited = [False] * n
