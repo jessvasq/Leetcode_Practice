@@ -49,25 +49,38 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
 
 
 '''80. Remove DUplicates from a sorted array II'''
-nums = [0,0,1,1,1,1,2,3,3]
-#Output: 5, nums = [1,1,2,2,3,_]
+# nums = [0,0,1,1,1,1,2,3,3]
+# #Output: 5, nums = [1,1,2,2,3,_]
     
-#use a pointer to identify if the current element is different from the element two positions back. If so, update the pointer to the current element. We use the pointer to keep track of the length of the array without duplicates.
-def remove_duplicates(nums):
-    #check if the length of the array is less or equal to 2. If so, return len(arr)
-    if len(nums) <= 2:
-        return len(nums) 
-    #initialize a pointer set to 2 
-    pointer = 2
-    #iterate through the array from range 2 to len(arr)
-    for i in range(2, len(nums)):
-        #check if the current index is not equal to pointer -2
-        if nums[i] != nums[pointer-2]:
-            #if so, update the pointer to the current index
-            nums[pointer] = nums[i]
-            #increment the pointer by 1 so that it points to the next index
-            pointer +=1 
-    return pointer
+# #use a pointer to identify if the current element is different from the element two positions back. If so, update the pointer to the current element. We use the pointer to keep track of the length of the array without duplicates.
+# def remove_duplicates(nums):
+#     #check if the length of the array is less or equal to 2. If so, return len(arr)
+#     if len(nums) <= 2:
+#         return len(nums) 
+#     #initialize a pointer set to 2 
+#     pointer = 2
+#     #iterate through the array from range 2 to len(arr)
+#     for i in range(2, len(nums)):
+#         #check if the current index is not equal to pointer -2
+#         if nums[i] != nums[pointer-2]:
+#             #if so, update the pointer to the current index
+#             nums[pointer] = nums[i]
+#             #increment the pointer by 1 so that it points to the next index
+#             pointer +=1 
+#     return pointer
       
-print(remove_duplicates(nums))
+# print(remove_duplicates(nums))
      
+'''189. Rotate Array - M
+Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.'''
+
+nums = [-1,-100,3,99]
+k = 2
+#first solution using insert and pop. Both insert and pop are O(n) operations.
+def rotate_arr(nums, k):
+    for i in range(k):
+        nums.insert(0, nums[-1])
+        nums.pop(-1)
+    return nums
+
+print(rotate_arr(nums, k))
