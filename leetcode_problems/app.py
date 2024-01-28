@@ -135,57 +135,57 @@ For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.'''
 '''DIJKSTRA'S ALGORITHM
 Finds the shortest path between two vertices in a graph. It is an algorithm for finding the shortest paths between nodes in a graph. The algorithm exists in many variants. Dijkstra's original algorithm found the shortest path between two given nodes, but a more common variant fixes a single node as the "source" node and finds shortest paths from the source to all other nodes in the graph, producing a shortest-path tree.'''
 
-graph = {
-    'A': {'B': 5, 'C': 1},
-    'B': {'A': 5, 'C': 2, 'D': 1},
-    'C': {'A': 1, 'B': 2, 'D': 4, 'E': 8},
-    'D': {'B': 1, 'C': 4, 'E': 3, 'F': 6},
-    'E': {'C': 8, 'D': 3},
-    'F': {'D': 6}
-}
+# graph = {
+#     'A': {'B': 5, 'C': 1},
+#     'B': {'A': 5, 'C': 2, 'D': 1},
+#     'C': {'A': 1, 'B': 2, 'D': 4, 'E': 8},
+#     'D': {'B': 1, 'C': 4, 'E': 3, 'F': 6},
+#     'E': {'C': 8, 'D': 3},
+#     'F': {'D': 6}
+# }
 
-import heapq #import heapq module to use the functions for implementing the priority queue. A priority queue is a data structure that stores elements in a queue and assigns a priority to each element. The element with the highest priority is dequeued first.
+# import heapq #import heapq module to use the functions for implementing the priority queue. A priority queue is a data structure that stores elements in a queue and assigns a priority to each element. The element with the highest priority is dequeued first.
 
-#pass in the graph and the start node
-def dijkstra(graph, start):
-    # Initialize distances with infinity for all nodes except the start node. We use a dictionary to store the distances to all nodes in the graph. We set the distance to the start node to 0 and the distance to all other nodes to infinity. 'Float('infinity')' is used to represent infinity.
-    distances = {node: float('infinity') for node in graph}
-    # Set the distance from the start node to itself is 0
-    distances[start] = 0
+# #pass in the graph and the start node
+# def dijkstra(graph, start):
+#     # Initialize distances with infinity for all nodes except the start node. We use a dictionary to store the distances to all nodes in the graph. We set the distance to the start node to 0 and the distance to all other nodes to infinity. 'Float('infinity')' is used to represent infinity.
+#     distances = {node: float('infinity') for node in graph}
+#     # Set the distance from the start node to itself is 0
+#     distances[start] = 0
 
-    # Priority queue to store (distance, node) pairs. (0, start) is the initial node with distance 0
-    priority_queue = [(0, start)]
+#     # Priority queue to store (distance, node) pairs. (0, start) is the initial node with distance 0
+#     priority_queue = [(0, start)]
 
-    # Loop until the queue is empty, if the queue is empty, it means we have visited all nodes
-    while priority_queue:
-        # Get the current node from the queue by getting the node with the smallest distance. Use heapq.heappop() to remove and return the smallest element from the heap
-        current_distance, current_node = heapq.heappop(priority_queue)
+#     # Loop until the queue is empty, if the queue is empty, it means we have visited all nodes
+#     while priority_queue:
+#         # Get the current node from the queue by getting the node with the smallest distance. Use heapq.heappop() to remove and return the smallest element from the heap
+#         current_distance, current_node = heapq.heappop(priority_queue)
 
-        # Check if the current path is shorter than the known distance
-        if current_distance > distances[current_node]:
-            continue
+#         # Check if the current path is shorter than the known distance
+#         if current_distance > distances[current_node]:
+#             continue
 
-        # Explore neighbors of the current node and update distances if necessary
-        for neighbor, weight in graph[current_node].items():
-            distance = current_distance + weight
+#         # Explore neighbors of the current node and update distances if necessary
+#         for neighbor, weight in graph[current_node].items():
+#             distance = current_distance + weight
 
-            # Update distance if a shorter path is found. We check if the distance to the neighbor is shorter than the current distance + weight of the edge between the current node and the neighbor. If it is shorter, we update the distance and add the neighbor to the priority queue.
-            if distance < distances[neighbor]:
-                distances[neighbor] = distance
-                # Use heapq.heappush() to add the neighbor to the priority queue with the updated distance
-                heapq.heappush(priority_queue, (distance, neighbor))
+#             # Update distance if a shorter path is found. We check if the distance to the neighbor is shorter than the current distance + weight of the edge between the current node and the neighbor. If it is shorter, we update the distance and add the neighbor to the priority queue.
+#             if distance < distances[neighbor]:
+#                 distances[neighbor] = distance
+#                 # Use heapq.heappush() to add the neighbor to the priority queue with the updated distance
+#                 heapq.heappush(priority_queue, (distance, neighbor))
 
-    return distances
+#     return distances
 
-# Example usage:
-graph = {
-    'A': {'B': 1, 'C': 4},
-    'B': {'A': 1, 'C': 2, 'D': 5},
-    'C': {'A': 4, 'B': 2, 'D': 1},
-    'D': {'B': 5, 'C': 1}
-}
+# # Example usage:
+# graph = {
+#     'A': {'B': 1, 'C': 4},
+#     'B': {'A': 1, 'C': 2, 'D': 5},
+#     'C': {'A': 4, 'B': 2, 'D': 1},
+#     'D': {'B': 5, 'C': 1}
+# }
 
-start_node = 'A'
-shortest_distances = dijkstra(graph, start_node)
+# start_node = 'A'
+# shortest_distances = dijkstra(graph, start_node)
 
-print(f"Shortest distances from {start_node}: {shortest_distances}")
+# print(f"Shortest distances from {start_node}: {shortest_distances}")

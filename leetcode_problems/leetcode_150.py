@@ -74,13 +74,49 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
 '''189. Rotate Array - M
 Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.'''
 
-nums = [-1,-100,3,99]
-k = 2
-#first solution using insert and pop. Both insert and pop are O(n) operations.
-def rotate_arr(nums, k):
-    for i in range(k):
-        nums.insert(0, nums[-1])
-        nums.pop(-1)
-    return nums
+# nums = [-1,-100,3,99]
+# k = 2
+# #first solution using insert and pop. Both insert and pop are O(n) operations.
+# def rotate_arr(nums, k):
+#     for i in range(k):
+#         nums.insert(0, nums[-1])
+#         nums.pop(-1)
+#     return nums
 
-print(rotate_arr(nums, k))
+# print(rotate_arr(nums, k))
+
+# import random, string
+
+# #print list of alphabet letters using string module
+# lower = list(string.ascii_lowercase)
+# upper = list(string.ascii_uppercase)
+# alphabets = list(string.ascii_letters)
+
+# #print list of numbers using range function
+# nums = range(0,9)
+# chars_list = list(string.ascii_letters) + list(string.digits) + list(string.punctuation) +  list(string.hexdigits) + list(string.octdigits) + list(string.printable) + list(string.ascii_lowercase) + list(string.ascii_uppercase) + list(string.digits)
+
+# #generate random string of length 10
+# def generate_random_string(length):
+#     random_string = ''
+#     for i in range(length):
+#         random_string += random.choice(chars_list)
+#     return random_string
+
+# print(generate_random_string(12))
+
+
+'''58. Length of Last Word
+
+Given a string s consisting of words and spaces, return the length of the last word in the string. A word is a maximal 
+substring consisting of non-space characters only.'''
+ 
+s = "   fly me   to   the moon  "
+
+def last_word_length(s):
+    s1 = s.strip()
+    list_s = s.split()
+    return len(list_s[-1])
+
+
+

@@ -943,8 +943,8 @@ Given a string s, return true if it is a palindrome, or false otherwise.'''
 #     #Using list-comprehension, convert to lowercase and remove all non-alphanumeric characters     
 #     lower_s = ''.join(char.lower() for char in s if char.isalnum())
 #     print(lower_s)
-    
-#     #reverse string 
+
+
 #     reversed_s=lower_s[::-1]
 #     if lower_s == reversed_s:
 #         return True 
