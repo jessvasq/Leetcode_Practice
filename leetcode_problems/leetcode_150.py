@@ -111,12 +111,38 @@ Given an integer array nums, rotate the array to the right by k steps, where k i
 Given a string s consisting of words and spaces, return the length of the last word in the string. A word is a maximal 
 substring consisting of non-space characters only.'''
  
-s = "   fly me   to   the moon  "
+# s = "   fly me   to   the moon  "
 
-def last_word_length(s):
-    s1 = s.strip()
-    list_s = s.split()
-    return len(list_s[-1])
+# def last_word_length(s):
+#     s1 = s.strip()
+#     list_s = s.split()
+#     return len(list_s[-1])
 
 
+'''242. Valid Anagram
+Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+'''
 
+s = 'rat'
+t='car'
+
+#This solution uses a dictionary to store the frequency of each character in the string. Then, we compare the two dictionaries to see if they are equal.
+def valid_anagram(s, t):
+    if len(t) > len(s):
+        return False
+    
+    s_dict = {}
+    for i in s: 
+        s_dict[i] = s_dict.get(i, 0) + 1
+    print(s_dict)
+    
+    t_dict = {}
+    for i in t: 
+        t_dict[i] = t_dict.get(i,0) + 1
+    print(t_dict)
+        
+ 
+    return t_dict == s_dict
+
+print(valid_anagram(s, t))
