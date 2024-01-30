@@ -146,3 +146,23 @@ def valid_anagram(s, t):
     return t_dict == s_dict
 
 print(valid_anagram(s, t))
+
+
+'''202. Happy Number
+Write an algorithm to determine if a number n is happy. A happy number is a number defined by the following process:
+Starting with any positive integer, replace the number by the sum of the squares of its digits.
+Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+Those numbers for which this process ends in 1 are happy.
+Return true if n is a happy number, and false if not.'''
+
+def happy_number(n):
+    #create a set to store the numbers we have seen
+    seen = set()
+    #iterate through the numbers and add the square of each digit
+    while n != 1 and n not in seen:
+        seen.add(n)
+        #convert the number to a string and iterate through each digit
+        n = sum(int(i)**2 for i in str(n))
+    return n == 1
+
+print(happy_number(19))
