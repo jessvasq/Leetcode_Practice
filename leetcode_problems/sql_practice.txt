@@ -1,1 +1,76 @@
 *SQL PRACTICE* 
+175. Combine Two Tables
+
+Table: Person
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| personId    | int     |
+| lastName    | varchar |
+| firstName   | varchar |
++-------------+---------+
+
+Table: Address
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| addressId   | int     |
+| personId    | int     |
+| city        | varchar |
+| state       | varchar |
++-------------+---------+
+
+*Write a solution to report the first name, last name, city, and state of each person in the Person table. If the address of a personId is not present in the Address table, report null instead. Return the result table in any order. *
+
+#First Solution 
+SELECT P.firstName, P.lastName, A.city, A.state 
+FROM Person P LEFT JOIN Address A
+on P.personId = A.addressId
+
+#Second Solution
+SELECT firstName, lastName, city, state 
+FROM Person p LEFT JOIN Address a 
+ON p.personId = a.addressId
+
+
+*183. Customers Who Never Order
+Write a solution to find all customers who never order anything.
+Return the result table in any order.
+The result format is in the following example.*
+
+Table: Customers
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| name        | varchar |
++-------------+---------+
+id is the primary key (column with unique values) for this table.
+Each row of this table indicates the ID and name of a customer.
+ 
+Table: Orders
+
++-------------+------+
+| Column Name | Type |
++-------------+------+
+| id          | int  |
+| customerId  | int  |
++-------------+------+
+id is the primary key (column with unique values) for this table.
+customerId is a foreign key (reference columns) of the ID from the Customers table.
+Each row of this table indicates the ID of an order and the ID of the customer who ordered it.
+ 
+*First Solution*
+SELECT name FROM Customers c 
+LEFT JOIN Orders o
+ON c.id = o.customerId 
+WHERE o.customerId = NULL;
+
+*Second Solution*
+SELECT name AS customers 
+FROM Customers 
+WHERE customers.id 
+NOT IN (SELECT customerId FROM Orders)
