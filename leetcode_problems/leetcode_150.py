@@ -166,3 +166,51 @@ def happy_number(n):
     return n == 1
 
 print(happy_number(19))
+
+
+'''290. Word Pattern
+Given a pattern and a string s, find if s follows the same pattern.
+Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s.
+'''
+pattern = 'abba'
+s = 'dog cat cat dog'
+
+
+def word_pattern(pattern, s):
+    #split the string 's' into a list of words
+    s_list = s.split()
+
+    #check if the lengths of pattern and words are equal 
+    if len(pattern) != len(s_list):
+        return False
+    
+    #create two dictionaries to store mappings
+    pattern_to_word = {}
+    word_to_pattern = {}
+    
+    #iterate over each character in the pattern and its corresponding word
+    for i in range(len(pattern)):
+        current_char = pattern[i]
+        current_word = s_list[i]
+        
+        #check if the current pattern character is already mapped
+        if current_char in pattern_to_word:
+            #if yes, check if the mapping is consistent
+            if pattern_to_word[current_char] != current_word:
+                return False
+            
+        else:
+            #if not create a new mapping
+            pattern_to_word[current_char] = current_word
+            
+        #check if the current_word is already mapped
+        if current_word in word_to_pattern:
+            if word_to_pattern[current_word] != current_char:
+                return False
+            
+        else:
+            word_to_pattern[current_word] = current_char
+            
+    return True
+
+print(word_pattern(pattern, s))
