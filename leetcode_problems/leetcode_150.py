@@ -124,28 +124,28 @@ Given two strings s and t, return true if t is an anagram of s, and false otherw
 An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
 '''
 
-s = 'rat'
-t='car'
+# s = 'rat'
+# t='car'
 
-#This solution uses a dictionary to store the frequency of each character in the string. Then, we compare the two dictionaries to see if they are equal.
-def valid_anagram(s, t):
-    if len(t) > len(s):
-        return False
+# #This solution uses a dictionary to store the frequency of each character in the string. Then, we compare the two dictionaries to see if they are equal.
+# def valid_anagram(s, t):
+#     if len(t) > len(s):
+#         return False
     
-    s_dict = {}
-    for i in s: 
-        s_dict[i] = s_dict.get(i, 0) + 1
-    print(s_dict)
+#     s_dict = {}
+#     for i in s: 
+#         s_dict[i] = s_dict.get(i, 0) + 1
+#     print(s_dict)
     
-    t_dict = {}
-    for i in t: 
-        t_dict[i] = t_dict.get(i,0) + 1
-    print(t_dict)
+#     t_dict = {}
+#     for i in t: 
+#         t_dict[i] = t_dict.get(i,0) + 1
+#     print(t_dict)
         
  
-    return t_dict == s_dict
+#     return t_dict == s_dict
 
-print(valid_anagram(s, t))
+# print(valid_anagram(s, t))
 
 
 '''202. Happy Number
@@ -155,62 +155,117 @@ Repeat the process until the number equals 1 (where it will stay), or it loops e
 Those numbers for which this process ends in 1 are happy.
 Return true if n is a happy number, and false if not.'''
 
-def happy_number(n):
-    #create a set to store the numbers we have seen
-    seen = set()
-    #iterate through the numbers and add the square of each digit
-    while n != 1 and n not in seen:
-        seen.add(n)
-        #convert the number to a string and iterate through each digit
-        n = sum(int(i)**2 for i in str(n))
-    return n == 1
+# def happy_number(n):
+#     #create a set to store the numbers we have seen
+#     seen = set()
+#     #iterate through the numbers and add the square of each digit
+#     while n != 1 and n not in seen:
+#         seen.add(n)
+#         #convert the number to a string and iterate through each digit
+#         n = sum(int(i)**2 for i in str(n))
+#     return n == 1
 
-print(happy_number(19))
+# print(happy_number(19))
 
 
 '''290. Word Pattern
 Given a pattern and a string s, find if s follows the same pattern.
 Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s.
 '''
-pattern = 'abba'
-s = 'dog cat cat dog'
+# pattern = 'abba'
+# s = 'dog cat cat dog'
 
 
-def word_pattern(pattern, s):
-    #split the string 's' into a list of words
-    s_list = s.split()
+# def word_pattern(pattern, s):
+#     #split the string 's' into a list of words
+#     s_list = s.split()
 
-    #check if the lengths of pattern and words are equal 
-    if len(pattern) != len(s_list):
+#     #check if the lengths of pattern and words are equal 
+#     if len(pattern) != len(s_list):
+#         return False
+    
+#     #create two dictionaries to store mappings
+#     pattern_to_word = {}
+#     word_to_pattern = {}
+    
+#     #iterate over each character in the pattern and its corresponding word
+#     for i in range(len(pattern)):
+#         current_char = pattern[i]
+#         current_word = s_list[i]
+        
+#         #check if the current pattern character is already mapped
+#         if current_char in pattern_to_word:
+#             #if yes, check if the mapping is consistent
+#             if pattern_to_word[current_char] != current_word:
+#                 return False
+            
+#         else:
+#             #if not create a new mapping
+#             pattern_to_word[current_char] = current_word
+            
+#         #check if the current_word is already mapped
+#         if current_word in word_to_pattern:
+#             if word_to_pattern[current_word] != current_char:
+#                 return False
+            
+#         else:
+#             word_to_pattern[current_word] = current_char
+            
+#     return True
+
+# print(word_pattern(pattern, s))
+
+'''125. Valid Palindrome'''
+s = "A man, a plan, a canal: Panama"
+
+def valid_palindrome(s):
+    lower_s = ''.join(char.lower() for char in s if char.isalnum())
+
+    reversed_word = lower_s[::-1]
+
+    return lower_s == reversed_word
+        
+print(valid_palindrome(s))
+
+
+'''205. Isomorphic Strings
+Given two strings s and t, determine if they are isomorphic.
+Two strings s and t are isomorphic if the characters in s can be replaced to get t.
+All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.'''
+
+s = "egg"
+t = "add"
+
+def isomorphic_strings(s, t):
+    #check if the lengths of the strings are equal
+    if len(s) != len(t):
         return False
     
     #create two dictionaries to store mappings
-    pattern_to_word = {}
-    word_to_pattern = {}
+    s_dict = {}
+    t_dict = {}
     
-    #iterate over each character in the pattern and its corresponding word
-    for i in range(len(pattern)):
-        current_char = pattern[i]
-        current_word = s_list[i]
-        
-        #check if the current pattern character is already mapped
-        if current_char in pattern_to_word:
+    #iterate through the strings and check if the characters are mapped to the same character
+    for i in range(len(s)):
+        #check if the character is already mapped
+        if s[i] in s_dict:
             #if yes, check if the mapping is consistent
-            if pattern_to_word[current_char] != current_word:
+            if s_dict[s[i]] != t[i]:
                 return False
-            
         else:
-            #if not create a new mapping
-            pattern_to_word[current_char] = current_word
-            
-        #check if the current_word is already mapped
-        if current_word in word_to_pattern:
-            if word_to_pattern[current_word] != current_char:
+            #if not, create a new mapping
+            s_dict[s[i]] = t[i]
+            print(s_dict)
+        
+        #check if the character is already mapped
+        if t[i] in t_dict:
+            #if yes, check if the mapping is consistent
+            if t_dict[t[i]] != s[i]:
                 return False
-            
         else:
-            word_to_pattern[current_word] = current_char
-            
+            #if not, create a new mapping
+            t_dict[t[i]] = s[i]
+            print(t_dict)
     return True
 
-print(word_pattern(pattern, s))
+print(isomorphic_strings(s, t))
