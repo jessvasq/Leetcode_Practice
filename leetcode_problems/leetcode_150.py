@@ -215,17 +215,19 @@ Here follow means a full match, such that there is a bijection between a letter 
 
 # print(word_pattern(pattern, s))
 
-'''125. Valid Palindrome'''
-s = "A man, a plan, a canal: Panama"
+'''125. Valid Palindrome
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+Given a string s, return true if it is a palindrome, or false otherwise.'''
+# s = "A man, a plan, a canal: Panama"
 
-def valid_palindrome(s):
-    lower_s = ''.join(char.lower() for char in s if char.isalnum())
+# def valid_palindrome(s):
+#     lower_s = ''.join(char.lower() for char in s if char.isalnum())
 
-    reversed_word = lower_s[::-1]
+#     reversed_word = lower_s[::-1]
 
-    return lower_s == reversed_word
+#     return lower_s == reversed_word
         
-print(valid_palindrome(s))
+# print(valid_palindrome(s))
 
 
 '''205. Isomorphic Strings
@@ -233,39 +235,41 @@ Given two strings s and t, determine if they are isomorphic.
 Two strings s and t are isomorphic if the characters in s can be replaced to get t.
 All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.'''
 
-s = "egg"
-t = "add"
+# s = "egg"
+# t = "add"
 
-def isomorphic_strings(s, t):
-    #check if the lengths of the strings are equal
-    if len(s) != len(t):
-        return False
+# def isomorphic_strings(s, t):
+#     #check if the lengths of the strings are equal
+#     if len(s) != len(t):
+#         return False
     
-    #create two dictionaries to store mappings
-    s_dict = {}
-    t_dict = {}
+#     #create two dictionaries to store mappings
+#     s_dict = {}
+#     t_dict = {}
     
-    #iterate through the strings and check if the characters are mapped to the same character
-    for i in range(len(s)):
-        #check if the character is already mapped
-        if s[i] in s_dict:
-            #if yes, check if the mapping is consistent
-            if s_dict[s[i]] != t[i]:
-                return False
-        else:
-            #if not, create a new mapping
-            s_dict[s[i]] = t[i]
-            print(s_dict)
+#     #iterate through the strings and check if the characters are mapped to the same character
+#     for i in range(len(s)):
+#         #check if the character is already mapped
+#         if s[i] in s_dict:
+#             #if yes, check if the mapping is consistent
+#             if s_dict[s[i]] != t[i]:
+#                 return False
+#         else:
+#             #if not, create a new mapping
+#             s_dict[s[i]] = t[i]
+#             print(s_dict)
         
-        #check if the character is already mapped
-        if t[i] in t_dict:
-            #if yes, check if the mapping is consistent
-            if t_dict[t[i]] != s[i]:
-                return False
-        else:
-            #if not, create a new mapping
-            t_dict[t[i]] = s[i]
-            print(t_dict)
-    return True
+#         #check if the character is already mapped
+#         if t[i] in t_dict:
+#             #if yes, check if the mapping is consistent
+#             if t_dict[t[i]] != s[i]:
+#                 return False
+#         else:
+#             #if not, create a new mapping
+#             t_dict[t[i]] = s[i]
+#             print(t_dict)
+#     return True
 
-print(isomorphic_strings(s, t))
+# print(isomorphic_strings(s, t))
+
+
