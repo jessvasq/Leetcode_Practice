@@ -282,26 +282,27 @@ You must write an algorithm with O(log n) runtime complexity.'''
 
 #O(log n) = binary search 
 
-nums = [1,3,5,6]
-target = 7
+# nums = [1,3,5,6]
+# target = 7
 
-#this solution uses binary search to find the index of the target value. If the target value is not found, the function returns the index where the target value would be if it were inserted in order.
-def search_insert(nums, target):
-    lo=0 
-    hi=len(nums)
-    while lo < hi:
-        #find the middle index
-        mid = (lo+hi) // 2 
-        #find the middle number
-        mid_num = nums[mid]
-        #if the middle number is less than the target, update the lower bound to the middle index + 1
-        if mid_num < target: 
-            #update the lower bound to the middle index + 1
-            lo = mid + 1
-        #if the middle number is greater than the target, update the upper bound to the middle index
-        else:
-            hi = mid
-    #if the target is found, return the middle index
-    return lo
+# #this solution uses binary search to find the index of the target value. If the target value is not found, the function returns the index where the target value would be if it were inserted in order.
+# def search_insert(nums, target):
+#     lo=0 
+#     hi=len(nums)
+#     while lo < hi:
+#         #find the middle index
+#         mid = (lo+hi) // 2 
+#         #find the middle number
+#         mid_num = nums[mid]
+#         #if the middle number is less than the target, update the lower bound to the middle index + 1
+#         if mid_num < target: 
+#             #update the lower bound to the middle index + 1
+#             lo = mid + 1
+#         #if the middle number is greater than the target, update the upper bound to the middle index
+#         else:
+#             hi = mid
+#     #if the target is found, return the middle index
+#     return lo
 
-print(search_insert(nums, target))
+# print(search_insert(nums, target))
+
