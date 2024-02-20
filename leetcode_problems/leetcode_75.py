@@ -445,7 +445,6 @@ Given the root of a binary tree, return the level order traversal of its nodes' 
 #     return res
 
 # print(level_order(root))
-7000
 
 '''700. Search in a Binary Search Tree
 You are given the root of a binary search tree (BST) and an integer val.

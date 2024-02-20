@@ -312,19 +312,138 @@ On each day, you may decide to buy and/or sell the stock. You can only hold at m
 
 Find and return the maximum profit you can achieve.'''
 
-prices = [7, 6, 4, 3, 1]  #Output=0
+# prices = [7, 6, 4, 3, 1]  #Output=0
 
-def max_profit(prices):
-    #initialize the profit to 0
-    profit = 0 
-    #Iterate through the numbers and add the difference between the current number and the previous number to the profit
-    for i in range(1, len(prices)):
-        if prices[i] > prices[i-1]:
-            profit += prices[i] - prices[i-1]
+# def max_profit(prices):
+#     #initialize the profit to 0
+#     profit = 0 
+#     #Iterate through the numbers and add the difference between the current number and the previous number to the profit
+#     for i in range(1, len(prices)):
+#         if prices[i] > prices[i-1]:
+#             profit += prices[i] - prices[i-1]
     
-    return profit 
+#     return profit 
 
-print(max_profit(prices))
+# print(max_profit(prices))
     
+'''
+          * 
+        * * 
+      * * * 
+    * * * * 
+  * * * * * 
+'''
+# for y in range(5):
+#     for x in range(y, 5):
+#         print(' ', end=' ')
+#     for x in range(y+1):
+#         print('*', end=' ')
+#     print()
+    
+# '''  
+#   * * * * * 
+#     * * * * 
+#       * * * 
+#         * * 
+#           * 
+# '''
+# for y in range(5):
+#     for x in range(y+1):
+#         print(' ', end=' ')
+    
+#     for x in range(y, 5):
+#         print('*', end=" ")
+#     print()
+    
+# '''
+#           * 
+#         * * * 
+#       * * * * * 
+#     * * * * * * * 
+#   * * * * * * * * * 
+# '''
+    
+# for y in range(5):
+#     for x in range(y, 5):
+#         print(' ', end=" ")
+#     for x in range(y+1):
+#         print('*', end=' ')
+        
+#     for x in range(y):
+#         print('*', end=' ')
+#     print()
+    
+# '''
+#   * * * * * * * * * 
+#     * * * * * * * 
+#       * * * * * 
+#         * * * 
+#           * 
+# '''
+    
+# for y in range(5):
+#     for x in range(y+1):
+#         print(' ', end=' ')
 
+    
+#     for x in range(y, 5-1):
+#         print("*", end=" ")
+    
+  
+#     for x in range(y, 5):
+#         print('*', end=" ")
+#     print()
+    
+# '''
+#           * 
+#         * * * 
+#       * * * * * 
+#     * * * * * * * 
+#   * * * * * * * * * 
+#     * * * * * * * 
+#       * * * * * 
+#         * * * 
+#           * 
+# '''
+        
+    
+# for y in range(4):
+#     for x in range(y, 5):
+#         print(' ', end=" ")
+        
+#     for x in range(y+1):
+#         print('*', end=" ")
+    
+#     for x in range(y):
+#         print('*', end=" ")
+        
+#     print()
+    
+# for y in range(5):
+#     for x in range(y+1):
+#         print(" ", end=" ")
+        
+#     for x in range(y, 5-1):
+#         print('*', end=' ')
+#     for x in range(y, 5):
+#         print('*', end=' ')
+#     print()
+  
+
+
+# # Create a hashmap (dictionary) with some key-value pairs
+# my_dict = {"apple": 5, "banana": 10, "orange": 8}
+
+# # Accessing data using keys
+# print(my_dict["apple"])  # Output: 5
+# print(my_dict["orange"]) # Output: 8
+
+# # Check if a key exists before accessing it to avoid KeyError
+# if "apple" in my_dict:
+#     print('a', my_dict["apple"])
+# else:
+#     print("Key not found")  # Output: Key not found
+
+# # Alternatively, use the get() method which returns None if the key is not found
+# print(my_dict.get("grape"))  # Output: None
 
