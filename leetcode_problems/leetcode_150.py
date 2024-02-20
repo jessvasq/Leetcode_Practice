@@ -327,3 +327,40 @@ Find and return the maximum profit you can achieve.'''
 # print(max_profit(prices))
     
 
+
+
+'''6. ZigZag Conversion
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)'''
+
+s = 'P   A   H   N A P L S I I G Y   I   R'
+numRows = 3
+#Output: "PAHNAPLSIIGYIR"
+
+def convert_from_zigzag(s: str, numRows: int) -> str:
+  #base case, check if the number of rows is 1 or greater than the length of the string. If the number of rows is 1, return the string as is. If the number of rows is greater than the length of the string, return the string as is because the string will not form a zigzag pattern.
+    if numRows == 1 or numRows >= len(s):
+        return s
+
+    #create a list of strings to store the rows
+    rows = [''] * numRows
+    #initialize variables
+    index, step = 0, 1
+
+  #iterate through the string and add each character to the corresponding row
+    for char in s:
+      #add the character to the current row
+        rows[index] += char
+        #if the index is 0, update the step to 1. If the index is numRows - 1, update the step to -1. We do this to change the direction of the zigzag pattern.
+        if index == 0:
+            step = 1
+        elif index == numRows - 1:
+            step = -1
+        #update the index by the step
+        index += step
+
+    return ''.join(rows)
+
+zigzag_pattern = "PAYPALISHIRING"
+num_rows = 3
+print(convert_from_zigzag(zigzag_pattern, num_rows))
+
