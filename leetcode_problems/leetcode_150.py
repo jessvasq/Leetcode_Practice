@@ -387,3 +387,33 @@ def has_path_sum(root, targetSum):
 root = TreeNode(5, TreeNode(4, TreeNode(11, TreeNode(7), TreeNode(2))), TreeNode(8, TreeNode(13), TreeNode(4, None, TreeNode(1))))
 targetSum = 22
 print(has_path_sum(root, targetSum))
+
+
+'''637. Average of Levels in Binary Tree
+Given the root of a binary tree, return the average value of the nodes on each level in the form of an array. Answers within 10-5 of the actual answer will be accepted.'''
+
+#This function uses a queue to store the nodes at each level. It iterates through the queue and adds the values of the nodes at each level to a list. It then calculates the average of the values and appends it to the result list.
+def average_of_levels(root):
+    result = []
+    queue = [root]
+    while queue:
+        #initialize variables
+        level_sum = 0
+        level_count = 0
+        next_level = []
+        #iterate through the queue and add the values of the nodes at each level to a list
+        for node in queue:
+            #update the level_sum and level_count
+            level_sum += node.val
+            level_count += 1
+            #add the left and right nodes to the next_level list
+            if node.left:
+                next_level.append(node.left)
+            if node.right:
+                next_level.append(node.right)
+        #calculate the average of the values and append it to the result list. We calculate the average as we want to return the average value of the nodes on each level in the form of an array
+        result.append(level_sum / level_count)
+        #update the queue to the next_level
+        queue = next_level
+    #return the result list
+    return result
