@@ -417,3 +417,28 @@ def average_of_levels(root):
         queue = next_level
     #return the result list
     return result
+
+'''141.Linked List Cycle
+Given head, the head of a linked list, determine if the linked list has a cycle in it. There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter. Return true if there is a cycle in the linked list. Otherwise, return false.'''
+
+#Linked list has a head, and a tail equal to Null
+#A Singly LL is made up of nodes, each node contains data and a pointer 'next' that indicates where the next node is located
+# Q: if the linked list has a cycle in it ?
+# Return True if there is a cycle, otherwise False 
+
+#This function uses two pointers, slow and fast, to iterate through the linked list. The slow pointer moves one node at a time, while the fast pointer moves two nodes at a time. If the slow and fast pointers are equal, it means there is a cycle in the linked list and the function returns True. If the fast pointer reaches the end of the linked list, it means there is no cycle and the function returns False.
+def hasCycle(head):
+    #initialize two pointers, slow and fast
+    slow = head
+    fast = head
+
+    #iterate through the linked list
+    while fast and fast.next:
+        #update the slow pointer to the next node
+        slow = slow.next
+        #update the fast pointer to the next next node
+        fast = fast.next.next
+        #check if the slow and fast pointers are equal
+        if slow == fast:
+            return True
+    return False
