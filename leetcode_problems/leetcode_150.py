@@ -504,9 +504,7 @@ def mergeTwoLists(list1, list2):
 '''54. Spiral Matrix
 Given an MxN matrix, return all elements of the matrix in spiral order'''
 
-matrix = [[1,2,3],
-          [4,5,6],
-          [7,8,9]]
+matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
 
 def spiralOrder(matrix):
     #Check if the matrix is empty

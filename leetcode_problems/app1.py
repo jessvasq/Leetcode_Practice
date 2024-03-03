@@ -1333,3 +1333,118 @@ Find a contiguous subarray whose length is equal to k that has the maximum avera
 # # Alternatively, use the get() method which returns None if the key is not found
 # print(my_dict.get("grape"))  # Output: None
 
+
+'''2D-Dimensional Arrays / Matrix'''
+#Initialize a new 2D array with[1,2,3] in the first row and [5,6,7] in the second row. Store it in a new variable called a_2d
+
+a_2d = [ [1,2,3],
+        [5,6,7] ]
+print(a_2d)
+
+# Replace the number 6 with 99 
+a_2d[1][1] = 99
+print(a_2d)
+
+# 3. Iterate over each item in c_2d and print it using 'for row in' syntax
+c_2d = [['a', 'b', 'c'],
+        ['x', 'y', 'z']]
+
+for row in c_2d:
+  for item in row:
+    print('Second Solution:', item)
+    
+#4. Iterate over each item in d_2d and print it using 'for i in range'
+
+for i in range(len(c_2d)):
+  for j in range(len(c_2d[i])):
+    print(c_2d[i][j])
+    
+#5. You are given a 2D array with the same number of rows and columns. Write a function that adds up the diagonal elements and returns the sum 
+
+arr_2D = [[1,2,3],
+          [4,5,6], 
+          [7,8,9]]  
+
+def diagonal_sum(matrix):
+  #Store the sum of total 
+  total = 0
+
+  for row in range(len(matrix)):
+    total += matrix[row][row]
+    
+  return total
+
+print(diagonal_sum(arr_2D))
+    
+    
+#3. You are given a chess board with rooks represented by 1. Return True if they can attack each other, otherwise False
+# What is the size of the chess board? Any size NxN
+# Is it always square shaped? Yes
+# Could the given array be empty? No, the size would always be at least 1x1
+
+#Rooks are indicated by 1
+chess_board =[
+  [2, 1, 0, 0],
+  [3, 0, 1, 0],
+  [4, 0, 0, 0],
+  [5, 0, 0, 1], 
+  [6, 4, 2, 1]
+  ]
+
+for row in range(len(chess_board)):
+  for col in range(len(chess_board[row])):
+    print('chess_board', chess_board[row][col])
+    
+#1 Step: Count the number of rooks represented by 1 in each row. If there's more than one rook then they can attack each other -> Return False
+#2 Step: Do the same for columns -> Return False if there's more than one rook
+#3 Step: If there is no rows or columns with at least two rooks then none of the rooks will be able to attack each other -> Return True
+    
+def chess_move(matrix):
+  #initialize a variable 
+  n = len(matrix)
+
+  for row in range(n):
+    row_count = 0
+    for col in range(n):
+      row_count += matrix[row][col]
+    
+  if row_count > 1:
+    return True
+  
+  for col in range(n):
+    col_count = 0
+    for row in range(n): 
+      col_count += matrix[col][row]
+    
+  if col_count > 1:
+    return True
+  
+  return False
+
+print(chess_move(chess_board))
+  
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
