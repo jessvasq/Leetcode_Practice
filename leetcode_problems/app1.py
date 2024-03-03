@@ -1446,5 +1446,3 @@ print(chess_move(chess_board))
     
     
     
-    
-    

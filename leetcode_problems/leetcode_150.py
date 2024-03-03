@@ -559,5 +559,36 @@ def spiralOrder(matrix):
     return result
 
 
-print(spiralOrder(matrix))    
-    
+print(spiralOrder(matrix))  
+
+'''20. Valid Parentheses
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. An input string is valid if:
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.'''
+
+s = "()[]{}"
+
+def isValid(s):
+    stack = []
+    #hasmap to store all the characters
+    closed_characters = {
+        ')' : '(',
+        '}' : '{',
+        ']' : '['
+    }
+
+
+    for i in s:
+        if i in closed_characters:
+            if stack and stack[-1] == closed_characters[i]:
+                print(closed_characters[i])
+                stack.pop()
+            else: 
+                return False
+        else:
+            stack.append(i)
+        
+    return True if not stack else False
+
+print(isValid(s))
+
