@@ -499,3 +499,67 @@ def mergeTwoLists(list1, list2):
         
     #Return the merged list starting from the dummyNode.next as we don't want to include -1 
     return dummy_node.next
+
+
+'''54. Spiral Matrix
+Given an MxN matrix, return all elements of the matrix in spiral order'''
+
+matrix = [[1,2,3],
+          [4,5,6],
+          [7,8,9]]
+
+def spiralOrder(matrix):
+    #Check if the matrix is empty
+    if not matrix:
+        return []
+    
+    rows = len(matrix)
+    cols = len(matrix[0])
+    # Initialize the top, bottom, left, and right pointers
+    top= 0
+    # The bottom pointer is equal to the number of rows - 1 because the index starts from 0
+    bottom = rows -1
+    left = 0
+    right = cols -1 
+    # initialize the result list 
+    result = []
+    
+    # Iterate through the matrix in a spiral order, while the top pointer is less than or equal to the bottom pointer and the left pointer is less than or equal to the right pointer
+    while top <= bottom and left <= right:
+        # Iterate through the top row from left to right
+        for i in range(left, right + 1):
+            # Append the elements to the result list
+            # matrix[top][i] is the current element in the top row. Top is the row index and i is the column index
+            result.append(matrix[top][i])
+        # Move the top pointer to the next row
+        top += 1
+        
+        # Iterate through the right column from top to bottom
+        for i in range(top, bottom + 1):
+            # Append the elements to the result list
+            result.append(matrix[i][right])
+        # Move the right pointer to the previous column because we have already iterated through the right column
+        right -= 1
+        
+        # Check if the top pointer is less than or equal to the bottom pointer
+        if top <= bottom:
+            # Iterate through the bottom row from right to left
+            for i in range(right, left - 1, -1):
+                # Append the elements to the result list
+                result.append(matrix[bottom][i])
+            # Move the bottom pointer to the previous row because we have already iterated through the bottom row  
+            bottom -= 1
+        # Check if the left pointer is less than or equal to the right pointer
+        if left <= right:
+            # Iterate through the left column from bottom to top
+            for i in range(bottom, top-1, 1):
+                # Append the elements to the result list
+                result.append(matrix[i][left])
+            # Move the left pointer to the next column
+            left -= 1
+    # Return the result list
+    return result
+
+
+print(spiralOrder(matrix))    
+    
