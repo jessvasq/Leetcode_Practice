@@ -592,3 +592,37 @@ def isValid(s):
 
 print(isValid(s))
 
+'''71. Simplify Path
+Given a string path, which is an absolute path (starting with a slash '/') to a file or directory in a Unix-style file system, convert it to the simplified canonical path.
+In a Unix-style file system, a period '.' refers to the current directory, a double period '..' refers to the directory up a level, and any multiple consecutive slashes (i.e. '//') are treated as a single slash '/'. For this problem, any other format of periods such as '...' are treated as file/directory names.'''
+
+path = "/../"
+
+def simplifyPath(path):
+    #Initialize a stack to keep track of directories
+    stack = []
+
+    #split the path by '/'
+    dir = path.split('/')
+    
+    #iterate through each directory in the path 
+    for i in dir:
+        # ignore empty string or .
+        if i == '' or i == '.':
+            continue
+        # if we encounter .., pop the last directory from the stack
+        elif i == '..':
+            if stack:
+                stack.pop()
+                print('popStack', stack)
+             
+        # otherwise, append the directory to the stack   
+        else:
+            stack.append(i)
+            print('addStack', stack)
+            
+    #join the directories in the stack and return the simplified canonical path
+    return '/' + '/'.join(stack)
+
+print(simplifyPath(path))
+        
