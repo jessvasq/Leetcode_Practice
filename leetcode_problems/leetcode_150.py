@@ -469,36 +469,36 @@ Merge two sorted linked lists and return it as a sorted list. The list should be
 # 1 -> 2 -> 4
 # 1 -> 3 -> 4
 
-def mergeTwoLists(list1, list2):
-    #initialize a dummy node for the merging process
-    dummy_node = ListNode(-1)
-    # Current tracks the current node in the merged list 
-    current = dummy_node
+# def mergeTwoLists(list1, list2):
+#     #initialize a dummy node for the merging process
+#     dummy_node = ListNode(-1)
+#     # Current tracks the current node in the merged list 
+#     current = dummy_node
    
-    #Traverse both lists simultaneously 
-    while list1 is not None and list2 is not None:
-        #compare the values of the current node
-        if list1.val < list2.val:
-            # Attach the node to the merged list 
-            current.next = list1
-            # Move to the next node 
-            list1 = list1.next
-        else:
-            current.next = list2
-            #move to the next node
-            list2 = list2.next
-        #Move the pointer in the merged list
-        current = current.next
+#     #Traverse both lists simultaneously 
+#     while list1 is not None and list2 is not None:
+#         #compare the values of the current node
+#         if list1.val < list2.val:
+#             # Attach the node to the merged list 
+#             current.next = list1
+#             # Move to the next node 
+#             list1 = list1.next
+#         else:
+#             current.next = list2
+#             #move to the next node
+#             list2 = list2.next
+#         #Move the pointer in the merged list
+#         current = current.next
         
-    # Attach the remaining nodes from l1 and l2 
-    # If we have not reached the tail(null) of the ll
-    if list1 is not None: 
-        current.next = list1
-    else:
-        current.next = list2
+#     # Attach the remaining nodes from l1 and l2 
+#     # If we have not reached the tail(null) of the ll
+#     if list1 is not None: 
+#         current.next = list1
+#     else:
+#         current.next = list2
         
-    #Return the merged list starting from the dummyNode.next as we don't want to include -1 
-    return dummy_node.next
+#     #Return the merged list starting from the dummyNode.next as we don't want to include -1 
+#     return dummy_node.next
 
 
 '''54. Spiral Matrix

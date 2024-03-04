@@ -1388,12 +1388,9 @@ chess_board =[
   [3, 0, 1, 0],
   [4, 0, 0, 0],
   [5, 0, 0, 1], 
-  [6, 4, 2, 1]
   ]
 
-for row in range(len(chess_board)):
-  for col in range(len(chess_board[row])):
-    print('chess_board', chess_board[row][col])
+
     
 #1 Step: Count the number of rooks represented by 1 in each row. If there's more than one rook then they can attack each other -> Return False
 #2 Step: Do the same for columns -> Return False if there's more than one rook
@@ -1423,10 +1420,54 @@ def chess_move(matrix):
 
 print(chess_move(chess_board))
   
-      
+'''QUEUES'''
+
+from collections import deque
+
+#Implementation of a queue class
+class Queue:
+  def __init__(self):
+    self.queue = deque()
+  
+  #Add an item to the queue
+  def enqueue(self, item):
+    self.queue.append(item)
+  
+  #Check if the queue is empty 
+  def is_empty(self):
+    return len(self.queue) == 0 
+  
+  #Remove first item added 
+  def dequeue(self):
+    if not self.is_empty():
+      self.queue.popleft()
+    else:
+      #Queue is empty
+      return None
+  
+  #Peek queue
+  def peek(self):
+    if not self.is_empty():
+      #return the first item in the queue which is located at index 0
+      return self.queue[0]
     
-    
-    
+    else: 
+      return None #indicates the queue is empty
+  
+  
+q = Queue()
+q.enqueue(2)
+q.enqueue(6)
+q.enqueue(9)
+print('Queue:', q.queue)
+#remove or popleft the first element added, in this case 12
+q.dequeue()
+#print the updated queue 
+print(q.queue)
+print(q.peek())
+print(q.is_empty())
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
     
     
     
