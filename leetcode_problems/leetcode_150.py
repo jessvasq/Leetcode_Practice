@@ -675,3 +675,43 @@ def isSameTree(p, q):
 
         
 print(isSameTree(q, p))
+
+'''22. Invert Binary Tree
+Given the root of a binary tree, invert the tree, and return its root'''
+
+#Traverse the tree using a BFS, meaning we'll need to start a queue so we can enqueue and deuque nodes 
+#Question: is the inversion performed in place, should the tree be modified directly?
+
+from collections import deque
+
+def invertTree(root):
+    if root is None: 
+        return None
+    
+    queue = deque([root])
+    
+    while len(queue) > 0:
+        current = queue.popleft()
+        
+        current.left, current.right = current.right, current.left
+        
+        if current.left:
+            queue.append(current.left)
+            
+        if current.right:
+            queue.append(current.right)
+    
+    return root
+
+root = TreeNode(4)
+root.right = TreeNode(7)
+root.left = TreeNode(2)
+root.right.right = TreeNode(9)
+root.right.left = TreeNode(6)
+root.left.right = TreeNode(3)
+root.left.left = TreeNode(1)
+
+print(invertTree(root))
+
+    
+    
