@@ -559,7 +559,7 @@ def spiralOrder(matrix):
     return result
 
 
-print(spiralOrder(matrix))  
+#print(spiralOrder(matrix))  
 
 '''20. Valid Parentheses
 Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. An input string is valid if:
@@ -590,7 +590,7 @@ def isValid(s):
         
     return True if not stack else False
 
-print(isValid(s))
+#print(isValid(s))
 
 '''71. Simplify Path
 Given a string path, which is an absolute path (starting with a slash '/') to a file or directory in a Unix-style file system, convert it to the simplified canonical path.
@@ -624,5 +624,54 @@ def simplifyPath(path):
     #join the directories in the stack and return the simplified canonical path
     return '/' + '/'.join(stack)
 
-print(simplifyPath(path))
+#print(simplifyPath(path))
+
+'''100. Same Tree
+Given the roots of two binary trees p and q, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.'''
+
+#we need to traverse the binary tree
+#we'll check p node's value with q node's value, If these are equal -> True 
+#How are we traversing the tree? We can use either a DFS OR BFS 
+#We'll use a iterative BFS
+
+class TreeNode:
+    def __init__(self, val=0, right=None, left=None):
+        self.val = val
+        self.right = right
+        self.left = left
+
+p = TreeNode(1)
+p.left = TreeNode(2)
+p.right = TreeNode(3)
         
+q = TreeNode(1)    
+q.left = TreeNode(2)
+q.right = TreeNode(3)
+
+
+
+#Optimized Solution
+def isSameTree(p, q):
+    #initialize a stack containing a tuple, this tuple contains the root nodes of the two binary trees
+    stack = [(p,q)]
+    
+    #iterate through both trees while the stack is not empty 
+    while stack:
+        #initialize two variables 
+        node1, node2 = stack.pop()
+
+        #if both node are None then we'll simply continue 
+        if not node1 and not node2:
+            continue 
+        #If either node is None or if the values are not equal -> False
+        if not node1 or not node2 or node1.val != node2.val:
+            return False
+        #Otherwise, we'll push the nodes (left1, left2) and (right1, right2) onto the stack
+        stack.append((node1.left, node2.left))
+        stack.append((node1.right, node2.right))
+    
+    #if the loop continues, then the trees are identical so we return -> True
+    return True
+
+        
+print(isSameTree(q, p))
