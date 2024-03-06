@@ -714,4 +714,23 @@ root.left.left = TreeNode(1)
 print(invertTree(root))
 
     
+'''14. Longest Common Prefix
+Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string "".  '''
+
+strs = ["flower", "flow", "flight"]
+#Output: 'fl'  
+
+def longestCommonPrefix(strs):
+    if len(strs) == 0:
+        return ' '
+
+    prefix = strs[0] #O(m) where m is the lenght of strings
     
+    for i in range(1, len(strs)): #o(n) where n is the len of the strinf
+        while prefix not in strs[i][:len(prefix)]: #o(m)
+            prefix = prefix[:-1]
+    
+    return prefix
+            
+#Time: O(n X m)  Space: O(m)
+print(longestCommonPrefix(strs))
