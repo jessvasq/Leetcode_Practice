@@ -1467,10 +1467,42 @@ print(q.queue)
 print(q.peek())
 print(q.is_empty())
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-    
-    
-    
+
+'''GRAPHS'''
+#Depth First Search (queue)
+         
+def dfs(graph, start):                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+  #Initialize a set to keep track of visited nodes
+  visited = set()
+  #Initialize a stack to keep track of nodes to visit
+  stack = [start]
+  #RUn the dfs algorithm
+  while stack:
+    #pop the last node from the stack
+    vertex = stack.pop()
+    #check if the vertex has been visited
+    if vertex not in visited:
+      print(vertex, end=' ')
+      #add the vertex to the visited set
+      visited.add(vertex)
+      #Add unvisited neighbors to the stack
+      for neighbor in reversed(graph.get(vertex, [])):
+        if neighbor not in visited:
+          stack.append(neighbor)
+  return visited
+
+#Graph represented by an adjacency list
+graph = {
+  'A': ['B', 'C'],
+  'B': ['D', 'E'],
+  'C': ['F'],
+  'D': [],
+  'E': ['F'],
+  'F': []
+}
+
+print(dfs(graph, 'A'))
+
     
     
     
