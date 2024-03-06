@@ -734,3 +734,61 @@ def longestCommonPrefix(strs):
             
 #Time: O(n X m)  Space: O(m)
 print(longestCommonPrefix(strs))
+
+'''392. Is Subsequence
+ Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+ A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).'''
+    
+#Return a booleam 
+s = 'acb'
+t = 'ahsdc'
+#Output: Tru
+
+#Time: O(n log n) where n is the len of the longest string. Space: O(n), as we use additional space to store sorted strings 
+def is_subsequence(s,t):
+    if len(t) < len(s):
+        print('false')
+
+    t = ''.join(sorted(t))
+    s = ''.join(sorted(s))
+
+    for i, j in zip(s, t):
+        if i != j:
+            print("false")
+        else: 
+            print('true')
+
+#Time: O(len(t)) as we iterate through the len of t. Space: O(1), constant amount of extra space
+def is_subsequence1(s, t):
+    sub = 0
+    for i in range(len(t)):
+        if sub <= len(s)-1:
+            if s[sub] == t[i]:
+                sub += 1
+    if sub == len(s):
+        print("true")
+    
+
+#optimized solution
+#Time: O(n) where n is the length of the string. Space: O(1) as we're not using any additional data structure
+def is_subsequence2(s,t):
+    if not s:
+        return True
+    if len(s) > len(t):
+        return False
+    
+    s_pointer = 0
+    t_pointer = 0
+    
+    while t_pointer < len(t):
+        if s[s_pointer] == t[t_pointer]:
+            s_pointer += 1
+
+            if s_pointer == len(s):
+                return True
+        
+        t_pointer += 1
+    return False
+
+print(is_subsequence2(s, t))
+        
