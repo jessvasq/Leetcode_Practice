@@ -791,4 +791,27 @@ def is_subsequence2(s,t):
     return False
 
 print(is_subsequence2(s, t))
-        
+
+'''209. Minimum Size Subarray Sum
+Given an array of positive integers nums and a positive integer target, return the minimal length of a contiguous subarray [numsl, numsl+1, ..., numsr-1, numsr] of which the sum is greater than or equal to target. If there is no such subarray, return 0 instead.'''
+
+def min_sub_sum(nums, target):
+    left = 0
+    total = 0
+    ans = float('inf')
+
+    for right in range(len(nums)):
+        total += nums[right]
+        print('total', total)
+        while total >= target:
+            ans = min(right - left + 1, ans)
+            print('ans', ans)
+            total -= nums[left]
+            print('new total', total)
+            left += 1
+            
+    return 0 if ans == float('inf') else ans
+
+nums = [2,3,1,2,4,3]
+target = 7
+#print(min_sub_sum(nums, target))

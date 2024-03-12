@@ -1504,5 +1504,39 @@ graph = {
 #print(dfs(graph, 'A'))
 
 
+for node in graph:
+  for neighbor in graph[node]:
+    print(node, 'neighbors', neighbor)
+    
+  if node == 'A':
+    graph[node].append('L')
+  
+  if node == 'B':
+    graph[node].pop(0)
+    
+print(graph)
+    
+    
+    
+s = 'carr'
+
+dict_s = {}
+for i in s:
+  dict_s[i] = dict_s.get(i, 0) + 1
+  
+  for key, value in dict_s.items():
+    if value > 1:
+      print(key)
+      
+print(dict_s)
+    
+    
+dict_2 = {}
+for i in range(len(s)):
+  dict_2[i] = s[i] 
+
+print(dict_2)
+
+
 
   
