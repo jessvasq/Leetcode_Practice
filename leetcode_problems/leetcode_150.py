@@ -882,3 +882,27 @@ if carry:
 #reverse the result and join to form the binary string
 print(''.join(result[::-1]))
     
+
+'''49. Group Anagrams
+Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.'''
+
+strs = [""]
+#Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+def group_anagrams(strs):
+    val_dict = {}
+    #iterate through the string, sort and check if the key already exists 
+    for word in strs:
+        #sort the word and add it as a key to a dictionary 
+        value = ''.join(sorted(word))
+        #if the key has not beend added, add it to the dictionary
+        #else, create a new key 
+        val_dict[value] = val_dict.get(value, [])
+        
+        if value in val_dict.keys():
+            val_dict[value].append(word)
+    #return the dictionary's values, which should return a list of all the anagrams grouped together
+    return val_dict.values()
+ 
+print(group_anagrams(strs))   
