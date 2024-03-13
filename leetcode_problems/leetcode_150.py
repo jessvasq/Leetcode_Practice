@@ -815,3 +815,70 @@ def min_sub_sum(nums, target):
 nums = [2,3,1,2,4,3]
 target = 7
 #print(min_sub_sum(nums, target))
+
+'''128. Longest Consecutive Sequence
+Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+You must write an algorithm that runs in O(n) time.
+'''
+
+nums = [100,4,200,1,3,2]
+#output 4
+#what to do with repeated numbers? 
+#set 
+
+#create a set to store all elements of the array 
+num_set = set(nums)
+max_length = 0
+
+for num in num_set:
+    #check if the predecessor of the current num exists in the set
+    if num - 1 not in num_set:
+        current_num = num 
+        current_length = 1
+        
+        #count the length of the consecutive sequence starting from current_num 
+        while current_num + 1 in num_set:
+            current_num += 1
+            current_length += 1
+        
+        #update max length 
+        max_length = max(max_length, current_length)
+    
+print(max_length)
+
+'''67. Add Binary 
+Given two binary strings a and b, return their sum as a binary string'''
+
+a = '11' 
+b = '1' 
+
+result = []
+carry = 0
+i = len(a) -1
+j = len(b) -1
+
+#iterate over the strings from right to left
+while i >= 0 or j >= 0:
+    bit_a = int(a[i]) if i >= 0 else 0
+    bit_b = int(b[j]) if j >= 0 else 0
+    
+    #calculate the sum of the bits and the carry
+    total = bit_a + bit_b + carry
+    
+    #Append the sum bit to the result 
+    result.append(str(total % 2))
+    
+    #update the carry for the next iteration 
+    carry = total // 2
+    
+    #move to the next bit
+    i -= 1
+    j -= 1
+    
+#if there's a carry, add to the result 
+if carry:
+    result.append(str(carry))
+    
+#reverse the result and join to form the binary string
+print(''.join(result[::-1]))
+    
