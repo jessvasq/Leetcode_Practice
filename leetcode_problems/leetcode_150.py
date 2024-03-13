@@ -906,3 +906,59 @@ def group_anagrams(strs):
     return val_dict.values()
  
 print(group_anagrams(strs))   
+
+'''STACKS'''
+
+'''155. Min Stack - Medium
+
+Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+Implement the MinStack class:
+MinStack() initializes the stack object.
+void push(int val) pushes the element val onto the stack.
+void pop() removes the element on the top of the stack.
+int top() gets the top element of the stack.
+int getMin() retrieves the minimum element in the stack.
+You must implement a solution with O(1) time complexity for each function.'''
+
+# A stack uses a LIFO approach, we can insert, pop, peek
+# Similar to a list, we can use append/pop to remove the last added element
+
+class MinStack:
+    def __init__(self):
+        self.stack = []
+        #initialize a min_stack to achieve constant time complexity for the get_min operation
+        self.min_stack = []
+        
+    def push(self, val):
+        self.stack.append(val)
+        #when a new element is pushed onto the stack, check if the min_stack is empty or if it's less or equal to the current mininum element(last item). If so, push it onto the min_stack
+        if not self.min_stack or val <= self.min_stack[-1]:
+            self.min_stack.append(val)
+      
+    def pop(self):
+        #check if the stack is not empty
+        if self.stack:
+            #check if the last item in the stack is equal to the last item in min_stack, if these are equal. Remove value from both stacks
+            if self.stack[-1] == self.min_stack[-1]:
+                self.min_stack.pop()
+            self.stack.pop()
+        
+    def top(self):
+        #check if the stack is not empty
+        if self.stack:
+            #return the last item added to the stack which is the top element. (LIFO)
+            return self.stack[-1]
+    
+    def get_min(self):
+        #check if the min_stack is not empty 
+        if self.min_stack:
+            #return the last element added, we always have access to the min element whenever we push/pop an element 
+            return self.min_stack[-1]
+
+
+
+
+
+
+
