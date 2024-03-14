@@ -957,8 +957,71 @@ class MinStack:
             return self.min_stack[-1]
 
 
+'''200. Number of Islands - Medium
 
+Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.'''
 
+#An island is a 1 or multiple 1s surrounded by 0s
 
+grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]
+#output: 3
 
+#Time complexity: O(rows * colums). Space complexity: O(rows * colums)
 
+def islandCount(grid):
+    #find the size of the grid 
+    rows = len(grid)
+    cols = len(grid[0])
+
+    #initialize a set to keep track of visited cells
+    visited = set()
+    #initialize a variable 'count' to keep track of the number of islands 
+    count = 0
+    #inner loop to ierate through the grid 
+    for row in range(rows):
+        for col in range(cols):
+            #calls the explore function to explore neighboring cells and determines if it's part of an insland
+            if explore(grid, row, col, visited):
+                #if it is, increment the island count
+                count += 1
+    return count
+            
+#row and col are the coordinates of the current cell being explored
+def explore(grid, row, col, visited):
+    #check if the current cell is out of bounds
+    rowInbounds = 0 <= row and row < len(grid)
+    colInbounds = 0 <= col and col < len(grid[0])
+    
+    #if the cell is out of bounds, return False
+    if not rowInbounds or not colInbounds:
+        return False
+    
+    #if the cell contains '0', return False as it indicates that this cell is not part of the island
+    if grid[row][col] == '0':
+        return False
+
+    #we add a comma to get our current position and check if we've already visited it
+    current = str(row) + ',' + str(col)
+    if current in visited:
+        return False
+        
+    #Otherwise, mark the current cell as visited by adding its coordinates
+    else:
+        visited.add(current)
+        
+    #Recursive Depth-first traversal, explore neighboring cells(up, down, left, right) by calling itself with updated coordinates
+    explore(grid, row-1, col, visited)
+    explore(grid, row+1, col, visited)  
+    explore(grid, row, col-1, visited) 
+    explore(grid, row, col+1, visited)
+    
+    #return True to indicate that the current cell is part of an island
+    return True
+
+print(islandCount(grid))
