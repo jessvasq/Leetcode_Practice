@@ -1471,7 +1471,7 @@ print(q.is_empty())
 '''GRAPHS'''
 #Depth First Search (stack)
          
-def dfs(graph, start):                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+def dfs(graph, start):                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
   #Initialize a set to keep track of visited nodes
   visited = set()
   #Initialize a stack to keep track of nodes to visit
@@ -1514,7 +1514,7 @@ for node in graph:
   if node == 'B':
     graph[node].pop(0)
     
-print(graph)
+#print(graph)
     
     
     
@@ -1571,7 +1571,7 @@ graph = {
   'f': []
 }
 
-print(depth_first_print(graph, 'a'))
+#print(depth_first_print(graph, 'a'))
 
 #Recursive Approach 
 def depth_first_recursive(graph, start_node):
@@ -1582,4 +1582,49 @@ def depth_first_recursive(graph, start_node):
     #recursive call on every neighbor
     depth_first_recursive(graph, neighbor)
     
-print(depth_first_print(graph, 'a'))
+#print(depth_first_print(graph, 'a'))
+
+
+'''Breadth-First-Search'''
+#Iterative Approach. Note: avoid using recursive approach 
+#a graph can also be referred as a adjacency list
+#Time Complexity: O(v+e) Space: O(v)
+
+from queue import Queue
+
+def bfs(graph, startNode):
+  #Use a queue to ensure that nodes are visited in the order they were added, we explore all immediate neighbors before exploring the neighbor's neigbors which mimics the behavior of level-order-traversal in a tree 
+  queue = Queue()
+  #enqueue/put/add the source node to the queue 
+  queue.put(startNode)
+  #Initialize a set to keep track of visited nodes
+  visited = set()
+  
+  #iterate while the queue is not empty. We use empty() to explicitly check if the queue is empty and ensure that the loop terminates correctly
+  while not queue.empty():
+    #remove/get the first element in the queue
+    current = queue.get()
+    #check if current has been visited 
+    if current not in visited:
+      print(current)
+      #mark it as visited to avoid infinite cycles
+      visited.add(current)
+    
+    #check if the current node exist in the graph
+    if current in graph:
+      #consider neighbors 
+      for neighbor in graph[current]:
+        #add/put each neighbor to the back of the queue
+        queue.put(neighbor)
+
+
+graph = {
+    'A': ['C', 'B'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+bfs(graph, 'A')
