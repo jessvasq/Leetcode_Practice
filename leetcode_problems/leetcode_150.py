@@ -957,6 +957,7 @@ class MinStack:
             return self.min_stack[-1]
 
 
+
 '''200. Number of Islands - Medium
 
 Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
@@ -1025,3 +1026,5 @@ def explore(grid, row, col, visited):
     return True
 
 print(islandCount(grid))
+
+

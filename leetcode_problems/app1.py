@@ -1469,7 +1469,7 @@ print(q.is_empty())
 
 
 '''GRAPHS'''
-#Depth First Search (queue)
+#Depth First Search (stack)
          
 def dfs(graph, start):                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
   #Initialize a set to keep track of visited nodes
@@ -1538,5 +1538,48 @@ for i in range(len(s)):
 print(dict_2)
 
 
-
+'''GRAPHS'''
   
+'''Depth-First-Traversal'''
+#Iterative approach
+def depth_first_print(graph, startNode):
+  #initialize a stack with the startNode
+  stack = [startNode]
+  #Initialize a set to keep track of visited nodes 
+  visited = set()
+  #iterate while there are nodes to visit
+  while stack:
+    current = stack.pop()
+    
+    #check if the current node has been visited 
+    if current not in visited:
+      print(current)
+      #mark the current node as visited 
+      visited.add(current)
+      
+    for neighbor in graph[current]:
+       #push each neighbor to the top of the stack
+       stack.append(neighbor)
+  
+
+graph = {
+  'a': ['c', 'b'],
+  'b': ['d'],
+  'c': ['e'],
+  'd': ['f'],
+  'e': [],
+  'f': []
+}
+
+print(depth_first_print(graph, 'a'))
+
+#Recursive Approach 
+def depth_first_recursive(graph, start_node):
+  print(start_node)
+  
+  #look at startnode's neighbors
+  for neighbor in graph[start_node]:
+    #recursive call on every neighbor
+    depth_first_recursive(graph, neighbor)
+    
+print(depth_first_print(graph, 'a'))
