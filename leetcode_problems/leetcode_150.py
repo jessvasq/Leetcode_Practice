@@ -1027,4 +1027,112 @@ def explore(grid, row, col, visited):
 
 print(islandCount(grid))
 
+'''130. Surrounded Regions - Medium
 
+Given an m x n matrix board containing 'X' and 'O', capture all regions that are 4-directionally surrounded by 'X'.
+A region is captured by flipping all 'O's into 'X's in that surrounded region.'''
+
+board = [
+    ["X","X","X","X"],
+    ["X","O","O","X"],
+    ["X","X","O","X"],
+    ["X","O","X","X"]]
+
+def solve(board):
+    if not board:
+        return
+    
+    rows = len(board)
+    cols = len(board[0])
+    
+    def dfs(row, col):
+        row_out_boundary = row < 0 or row >= len(board)
+        col_out_boundary = col < 0 or col >= len(board[0])
+        
+        if row_out_boundary or col_out_boundary or board[row][col] != 'O':
+            return
+        board[row][col] = '*'  # Temporary marker
+        
+        # Traverse in all four directions
+        dfs(row + 1, col)
+        dfs(row - 1, col)
+        dfs(row, col + 1)
+        dfs(row, col - 1)
+    
+    # Traverse the boundary rows and mark connected 'O's
+    for row in range(rows):
+        dfs(row, 0)
+        dfs(row, cols - 1)
+    
+    # Traverse the boundary columns and mark connected 'O's
+    for col in range(cols):
+        dfs(0, col)
+        dfs(rows - 1, col)
+    
+    # Convert unmarked 'O's to 'X's and revert marked '*'s back to 'O's
+    for row in range(rows):
+        for col in range(cols):
+            if board[row][col] == 'O':
+                board[row][col] = 'X'
+            elif board[row][col] == '*':
+                board[row][col] = 'O'
+
+    return board
+print(solve(board))
+
+
+# #traverse using a recursive dfs approach and a stack to keep track of visited nodes (does not pass all test cases)
+# def dfs(row, col, visited, board):
+#     row_out_boundary = row < 0 or row >= len(board)
+#     col_out_boundary = col < 0 or col >= len(board[0])
+    
+#     if row_out_boundary or col_out_boundary or board[row][col] != 'O' or visited[row][col]:
+#         return
+#     #mark this cell as visited 
+#     visited[row][col] = True
+#     board[row][col] = '*'
+    
+#     #Traverse in all four directions 
+#     dfs(row+1, col, visited, board)
+#     dfs(row-1, col, visited, board)
+#     dfs(row, col+1, visited, board)
+#     dfs(row, col-1, visited, board)
+    
+
+# def solve(board):
+#     if not board:
+#         return
+    
+#     rows = len(board)
+#     cols = len(board[0])   
+    
+#     #initialize visited array by setting all cells to False
+#     visited = [[False] * cols for _ in range(rows)]
+    
+#     #traverse the boundary rows(first and last row) and mark connected to 'O's
+#     for i in range(cols):
+#         if board[0][i] == 'O':
+#             dfs(0, i, visited, board)
+#         if board[rows-1][i] == 'O':
+#             dfs(rows-1, i,  visited, board)
+            
+        
+#     #traverse the boundary cols and mark connected to 'O's
+#     for j in range(rows):
+#         if board[j][0] == 'O':
+#             dfs(0, j, visited, board)
+#         if board[cols-1][j] == 'O':
+#             dfs(cols-1, j, visited, board)
+            
+#     #traverse the board and convert unmarked 'O' to 'X's and revert marked '*' back to 'O's
+    
+#     for row in range(rows):
+#         for col in range(cols):
+#             if board[row][col] == 'O' and not visited[row][col]:
+#                 board[row][col] = 'X'
+#             elif board[row][col] == '*':
+#                 board[row][col] = 'O'
+#     return board
+    
+# print(solve(board))
+    
