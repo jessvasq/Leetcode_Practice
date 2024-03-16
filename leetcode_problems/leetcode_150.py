@@ -1136,3 +1136,29 @@ print(solve(board))
     
 # print(solve(board))
     
+
+'''215. Kth Largest Element in an Array
+Given an integer array nums and an integer k, return the kth largest element in the array.
+Note that it is the kth largest element in the sorted order, not the kth distinct element.
+Can you solve it without sorting?'''
+
+nums = [3,2,1,5,6,4]
+k = 2
+
+import heapq
+def find_n_longest(nums):
+    #heap will be used to store the 'k largest elements encountered so far
+    heap = []
+    
+    for num in nums:
+        #push the current element onto the heap as long as heap is less than k
+        if len(heap) < k:
+            heapq.heappush(heap, num)    
+        #if the length of the heap is equal to k, then the heap is full
+        else:
+            #if the current element is larger than the smallest element in the heap, we remove the smallest element in the heap using 'heppop(heap)' and push the current element onto the heap using heap.push(heap, num)
+            if num > heap[0]:
+                heapq.heappop(heap)
+                heapq.heappush(heap, num)
+    #after iteratiing the heap will contain the 'k' largest elements found. So we then return the smallest element in the heap wich represents the largest element in the array
+    return heap[0]
