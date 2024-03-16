@@ -1628,3 +1628,73 @@ graph = {
 }
 
 bfs(graph, 'A')
+
+'''TREES '''
+#Depth-first-search uses a stack 
+#Time: n: # of nodes O(n) as we're only visiting each node exactly once 
+#Space: O(n) as the only thing we store is the stack which is a linear DS and we will not be adding any more elements than what we already have 
+
+class TreeNode:
+  def __init__(self, val=0, right=None, left=None):
+    self.val = val
+    self.left = left
+    self.right = right
+   
+   
+#create instances of this class 
+# Correct tree construction using TreeNode objects
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+
+#Iterative approach uses a stack
+def dfs_tree(root):
+  # check if the tree is empty 
+  if not root: 
+    return 
+  
+  #initialize an array to store the nodes's values
+  ans = []
+  
+  #Initialize stack with the root node
+  stack = [root] #pop() removes top element, append() -> pushes an element onto to the stack 
+  
+  #iterate while there are nodes in the stack
+  while stack:
+    current = stack.pop()
+    ans.append(current.val) #current.val prints the node's value
+    
+    #check if the current node has any children 
+    if current.right:
+      stack.append(current.right)
+    if current.left: 
+      stack.append(current.left)
+  
+  return ans
+      
+      
+#Recursive Approach
+def dfs_recursive(root):
+  if not root: 
+    return []
+  
+  # Initialize an empty list to store node values
+  values = []
+  
+  # Traverse the left subtree recursively
+  if root.left:
+    values.extend(dfs_recursive(root.left))
+  # Add the current node's value to the list
+  values.append(root.val)
+  
+  # Traverse the right subtree recursively
+  if root.right:
+    values.extend(dfs_recursive(root.right))
+ 
+  return values
+
+
+print(dfs_recursive(root))
+print(dfs_recursive(root))
