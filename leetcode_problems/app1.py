@@ -1698,3 +1698,33 @@ def dfs_recursive(root):
 
 print(dfs_recursive(root))
 print(dfs_recursive(root))
+
+
+#Breadth-First Approach 
+#Time: O(n), we're only visiting each node once, assuming that we have O(1)add and remove operations
+#Space: O(n) because we're only adding n nodes to the queue
+
+from queue import Queue
+def bfs(root):
+  if not root:
+    return []
+  
+  values = []
+  queue = Queue()
+  #initialize queue with the root node
+  queue.put(root)
+  
+  while not queue.empty():
+    #remove front element in the queue
+    current = queue.get()
+    values.append(current.val)
+    
+    if current.left:
+      queue.put(current.left)
+      
+    if current.right:
+      queue.put(current.right)
+  
+  return values
+
+print(bfs(root))
