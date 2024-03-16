@@ -1812,3 +1812,82 @@ def tree_sum_2(root):
 
 print(tree_sum_2(root))
 
+#Tree Min Value 
+#Time: O(n) -> where n is the # of nodes 
+#Space: O(n) -> since we're not using any additional DS
+
+#depth-first iterative approach
+def tree_min(root): 
+  if not root: 
+    return
+  
+  stack = [root]
+  min = float('inf')
+  
+  while stack:
+    current = stack.pop()
+    if current.val  < min:
+      min = current.val
+    
+    if current.right:
+      stack.append(current.right)
+      
+    if current.left:
+      stack.append(current.left)
+  
+  return min
+
+#recursive dfs
+def tree_min_1(root):
+    if root is None:
+      return float('inf')
+    #return the smallest value in the left and right subtree
+    left_subtree = tree_min(root.left)
+    right_subtree = tree_min(root.right)
+    
+    return min(left_subtree, right_subtree, root.val)
+
+#breadth-first search approach 
+def tree_min_2(root):
+  if not root: 
+    return
+  
+  queue = Queue()
+  queue.put(root)
+  min = float('inf')
+  
+  while not queue.empty():
+    current = queue.get()
+    
+    if current.val < min:
+      min = current.val
+    
+    if current.left: 
+      queue.put(current.left)
+      
+    if current.right: 
+      queue.put(current.right)
+  
+  return min
+
+print(tree_min(root))
+print(tree_min_1(root))
+print(tree_min_2(root))
+
+#Max Root to Leaf Path Sum 
+#Time: O(n), Space:O(n) where n is the # of nodes 
+def max_path(root):
+  #check if a node is None, if it is return -infinity
+  if root is None:
+    return float('-inf')
+  
+  if root.left is None and root.right is None:
+    return root.val 
+  
+  max_child_sum = max(max_path(root.left), max_path(root.right))
+  
+  return root.val + max_child_sum
+
+print(max_path(root))
+
+  
