@@ -1704,27 +1704,111 @@ print(dfs_recursive(root))
 #Time: O(n), we're only visiting each node once, assuming that we have O(1)add and remove operations
 #Space: O(n) because we're only adding n nodes to the queue
 
-from queue import Queue
-def bfs(root):
-  if not root:
-    return []
+# from queue import Queue
+# def bfs(root):
+#   if not root:
+#     return []
   
-  values = []
+#   values = []
+#   queue = Queue()
+#   #initialize queue with the root node
+#   queue.put(root)
+  
+#   while not queue.empty():
+#     #remove front element in the queue
+#     current = queue.get()
+#     values.append(current.val)
+    
+#     if current.left:
+#       queue.put(current.left)
+      
+#     if current.right:
+#       queue.put(current.right)
+  
+#   return values
+
+# print(bfs(root))
+
+
+#Check if the given tree contains the given node
+#Time: O(n) #nodes 
+#Space: O(n) #nodes
+
+from queue import Queue
+
+def has_path(root, target):
+  if not root:
+    return False
+  
   queue = Queue()
-  #initialize queue with the root node
   queue.put(root)
   
   while not queue.empty():
-    #remove front element in the queue
     current = queue.get()
-    values.append(current.val)
     
-    if current.left:
+    if current.val == target:
+      return True
+    
+    if current.left: 
       queue.put(current.left)
       
     if current.right:
       queue.put(current.right)
-  
-  return values
+      
+  return False
 
-print(bfs(root))
+
+#Recursively 
+def has_path_recursively(root, target):
+  if not root: 
+    return False
+  
+  if root.val == target:
+    return True
+  
+  #check left and right subtrees
+  return has_path_recursively(root.left, target) or has_path_recursively(root.right, target)
+
+
+print(has_path_recursively(root, 4)) #True
+print(has_path(root, 4)) #True
+
+#Tree_Sum 
+#when implementing a recursive approach, think about the base which in most cases is about a 'none' node
+#Time: O(n) where n is the number of nodes
+#Space: O(n)
+
+#DFS
+#Recursive 
+def tree_sum(root):
+    if not root:
+        return 0
+    
+    return root.val + tree_sum(root.left) + tree_sum(root.right)
+
+
+print(tree_sum(root))
+
+#Iteratively 
+def tree_sum_2(root):
+  if not root: 
+    return 0 
+  
+  stack = [root]
+  total = 0
+  
+  while stack: 
+    current = stack.pop()
+    
+    total += current.val
+    
+    if current.right: 
+      stack.append(current.right)
+      
+    if current.left: 
+      stack.append(current.left)
+
+  return total
+
+print(tree_sum_2(root))
+
