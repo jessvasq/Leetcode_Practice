@@ -1912,3 +1912,56 @@ def sum_num(num):
   return num + sum_num(num-1)
 
 print(sum_num(5))
+
+'''Merge Sort'''
+def merge_sort(arr):
+  #find the middle index 
+  if len(arr) > 1:
+    mid = len(arr) // 2
+    
+    #Split the array into two halves 
+    left_half = arr[mid:]
+    right_half = arr[:mid]
+    
+    #recursively sort the left and right halves 
+    merge_sort(left_half)
+    merge_sort(right_half)
+    
+    #merge sorted halves
+    #initialize idx for left_half, right_half, and for the merged arr
+    left_idx = 0
+    right_idx = 0
+    merged_idx = 0
+    
+    #iterate while the left_idx is less than the length of the left_half, and the right_idx is less than the length of the righ_half 
+    while left_idx < len(left_half) and right_idx < len(right_half):
+      #compare elements from left and right halves 
+      if left_half[left_idx] < right_half[right_idx]:
+        #if element from left half is smaller, add it to the merged array 
+        arr[merged_idx] = left_half[left_idx]
+        #increment the left index
+        left_idx += 1
+      #if element from right half is smaller, add it to the merged array 
+      else: 
+        arr[merged_idx] = right_half[right_idx]
+        right_idx += 1
+        
+      #increment arr_idx, the next available index
+      merged_idx += 1
+      
+      #check if any elements are left in the left_half 
+      while left_idx < len(left_half):
+        #If there are remaining elements, add them to the merged array 
+        arr[merged_idx] = left_half[left_idx]
+        left_idx += 1
+        merged_idx += 1
+      #check if any elements are left in the right_half 
+      while right_idx < len(right_half):
+        #if there are remaining elements, add them to the array
+        arr[merged_idx] = right_half[right_idx]
+        #increment left_idx 
+        right_idx += 1
+        #increment merged_arr idx
+        merged_idx += 1
+
+      
