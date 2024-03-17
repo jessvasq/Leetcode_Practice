@@ -1890,4 +1890,25 @@ def max_path(root):
 
 print(max_path(root))
 
-  
+'''Recursion'''
+
+#Convert a number to binary 
+def convert_to_binary(num):
+  if num <= 1:
+    #return '0' or '1' for num=0 or num=1
+    return str(num)
+  #else recurse 
+  return convert_to_binary(num//2) + str(num % 2)
+   
+print(convert_to_binary(17))
+
+
+#calculate the sum of all positive integers up to a given number
+def sum_num(num):
+  #if the number is one or less, return the number itself
+  if num <= 1:
+    return num
+  #Add the current number to the sum of all numbers below it
+  return num + sum_num(num-1)
+
+print(sum_num(5))
