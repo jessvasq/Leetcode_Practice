@@ -1949,14 +1949,14 @@ def merge_sort(arr):
       #increment arr_idx, the next available index
       merged_idx += 1
       
-      #check if any elements are left in the left_half 
-      while left_idx < len(left_half):
+    #check if any elements are left in the left_half 
+    while left_idx < len(left_half):
         #If there are remaining elements, add them to the merged array 
         arr[merged_idx] = left_half[left_idx]
         left_idx += 1
         merged_idx += 1
-      #check if any elements are left in the right_half 
-      while right_idx < len(right_half):
+    #check if any elements are left in the right_half 
+    while right_idx < len(right_half):
         #if there are remaining elements, add them to the array
         arr[merged_idx] = right_half[right_idx]
         #increment left_idx 
@@ -1964,4 +1964,7 @@ def merge_sort(arr):
         #increment merged_arr idx
         merged_idx += 1
 
-      
+    return arr
+
+arr = [-2, 4, 5, 1, 0, 3, 11]
+print(merge_sort(arr))
