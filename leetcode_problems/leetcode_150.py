@@ -1163,3 +1163,49 @@ def find_n_longest(nums):
     #after iteratiing the heap will contain the 'k' largest elements found. So we then return the smallest element in the heap wich represents the largest element in the array
     return heap[0]
 
+'''Bit Manipulation'''
+'''67. Add Binary - Easy
+Given two binary strings a and b, return their sum as a binary string.'''
+a = '11'
+b = '1'
+
+# Time: O(n), Space: O(n). This solution is dependent on the length of the longer binary string.
+def add_binary(a, b):
+    #find the max length among the given bin strings
+    max_len = max(len(a), len(b))
+    
+    #pad the shorter string with zeroes
+    a = a.zfill(max_len)
+    b = b.zfill(max_len)
+    
+    carry = 0
+    ans = []
+    
+    #iterate from right to left
+    for i in range(max_len -1, -1, -1):
+        digit_sum = int(a[i]) + int(b[i]) + carry
+        #insert() -- inserts an element at a specified position 
+        #insert the remainder(either 1 or 0) to the left side of the list as we're building the number from right to left
+        ans.insert(0, str(digit_sum % 2))
+        #update the carry for the next iteration by dividing total sum by the remainder. 1 // 2 = 1, 2//2 == 0
+        carry = digit_sum // 2 
+    #if there's a carry, add it to the result 
+    if carry: 
+        ans.insert(0, '1')
+    
+    #convert the ans to a string 
+    print(ans)
+    return ''.join(ans)
+
+print(add_binary(a, b))
+
+def add_binary_1(a, b):
+    #convert to integers with base of 2
+    int_a = int(a, 2) 
+    int_b = int(b, 2)
+    #perform the addition 
+    total = int_a + int_b
+    #return the result as a string removing the prefix '0b'
+    return bin(total)[2:]
+    
+print(add_binary_1(a,b))
