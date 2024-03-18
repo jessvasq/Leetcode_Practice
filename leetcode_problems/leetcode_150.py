@@ -1227,3 +1227,58 @@ def reverseBits(n):
     
 print(reverseBits(n))
 
+
+'''530. Minimum Absolute Difference in BST
+Given the root of a Binary Search Tree (BST), return the minimum absolute difference between the values of any two different nodes in the tree.'''
+
+#minimum difference b/w of any node 
+#traverse the tree
+#perform a subtraction betwee parent and child
+
+#we can use min or a heap to return the min 
+#DFS - stack 
+
+def min_difference_bst(root):
+    if not root:
+        return None
+    
+    #empty stack to keep track of nodes to visit
+    stack = []
+    # initialize current node to the root
+    current = root
+    min_diff = float('inf')
+    #initialize prev_val to negative infinity
+    prev_val = float('-inf')
+
+    #Traverse the tree until the stack is empty and current is None 
+    while stack or current:
+        #Traverse left subtree and push nodes onto the stack
+        while current: 
+            stack.append(current)
+            current = current.left
+        #pop the top node from the stack
+        current = stack.pop()
+        #calculate the absolute diff b/w current node'val and prev_val 
+        min_diff = min(min_diff, abs(current.val - prev_val))
+        #update previous node value to the current node's value
+        prev_val = current.val
+        #move to the right child of the current node
+        current = current.right
+       
+    return min_diff
+
+
+class TreeNode:
+    def __init__(self, val=0, right=None, left=None):
+        self.val = val  
+        self.right = right
+        self.left = left
+        
+root = TreeNode(1)
+root.left = TreeNode(0)
+root.right = TreeNode(48)
+root.right.left = TreeNode(12)
+root.right.right = TreeNode(49)
+
+
+print(min_difference_bst(root))
