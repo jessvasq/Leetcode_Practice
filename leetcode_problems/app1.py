@@ -1968,3 +1968,73 @@ def merge_sort(arr):
 
 arr = [-2, 4, 5, 1, 0, 3, 11]
 print(merge_sort(arr))
+
+
+'''Linked List Reversal'''
+#A linked list has a head and tail, last node == None 
+#Each node has a value and pointer 
+# We need to check if the head is None
+
+class ListNode: 
+  def __init__(self, val):
+    self.val = val
+    self.next = None
+    
+  #print elements in the list 
+  def print_linked_list(self):
+    current = self
+    while current:
+      print(current.val, end="->")
+      current = current.next
+    print('None')
+    
+#reverse Linked List using recursion
+def reverse_linked_list(head):
+  #if the node is None or if it's the last node in the ll
+  if head is None or head.next is None:
+    return head
+  
+  #Recursively reverse the list starting from the next node: 
+  reversed_head = reverse_linked_list(head.next)
+  
+  #reverse the links so that the next node points to the current node 
+  head.next.next = head
+  head.next = None
+  
+  #return the new head of the current list 
+  return reversed_head
+
+
+#Reverse linked list without using recursion 
+def reverse_ll(head):
+  #initialize a variable for the previous node 
+  previous_node = None
+  #Initialize a variable to keep track of the current node 
+  current = head
+  
+  #traverse the list until current node becomes None, indicating we've reached the end of the list
+  while current is not None:
+    #store the next node before changing its next pointer
+    next_node = current.next 
+    #reverse the next pointer of the current node to point to the prev node
+    current.next = previous_node
+    #move previous and current one step forward 
+    previous_node = current
+    current = next_node
+  
+  return previous_node
+    
+  
+head = ListNode(4)
+head.next = ListNode(6)
+head.next.next = ListNode(8)
+head.next.next.next = ListNode(10)
+
+
+head.print_linked_list()
+head = reverse_linked_list(head)
+head.print_linked_list()
+
+    
+
+    
