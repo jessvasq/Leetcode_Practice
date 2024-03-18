@@ -1209,3 +1209,21 @@ def add_binary_1(a, b):
     return bin(total)[2:]
     
 print(add_binary_1(a,b))
+
+
+'''190. Reverse Bits - Easy
+Reverse bits of a given 32 bits unsigned integer.'''
+
+n = 0b00000010100101000001111010011100
+
+def reverseBits(n): 
+    #convert to a string 
+    # format() --> formats the integer as a binary string 
+    n = format(n, 'b')
+    #if the string has less than 32 bits, padd with leading zeros 
+    n = n.zfill(32)
+    #convert the string to integer eith base of 2 
+    print(int(n[::-1], 2))
+    
+print(reverseBits(n))
+
