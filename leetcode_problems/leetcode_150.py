@@ -1346,3 +1346,64 @@ def search_2(nums, target):
 nums = [5,1,3]
 target = 0
 print(search_2(nums, target))
+
+'''208. Implement Trie (Prefix Tree)
+A trie (pronounced as "try") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker.
+
+Implement the Trie class:
+Trie() Initializes the trie object.
+void insert(String word) Inserts the string word into the trie.
+boolean search(String word) Returns true if the string word is in the trie (i.e., was inserted before), and false otherwise.
+boolean startsWith(String prefix) Returns true if there is a previously inserted string word that has the prefix prefix, and false otherwise.'''
+
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_end_of_word = False
+    
+class Trie: 
+    def __init__(self):
+        self.root = TrieNode()        
+
+    def insert(self, word):
+        #start at the root 
+        current = self.root
+        #iterate the word 
+        for char in word:
+        #check if the character already exists, current will be set to that child and continue iterating
+            if char not in current.children:
+                #if it does not, create a TrieNode and use 'char' as a key value 
+                current.children[char] = TrieNode()
+            current = current.children[char]
+        #once we're done iterating, mark the last 'char'.endofword --> True 
+        current.is_end_of_word = True
+        
+    def search(self, word):
+        #start at the root 
+        current = self.root
+        #iterate through the word
+        for char in word:
+        #check if the char exist
+            if char not in current.children:
+                #if it does not return False
+                return False
+            #if char exist, continue iterating by moving to the child until we reach the last character
+            current = current.children[char]
+        #once we exit the loop, check if current.endofword is true, which will indicate if the word exist
+        return current.is_end_of_word #this will return a boolean, True -> word exist, False -> word does not exist
+    
+    def starts_with(self, prefix):
+        #start at the root
+        current = self.root
+        #iterate through the prefix
+        for char in prefix:
+            #check if the char exist
+            if char not in current.children:
+                #if this char -> return False
+                return False
+            #if char exist, shift/move to the next node
+            current = current.children[char]
+        return True
+         
+        
+        
