@@ -1281,4 +1281,68 @@ root.right.left = TreeNode(12)
 root.right.right = TreeNode(49)
 
 
-print(min_difference_bst(root))
+#print(min_difference_bst(root))
+
+
+'''33. Search in Rotated Sorted Array
+There is an integer array nums sorted in ascending order (with distinct values).
+Prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 and become [4,5,6,7,0,1,2].
+Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
+You must write an algorithm with O(log n) runtime complexity.'''
+
+#Binary search --> O(log n)
+#Example 1:
+
+nums = [4,5,6,7,0,1,2]
+target = 0
+
+def search(nums, target):
+    lo = 0
+    hi = len(nums) - 1
+
+    mid_idx = (lo + hi) // 2
+    left_seg = nums[:mid_idx]
+    right_seg = nums[mid_idx:]
+        
+    if target in left_seg:
+        return nums.index(target)
+    elif target in right_seg:
+        return nums.index(target)
+    else: 
+        return -1 
+
+print(search(nums, target))            
+    
+def search_2(nums, target):
+    lo, hi = 0, len(nums)-1
+    
+    while lo <= hi:
+        #find the mid index
+        mid = (lo + hi) // 2
+        #if the middle element is the target, return its index 
+        if nums[mid] == target:
+            return mid
+        
+        #check if the left side is sorted 
+        if nums[lo] <= nums[mid]:
+            #check if the target is within the left half 
+            if nums[lo] <= target < nums[mid]:
+                #if the targets is within the left half
+                hi = mid-1
+            #if the target is not within the left half, adjust the boundary 
+            else: 
+                lo = mid + 1
+        #check if the right half is sorted
+        else:
+            #check if the target is within the sorted right half 
+            if nums[mid] < target <= nums[hi]:
+                lo = mid + 1
+            else:
+                hi = mid - 1
+    
+    #if the target is not found 
+    return -1 
+
+nums = [5,1,3]
+target = 0
+print(search_2(nums, target))
