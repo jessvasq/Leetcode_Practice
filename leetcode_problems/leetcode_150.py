@@ -1406,4 +1406,58 @@ class Trie:
         return True
          
         
-        
+'''54. Spiral Matrix
+Given an m x n matrix, return all elements of the matrix in spiral order.
+'''
+matrix = [
+          [1,2,3],
+          [4,5,6],
+          [7,8,9]
+         ]
+#Output: [1,2,3,6,9,8,7,4,5]
+
+def spiral_order(matrix):
+    #initialize four pointers to traverse the matrix
+    left_corner = 0
+    right_corner = len(matrix[0]) -1
+    top_corner = 0
+    bottom_corner = len(matrix) -1
+    #initialize 'order' used to traverse the matrix
+    order = 0
+    #initialize an empty array to store the results
+    result = []
+    
+    #iterate while the pointers are withing the boundaries
+    while left_corner <= right_corner and top_corner <= bottom_corner:
+        #traverse the topmost row from left to right
+        if order == 0:
+            for row in range(left_corner, right_corner+1):
+                result.append(matrix[top_corner][row])
+            top_corner += 1
+            order = 1
+                
+        #traverse the rightmost column from top to bottom
+        elif order == 1:
+            for col in range(top_corner, bottom_corner+1):
+                result.append(matrix[col][right_corner])
+            right_corner -= 1
+            order = 2 
+            
+        #traverse the bottom row from right to left
+        elif order == 2:
+            #print last row from right to left
+            for row in range(right_corner, left_corner-1,-1):
+                result.append(matrix[bottom_corner][row])
+            bottom_corner -= 1
+            order = 3
+
+        #traverse from bottom to top
+        elif order == 3:
+            for col in range(bottom_corner, top_corner-1, -1):
+                result.append(matrix[col][left_corner])
+            left_corner += 1
+            order = 0
+            
+    return result
+
+print(spiral_order(matrix))
