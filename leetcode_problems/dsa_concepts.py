@@ -2035,6 +2035,26 @@ head.print_linked_list()
 head = reverse_linked_list(head)
 head.print_linked_list()
 
-    
+'''Sliding window'''
+''''Given an array of positive integers and a positive number k, find the maximum sum of any contiguous subarray of size k.'''
+arr = [3, 5, 2, 1, 7]
+k=2
 
+def find_maxsum(arr, k):
+  max_sum = float('-inf')
+  pointer = 0 
+  window_sum = 0
+  
+  for i in range(len(arr)):
+    window_sum += arr[i]
     
+    #check whetheer the current size window is of size k, we add 1 to get the actual counts of elements in the window becasue indexing starts at 0
+    if (i - pointer + 1) == k:
+      max_sum = max(max_sum, window_sum)
+      window_sum -= arr[pointer]
+      pointer += 1
+  return max_sum
+
+
+print(find_maxsum(arr, k))    
+  
