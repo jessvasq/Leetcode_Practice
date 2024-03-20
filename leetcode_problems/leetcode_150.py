@@ -1461,3 +1461,46 @@ def spiral_order(matrix):
     return result
 
 print(spiral_order(matrix))
+
+'''228. Summary Ranges
+You are given a sorted unique integer array nums.
+A range [a,b] is the set of all integers from a to b (inclusive).
+Return the smallest sorted list of ranges that cover all the numbers in the array exactly. That is, each element of nums is covered by exactly one of the ranges, and there is no integer x such that x is in one of the ranges but not in nums.
+Each range [a,b] in the list should be output as:'''
+
+nums = [0,1,2,4,5,7]
+#Output: ["0->2","4->5","7"]
+nums = [0,2,3,4,6,8,9]
+#Output: ["0","2->4","6","8->9"]
+
+def summary_ranges(nums):
+    #if the array is empty return and empty array
+    if not nums: 
+        return []
+    #initialize two pointers 
+    current = nums[0]
+    next = nums[0]
+    #initialize an empty array to store the results
+    nums_arr = []
+    #iterate through the array starting at index 1    
+    for i in nums[1:]:
+        #if num is equal to the following number
+        if i == next + 1:
+            next = i
+        #if num is not equal to the following number
+        else:
+            if current == next:
+                nums_arr.append(str(current))
+            else:
+                nums_arr.append((str(current) + "->" + str(next)))
+            current = i
+            next = i
+            
+    if current == next:
+        nums_arr.append(str(current))
+    else:
+        nums_arr.append(str(current) + '->' + str(next))
+              
+    return nums_arr
+    
+print(summary_ranges(nums))
