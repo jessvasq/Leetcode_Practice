@@ -2056,5 +2056,4 @@ def find_maxsum(arr, k):
   return max_sum
 
 
-print(find_maxsum(arr, k))    
-  
+print(find_maxsum(arr, k))

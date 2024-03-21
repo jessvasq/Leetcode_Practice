@@ -1504,3 +1504,41 @@ def summary_ranges(nums):
     return nums_arr
     
 print(summary_ranges(nums))
+
+
+'''1004. Max Consecutive Ones III
+Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+ '''
+ 
+ #binary array --> 01010
+ #integer k = 2
+ #max number of consecutive 1's(numbers are next to each other)
+ #flip/change at most 'k' numbers
+ 
+#sliding window technique 
+#returning an integer 
+#initialize two pointers 
+left = 0 
+max_val = 0
+#store number of '0's
+zeros_count = 0
+
+#iterate through the array
+for right in range(len(nums)):
+    if nums[right] == 0:
+        zeros_count += 1
+    
+    while zeros_count > k:
+        if nums[left] == 0:
+            zeros_count -= 1
+        #increment left pointer by 1, regardless if it's a '0' or '1'
+        left += 1
+    #store current len 
+    num_len = right - left + 1
+    #store the max number of consecutives 1's
+    max_val = max(max_val, num_len)
+    
+ #Test
+nums = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1]
+k = 3 #OUPUT: 6
+print(max_val)      
