@@ -2057,3 +2057,37 @@ def find_maxsum(arr, k):
 
 
 print(find_maxsum(arr, k))
+
+#implementation of sliding window technique
+def sliding_window(arr,k):
+  #arr: input list/arr
+  #k: size of the window
+  #return: A list with the results
+  
+  n = len(arr)
+  #check if 'k' (window size) is larger than the array size
+  if n < k :
+    return [] 
+  
+  #initialize an empty array to store the results 
+  result = []
+  #calculate the sum of the first window
+  window_sum = sum(arr[:k])
+  #append the result of the firs window to the 'result' array 
+  result.append(window_sum)
+  
+  #iterates over the range od indices from '1' to 'n-k+1' (len(arr) - k)
+  #the loop starts at index 1 as we've already processed the first window
+  for i in range(1, len(arr)-k + 1):
+    #remove the element going out of the window and add the new element coming in 
+    #window_sum = sum(arr[2,4]) = window_sum = 6
+                  #removes the first element and add the next element
+    window_sum = window_sum - arr[i - 1] + arr[i + k-1]
+    #append the sum to the result array 
+    result.append(window_sum)
+  
+  return result
+
+arr = [1, 3, -1, -3, 5, 3, 6, 7]
+k = 2
+print(sliding_window(arr, k))
