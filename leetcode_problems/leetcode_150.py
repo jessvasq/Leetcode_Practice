@@ -1571,33 +1571,6 @@ Given an integer, convert it to a roman numeral.'''
 #num = 58 
 # output = L=50, V= 5, III = 3 
 
-#do we need to return a string? yes 
-#are we working with positive nums? yes 
-#do we assume that we're always given a num, what if the value is 0, what to return? None or an empty string ? empy string 
-
-#iterate through the num, we can count its position, 2 -> 50, 3 -> 100, 4-> 1000
-
-num= 1994
-roman_dict = {
-        1: 'I', 4: 'IV', 5: 'V', 9: 'IX', 10: 'X', 40: 'XL',
-        50: 'L', 90: 'XC', 100: 'C', 400: 'CD', 500: 'D', 900: 'CM',
-        1000: 'M'
-    }
-
-#initialize an empty string to hold the roman numeral 
-roman_val = ''
-
-#iterate through the dictionary in descendending order of the keys
-#sorted () by default sorts in ascending order, so we pass the parameter 'reverse=True' to sort the elements in descending order
-
-
-for value, numeral in sorted(roman_dict.items(), reverse=True):
-    while num >= value:
-        roman_val += numeral
-        num -= value
-print(roman_val)
-
-
 num= 58
 #initialize a dictionary to store the romans in descending order
 roman_dict = {
@@ -1626,4 +1599,3 @@ for value, roman in roman_dict.items():
         romans += roman
         num -= value
 print(romans)
-        
