@@ -2089,5 +2089,3 @@ def sliding_window(arr,k):
   return result
 
 arr = [1, 3, -1, -3, 5, 3, 6, 7]
-k = 2
-print(sliding_window(arr, k))
